@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="Stuart McColl ">
+<meta name="description"
+    content="Kombu is an open-source messaging library available for Python which aims to make messaging as simple as possible. Kombu provides a high-level interface for the Advanced Message Queuing Protocol (AMQP), an open standard protocol for message orientation, queuing, routing, reliability, and security. The most popular implementation of AMQP is the RabbitMQ open-source messaging server.
+In the example application we&amp;rsquo;re going to create here, we&amp;rsquo;re going to use Kombu and RabbitMQ in combination to do the following:" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/posts/quick-and-dirty-kombu/rabbitmq-application/" />
+
+
+<title>
+    
+    Quick and Dirty Kombu/RabbitMQ Application :: Stuart McColl  — Software Design and Development
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.91687bbfc139d7ff1a244bb6d7324425f9c4f424eaaad242b478e3b3cf56396a.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="theme-color" content="#252627">
+<meta itemprop="name" content="Quick and Dirty Kombu/RabbitMQ Application">
+<meta itemprop="description" content="Quick and Dirty Kombu/RabbitMQ Application">
+
+
+<meta itemprop="datePublished" content="2017-05-14T10:10:32&#43;00:00" />
+<meta itemprop="dateModified" content="2017-05-14T10:10:32&#43;00:00" />
+<meta itemprop="wordCount" content="989">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/"/>
+
+<meta name="twitter:title" content="Quick and Dirty Kombu/RabbitMQ Application"/>
+<meta name="twitter:description" content="Quick and Dirty Kombu/RabbitMQ Application"/>
+
+
+
+
+<meta property="article:published_time" content="2017-05-14 10:10:32 &#43;0000 &#43;0000" />
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">cd ~/</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/about">about</a></li><li><a href="/posts">blog</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="/posts/quick-and-dirty-kombu/rabbitmq-application/">Quick and Dirty Kombu/RabbitMQ Application</a></h2>
+
+            
+
+            <div class="post-content">
+                
+
+<p><a href="https://github.com/celery/kombu">Kombu</a> is an open-source messaging library available for Python which aims to make messaging as simple as possible. Kombu provides a high-level interface for the <a href="http://amqp.org/">Advanced Message Queuing Protocol</a> (AMQP), an open standard protocol for message orientation, queuing, routing, reliability, and security. The most popular implementation of AMQP is the <a href="http://www.rabbitmq.com/">RabbitMQ</a> open-source messaging server.</p>
+
+<p>In the example application we&rsquo;re going to create here, we&rsquo;re going to use Kombu and RabbitMQ in combination to do the following:</p>
+
+<ul>
+<li>Send a message from a Kombu application (in this case a simple Python script).</li>
+<li>Receive the message at an exchange (our RabbitMQ server), which will then place the message on a queue.</li>
+<li>Read from the queue within another Kombu application (in this case, another simple Python script).</li>
+</ul>
+
+<p>The application we&rsquo;re going to create will only feature one queue, one script which will fire a message at the exchange (our producer), and another script that will read from the queue as soon as it finds something on it (our consumer). It&rsquo;s a basic example, but we could build upon and utilise this for any number of uses.</p>
+
+<h2 id="tutorial">Tutorial</h2>
+
+<p>Let&rsquo;s begin with our script that&rsquo;ll consume messages - <code>consumer.py</code>.</p>
+
+<p>In order to send and receive messages, we&rsquo;ll need to fulfil a few prerequisites. Firstly, we need to create a connection to our RabbitMQ server.</p>
+
+<pre><code class="language-python">conn = Connection(&quot;amqp://localhost:5672/&quot;)
+</code></pre>
+
+<p>We&rsquo;ll use this connection in a moment when we instantiate the Consumer class. Next, we&rsquo;ll create our exchange.</p>
+
+<pre><code class="language-python">test_exchange = Exchange(&quot;test_exchange&quot;, type=&quot;direct&quot;)
+</code></pre>
+
+<p>The first parameter passed gives the name of our exchange and the second parameter dictates what type of exchange we&rsquo;re creating. Here, we can pass either direct (matches  if the routing_key attribute and the routing key property of the message are identical), fanout (always matches), and topic (matches the routing key property of the message by a pattern matching scheme). For this small example we&rsquo;re going to create a simple direct exchange.</p>
+
+<p>With a connection and an exchange created, we&rsquo;re now going to create our queue. This is what we&rsquo;ll drop our messages onto before consuming them.</p>
+
+<pre><code class="language-python">queue = Queue(name=&quot;queue&quot;, exchange=test_exchange, routing_key=&quot;test&quot;)
+</code></pre>
+
+<p>To configure our queue, we&rsquo;re simply giving it a name, passing an exchange to it, and a routing key. The routing key will be utilised based on the type of the exchange, as we&rsquo;ve set above.</p>
+
+<p>Lastly, we need to set up our Consumer. A Consumer needs a connection (or channel) and a list of queues to consume from. We&rsquo;re also going to pass it a callback, which is a function which it&rsquo;ll call when it finds an event on our queue.</p>
+
+<pre><code class="language-python">with Consumer(conn, queues=queue, callbacks=[process_message], accept=[&quot;text/plain&quot;]):
+    conn.drain_events()
+</code></pre>
+
+<p>Our Consumer takes our connection variable, our queue, and a callback to a process_message function which we&rsquo;ll create in a moment. We&rsquo;re not passing any kind of timeout only because for this example we want it to consume messages indefinitely to give an idea of how Kombu and RabbitMQ work. I&rsquo;ll expand upon this further in future posts where I&rsquo;ll be looking at putting Kombu to a more functional use.</p>
+
+<p>Here&rsquo;s our <code>consumer.py</code> file in full:</p>
+
+<pre><code class="language-python">from kombu import Connection, Exchange, Consumer, Queue
+from process_message import process_message
+
+# Create the connection
+conn = Connection(&quot;amqp://localhost:5672/&quot;)
+
+# Create the exchange
+test_exchange = Exchange(&quot;test_exchange&quot;, type=&quot;direct&quot;)
+
+# Create the queue
+queue = Queue(name=&quot;queue&quot;, exchange=test_exchange, routing_key=&quot;test&quot;)
+
+# Create the consumer
+with Consumer(conn, queues=queue, callbacks=[process_message],
+              accept=[&quot;text/plain&quot;]):
+</code></pre>
+
+<p>Now, to create our <code>process_message</code> function. This is going to live in it&rsquo;s own <code>process_message.py</code> file.</p>
+
+<pre><code class="language-python">def process_message(body, message):
+    print &quot;The following message has been received: %s&quot; % body
+
+    # Acknowledge the message
+    message.ack()
+</code></pre>
+
+<p>This function receives the body and message of our event, prints a statement to the console detailing what has been received, then acknowledges the message. By acknowledging the message we remove it from the queue.</p>
+
+<p>At this stage, we have our queue ready to put messages on, we&rsquo;ve got a consumer that&rsquo;s ready to grab messages off the queue, and we&rsquo;ve also got a function that&rsquo;s going to process the message once we&rsquo;ve taken it from the queue. The only thing left to do is to set up our producer, which is what will drop our messages onto the queue.</p>
+
+<p>A lot of our <code>producer.py</code> file is going to look similar to our <code>consumer.py</code> file.</p>
+
+<pre><code class="language-python">conn = Connection(&quot;amqp://localhost:5672/&quot;)
+</code></pre>
+
+<p>We need to set up our connection as before.</p>
+
+<pre><code class="language-python">channel = conn.channel()
+</code></pre>
+
+<p>Then we create and return a new channel.</p>
+
+<pre><code class="language-python">test_exchange = Exchange(&quot;test_exchange&quot;, type=&quot;direct&quot;)
+</code></pre>
+
+<p>We create our exchange in the same way that we did within our <code>consumer.py</code> file.</p>
+
+<pre><code class="language-python">producer = Producer(exchange=test_exchange, channel=channel, routing_key=&quot;test&quot;)
+</code></pre>
+
+<p>Our instantiation of the Producer class looks similar to the way we instantiated our Consumer class. We pass in our exchange and our channel, and then we also pass in the same routing_key that we gave to our consumer. As we&rsquo;re using a direct exchange, we need to make sure that our messages are going to the same place, which is why we ensure that we pass in the same routing_key to both the producer and the consumer.</p>
+
+<pre><code class="language-python">producer.publish(&quot;Hello World!&quot;)
+</code></pre>
+
+<p>Lastly, we call the publish method and pass through a string as our message. Whenever we run the <code>producer.py</code> script this will send our message to the exchange.</p>
+
+<p>Here&rsquo;s our <code>producer.py</code> in full:</p>
+
+<pre><code class="language-python">from kombu import Connection, Exchange, Producer
+
+# Create the connection
+conn = Connection(&quot;amqp://localhost:5672/&quot;)
+
+# Create a new channel
+channel = conn.channel()
+
+# Create the exchange
+test_exchange = Exchange(&quot;test_exchange&quot;, type=&quot;direct&quot;)
+
+# Create the producer
+producer = Producer(exchange=test_exchange, channel=channel,
+                    routing_key=&quot;test&quot;)
+
+# Publish a message
+producer.publish(&quot;Hello World!&quot;)
+</code></pre>
+
+<p>If we run our <code>consumer.py</code> script now, it&rsquo;ll run indefinitely and wait until it finds something on the queue we&rsquo;ve created. Now, if we run <code>producer.py</code> it&rsquo;ll fire a message at the exchange which will route it onto the queue. The already-running <code>consumer.py</code> will find it on the queue and process it, which removes it from the queue.</p>
+
+<p>A simple example that doesn&rsquo;t do anything of use, but I hope it&rsquo;s given you an insight into the way Kombu and RabbitMQ work together.</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+  			</div>
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2019</span>
+            
+                <span><a href="/">Stuart McColl</a></span>
+            
+            <span></span>
+            <span> <a href="/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.cf7871ed49474a80ed457154d24e61f7881adbe0f9384951a74ac46b688a39a4dbfa68bc6d37baeb058186de354ead3487d4ee7f083ea4cba860c48600b694f3.js" integrity="sha512-z3hx7UlHSoDtRXFU0k5h94ga2&#43;D5OElRp0rEa2iKOaTb&#43;mi8bTe66wWBht41Tq00h9Tufwg&#43;pMuoYMSGALaU8w=="></script>
+
+
+
+    </body>
+</html>

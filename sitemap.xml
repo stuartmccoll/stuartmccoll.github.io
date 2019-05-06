@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/posts/hackthebox-lernaen-write-up/</loc>
+    <lastmod>2019-02-03T10:10:32+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2019-02-03T10:10:32+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2019-02-03T10:10:32+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/posts/deploy-a-serverless-flask-application-with-aws-lambda/</loc>
+    <lastmod>2018-10-17T22:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/designing-resilient-apis-with-idempotency/</loc>
+    <lastmod>2018-09-02T18:50:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2018-09-02T18:50:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/api/</loc>
+    <lastmod>2018-09-02T18:50:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/idempotency/</loc>
+    <lastmod>2018-09-02T18:50:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/software/</loc>
+    <lastmod>2018-09-02T18:50:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/posts/python-3.7-data-classes/</loc>
+    <lastmod>2018-07-08T19:50:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/gitlab-changelog-generator/</loc>
+    <lastmod>2018-06-23T22:50:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/add-a-flask-application-to-a-docker-container/</loc>
+    <lastmod>2017-05-14T10:10:32+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/quick-and-dirty-kombu/rabbitmq-application/</loc>
+    <lastmod>2017-05-14T10:10:32+00:00</lastmod>
+  </url>
+  
+</urlset>

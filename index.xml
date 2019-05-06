@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Stuart McColl</title>
+    <link>/</link>
+    <description>Recent content on Stuart McColl</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 03 Feb 2019 10:10:32 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>HackTheBox Lernaen Write-Up</title>
+      <link>/posts/hackthebox-lernaen-write-up/</link>
+      <pubDate>Sun, 03 Feb 2019 10:10:32 +0000</pubDate>
+      
+      <guid>/posts/hackthebox-lernaen-write-up/</guid>
+      <description>HackTheBox is an online platform for testing and advancing skills in penetration testing and cyber security. The site provides vulnerable machines as well as dedicated challenges in areas such as forensics, cryptography and web applications. The following is a write-up after completion of HackTheBox&amp;rsquo;s Lernaen web challenge.
+Our instance of the challenge will be contained in a Docker container - after starting the instance you&amp;rsquo;ll be given an address, such as docker.</description>
+    </item>
+    
+    <item>
+      <title>Deploy a Serverless Flask Application with AWS Lambda</title>
+      <link>/posts/deploy-a-serverless-flask-application-with-aws-lambda/</link>
+      <pubDate>Wed, 17 Oct 2018 22:00:00 +0000</pubDate>
+      
+      <guid>/posts/deploy-a-serverless-flask-application-with-aws-lambda/</guid>
+      <description>AWS Lambda lets us run code without provisioning or managing servers, paying only for the compute time of the running code. There&amp;rsquo;s no permanent infrastructure, and the server only has a life cycle of 40 milliseconds. AWS provides automatic horizontal scaling for Lambda applications, spinning up and down as many instances as are necessary.
+An open source Python library, Zappa gives us the ability to build and deploy serverless, event-driven Python applications on AWS Lambda.</description>
+    </item>
+    
+    <item>
+      <title>Designing Resilient APIs with Idempotency</title>
+      <link>/posts/designing-resilient-apis-with-idempotency/</link>
+      <pubDate>Sun, 02 Sep 2018 18:50:00 +0000</pubDate>
+      
+      <guid>/posts/designing-resilient-apis-with-idempotency/</guid>
+      <description>How can we design APIs to be resilient when our networks necessarily aren&amp;rsquo;t? An API should be robust enough to handle failure scenarios including connectivity drops, timeouts between resultant calls, and more. If a client makes a request to our API and loses connection during the request, how can we ensure that a successive identical request doesn&amp;rsquo;t alter the state of the system in a way that we weren&amp;rsquo;t expecting?</description>
+    </item>
+    
+    <item>
+      <title>Python 3.7 Data Classes</title>
+      <link>/posts/python-3.7-data-classes/</link>
+      <pubDate>Sun, 08 Jul 2018 19:50:00 +0000</pubDate>
+      
+      <guid>/posts/python-3.7-data-classes/</guid>
+      <description>PEP 557 in the recently-released [Python 3.7]() added data classes to the standard Python library. Data classes can be thought of as mutable data holders and are somewhat similar to named tuples, although named tuples are immutable.
+Data classes provide a lot of boilerplate code, saving time and effort on the part of the Python programmer, although it could be argued that this layer of abstraction makes debugging more difficult.</description>
+    </item>
+    
+    <item>
+      <title>GitLab Changelog Generator</title>
+      <link>/posts/gitlab-changelog-generator/</link>
+      <pubDate>Sat, 23 Jun 2018 22:50:00 +0000</pubDate>
+      
+      <guid>/posts/gitlab-changelog-generator/</guid>
+      <description>I&amp;rsquo;ve recently written a small command line utility using Python 3.6 which will produce a CHANGELOG.md file from the commit differences between two different GitLab project branches. I&amp;rsquo;ve released this as an open source Python package and it&amp;rsquo;s available from PyPi here. Not intended to be a direct replacement for writing a manual changelog, the utility should be used as a draft upon which to build.
+This was a small project to trial a few things; Python&amp;rsquo;s type hinting, which was added in PEP484; Facebook Open Source&amp;rsquo;s type checker Pyre; and Black &amp;lsquo;the uncompromising Python code formatter&amp;rsquo;.</description>
+    </item>
+    
+    <item>
+      <title>Add a Flask Application to a Docker Container</title>
+      <link>/posts/add-a-flask-application-to-a-docker-container/</link>
+      <pubDate>Sun, 14 May 2017 10:10:32 +0000</pubDate>
+      
+      <guid>/posts/add-a-flask-application-to-a-docker-container/</guid>
+      <description>Flask is a microframework for Python, based on Werkzeug and Jinja2. The core Flask framework is extremely lightweight, albeit infinitely extensible, and it&amp;rsquo;s simple for an experienced developer to pick up. I had been using Laravel a lot at the beginning of the year and Flask has been a breeze to work with in comparison. With it&amp;rsquo;s extensibility I haven&amp;rsquo;t been locked into working with pre-defined components either; I&amp;rsquo;ve used different database abstraction layers across multiple projects, such as Redis and PostgreSQL.</description>
+    </item>
+    
+    <item>
+      <title>Quick and Dirty Kombu/RabbitMQ Application</title>
+      <link>/posts/quick-and-dirty-kombu/rabbitmq-application/</link>
+      <pubDate>Sun, 14 May 2017 10:10:32 +0000</pubDate>
+      
+      <guid>/posts/quick-and-dirty-kombu/rabbitmq-application/</guid>
+      <description>Kombu is an open-source messaging library available for Python which aims to make messaging as simple as possible. Kombu provides a high-level interface for the Advanced Message Queuing Protocol (AMQP), an open standard protocol for message orientation, queuing, routing, reliability, and security. The most popular implementation of AMQP is the RabbitMQ open-source messaging server.
+In the example application we&amp;rsquo;re going to create here, we&amp;rsquo;re going to use Kombu and RabbitMQ in combination to do the following:</description>
+    </item>
+    
+  </channel>
+</rss>

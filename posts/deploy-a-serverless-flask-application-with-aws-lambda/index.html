@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="Stuart McColl ">
+<meta name="description"
+    content="AWS Lambda lets us run code without provisioning or managing servers, paying only for the compute time of the running code. There&amp;rsquo;s no permanent infrastructure, and the server only has a life cycle of 40 milliseconds. AWS provides automatic horizontal scaling for Lambda applications, spinning up and down as many instances as are necessary.
+An open source Python library, Zappa gives us the ability to build and deploy serverless, event-driven Python applications on AWS Lambda." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/posts/deploy-a-serverless-flask-application-with-aws-lambda/" />
+
+
+<title>
+    
+    Deploy a Serverless Flask Application with AWS Lambda :: Stuart McColl  — Software Design and Development
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.91687bbfc139d7ff1a244bb6d7324425f9c4f424eaaad242b478e3b3cf56396a.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="theme-color" content="#252627">
+<meta itemprop="name" content="Deploy a Serverless Flask Application with AWS Lambda">
+<meta itemprop="description" content="Deploy a Serverless Flask Application with AWS Lambda">
+
+
+<meta itemprop="datePublished" content="2018-10-17T22:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-10-17T22:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="546">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/"/>
+
+<meta name="twitter:title" content="Deploy a Serverless Flask Application with AWS Lambda"/>
+<meta name="twitter:description" content="Deploy a Serverless Flask Application with AWS Lambda"/>
+
+
+
+
+<meta property="article:published_time" content="2018-10-17 22:00:00 &#43;0000 &#43;0000" />
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">cd ~/</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/about">about</a></li><li><a href="/posts">blog</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            
+            </p>
+        </div>
+
+        <article>
+            <h2 class="post-title"><a href="/posts/deploy-a-serverless-flask-application-with-aws-lambda/">Deploy a Serverless Flask Application with AWS Lambda</a></h2>
+
+            
+
+            <div class="post-content">
+                
+
+<p><a href="https://aws.amazon.com/lambda/">AWS Lambda</a> lets us run code without provisioning or managing servers, paying only for the compute time of the running code. There&rsquo;s no permanent infrastructure, and the server only has a life cycle of 40 <em>milliseconds</em>. AWS provides automatic horizontal scaling for Lambda applications, spinning up and down as many instances as are necessary.</p>
+
+<p>An open source Python library, <a href="https://github.com/Miserlou/Zappa">Zappa</a> gives us the ability to build and deploy serverless, event-driven Python applications on <a href="https://aws.amazon.com/lambda/">AWS Lambda</a>. Zappa works out of the box with WSGI web applications, such as Flask and Django.</p>
+
+<p>It&rsquo;s quick and easy to deploy a Python WSGI application to AWS Lambda. The below guide assumes you have an AWS account and have created an IAM user with the relevant permissions.</p>
+
+<h3 id="configuration">Configuration</h3>
+
+<p>With <a href="https://pypi.org/project/pip/">pip</a> installed locally, we&rsquo;ll grab the <a href="https://pypi.org/project/awscli/">awscli</a> package.</p>
+
+<pre><code class="language-bash">$ pip install awscli
+</code></pre>
+
+<p>Once installed, the <code>aws configure</code> command will be the quickest way to configure our AWS credentials.</p>
+
+<pre><code class="language-bash">$ aws configure
+</code></pre>
+
+<p>This command will request four pieces of information.</p>
+
+<pre><code class="language-bash">AWS Access Key ID [None]:
+</code></pre>
+
+<p>This is the AWS Access Key ID of our IAM user with the relevant permissions.</p>
+
+<pre><code class="language-bash">AWS Secret Access Key [None]:
+</code></pre>
+
+<p>This is the AWS Secret Access Key of our IAM user with the relevant permissions.</p>
+
+<pre><code class="language-bash">Default region name [None]:
+</code></pre>
+
+<p>This can be left blank, which will default this value to <code>us-east-1</code>.</p>
+
+<pre><code class="language-bash">Default output format [None]:
+</code></pre>
+
+<p>This can also be left blank, which will default this value to <code>json</code>.</p>
+
+<p>After running the command, the credentials will be stored in the AWS credentials file, located at <code>~/.aws/credentials</code>.</p>
+
+<h3 id="deployment">Deployment</h3>
+
+<p>First, we&rsquo;ll create a <code>requirements.txt</code> file which will document the <a href="https://pypi.org/project/pip/">pip</a> libraries our application will be dependent upon. Run the command below.</p>
+
+<pre><code class="language-bash">$ touch requirements.txt
+</code></pre>
+
+<p>And then add the following to this file:</p>
+
+<pre><code class="language-bash">awscli
+flask
+zappa
+</code></pre>
+
+<p><a href="https://github.com/Miserlou/Zappa">Zappa</a> needs a virtual environment to run, which we can create like so (after running <code>pip install virtualenv</code>):</p>
+
+<pre><code class="language-bash">$ virtualenv venv
+</code></pre>
+
+<p>That command will create our virtual environment in a new directory named <code>venv</code>. We can activate our virtual environment with the following command:</p>
+
+<pre><code class="language-bash">$ source venv/bin/activate
+</code></pre>
+
+<p>If we need to deactivate our virtual environment, we can do so by running the command <code>deactivate</code> or by exiting the terminal.</p>
+
+<p>Once in the virtual environment, let&rsquo;s install the <a href="https://pypi.org/project/pip/">pip</a> libraries from our <code>requirements.txt</code> file.</p>
+
+<pre><code class="language-bash">$ pip install -r requirements.txt
+</code></pre>
+
+<p>Our Flask application will sit in a file named <code>app.py</code>, which will serve one route that will return a JSON key/value pair.</p>
+
+<pre><code class="language-python">from flask import Flask, jsonify
+
+
+app = Flask(__name__)
+
+@app.route(&quot;/&quot;)
+def index():
+	return jsonify({&quot;response&quot;: &quot;Hello world&quot;})
+
+if __name__ == &quot;__main__&quot;:
+	app.run()
+</code></pre>
+
+<p>In order to deploy our application to AWS, we&rsquo;ll need to run a couple of Zappa commands. The following command begins an interactive process.</p>
+
+<pre><code class="language-bash">$ zappa init
+</code></pre>
+
+<p>This will prompt us for a few different values, which we&rsquo;ll leave as their defaults.</p>
+
+<p>The next command we&rsquo;ll run will tell Zappa to bundle and upload our application and it&rsquo;s dependencies. As part of this process, Zappa will create the necessary API gateways.</p>
+
+<pre><code class="language-bash">$ zappa deploy dev
+</code></pre>
+
+<p>After running the above command, Zappa will return the URL where the application has been hosted. Hit this URL and we&rsquo;ll get back the following response:</p>
+
+<pre><code class="language-json">{&quot;response&quot;:&quot;Hello world&quot;}
+</code></pre>
+
+<p>To remove the AWS Lambda function, and associated API gateway and Cloudwatch logs, we can run the <code>undeploy</code> command.</p>
+
+<pre><code class="language-bash">$ zappa undeploy dev
+</code></pre>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+  			</div>
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2019</span>
+            
+                <span><a href="/">Stuart McColl</a></span>
+            
+            <span></span>
+            <span> <a href="/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.cf7871ed49474a80ed457154d24e61f7881adbe0f9384951a74ac46b688a39a4dbfa68bc6d37baeb058186de354ead3487d4ee7f083ea4cba860c48600b694f3.js" integrity="sha512-z3hx7UlHSoDtRXFU0k5h94ga2&#43;D5OElRp0rEa2iKOaTb&#43;mi8bTe66wWBht41Tq00h9Tufwg&#43;pMuoYMSGALaU8w=="></script>
+
+
+
+    </body>
+</html>
