@@ -32,15 +32,6 @@ Our instance of the challenge will be contained in a Docker container - after st
     </item>
     
     <item>
-      <title>Microservice Design Patterns: Aggregator</title>
-      <link>/posts/microservice-design-patterns-aggregator/</link>
-      <pubDate>Sun, 03 Feb 2019 10:10:32 +0000</pubDate>
-      
-      <guid>/posts/microservice-design-patterns-aggregator/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Deploy a Serverless Flask Application with AWS Lambda</title>
       <link>/posts/deploy-a-serverless-flask-application-with-aws-lambda/</link>
       <pubDate>Wed, 17 Oct 2018 22:00:00 +0000</pubDate>
