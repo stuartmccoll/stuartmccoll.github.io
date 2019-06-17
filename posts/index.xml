@@ -55,6 +55,40 @@ b'&lt;h1 style=\'color: #fff;\'&gt;HTB{l1k3_4_b0s5_s0n}&lt;/h1&gt;&lt;script typ
         </item>
         
         <item>
+            <title>Microservice Design Patterns: Aggregator</title>
+            <link>/posts/microservice-design-patterns-aggregator/</link>
+            <pubDate>Sun, 03 Feb 2019 10:10:32 +0000</pubDate>
+            
+            <guid>/posts/microservice-design-patterns-aggregator/</guid>
+            <description>The aggregator design pattern is a simple way of providing a single, unified service capable of surfacing data from multiple microservices, and a commonly used pattern when implementing a microservice-based architecture.
+Let&amp;rsquo;s imagine that we&amp;rsquo;ve been tasked with developing an internal API for our organisation - a general practice clinic. The API needs to consume data from three existing microservices, each of which is used by other services within the practice&amp;rsquo;s architecture - some services call these individually, some call all three.</description>
+            <content type="html"><![CDATA[<p>The aggregator design pattern is a simple way of providing a single, unified service capable of surfacing data from multiple microservices, and a commonly used pattern when implementing a microservice-based architecture.</p>
+
+<p>Let&rsquo;s imagine that we&rsquo;ve been tasked with developing an internal API for our organisation - a general practice clinic. The API needs to consume data from three existing microservices, each of which is used by other services within the practice&rsquo;s architecture - some services call these individually, some call all three.</p>
+
+<p>The requirements for the API are that it should return simple details for a patient, a list of their allergies and a list of medication that they are currently taking.</p>
+
+<p>Our three existing microservices are as follows:</p>
+
+<ul>
+<li><em>Existing Service #1</em> returns details about a patient - their name, age, etc.</li>
+<li><em>Existing Service #2</em> returns a list of allergies that the patient has.</li>
+<li><em>Existing Service #3</em> returns a list of medication that the patient is currently taking.</li>
+</ul>
+
+<p>Usually, we&rsquo;d expect an aggregator to make synchronous calls to relevant microservices, performing any necessary business logic on each result as it receives it and then packaging this up as an API endpoint for a consumer to use. This meets our requirements whilst opening up potential for re-use and decoupling.</p>
+
+<p>Rather than increasing the number of services which call these microservices directly, we can make use of the aggregator pattern here.</p>
+
+<p><img src="/img/aggregator-architecture.png" alt="Simple component diagram demonstrating an example of the aggregator design pattern" /></p>
+
+<p>Our new internal API will call our new aggregator microservice, which will call the three existing microservices before then pushing the necessary results back up to the internal API.</p>
+
+<p>We can re-use our aggregator within other services which call <em>all three</em> existing services, decoupling these from direct interaction with the microservices, which will make it easier to replace one later down the line; if we want to suddenly commission a new allergies microservice, we only have to update the aggregator (and those services which don&rsquo;t call <em>all three</em> existing services).</p>
+]]></content>
+        </item>
+        
+        <item>
             <title>Deploy a Serverless Flask Application with AWS Lambda</title>
             <link>/posts/deploy-a-serverless-flask-application-with-aws-lambda/</link>
             <pubDate>Wed, 17 Oct 2018 22:00:00 +0000</pubDate>

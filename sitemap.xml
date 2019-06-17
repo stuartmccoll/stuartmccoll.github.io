@@ -19,7 +19,36 @@
   </url>
   
   <url>
+    <loc>/posts/microservice-design-patterns-aggregator/</loc>
+    <lastmod>2019-02-03T10:10:32+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/posts/</loc>
+    <lastmod>2019-02-03T10:10:32+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-02-03T10:10:32+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/design-patterns/</loc>
+    <lastmod>2019-02-03T10:10:32+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/microservices/</loc>
+    <lastmod>2019-02-03T10:10:32+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/software/</loc>
     <lastmod>2019-02-03T10:10:32+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -35,12 +64,6 @@
   </url>
   
   <url>
-    <loc>/tags/</loc>
-    <lastmod>2018-09-02T18:50:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/api/</loc>
     <lastmod>2018-09-02T18:50:00+00:00</lastmod>
     <priority>0</priority>
@@ -48,12 +71,6 @@
   
   <url>
     <loc>/tags/idempotency/</loc>
-    <lastmod>2018-09-02T18:50:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/software/</loc>
     <lastmod>2018-09-02T18:50:00+00:00</lastmod>
     <priority>0</priority>
   </url>

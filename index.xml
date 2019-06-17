@@ -32,6 +32,16 @@ Our instance of the challenge will be contained in a Docker container - after st
     </item>
     
     <item>
+      <title>Microservice Design Patterns: Aggregator</title>
+      <link>/posts/microservice-design-patterns-aggregator/</link>
+      <pubDate>Sun, 03 Feb 2019 10:10:32 +0000</pubDate>
+      
+      <guid>/posts/microservice-design-patterns-aggregator/</guid>
+      <description>The aggregator design pattern is a simple way of providing a single, unified service capable of surfacing data from multiple microservices, and a commonly used pattern when implementing a microservice-based architecture.
+Let&amp;rsquo;s imagine that we&amp;rsquo;ve been tasked with developing an internal API for our organisation - a general practice clinic. The API needs to consume data from three existing microservices, each of which is used by other services within the practice&amp;rsquo;s architecture - some services call these individually, some call all three.</description>
+    </item>
+    
+    <item>
       <title>Deploy a Serverless Flask Application with AWS Lambda</title>
       <link>/posts/deploy-a-serverless-flask-application-with-aws-lambda/</link>
       <pubDate>Wed, 17 Oct 2018 22:00:00 +0000</pubDate>
