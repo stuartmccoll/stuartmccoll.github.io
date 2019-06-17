@@ -6,10 +6,37 @@
     <description>Recent content in Tags on Stuart McColl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 02 Sep 2018 18:50:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 03 Feb 2019 10:10:32 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>design patterns</title>
+      <link>/tags/design-patterns/</link>
+      <pubDate>Sun, 03 Feb 2019 10:10:32 +0000</pubDate>
+      
+      <guid>/tags/design-patterns/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>microservices</title>
+      <link>/tags/microservices/</link>
+      <pubDate>Sun, 03 Feb 2019 10:10:32 +0000</pubDate>
+      
+      <guid>/tags/microservices/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>software</title>
+      <link>/tags/software/</link>
+      <pubDate>Sun, 03 Feb 2019 10:10:32 +0000</pubDate>
+      
+      <guid>/tags/software/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>api</title>
@@ -26,15 +53,6 @@
       <pubDate>Sun, 02 Sep 2018 18:50:00 +0000</pubDate>
       
       <guid>/tags/idempotency/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>software</title>
-      <link>/tags/software/</link>
-      <pubDate>Sun, 02 Sep 2018 18:50:00 +0000</pubDate>
-      
-      <guid>/tags/software/</guid>
       <description></description>
     </item>
     
