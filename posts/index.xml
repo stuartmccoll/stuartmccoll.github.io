@@ -5,8 +5,166 @@
         <description>Recent content in Posts on Stuart McColl</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
-        <lastBuildDate>Sun, 03 Feb 2019 10:10:32 +0000</lastBuildDate>
+        <lastBuildDate>Thu, 04 Jul 2019 10:00:00 +0000</lastBuildDate>
         <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Weeknotes (28/06/19)</title>
+            <link>/posts/weeknotes-28/06/19/</link>
+            <pubDate>Thu, 04 Jul 2019 10:00:00 +0000</pubDate>
+            
+            <guid>/posts/weeknotes-28/06/19/</guid>
+            <description>I’m writing these later than I’d like to already (the Thursday of ‘next week’, as opposed to the intended Friday of ‘this’ week) and it’s only the second week of this commitment, which goes some way to explain how busy I’ve been this week.
+I started the week by writing a lighter version of my list of ‘things to achieve this week’ – three days this week were to be taken up with an off-site project kickoff session, which went really well.</description>
+            <content type="html"><![CDATA[
+
+<p>I’m writing these later than I’d like to already (the Thursday of ‘next week’, as opposed to the intended Friday of ‘this’ week) and it’s only the second week of this commitment, which goes some way to explain how busy I’ve been this week.</p>
+
+<p>I started the week by writing a lighter version of my list of ‘things to achieve this week’ – three days this week were to be taken up with an off-site project kickoff session, which went really well. I’m not always a fan of things like this as they’ve tended to, in my experience, veer towards ‘organised fun’-type activities, but this was organised excellently and struck a good balance between team-building and project-focussed work.</p>
+
+<hr />
+
+<h2 id="monday">Monday</h2>
+
+<p>Being out of the office for the majority of the week meant having to cram lots of meetings into the remaining in-office time.</p>
+
+<p>I gave a co-presentation on unit testing in Python to the software developer community of practice in the afternoon, which I think was received well. My section of the presentation was mostly centred around the theory of unit testing as opposed to practical examples, but the whole thing inspired a lot of conversation and ‘how would I do <em>this’</em>-type questions, which is what we wanted to see from it.</p>
+
+<p>The rest of the day was mostly spent in project-related meetings and looking over the job profile for an interview panel I’ll be sitting on.</p>
+
+<h2 id="tuesday">Tuesday</h2>
+
+<p>This was the first day of our off-site project kickoff. I can’t remember the last time I emptied my calendar for something that wasn’t annual leave!</p>
+
+<p>A good mix of icebreaker activities and project talk. I’d happily have played ‘agile beer pong jeopardy’ for the rest of the week, which had around the maximum level of sporting participation that I’m willing to commit to. I like things like this because they highlight the different understandings people have of agile based on the different flavours and approaches that they’ve been exposed to.</p>
+
+<h2 id="wednesday">Wednesday</h2>
+
+<p>Wednesday was the second day of our project kickoff, and the first all-day session.</p>
+
+<p>I presented a quick overview of the target architecture for the service on a whiteboard which enabled some good conversations within the team around some of our potential risks and dependencies.</p>
+
+<p>I’m yet to decide whether it’s a good thing that I can draw the entire component diagram for the service from memory 🤔.</p>
+
+<h2 id="thursday">Thursday</h2>
+
+<p>Thursday was the last day of our project kickoff, which meant lots of epics and user stories to refine to enable us to hit our beta phase running. These three days were the first time I’ve felt like we’ve spent some quality time as a team looking at the problems we’re trying to solve from all angles, and it really shone through in some of the approaches and outputs from these refinement sessions.</p>
+
+<h2 id="friday">Friday</h2>
+
+<p>Fridays always swing one of two ways for me; either no meetings at all, in which case I can devote some solid time to project work; or booked out for one-to-ones, either my own or for those colleagues whom I line manage.</p>
+
+<p>This Friday was no exception. I had a one-to-one with my line manager where we discussed what <em>good</em> looks like in terms of my role, as well as the kinds of things expected of a lead software engineer and how I might factor that into personal objectives.</p>
+
+<p>I also had a one-to-one with a colleague I line manage, where we discussed their current work and objectives. I watched <a href="https://twitter.com/mseckington">Melinda Seckington</a>’s ‘<a href="https://www.youtube.com/watch?v=18MI6n9hFDI">Levelling Up Developers</a>’ talk from <a href="https://london2019.theleaddeveloper.com/">Lead Dev London 2019</a> recently, which led me onto her blog, specifically the ‘<a href="https://missgeeky.com/2018/07/11/goal-setting-workshops-managers/">Goal-setting workshops for managers</a>’ post. It made me think about the way I enable staff to set personal objectives, and whether I could improve upon that by taking some of her ideas into consideration. I don’t think I’ve even scratched the surface of being a good line manager yet, so it’s always nice to stumble across things like this.</p>
+
+<hr />
+
+<p><img src="/img/concorde-alpha-foxtrot.jpeg" alt="Concorde Alpha Foxtrot on display at Aerospace Bristol" /></p>
+
+<p>I spent Saturday in Bristol visiting a friend and managed to squeeze in a visit to <a href="http://aerospacebristol.org/">Aerospace Bristol</a>, which is home to the last Concorde both to be built and to fly. It’s well worth a visit, and I’ll inevitably be dragging my wife back at some point.</p>
+]]></content>
+        </item>
+        
+        <item>
+            <title>Weeknotes (21/06/19)</title>
+            <link>/posts/weeknotes-21/06/19/</link>
+            <pubDate>Wed, 26 Jun 2019 10:00:00 +0000</pubDate>
+            
+            <guid>/posts/weeknotes-21/06/19/</guid>
+            <description>I moved into a new role semi-recently which also involved moving into a new team, which was coming to the end of the alpha phase of a project. In theory, the role shouldn’t be hugely different to the one I was already fulfilling (it’s an upgrade in seniority) and the differences that are there were things that I knew up front.
+Software development during the alpha phase of an agile project is very different to software development during the beta phase.</description>
+            <content type="html"><![CDATA[
+
+<p>I moved into a new role semi-recently which also involved moving into a new team, which was coming to the end of the alpha phase of a project. In theory, the role shouldn’t be hugely different to the one I was already fulfilling (it’s an upgrade in seniority) and the differences that <em>are</em> there were things that I knew up front.</p>
+
+<p>Software development during the alpha phase of an agile project is <em>very</em> different to software development during the beta phase. Working as a software developer during beta, I had been used to my days involving two things; either delivering features and bug fixes; or live support for the service I was working on. These two things play out very differently in reality, but both have tangible outputs which I can point at and say “I achieved these things today”.</p>
+
+<p>Working as a senior software developer during alpha feels very different. There’s no live service to support, no bugs to fix, and depending on the goals of the alpha phase, there isn’t necessarily any code to write. Much of my time is taken up with ‘bigger picture’-type discussions, ensuring that what we’re proposing from a technical point of view aligns strategically with other areas of the organisation, ensuring that the right things are being done to de-risk any identified risks, and mapping our dependencies. I’ve drawn some target architecture on a whiteboard and thought about how our components fit together, but I’ve spent <em>very</em> little time writing code.</p>
+
+<p>If I don’t have any of those ‘tangible outputs’ to show for the work I’ve done during the day, am I doing a good job? I’ve had a chat with a couple of colleagues in the same role about what <em>good</em> looks like and what their coping strategy is for not having those tangible outputs, and their experiences are very similar to mine. That’s reassuring in some ways, but it doesn’t stretch <em>all</em> the way.</p>
+
+<p>I’m experimenting with a combination of two things to try and combat that feeling of not having achieved x things during the day. First of which, you’re reading right now. I’ve been following the week notes community for a while (particularly <a href="https://medium.com/u/580b65df502c">Ian Ames</a> and <a href="https://medium.com/u/27dad6d7c304">Jonathan Kerr</a> 👋), and it seemed like something I could leverage in order to reassess the things I’d worked on during the week and to reflect on whether or not I consider that ‘doing a good job’. To aid this, the other thing I’m experimenting with is writing a list of things I want to achieve each week.</p>
+
+<hr />
+
+<h2 id="monday">Monday</h2>
+
+<p>I took Monday off to recover from my previous week which was filled with university exams (my penultimate year of undergraduate study in Computer Science with the Open University). I’d expected to spend it sleeping/vegetating, but I’d actually come out of the weekend already feeling refreshed and ready to hit the week running. Just having the knowledge that I didn’t have to spend all of my ‘spare’ time studying/revising felt like a massive weight had been lifted from my shoulders.</p>
+
+<p>I made the most of this and ploughed through a couple of the non-project related things I’d been pushing down my to-do list for the past few weeks and which had landed on my list of things I wanted to achieve this week.</p>
+
+<h2 id="tuesday">Tuesday</h2>
+
+<p><img src="/img/dilbert-meetings.png" alt="A Dilbert on meetings" /></p>
+
+<p>The combination of half a working week last week and taking Monday off meant that I’d squeezed a lot of meetings into Tuesday. Five hours worth of meetings, to be precise. With that feeling of refreshed energy quickly dissipating, I wanted to try and engineer something out of the situation and decided that moving forward I’m going to start tracking how long I spend in meetings and see if I can use this as some kind of foundation in being better at picking and choosing the meetings I attend. At least two of those five hours didn’t come with any outputs and that feels like time that I could and <em>should</em> be better utilising.</p>
+
+<h2 id="wednesday">Wednesday</h2>
+
+<p>I managed to progress a few of the things on my to-do list for the week, so a 👍 there.</p>
+
+<p>I was anticipating another meeting-heavy day but managed to knock this down to only two hours, leaving me with some substantial project time. Working with a colleague we came to an agreement on our branching strategy moving into the beta phase, and I was able to spend some time reviewing a couple of early pull requests. It had felt like weeks since I’d actually looked at a line of code, so it was nice to get involved at this level again.</p>
+
+<h2 id="thursday">Thursday</h2>
+
+<p>Most of today was spent working on the technology section of the slide deck for our end-of-alpha showcase and preparing to deliver this in the afternoon.</p>
+
+<p>I don’t consider myself a good public speaker. I don’t mind doing it, and that’s partly because I always think I’ll do a good job, but when I’m actually stood in front of a room full of people the things I was planning to say leave my brain, and not via my mouth, as intended. Sometimes, I’ll even say things that either don’t mean anything in reality, or that I <em>know</em> are the complete opposite of the thing that I was supposed to say. Unfortunately, I felt like I did exactly that on this occassion.</p>
+
+<p>I read Chris Anderson’s ‘<a href="https://www.amazon.co.uk/TED-Talks-official-public-speaking/dp/1472228065/">TED Talks: The Official TED Guide to Public Speaking</a>’ on the train to/from London recently, and I think that it <em>might</em> have contributed to some sort of incremental improvement in my public speaking, or at least in my approach to it. This is almost definitely an area that I both want and need to improve in and I think that’s only going to happen with increased exposure to it. Which is lucky, because I’ve got another presentation to give on Monday.</p>
+
+<h2 id="friday">Friday</h2>
+
+<p>Another thing ticked off the to-do list early on this morning 👍, which left me with only two of six work-related things left to complete. One of these I had anticipated doing over the weekend (the slide deck for Monday’s presentation; it just needs tidying and some rehearsal time) and the other was a stretch goal that I felt might rollover into next week.</p>
+
+<p>I worked a considerably shorter day on Friday, so meetings took up a large chunk of this; one of which was project-related, the other related to recruitment. I’ve taken an interest in our approach to recruitment within the software development practice recently, as I don’t think we do it as well as we could. There’s a perception that we struggle to recruit for a number of reasons, but I don’t necessarily agree with all of these. I think it partly stems from the fact that, although we’re the largest technology employer in the area, <em>nobody knows we’re here</em>. A few of us are beginning to challenge that by working on conference sponsorships (likely to feature on next week’s to-do list), and how we approach our job profiles, and I hope this pays off.</p>
+
+<hr />
+
+<p>As well as work-related things on my to-do list for the week, I decided to try and track some non-work-related tasks as well.</p>
+
+<p>I’m reading two books at the moment and one of these tasks was to get through a subsequent chunk of both. For my (sort of) non-work-related book I’m reading Shoshana Zuboff’s ‘<a href="https://www.amazon.co.uk/Age-Surveillance-Capitalism-Future-Frontier/dp/1781256845/">The Age of Surveillance Capitalism: The Fight for a Human Future at the New Frontier of Power</a>’. It’s heavy reading at times and frankly terrifying. For my work-related book I’m reading Robert C. Martin’s ‘<a href="https://www.amazon.co.uk/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164/">Clean Architecture</a>’. This came recommended (albeit by a number of ‘top lists’ of books on software architecture) and it’s been interesting so far.</p>
+
+<p>Another task was book-related, but from the opposite perspective. I’ve been toying with the idea of writing my own book around impostor syndrome with specific reference to the technology industry and possibly stretching this out wider from impostor syndrome to mental health in general. I started doing some research into this during the week, reading some early research papers on impostor syndrome (thanks to the Open University’s library) and starting to put together what the book’s structure might look like. I don’t expect to start writing it anytime soon (it’ll probably take a backseat again when my final year of undergraduate study begins in September), but it feels like I’ve made a start on <em>making a start</em>.</p>
+
+<p>The final task was to write this post, which, if you’re reading this, means I’ve achieved it 👍.</p>
+]]></content>
+        </item>
+        
+        <item>
+            <title>Microservice Design Patterns: Aggregator</title>
+            <link>/posts/microservice-design-patterns-aggregator/</link>
+            <pubDate>Mon, 17 Jun 2019 10:00:00 +0000</pubDate>
+            
+            <guid>/posts/microservice-design-patterns-aggregator/</guid>
+            <description>The aggregator design pattern is a simple way of providing a single, unified service capable of surfacing data from multiple microservices, and a commonly used pattern when implementing a microservice-based architecture.
+Let&amp;rsquo;s imagine that we&amp;rsquo;ve been tasked with developing an internal API for our organisation - a general practice clinic. The API needs to consume data from three existing microservices, each of which is used by other services within the practice&amp;rsquo;s architecture - some services call these individually, some call all three.</description>
+            <content type="html"><![CDATA[<p>The aggregator design pattern is a simple way of providing a single, unified service capable of surfacing data from multiple microservices, and a commonly used pattern when implementing a microservice-based architecture.</p>
+
+<p>Let&rsquo;s imagine that we&rsquo;ve been tasked with developing an internal API for our organisation - a general practice clinic. The API needs to consume data from three existing microservices, each of which is used by other services within the practice&rsquo;s architecture - some services call these individually, some call all three.</p>
+
+<p>The requirements for the API are that it should return simple details for a patient, a list of their allergies and a list of medication that they are currently taking.</p>
+
+<p>Our three existing microservices are as follows:</p>
+
+<ul>
+<li><em>Existing Service #1</em> returns details about a patient - their name, age, etc.</li>
+<li><em>Existing Service #2</em> returns a list of allergies that the patient has.</li>
+<li><em>Existing Service #3</em> returns a list of medication that the patient is currently taking.</li>
+</ul>
+
+<p>Usually, we&rsquo;d expect an aggregator to make synchronous calls to relevant microservices, performing any necessary business logic on each result as it receives it and then packaging this up as an API endpoint for a consumer to use. This meets our requirements whilst opening up potential for re-use and decoupling.</p>
+
+<p>Rather than increasing the number of services which call these microservices directly, we can make use of the aggregator pattern here.</p>
+
+<p><img src="/img/aggregator-architecture.png" alt="Simple component diagram demonstrating an example of the aggregator design pattern" /></p>
+
+<p>Our new internal API will call our new aggregator microservice, which will call the three existing microservices before then pushing the necessary results back up to the internal API.</p>
+
+<p>We can re-use our aggregator within other services which call <em>all three</em> existing services, decoupling these from direct interaction with the microservices, which will make it easier to replace one later down the line; if we want to suddenly commission a new allergies microservice, we only have to update the aggregator (and those services which don&rsquo;t call <em>all three</em> existing services).</p>
+]]></content>
+        </item>
         
         <item>
             <title>HackTheBox Lernaen Write-Up</title>
@@ -51,40 +209,6 @@ b'&lt;h1 style=\'color: #fff;\'&gt;HTB{l1k3_4_b0s5_s0n}&lt;/h1&gt;&lt;script typ
 </code></pre>
 
 <p>Look inside the first <code>h1</code> element and you&rsquo;ll find our flag.</p>
-]]></content>
-        </item>
-        
-        <item>
-            <title>Microservice Design Patterns: Aggregator</title>
-            <link>/posts/microservice-design-patterns-aggregator/</link>
-            <pubDate>Sun, 03 Feb 2019 10:10:32 +0000</pubDate>
-            
-            <guid>/posts/microservice-design-patterns-aggregator/</guid>
-            <description>The aggregator design pattern is a simple way of providing a single, unified service capable of surfacing data from multiple microservices, and a commonly used pattern when implementing a microservice-based architecture.
-Let&amp;rsquo;s imagine that we&amp;rsquo;ve been tasked with developing an internal API for our organisation - a general practice clinic. The API needs to consume data from three existing microservices, each of which is used by other services within the practice&amp;rsquo;s architecture - some services call these individually, some call all three.</description>
-            <content type="html"><![CDATA[<p>The aggregator design pattern is a simple way of providing a single, unified service capable of surfacing data from multiple microservices, and a commonly used pattern when implementing a microservice-based architecture.</p>
-
-<p>Let&rsquo;s imagine that we&rsquo;ve been tasked with developing an internal API for our organisation - a general practice clinic. The API needs to consume data from three existing microservices, each of which is used by other services within the practice&rsquo;s architecture - some services call these individually, some call all three.</p>
-
-<p>The requirements for the API are that it should return simple details for a patient, a list of their allergies and a list of medication that they are currently taking.</p>
-
-<p>Our three existing microservices are as follows:</p>
-
-<ul>
-<li><em>Existing Service #1</em> returns details about a patient - their name, age, etc.</li>
-<li><em>Existing Service #2</em> returns a list of allergies that the patient has.</li>
-<li><em>Existing Service #3</em> returns a list of medication that the patient is currently taking.</li>
-</ul>
-
-<p>Usually, we&rsquo;d expect an aggregator to make synchronous calls to relevant microservices, performing any necessary business logic on each result as it receives it and then packaging this up as an API endpoint for a consumer to use. This meets our requirements whilst opening up potential for re-use and decoupling.</p>
-
-<p>Rather than increasing the number of services which call these microservices directly, we can make use of the aggregator pattern here.</p>
-
-<p><img src="/img/aggregator-architecture.png" alt="Simple component diagram demonstrating an example of the aggregator design pattern" /></p>
-
-<p>Our new internal API will call our new aggregator microservice, which will call the three existing microservices before then pushing the necessary results back up to the internal API.</p>
-
-<p>We can re-use our aggregator within other services which call <em>all three</em> existing services, decoupling these from direct interaction with the microservices, which will make it easier to replace one later down the line; if we want to suddenly commission a new allergies microservice, we only have to update the aggregator (and those services which don&rsquo;t call <em>all three</em> existing services).</p>
 ]]></content>
         </item>
         
