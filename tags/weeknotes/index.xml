@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>weeknotes on Stuart McColl</title>
+    <link>/tags/weeknotes/</link>
+    <description>Recent content in weeknotes on Stuart McColl</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 04 Jul 2019 10:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/weeknotes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Weeknotes (28/06/19)</title>
+      <link>/posts/weeknotes-28/06/19/</link>
+      <pubDate>Thu, 04 Jul 2019 10:00:00 +0000</pubDate>
+      
+      <guid>/posts/weeknotes-28/06/19/</guid>
+      <description>I’m writing these later than I’d like to already (the Thursday of ‘next week’, as opposed to the intended Friday of ‘this’ week) and it’s only the second week of this commitment, which goes some way to explain how busy I’ve been this week.
+I started the week by writing a lighter version of my list of ‘things to achieve this week’ – three days this week were to be taken up with an off-site project kickoff session, which went really well.</description>
+    </item>
+    
+    <item>
+      <title>Weeknotes (21/06/19)</title>
+      <link>/posts/weeknotes-21/06/19/</link>
+      <pubDate>Wed, 26 Jun 2019 10:00:00 +0000</pubDate>
+      
+      <guid>/posts/weeknotes-21/06/19/</guid>
+      <description>I moved into a new role semi-recently which also involved moving into a new team, which was coming to the end of the alpha phase of a project. In theory, the role shouldn’t be hugely different to the one I was already fulfilling (it’s an upgrade in seniority) and the differences that are there were things that I knew up front.
+Software development during the alpha phase of an agile project is very different to software development during the beta phase.</description>
+    </item>
+    
+  </channel>
+</rss>
