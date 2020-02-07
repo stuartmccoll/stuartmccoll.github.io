@@ -6,10 +6,55 @@
     <description>Recent content in Tags on Stuart McColl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 14 Jul 2019 10:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 Feb 2020 20:45:35 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>aws</title>
+      <link>/tags/aws/</link>
+      <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
+      
+      <guid>/tags/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>devops</title>
+      <link>/tags/devops/</link>
+      <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
+      
+      <guid>/tags/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>route53</title>
+      <link>/tags/route53/</link>
+      <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
+      
+      <guid>/tags/route53/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>s3</title>
+      <link>/tags/s3/</link>
+      <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
+      
+      <guid>/tags/s3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>software development</title>
+      <link>/tags/software-development/</link>
+      <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
+      
+      <guid>/tags/software-development/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>agile</title>
@@ -26,15 +71,6 @@
       <pubDate>Sun, 14 Jul 2019 10:00:00 +0000</pubDate>
       
       <guid>/tags/digital/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>software development</title>
-      <link>/tags/software-development/</link>
-      <pubDate>Sun, 14 Jul 2019 10:00:00 +0000</pubDate>
-      
-      <guid>/tags/software-development/</guid>
       <description></description>
     </item>
     

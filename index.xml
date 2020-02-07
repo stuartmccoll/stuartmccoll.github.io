@@ -6,10 +6,20 @@
     <description>Recent content on Stuart McColl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 14 Jul 2019 10:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 Feb 2020 20:45:35 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>HTTP/S Redirects for AWS Route 53 Using S3</title>
+      <link>/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</link>
+      <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
+      
+      <guid>/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</guid>
+      <description>I moved hosting of my domains recently from tsoHost to Amazon Web Services, as uptime on tsoHost seems to have been slowly getting worse. Rather than using disparate providers for different services, I chose AWS to sit everything under one provider.
+Shifting to AWS itself was relatively easy - I&amp;rsquo;m now using Amazon WorkMail for my email service and Amazon Route 53 for DNS. The documentation for switching to both from another provider was straight forward and I was up and running within a few days.</description>
+    </item>
     
     <item>
       <title>Weeknotes (05/07/19)</title>
