@@ -5,8 +5,40 @@
         <description>Recent content in Posts on Stuart McColl</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
-        <lastBuildDate>Sun, 14 Jul 2019 10:00:00 +0000</lastBuildDate>
+        <lastBuildDate>Fri, 07 Feb 2020 20:45:35 +0000</lastBuildDate>
         <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>HTTP/S Redirects for AWS Route 53 Using S3</title>
+            <link>/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</link>
+            <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
+            
+            <guid>/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</guid>
+            <description>I moved hosting of my domains recently from tsoHost to Amazon Web Services, as uptime on tsoHost seems to have been slowly getting worse. Rather than using disparate providers for different services, I chose AWS to sit everything under one provider.
+Shifting to AWS itself was relatively easy - I&amp;rsquo;m now using Amazon WorkMail for my email service and Amazon Route 53 for DNS. The documentation for switching to both from another provider was straight forward and I was up and running within a few days.</description>
+            <content type="html"><![CDATA[
+
+<p>I moved hosting of my domains recently from <a href="https://www.tsohost.com">tsoHost</a> to <a href="https://aws.amazon.com">Amazon Web Services</a>, as uptime on tsoHost seems to have been slowly getting worse. Rather than using disparate providers for different services, I chose AWS to sit everything under one provider.</p>
+
+<p>Shifting to AWS itself was relatively easy - I&rsquo;m now using <a href="https://aws.amazon.com/workmail/">Amazon WorkMail</a> for my email service and <a href="https://aws.amazon.com/route53/">Amazon Route 53</a> for DNS. The documentation for switching to both from another provider was straight forward and I was up and running within a few days.</p>
+
+<p>Out of the box, Route 53 doesn&rsquo;t provide the ability to redirect to sites hosted outside of AWS. It&rsquo;s achievable with the use of another Amazon service, S3 (Simple Storage Bucket).</p>
+
+<h2 id="guide">Guide</h2>
+
+<p>Create a new S3 bucket in the <a href="https://console.aws.amazon.com/s3/">Amazon S3 console</a>. Give it a name which matches your domain - <code>example.com</code>. Keep all of the default settings.</p>
+
+<p>Once created, enter the &lsquo;Properties&rsquo; section of the bucket, and select &lsquo;Static Website Hosting&rsquo;. In here, select &lsquo;Redirect all request to another host name&rsquo;, which will provide you with two input fields to fill in. Add the domain to redirect to in the first, let&rsquo;s assume it&rsquo;s <code>https://www.example.net</code>, and enter one of <code>http</code> or <code>https</code> in the second, before saving.</p>
+
+<p>In the <a href="https://console.aws.amazon.com/route53/">Route 53 console</a>, choose your matching hosted zone - in this case it&rsquo;d be <code>example.com</code>.</p>
+
+<p>In here, create a new resource record (by clicking &lsquo;Create Record Set&rsquo;). Select a &lsquo;Record type&rsquo; of &lsquo;A - IPv4 address&rsquo;. Select the &lsquo;Alias&rsquo; option, and within &lsquo;Alias Target&rsquo;, you&rsquo;ll be provided with a list of your AWS resources which you can redirect to. Your S3 bucket will be listed under a heading of &lsquo;S3 Website Endpoints&rsquo;. Leave &lsquo;Routing Policy&rsquo; as &lsquo;Simple&rsquo; and &lsquo;Evaluate Health Target&rsquo; as &lsquo;No&rsquo;, then click &lsquo;Create&rsquo; to create the record.</p>
+
+<p>The change might take a little bit of time to propogate. It was instant for me. You can test this by running <code>curl --head example.com</code>. This returned the following headers for my request <code>HTTP/1.1 301 Moved Permanently</code>, <code>Server: AmazonS3</code>, and <code>Location: https://www.example.net/</code>, confirming that the change had propogated.</p>
+
+<p>To ensure redirects for both <code>example.com</code> and <code>www.example.com</code>, you&rsquo;ll want to follow the same process as above, this time creating an S3 bucket with a name of <code>www.example.com</code> and pointing another new record set for your domain at this second S3 bucket.</p>
+]]></content>
+        </item>
         
         <item>
             <title>Weeknotes (05/07/19)</title>
