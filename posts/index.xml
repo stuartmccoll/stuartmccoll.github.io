@@ -5,8 +5,100 @@
         <description>Recent content in Posts on Stuart McColl</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
-        <lastBuildDate>Fri, 07 Feb 2020 20:45:35 +0000</lastBuildDate>
+        <lastBuildDate>Mon, 27 Apr 2020 20:00:00 +0000</lastBuildDate>
         <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>AppleScript for Configuring External Displays</title>
+            <link>/posts/2020-04-27-applescript-external-displays/</link>
+            <pubDate>Mon, 27 Apr 2020 20:00:00 +0000</pubDate>
+            
+            <guid>/posts/2020-04-27-applescript-external-displays/</guid>
+            <description>AppleScript is a scripting language bundled within all versions of macOS, which allows for scripting of elements of the operating system and compatible applications.
+I&amp;rsquo;d never touched it before, but decided to try to use it to automate setting the resolutions of my external displays when switching between my personal and work MacBook Pros. Sometimes the resolutions stick when switching between the two, sometimes they don&amp;rsquo;t. Rather than have to go into System Preferences &amp;gt; Displays and set them whenever the settings don&amp;rsquo;t stick, I quite liked the idea of just running a script and having something else take care of it for me.</description>
+            <content type="html"><![CDATA[<p>AppleScript is a scripting language bundled within all versions of macOS, which allows for scripting of elements of the operating system and compatible applications.</p>
+
+<p>I&rsquo;d never touched it before, but decided to try to use it to automate setting the resolutions of my external displays when switching between my personal and work MacBook Pros.
+Sometimes the resolutions stick when switching between the two, sometimes they don&rsquo;t. Rather than have to go into <code>System Preferences &gt; Displays</code> and set them whenever the
+settings don&rsquo;t stick, I quite liked the idea of just running a script and having something else take care of it for me. That&rsquo;s where AppleScript comes in.</p>
+
+<p>There are different ways of running AppleScripts - I&rsquo;m not going to cover that here. Options include running from the command line, running as a bundled application, running
+from <a href="https://www.alfredapp.com">Alfred</a>, etc.</p>
+
+<p>I managed to cobble together a sloppy script to automate setting the resolution of my displays, which I&rsquo;ll detail below. Prior warning - I haven&rsquo;t done any cleanup; there&rsquo;s
+plenty that could be refactored - for example, it could be one function which you pass parameters to and call for each display you want to set. Go with it for now.</p>
+
+<pre><code class="language-applescript">tell application &quot;System Preferences&quot;
+	reveal anchor &quot;displaysDisplayTab&quot; of pane id &quot;com.apple.preference.displays&quot;
+end tell
+</code></pre>
+
+<p>This opens <code>System Preferences &gt; Displays</code> and then ensures that the <code>Display</code> tab is open.</p>
+
+<p><img src="/img/20200427-display.png" alt="System Preferences &gt; Displays" /></p>
+
+<pre><code class="language-applescript">tell application &quot;System Events&quot; to tell process &quot;System Preferences&quot; to tell window &quot;Built-in Retina Display&quot;
+	set is_scaled to value of radio button &quot;Scaled&quot; of tab group 1
+	if is_scaled = 0 then
+		click radio button &quot;Scaled&quot; of tab group 1
+		click radio button 5 of radio group 1 of group 1 of tab group 1
+	else
+		set scale_value to value of radio group 1 of group 1 of tab group 1
+		if scale_value is not equal to 5 then
+			click radio button 5 of radio group 1 of group 1 of tab group 1
+		end if
+	end if
+end tell
+</code></pre>
+
+<p>This is the bulk of the script, which I essentially duplicate this for both external displays. Let&rsquo;s break down what&rsquo;s happening here.</p>
+
+<pre><code class="language-applescript">tell application &quot;System Events&quot; to tell process &quot;System Preferences&quot; to tell window &quot;Built-in Retina Display&quot;
+...
+end tell
+</code></pre>
+
+<p>This <code>tell</code> block ensures that I&rsquo;m targeting the &ldquo;Built-in Retina Display&rdquo; window. I also have two separate <code>tell</code> blocks for my external displays, where instead of using
+<code>tell window &quot;Built-in Retina Display&quot;</code>, I use <code>tell window &quot;U28E590 (1)&quot;</code> and <code>tell window &quot;U28E590 (2)&quot;</code>. This is what I meant about my lack of refactoring; you could easily
+make this a function and pass the display name as an argument.</p>
+
+<pre><code class="language-applescript">set is_scaled to value of radio button &quot;Scaled&quot; of tab group 1
+</code></pre>
+
+<p>This sets the value of the &ldquo;Scaled&rdquo; radio button to a variable, which we can then check.</p>
+
+<pre><code class="language-applescript">if is_scaled = 0 then
+		click radio button &quot;Scaled&quot; of tab group 1
+		click radio button 5 of radio group 1 of group 1 of tab group 1
+	else
+		...
+	end if
+</code></pre>
+
+<p>If the &ldquo;Scaled&rdquo; radio button has a value of <code>0</code>, then that means that it hasn&rsquo;t been clicked. We click the &ldquo;Scaled&rdquo; radio button and then select the appropriate resolution
+size from within the &ldquo;Scaled&rdquo; submenu. In this code example, <code>radio button 5</code> is the &ldquo;More Space&rdquo; setting.</p>
+
+<pre><code class="language-applescript">if is_scaled = 0 then
+		...
+	else
+		set scale_value to value of radio group 1 of group 1 of tab group 1
+		if scale_value is not equal to 5 then
+			click radio button 5 of radio group 1 of group 1 of tab group 1
+		end if
+	end if
+</code></pre>
+
+<p>In the <code>else</code> block, &ldquo;Scaled&rdquo; was already selected. In this case, we want to make sure that the appropriate resolution size from within the &ldquo;Scaled&rdquo; submenu is selected. Here,
+we set the currently selected resolution size to the <code>scale_value</code> variable. We then check whether it&rsquo;s equal to the value we want (in this case <code>5</code>). If it isn&rsquo;t, then we set it. If it&rsquo;s already set to <code>5</code>, then we don&rsquo;t need to click it again.</p>
+
+<pre><code class="language-applescript">quit application &quot;System Preferences&quot;
+</code></pre>
+
+<p>This line is self-explanatory.</p>
+
+<p>And that&rsquo;s it.</p>
+]]></content>
+        </item>
         
         <item>
             <title>HTTP/S Redirects for AWS Route 53 Using S3</title>
