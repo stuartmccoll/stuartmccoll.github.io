@@ -3,26 +3,61 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</loc>
-    <lastmod>2020-02-07T20:45:35+00:00</lastmod>
+    <loc>/posts/2020-04-27-applescript-external-displays/</loc>
+    <lastmod>2020-04-27T20:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/posts/</loc>
-    <lastmod>2020-02-07T20:45:35+00:00</lastmod>
+    <lastmod>2020-04-27T20:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-02-07T20:45:35+00:00</lastmod>
+    <lastmod>2020-04-27T20:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2020-02-07T20:45:35+00:00</lastmod>
+    <lastmod>2020-04-27T20:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/applescript/</loc>
+    <lastmod>2020-04-27T20:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/display/</loc>
+    <lastmod>2020-04-27T20:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/external/</loc>
+    <lastmod>2020-04-27T20:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/macos/</loc>
+    <lastmod>2020-04-27T20:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/resolution/</loc>
+    <lastmod>2020-04-27T20:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</loc>
+    <lastmod>2020-02-07T20:45:35+00:00</lastmod>
   </url>
   
   <url>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>macOS on Stuart McColl</title>
+    <title>macos on Stuart McColl</title>
     <link>/tags/macos/</link>
-    <description>Recent content in macOS on Stuart McColl</description>
+    <description>Recent content in macos on Stuart McColl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 27 Apr 2020 11:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 27 Apr 2020 20:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/macos/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>AppleScript for Configuring External Displays</title>
       <link>/posts/2020-04-27-applescript-external-displays/</link>
-      <pubDate>Mon, 27 Apr 2020 11:00:00 +0000</pubDate>
+      <pubDate>Mon, 27 Apr 2020 20:00:00 +0000</pubDate>
       
       <guid>/posts/2020-04-27-applescript-external-displays/</guid>
       <description>AppleScript is a scripting language bundled within all versions of macOS, which allows for scripting of elements of the operating system and compatible applications.
