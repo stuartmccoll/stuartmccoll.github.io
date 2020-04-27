@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>applescript on Stuart McColl</title>
+    <link>/tags/applescript/</link>
+    <description>Recent content in applescript on Stuart McColl</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 27 Apr 2020 11:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/applescript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>AppleScript for Configuring External Displays</title>
+      <link>/posts/2020-04-27-applescript-external-displays/</link>
+      <pubDate>Mon, 27 Apr 2020 11:00:00 +0000</pubDate>
+      
+      <guid>/posts/2020-04-27-applescript-external-displays/</guid>
+      <description>AppleScript is a scripting language bundled within all versions of macOS, which allows for scripting of elements of the operating system and compatible applications.
+I&amp;rsquo;d never touched it before, but decided to try to use it to automate setting the resolutions of my external displays when switching between my personal and work MacBook Pros. Sometimes the resolutions stick when switching between the two, sometimes they don&amp;rsquo;t. Rather than have to go into System Preferences &amp;gt; Displays and set them whenever the settings don&amp;rsquo;t stick, I quite liked the idea of just running a script and having something else take care of it for me.</description>
+    </item>
+    
+  </channel>
+</rss>

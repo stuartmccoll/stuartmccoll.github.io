@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="Stuart McColl ">
+<meta name="description"
+    content="AppleScript is a scripting language bundled within all versions of macOS, which allows for scripting of elements of the operating system and compatible applications.
+I&amp;rsquo;d never touched it before, but decided to try to use it to automate setting the resolutions of my external displays when switching between my personal and work MacBook Pros. Sometimes the resolutions stick when switching between the two, sometimes they don&amp;rsquo;t. Rather than have to go into System Preferences &amp;gt; Displays and set them whenever the settings don&amp;rsquo;t stick, I quite liked the idea of just running a script and having something else take care of it for me." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/posts/2020-04-27-applescript-external-displays/" />
+
+
+<title>
+    
+    AppleScript for Configuring External Displays :: Stuart McColl  — Software Design and Development
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.91687bbfc139d7ff1a244bb6d7324425f9c4f424eaaad242b478e3b3cf56396a.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="theme-color" content="#252627">
+<meta itemprop="name" content="AppleScript for Configuring External Displays">
+<meta itemprop="description" content="AppleScript is a scripting language bundled within all versions of macOS, which allows for scripting of elements of the operating system and compatible applications.
+I&rsquo;d never touched it before, but decided to try to use it to automate setting the resolutions of my external displays when switching between my personal and work MacBook Pros. Sometimes the resolutions stick when switching between the two, sometimes they don&rsquo;t. Rather than have to go into System Preferences &gt; Displays and set them whenever the settings don&rsquo;t stick, I quite liked the idea of just running a script and having something else take care of it for me.">
+
+
+<meta itemprop="datePublished" content="2020-04-27T11:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-04-27T11:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="682">
+
+
+
+<meta itemprop="keywords" content="applescript,display,external,resolution,macOS," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/"/>
+
+<meta name="twitter:title" content="AppleScript for Configuring External Displays"/>
+<meta name="twitter:description" content="AppleScript is a scripting language bundled within all versions of macOS, which allows for scripting of elements of the operating system and compatible applications.
+I&rsquo;d never touched it before, but decided to try to use it to automate setting the resolutions of my external displays when switching between my personal and work MacBook Pros. Sometimes the resolutions stick when switching between the two, sometimes they don&rsquo;t. Rather than have to go into System Preferences &gt; Displays and set them whenever the settings don&rsquo;t stick, I quite liked the idea of just running a script and having something else take care of it for me."/>
+
+
+
+
+<meta property="article:published_time" content="2020-04-27 11:00:00 &#43;0000 UTC" />
+
+
+
+
+
+<script async defer data-domain="stuartmccoll.co.uk" src="https://plausible.io/js/plausible.js"></script>
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">cd ~/</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/about">about</a></li><li><a href="/posts">blog</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>4 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="/posts/2020-04-27-applescript-external-displays/">AppleScript for Configuring External Displays</a></h1>
+
+            
+
+            <div class="post-content">
+                <p>AppleScript is a scripting language bundled within all versions of macOS, which allows for scripting of elements of the operating system and compatible applications.</p>
+
+<p>I&rsquo;d never touched it before, but decided to try to use it to automate setting the resolutions of my external displays when switching between my personal and work MacBook Pros.
+Sometimes the resolutions stick when switching between the two, sometimes they don&rsquo;t. Rather than have to go into <code>System Preferences &gt; Displays</code> and set them whenever the
+settings don&rsquo;t stick, I quite liked the idea of just running a script and having something else take care of it for me. That&rsquo;s where AppleScript comes in.</p>
+
+<p>There are different ways of running AppleScripts - I&rsquo;m not going to cover that here. Options include running from the command line, running as a bundled application, running
+from <a href="https://www.alfredapp.com">Alfred</a>, etc.</p>
+
+<p>I managed to cobble together a sloppy script to automate setting the resolution of my displays, which I&rsquo;ll detail below. Prior warning - I haven&rsquo;t done any cleanup; there&rsquo;s
+plenty that could be refactored - for example, it could be one function which you pass parameters to and call for each display you want to set. Go with it for now.</p>
+
+<pre><code class="language-applescript">tell application &quot;System Preferences&quot;
+	reveal anchor &quot;displaysDisplayTab&quot; of pane id &quot;com.apple.preference.displays&quot;
+end tell
+</code></pre>
+
+<p>This opens <code>System Preferences &gt; Displays</code> and then ensures that the <code>Display</code> tab is open.</p>
+
+<p><img src="/img/20200427-display.png" alt="System Preferences &gt; Displays" /></p>
+
+<pre><code class="language-applescript">tell application &quot;System Events&quot; to tell process &quot;System Preferences&quot; to tell window &quot;Built-in Retina Display&quot;
+	set is_scaled to value of radio button &quot;Scaled&quot; of tab group 1
+	if is_scaled = 0 then
+		click radio button &quot;Scaled&quot; of tab group 1
+		click radio button 5 of radio group 1 of group 1 of tab group 1
+	else
+		set scale_value to value of radio group 1 of group 1 of tab group 1
+		if scale_value is not equal to 5 then
+			click radio button 5 of radio group 1 of group 1 of tab group 1
+		end if
+	end if
+end tell
+</code></pre>
+
+<p>This is the bulk of the script, which I essentially duplicate this for both external displays. Let&rsquo;s break down what&rsquo;s happening here.</p>
+
+<pre><code class="language-applescript">tell application &quot;System Events&quot; to tell process &quot;System Preferences&quot; to tell window &quot;Built-in Retina Display&quot;
+...
+end tell
+</code></pre>
+
+<p>This <code>tell</code> block ensures that I&rsquo;m targeting the &ldquo;Built-in Retina Display&rdquo; window. I also have two separate <code>tell</code> blocks for my external displays, where instead of using
+<code>tell window &quot;Built-in Retina Display&quot;</code>, I use <code>tell window &quot;U28E590 (1)&quot;</code> and <code>tell window &quot;U28E590 (2)&quot;</code>. This is what I meant about my lack of refactoring; you could easily
+make this a function and pass the display name as an argument.</p>
+
+<pre><code class="language-applescript">set is_scaled to value of radio button &quot;Scaled&quot; of tab group 1
+</code></pre>
+
+<p>This sets the value of the &ldquo;Scaled&rdquo; radio button to a variable, which we can then check.</p>
+
+<pre><code class="language-applescript">if is_scaled = 0 then
+		click radio button &quot;Scaled&quot; of tab group 1
+		click radio button 5 of radio group 1 of group 1 of tab group 1
+	else
+		...
+	end if
+</code></pre>
+
+<p>If the &ldquo;Scaled&rdquo; radio button has a value of <code>0</code>, then that means that it hasn&rsquo;t been clicked. We click the &ldquo;Scaled&rdquo; radio button and then select the appropriate resolution
+size from within the &ldquo;Scaled&rdquo; submenu. In this code example, <code>radio button 5</code> is the &ldquo;More Space&rdquo; setting.</p>
+
+<pre><code class="language-applescript">if is_scaled = 0 then
+		...
+	else
+		set scale_value to value of radio group 1 of group 1 of tab group 1
+		if scale_value is not equal to 5 then
+			click radio button 5 of radio group 1 of group 1 of tab group 1
+		end if
+	end if
+</code></pre>
+
+<p>In the <code>else</code> block, &ldquo;Scaled&rdquo; was already selected. In this case, we want to make sure that the appropriate resolution size from within the &ldquo;Scaled&rdquo; submenu is selected. Here,
+we set the currently selected resolution size to the <code>scale_value</code> variable. We then check whether it&rsquo;s equal to the value we want (in this case <code>5</code>). If it isn&rsquo;t, then we set it. If it&rsquo;s already set to <code>5</code>, then we don&rsquo;t need to click it again.</p>
+
+<pre><code class="language-applescript">quit application &quot;System Preferences&quot;
+</code></pre>
+
+<p>This line is self-explanatory.</p>
+
+<p>And that&rsquo;s it.</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="/tags/applescript">applescript</a></span><span class="tag"><a href="/tags/display">display</a></span><span class="tag"><a href="/tags/external">external</a></span><span class="tag"><a href="/tags/resolution">resolution</a></span><span class="tag"><a href="/tags/macos">macOS</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>682 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-04-27 12:00 &#43;0100</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Read other posts</span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/">
+                                <span class="button__text">HTTP/S Redirects for AWS Route 53 Using S3</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="/">Stuart McColl</a></span>
+            
+            <span></span>
+            <span> <a href="/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.cf7871ed49474a80ed457154d24e61f7881adbe0f9384951a74ac46b688a39a4dbfa68bc6d37baeb058186de354ead3487d4ee7f083ea4cba860c48600b694f3.js" integrity="sha512-z3hx7UlHSoDtRXFU0k5h94ga2&#43;D5OElRp0rEa2iKOaTb&#43;mi8bTe66wWBht41Tq00h9Tufwg&#43;pMuoYMSGALaU8w=="></script>
+
+
+
+    </body>
+</html>
