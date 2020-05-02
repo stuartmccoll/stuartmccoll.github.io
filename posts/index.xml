@@ -5,8 +5,120 @@
         <description>Recent content in Posts on Stuart McColl</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
-        <lastBuildDate>Mon, 27 Apr 2020 20:00:00 +0000</lastBuildDate>
+        <lastBuildDate>Sat, 02 May 2020 10:50:44 +0100</lastBuildDate>
         <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>AppleScript for Connecting Bluetooth Devices</title>
+            <link>/posts/2020-05-02-applescript-bluetooth-devices/</link>
+            <pubDate>Sat, 02 May 2020 10:50:44 +0100</pubDate>
+            
+            <guid>/posts/2020-05-02-applescript-bluetooth-devices/</guid>
+            <description>Last week I wrote another AppleScript for automating a manual task I have to carry out each time I switch between my personal MacBook Pro and my work device. This time, I needed to write a script which would connect to my Bluetooth devices - a Magic Mouse, Magic Keyboard and my AirPods.
+Rather than accessing the System Preferences application, which I demonstrated in my last AppleScript, this script needed to directly access the Bluetooth icon in the menu bar.</description>
+            <content type="html"><![CDATA[<p>Last week I wrote another AppleScript for automating a manual task I have to carry out each time I switch between my personal MacBook Pro and my work device. This time, I needed
+to write a script which would connect to my Bluetooth devices - a Magic Mouse, Magic Keyboard and my AirPods.</p>
+
+<p>Rather than accessing the System Preferences application, which I demonstrated in <a href="/posts/2020-04-27-applescript-external-displays">my last AppleScript</a>, this script needed to directly access the Bluetooth icon in the
+menu bar. If you&rsquo;re repurposing anything within this script, you&rsquo;ll need to make sure that you have the Bluetooth icon within your own menu bar.</p>
+
+<pre><code class="language-applescript">-- Subroutine to connect to Bluetooth devices
+-- @param bluetooth_devices : List(String) - the device names
+on connect_bluetooth_devices(bluetooth_devices)
+    ...
+end connect_bluetooth_devices
+</code></pre>
+
+<p>I&rsquo;ve written a <a href="https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptLangGuide/conceptual/ASLR_about_handlers.html#//apple_ref/doc/uid/TP40000983-CH206-SW3">handler</a> (think &lsquo;function&rsquo;), which takes an array of Bluetooth device names. The idea here is that we&rsquo;ll pass all of the Bluetooth devices which we want
+to connect to into the handler, loop through them and for each one connect to it using the Bluetooth icon in the menu bar.</p>
+
+<pre><code class="language-applescript">activate application &quot;SystemUIServer&quot;
+</code></pre>
+
+<p>SystemUIServer is responsible for the system tray side of the menu bar - things like Bluetooth, Networking, Clock, etc.</p>
+
+<pre><code class="language-applescript">tell application &quot;System Events&quot; to tell process &quot;SystemUIServer&quot;
+    ...
+end tell
+</code></pre>
+
+<p>This is us enabling ourselves to be able to access items within the menu bar.</p>
+
+<pre><code class="language-applescript">set bluetooth_menu_bar_item to (menu bar item 1 of menu bar 1 whose description contains &quot;bluetooth&quot;)
+tell bluetooth_menu_bar_item
+    ...
+end tell
+</code></pre>
+
+<p>Here, we&rsquo;re getting the Bluetooth menu bar item and setting it to a variable.</p>
+
+<pre><code class="language-applescript">repeat with bluetooth_device in bluetooth_devices
+
+end repeat
+</code></pre>
+
+<p>This is the loop I mentioned earlier - we&rsquo;re looping through each item in the array, and assigning the item to the <code>bluetooth_device</code> variable.</p>
+
+<pre><code class="language-applescript">click
+if exists menu item bluetooth_device of menu 1 then
+    tell (menu item bluetooth_device of menu 1)
+        click
+        if exists menu item &quot;Connect&quot; of menu 1 then
+            click menu item &quot;Connect&quot; of menu 1
+        else
+            -- Exit Bluetooth menu bar item
+            key code 53
+        end if
+    end tell
+end if
+</code></pre>
+
+<p>This is really the bulk of the script. We <code>click</code> the Bluetooth menu bar icon. We then check whether our <code>bluetooth_device</code> is present in the list that is displayed. If it is,
+then we click the device name. If the submenu that opens contains a <code>Connect</code> option, then we click it. Otherwise, we use <code>key code 53</code> (Escape), to exit the menu.</p>
+
+<p>After exiting our loop we hit <code>key code 53</code> one last time to ensure that we&rsquo;ve closed the Bluetooth menu.</p>
+
+<p>We can call our handler like so:</p>
+
+<pre><code class="language-applescript">connect_bluetooth_devices({&quot;Stuart’s AirPods&quot;, &quot;Stuart’s Keyboard&quot;, &quot;Stuart’s Mouse&quot;})
+</code></pre>
+
+<p>The important thing to note here is the difference between the <code>’</code> character used in the device name string and the <code>'</code> character on your keyboard.</p>
+
+<p>Here&rsquo;s the script in full:</p>
+
+<pre><code class="language-applescript">-- Connect to Bluetooth devices
+connect_bluetooth_devices({&quot;Stuart’s AirPods&quot;, &quot;Stuart’s Keyboard&quot;, &quot;Stuart’s Mouse&quot;})
+
+-- Handler to connect to Bluetooth devices
+-- @param bluetooth_devices : List(String) - the device names
+on connect_bluetooth_devices(bluetooth_devices)
+	activate application &quot;SystemUIServer&quot;
+	tell application &quot;System Events&quot; to tell process &quot;SystemUIServer&quot;
+		set bluetooth_menu_bar_item to (menu bar item 1 of menu bar 1 whose description contains &quot;bluetooth&quot;)
+		tell bluetooth_menu_bar_item
+			repeat with bluetooth_device in bluetooth_devices
+				click
+				if exists menu item bluetooth_device of menu 1 then
+					tell (menu item bluetooth_device of menu 1)
+						click
+						if exists menu item &quot;Connect&quot; of menu 1 then
+							click menu item &quot;Connect&quot; of menu 1
+						else
+							-- Exit Bluetooth menu bar item
+							key code 53
+						end if
+					end tell
+				end if
+			end repeat
+			-- Exit Bluetooth menu bar item
+			key code 53
+		end tell
+	end tell
+end connect_bluetooth_devices
+</code></pre>
+]]></content>
+        </item>
         
         <item>
             <title>AppleScript for Configuring External Displays</title>

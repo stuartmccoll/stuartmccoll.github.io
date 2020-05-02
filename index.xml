@@ -6,10 +6,20 @@
     <description>Recent content on Stuart McColl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 27 Apr 2020 20:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 02 May 2020 10:50:44 +0100</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>AppleScript for Connecting Bluetooth Devices</title>
+      <link>/posts/2020-05-02-applescript-bluetooth-devices/</link>
+      <pubDate>Sat, 02 May 2020 10:50:44 +0100</pubDate>
+      
+      <guid>/posts/2020-05-02-applescript-bluetooth-devices/</guid>
+      <description>Last week I wrote another AppleScript for automating a manual task I have to carry out each time I switch between my personal MacBook Pro and my work device. This time, I needed to write a script which would connect to my Bluetooth devices - a Magic Mouse, Magic Keyboard and my AirPods.
+Rather than accessing the System Preferences application, which I demonstrated in my last AppleScript, this script needed to directly access the Bluetooth icon in the menu bar.</description>
+    </item>
     
     <item>
       <title>AppleScript for Configuring External Displays</title>
