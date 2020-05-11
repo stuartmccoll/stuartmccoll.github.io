@@ -1,145 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
+<html lang="en-GB">
+
+<head>
+    <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author"
     content="Stuart McColl ">
 <meta name="description"
-    content="How can we design APIs to be resilient when our networks necessarily aren&amp;rsquo;t? An API should be robust enough to handle failure scenarios including connectivity drops, timeouts between resultant calls, and more. If a client makes a request to our API and loses connection during the request, how can we ensure that a successive identical request doesn&amp;rsquo;t alter the state of the system in a way that we weren&amp;rsquo;t expecting?" />
-<meta name="keywords" content="" />
+    content="How can we design APIs to be resilient when our networks necessarily aren&amp;rsquo;t? An API should be robust enough to handle failure scenarios including connectivity drops, timeouts between resultant calls, and more. If a client makes a request to our API and loses connection during the request, how can we ensure that a successive identical request doesn&amp;rsquo;t alter the state of the system in a way that we weren&amp;rsquo;t expecting? This is where idempotence comes into play." />
+<meta name="keywords" content="homepage, blog, development, programming" />
 <meta name="robots" content="noodp" />
 <link rel="canonical" href="/posts/designing-resilient-apis-with-idempotency/" />
-
-
 <title>
-    
-    Designing Resilient APIs with Idempotency :: Stuart McColl  — Software Design and Development
-    
+    Designing Resilient APIs with Idempotency ::  
 </title>
-
-
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
-    type="text/css">
-
-
-
-<link rel="stylesheet" href="/main.min.91687bbfc139d7ff1a244bb6d7324425f9c4f424eaaad242b478e3b3cf56396a.css">
-
-
-
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/main.min.9b276610b5993837f29d9c1e20b9e04db4f387b683b8034a6bf96f7fbfad81dc.css"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
 <link rel="shortcut icon" href="/favicon.ico">
-<meta name="theme-color" content="#252627">
-<meta itemprop="name" content="Designing Resilient APIs with Idempotency">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Designing Resilient APIs with Idempotency">
 <meta itemprop="description" content="Designing Resilient APIs with Idempotency">
-
-
 <meta itemprop="datePublished" content="2018-09-02T18:50:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-09-02T18:50:00&#43;00:00" />
 <meta itemprop="wordCount" content="866">
+<meta itemprop="image" content="/"/>
 
 
 
-<meta itemprop="keywords" content="software,api,idempotency," />
-<meta name="twitter:card" content="summary_large_image"/>
+<meta itemprop="keywords" content="software,api,idempotency," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="/"/>
 
 <meta name="twitter:title" content="Designing Resilient APIs with Idempotency"/>
 <meta name="twitter:description" content="Designing Resilient APIs with Idempotency"/>
 
-
-
-
 <meta property="article:published_time" content="2018-09-02 18:50:00 &#43;0000 &#43;0000" />
+</head>
 
-
-
-
-
-<script async defer data-domain="stuartmccoll.co.uk" src="https://plausible.io/js/plausible.js"></script>
-
-    </head>
-
-    <body class="">
-        <div class="container">
-            <header class="header">
-    <span class="header__inner">
-        <a href="/" style="text-decoration: none;">
-    <div class="logo">
-        
-            <span class="logo__mark">></span>
-            <span class="logo__text">cd ~/</span>
-            <span class="logo__cursor"></span>
-        
-    </div>
-</a>
-
-
-        <span class="header__right">
-            
-                <nav class="menu">
-    <ul class="menu__inner"><li><a href="/about">about</a></li><li><a href="/posts">blog</a></li>
-    </ul>
-</nav>
-
-                <span class="menu-trigger">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-                    </svg>
-                </span>
-            
-
-            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
-  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
-  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
-</svg>
-</span>
-        </span>
-    </span>
+<body>
+    <div class="container">
+        <header>
+    <section>
+        <h1 class="site-heading">Stuart McColl</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Blog</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+    </section>
 </header>
 
+<hr />
 
-            <div class="content">
-                
-    <main class="post">
-
-        <div class="post-info">
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>5 minutes
-
+        <div class="content">
             
+<main class="post">
 
-            </p>
-        </div>
+    <article>
+        <header>
+            <h1 class="post-title">Designing Resilient APIs with Idempotency</h1>
+            <p class="post-date">September 2, 2018</p>
+        </header>
 
-        <article>
-            <h1 class="post-title"><a href="/posts/designing-resilient-apis-with-idempotency/">Designing Resilient APIs with Idempotency</a></h1>
+        <hr class="post-rule" />
 
-            
-
-            <div class="post-content">
-                
-
-<p>How can we design APIs to be resilient when our networks necessarily aren&rsquo;t? An API should be robust enough to handle failure scenarios including connectivity drops, timeouts between resultant calls, and more. If a client makes a request to our API and loses connection during the request, how can we ensure that a successive identical request doesn&rsquo;t alter the state of the system in a way that we weren&rsquo;t expecting? This is where <a href="https://en.wikipedia.org/wiki/Idempotence">idempotence</a> comes into play. An idempotent request is one which can be made any number of times with the guarantee that any resulting logic, or side effects, only happen once.</p>
-
+        <div class="post-content">
+            <p>How can we design APIs to be resilient when our networks necessarily aren&rsquo;t? An API should be robust enough to handle failure scenarios including connectivity drops, timeouts between resultant calls, and more. If a client makes a request to our API and loses connection during the request, how can we ensure that a successive identical request doesn&rsquo;t alter the state of the system in a way that we weren&rsquo;t expecting? This is where <a href="https://en.wikipedia.org/wiki/Idempotence">idempotence</a> comes into play. An idempotent request is one which can be made any number of times with the guarantee that any resulting logic, or side effects, only happen once.</p>
 <p>HTTP has two methods as idempotent by default, the <code>PUT</code> and <code>DELETE</code> verbs. A <code>PUT</code> request is utilised to replace an entire entity with the payload included in the request. Therefore, we can safely make a <code>PUT</code> request multiple times, safe in the knowledge that we&rsquo;ll simply overwrite an entity with the <em>same</em> contents. <code>DELETE</code> requests are similar in that if a first <code>DELETE</code> request failed, then a subsequent request would leave the system in the same intended state. Multiple successful <code>DELETE</code> requests might return different status codes in the response (<code>200</code> for the first request, <code>410</code> or <code>404</code> for the second), but again, the state of the system would remain the same. We should be careful not to interpret idempotency as <em>&ldquo;I should receive the same response from multiple identical requests&rdquo;</em> but as <em>&ldquo;The state of the system should be the same when multiple identical requests are made&rdquo;</em>.</p>
-
 <h2 id="how-can-we-implement-idempotency-in-our-apis">How can we implement idempotency in our APIs?</h2>
-
 <p>We&rsquo;ve identified the need to ensure that our API is capable of serving multiple identical requests under conditions of volatility, but how do we implement that in practice? One such way of dealing with such cases is through the use of <strong>idempotency keys</strong>.</p>
-
 <p>An idempotency key is a unique token generated by the client and passed into the header of a request. When a server receives a request containing an idempotency key it stores it for potential later use. Once the server finishes handling the request, it will update the details stored against the idempotency key to mark this request as completed. If possible, the server could also store the result. If a client makes a further request containing the same idempotency key (perhaps they lost connection before the results were retrieved), the server identifies the key it stored previously and serves up the cached results, or, in scenarios where the server does not store a result, it could return a <code>409</code> status code response, detailing that a resource already exists against the idempotency key passed in the request header.</p>
-
 <p>Let&rsquo;s take a look at these examples in more detail. Firstly, our client makes a request to create a new resource by calling our <code>POST</code> HTTP endpoint, passing an idempotency key in the header and a payload in the request body:</p>
-
 <pre><code>POST https://an-api/v1/resources HTTP/1.1
 Idempotency-Key: 845c52a3-6b91-4358-9004-e2f94eec48fa
 {
@@ -147,115 +81,87 @@ Idempotency-Key: 845c52a3-6b91-4358-9004-e2f94eec48fa
     &quot;surname&quot;: &quot;Picard&quot;,
     &quot;rank&quot;: &quot;Captain&quot;
 }
-</code></pre>
-
-<p>Server side, we create a new resource with the attributes specified in the request body and store the idempotency key and the status of the request, which is &lsquo;<code>complete</code>&rsquo;. However, the connection between the client and the server dropped, so we&rsquo;ve been unable to return a response to the client. In this case, the client retries their request, re-sending an identical idempotency key and payload. The server cross references the incoming idempotency key with those contained in storage, identifies that it is a duplicate key and returns the following response:</p>
-
+</code></pre><p>Server side, we create a new resource with the attributes specified in the request body and store the idempotency key and the status of the request, which is &lsquo;<code>complete</code>&rsquo;. However, the connection between the client and the server dropped, so we&rsquo;ve been unable to return a response to the client. In this case, the client retries their request, re-sending an identical idempotency key and payload. The server cross references the incoming idempotency key with those contained in storage, identifies that it is a duplicate key and returns the following response:</p>
 <pre><code>HTTP/1.1 409 (Conflict)
 {
     &quot;error&quot;: &quot;A resource has previously been created using this idempotency key&quot;
 }
-</code></pre>
-
-<p>Let&rsquo;s re-use the above example, but consider this time that the server has stored the response it would have sent had the connection between client and server not dropped. Again, the client retries their request, re-sending the identical idempotency key and payload. The server again cross references the incoming idempotency key with those contained in storage, identifies that it is a duplicate key and returns the cached response:</p>
-
+</code></pre><p>Let&rsquo;s re-use the above example, but consider this time that the server has stored the response it would have sent had the connection between client and server not dropped. Again, the client retries their request, re-sending the identical idempotency key and payload. The server again cross references the incoming idempotency key with those contained in storage, identifies that it is a duplicate key and returns the cached response:</p>
 <pre><code>HTTP/1.1 201 (CREATED)
 {
     &quot;message&quot;: &quot;Resource created successfully&quot;
 }
-</code></pre>
-
-<p>In our final scenario, perhaps the server was unable to complete the request due to a failure part-way through processing. The logic and resultant behaviour here depends on how the idempotency is implemented on the server. In this situation, the server might have stored the state of the request against the idempotency key at certain points of operation, in which case upon a re-request from the client, the server can cross reference the incoming idempotency key in a re-request with those in storage and identify at which point the transaction was aborter. The server can then continue processing before sending back a response. Another implementation might be that the entire operation was rolled back via an ACID database, meaning that the server can re-process the request from scratch.</p>
-
+</code></pre><p>In our final scenario, perhaps the server was unable to complete the request due to a failure part-way through processing. The logic and resultant behaviour here depends on how the idempotency is implemented on the server. In this situation, the server might have stored the state of the request against the idempotency key at certain points of operation, in which case upon a re-request from the client, the server can cross reference the incoming idempotency key in a re-request with those in storage and identify at which point the transaction was aborter. The server can then continue processing before sending back a response. Another implementation might be that the entire operation was rolled back via an ACID database, meaning that the server can re-process the request from scratch.</p>
 <p>The server side storage of idempotency keys should be recycled periodically. We wouldn&rsquo;t expect a dropped connection re-request to happen 24 hours after the original request, so this isn&rsquo;t the kind of data which we need to store long term.</p>
-
 <p>In a future blog post I&rsquo;ll look at a lightweight implementation of idempotency in both Flask and Django web applications.</p>
 
-            </div>
-        </article>
+        </div>
+    </article>
 
+</main>
+
+        </div>
+
+        
         <hr />
-
-        <div class="post-info">
-                <p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="/tags/software">software</a></span><span class="tag"><a href="/tags/api">api</a></span><span class="tag"><a href="/tags/idempotency">idempotency</a></span>
-                </p>
-
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>866 Words</p>
-
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2018-09-02 19:50 &#43;0100</p>
-        </div>
-
-        
-            <div class="pagination">
-                <div class="pagination__title">
-                    <span class="pagination__title-h">Read other posts</span>
-                    <hr />
-                </div>
-
-                <div class="pagination__buttons">
-                    
-                        <span class="button previous">
-                            <a href="/posts/deploy-a-serverless-flask-application-with-aws-lambda/">
-                                <span class="button__icon">←</span>
-                                <span class="button__text">Deploy a Serverless Flask Application with AWS Lambda</span>
-                            </a>
-                        </span>
-                    
-
-                    
-                        <span class="button next">
-                            <a href="/posts/python-3.7-data-classes/">
-                                <span class="button__text">Python 3.7 Data Classes</span>
-                                <span class="button__icon">→</span>
-                            </a>
-                        </span>
-                    
-                </div>
-            </div>
-        
-
-        
-    </main>
-
-            </div>
-
+        <footer>
+    
+    
+    
+    <section>
+        <h3>Share this content</h3>
+        <p>
+            <a
+                href="https://twitter.com/intent/tweet?url=https://stuartmccoll.github.io%2fposts%2fdesigning-resilient-apis-with-idempotency%2f&via=itstuartmccoll&text=I%27m%20reading">
+                Tweet this blog post</a>
+        </p>
+    </section>
+    <hr />
+    
+    
+    
+    <section>
+        <h3>More</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://twitter.com/intent/tweet?text=%40itstuartmccoll%20Hello%2C%20%3Cinsert%20message%20here%3E">
+                    Contact me on Twitter
+                </a>
+            </li>
+            <li>Spotted a bug in the site?
+                <a href="https://github.com/stuartmccoll/stuartmccoll.github.io/issues/new">
+                    Raise an issue on GitHub
+                </a>
+            </li>
+            <li>Get notifications of new posts by
+                <a href="https://stuartmccoll.github.io/index.xml">
+                    subscribing to my RSS feed
+                </a>
+            </li>
+            <li>This static site was generated using
+                <a href="https://github.com/gohugoio/hugo/releases/tag/v0.70.0">
+                    Hugo version 0.70.0
+                </a>
+            </li>
+        </ul>
+    </section>
+    <hr />
+    <section>
+        <h3>Attribution</h3>
+        <p xmlns:dct="http://purl.org/dc/terms/" xmlns:cc="http://creativecommons.org/ns#" class="license-text">
             
-                <footer class="footer">
-    <div class="footer__inner">
-        <div class="footer__content">
-            <span>&copy; 2020</span>
+            This blog post <span rel="dct:title">(Designing Resilient APIs with Idempotency)</span> is licensed under
+            <a href="https://creativecommons.org/licenses/by/4.0">CC BY 4.0</a>. Any code contained within
+            this article may be subject to other licenses.
             
-                <span><a href="/">Stuart McColl</a></span>
-            
-            <span></span>
-            <span> <a href="/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
-        </div>
-    </div>
-    <div class="footer__inner">
-        <div class="footer__content">
-
-        </div>
-    </div>
-    <div class="footer__inner">
-        <div class="footer__content">
-            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
-            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
-        </div>
-    </div>
+        </p>
+    </section>
 </footer>
-
-            
-        </div>
-
         
+    </div>
 
+    
+</body>
 
-
-
-<script type="text/javascript" src="/bundle.min.cf7871ed49474a80ed457154d24e61f7881adbe0f9384951a74ac46b688a39a4dbfa68bc6d37baeb058186de354ead3487d4ee7f083ea4cba860c48600b694f3.js" integrity="sha512-z3hx7UlHSoDtRXFU0k5h94ga2&#43;D5OElRp0rEa2iKOaTb&#43;mi8bTe66wWBht41Tq00h9Tufwg&#43;pMuoYMSGALaU8w=="></script>
-
-
-
-    </body>
 </html>
