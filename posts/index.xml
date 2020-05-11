@@ -1,8 +1,8 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Posts on Stuart McColl</title>
+        <title>Posts on </title>
         <link>/posts/</link>
-        <description>Recent content in Posts on Stuart McColl</description>
+        <description>Recent content in Posts on </description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <lastBuildDate>Sat, 02 May 2020 10:50:44 +0100</lastBuildDate>
@@ -18,105 +18,78 @@
 Rather than accessing the System Preferences application, which I demonstrated in my last AppleScript, this script needed to directly access the Bluetooth icon in the menu bar.</description>
             <content type="html"><![CDATA[<p>Last week I wrote another AppleScript for automating a manual task I have to carry out each time I switch between my personal MacBook Pro and my work device. This time, I needed
 to write a script which would connect to my Bluetooth devices - a Magic Mouse, Magic Keyboard and my AirPods.</p>
-
 <p>Rather than accessing the System Preferences application, which I demonstrated in <a href="/posts/2020-04-27-applescript-external-displays">my last AppleScript</a>, this script needed to directly access the Bluetooth icon in the
 menu bar. If you&rsquo;re repurposing anything within this script, you&rsquo;ll need to make sure that you have the Bluetooth icon within your own menu bar.</p>
-
-<pre><code class="language-applescript">-- Subroutine to connect to Bluetooth devices
--- @param bluetooth_devices : List(String) - the device names
-on connect_bluetooth_devices(bluetooth_devices)
-    ...
-end connect_bluetooth_devices
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="c">-- Subroutine to connect to Bluetooth devices</span>
+<span class="c">-- @param bluetooth_devices : List(String) - the device names</span>
+<span class="k">on</span> <span class="nv">connect_bluetooth_devices</span><span class="p">(</span><span class="nv">bluetooth_devices</span><span class="p">)</span>
+    <span class="p">...</span>
+<span class="k">end</span> <span class="nv">connect_bluetooth_devices</span></code></pre></div>
 <p>I&rsquo;ve written a <a href="https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptLangGuide/conceptual/ASLR_about_handlers.html#//apple_ref/doc/uid/TP40000983-CH206-SW3">handler</a> (think &lsquo;function&rsquo;), which takes an array of Bluetooth device names. The idea here is that we&rsquo;ll pass all of the Bluetooth devices which we want
 to connect to into the handler, loop through them and for each one connect to it using the Bluetooth icon in the menu bar.</p>
-
-<pre><code class="language-applescript">activate application &quot;SystemUIServer&quot;
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="nb">activate</span> <span class="nb">application</span> <span class="s2">&#34;SystemUIServer&#34;</span></code></pre></div>
 <p>SystemUIServer is responsible for the system tray side of the menu bar - things like Bluetooth, Networking, Clock, etc.</p>
-
-<pre><code class="language-applescript">tell application &quot;System Events&quot; to tell process &quot;SystemUIServer&quot;
-    ...
-end tell
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="k">tell</span> <span class="nb">application</span> <span class="s2">&#34;System Events&#34;</span> <span class="k">to</span> <span class="k">tell</span> <span class="nv">process</span> <span class="s2">&#34;SystemUIServer&#34;</span>
+    <span class="p">...</span>
+<span class="k">end</span> <span class="k">tell</span></code></pre></div>
 <p>This is us enabling ourselves to be able to access items within the menu bar.</p>
-
-<pre><code class="language-applescript">set bluetooth_menu_bar_item to (menu bar item 1 of menu bar 1 whose description contains &quot;bluetooth&quot;)
-tell bluetooth_menu_bar_item
-    ...
-end tell
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="k">set</span> <span class="nv">bluetooth_menu_bar_item</span> <span class="k">to</span> <span class="p">(</span><span class="na">menu</span> <span class="nv">bar</span> <span class="nb">item</span> <span class="mi">1</span> <span class="k">of</span> <span class="na">menu</span> <span class="nv">bar</span> <span class="mi">1</span> <span class="nb">whose</span> <span class="nv">description</span> <span class="ow">contains</span> <span class="s2">&#34;bluetooth&#34;</span><span class="p">)</span>
+<span class="k">tell</span> <span class="nv">bluetooth_menu_bar_item</span>
+    <span class="p">...</span>
+<span class="k">end</span> <span class="k">tell</span></code></pre></div>
 <p>Here, we&rsquo;re getting the Bluetooth menu bar item and setting it to a variable.</p>
+<div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="k">repeat</span> <span class="k">with</span> <span class="nv">bluetooth_device</span> <span class="k">in</span> <span class="nv">bluetooth_devices</span>
 
-<pre><code class="language-applescript">repeat with bluetooth_device in bluetooth_devices
-
-end repeat
-</code></pre>
-
+<span class="k">end</span> <span class="k">repeat</span></code></pre></div>
 <p>This is the loop I mentioned earlier - we&rsquo;re looping through each item in the array, and assigning the item to the <code>bluetooth_device</code> variable.</p>
-
-<pre><code class="language-applescript">click
-if exists menu item bluetooth_device of menu 1 then
-    tell (menu item bluetooth_device of menu 1)
-        click
-        if exists menu item &quot;Connect&quot; of menu 1 then
-            click menu item &quot;Connect&quot; of menu 1
-        else
-            -- Exit Bluetooth menu bar item
-            key code 53
-        end if
-    end tell
-end if
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="nv">click</span>
+<span class="k">if</span> <span class="nb">exists</span> <span class="na">menu</span> <span class="nb">item</span> <span class="nv">bluetooth_device</span> <span class="k">of</span> <span class="na">menu</span> <span class="mi">1</span> <span class="k">then</span>
+    <span class="k">tell</span> <span class="p">(</span><span class="na">menu</span> <span class="nb">item</span> <span class="nv">bluetooth_device</span> <span class="k">of</span> <span class="na">menu</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="nv">click</span>
+        <span class="k">if</span> <span class="nb">exists</span> <span class="na">menu</span> <span class="nb">item</span> <span class="s2">&#34;Connect&#34;</span> <span class="k">of</span> <span class="na">menu</span> <span class="mi">1</span> <span class="k">then</span>
+            <span class="nv">click</span> <span class="na">menu</span> <span class="nb">item</span> <span class="s2">&#34;Connect&#34;</span> <span class="k">of</span> <span class="na">menu</span> <span class="mi">1</span>
+        <span class="k">else</span>
+            <span class="c">-- Exit Bluetooth menu bar item</span>
+            <span class="na">key code</span> <span class="mi">53</span>
+        <span class="k">end</span> <span class="k">if</span>
+    <span class="k">end</span> <span class="k">tell</span>
+<span class="k">end</span> <span class="k">if</span></code></pre></div>
 <p>This is really the bulk of the script. We <code>click</code> the Bluetooth menu bar icon. We then check whether our <code>bluetooth_device</code> is present in the list that is displayed. If it is,
 then we click the device name. If the submenu that opens contains a <code>Connect</code> option, then we click it. Otherwise, we use <code>key code 53</code> (Escape), to exit the menu.</p>
-
 <p>After exiting our loop we hit <code>key code 53</code> one last time to ensure that we&rsquo;ve closed the Bluetooth menu.</p>
-
 <p>We can call our handler like so:</p>
-
-<pre><code class="language-applescript">connect_bluetooth_devices({&quot;Stuart’s AirPods&quot;, &quot;Stuart’s Keyboard&quot;, &quot;Stuart’s Mouse&quot;})
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="nv">connect_bluetooth_devices</span><span class="p">({</span><span class="s2">&#34;Stuart’s AirPods&#34;</span><span class="p">,</span> <span class="s2">&#34;Stuart’s Keyboard&#34;</span><span class="p">,</span> <span class="s2">&#34;Stuart’s Mouse&#34;</span><span class="p">})</span></code></pre></div>
 <p>The important thing to note here is the difference between the <code>’</code> character used in the device name string and the <code>'</code> character on your keyboard.</p>
-
 <p>Here&rsquo;s the script in full:</p>
+<div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="c">-- Connect to Bluetooth devices</span>
+<span class="nv">connect_bluetooth_devices</span><span class="p">({</span><span class="s2">&#34;Stuart’s AirPods&#34;</span><span class="p">,</span> <span class="s2">&#34;Stuart’s Keyboard&#34;</span><span class="p">,</span> <span class="s2">&#34;Stuart’s Mouse&#34;</span><span class="p">})</span>
 
-<pre><code class="language-applescript">-- Connect to Bluetooth devices
-connect_bluetooth_devices({&quot;Stuart’s AirPods&quot;, &quot;Stuart’s Keyboard&quot;, &quot;Stuart’s Mouse&quot;})
-
--- Handler to connect to Bluetooth devices
--- @param bluetooth_devices : List(String) - the device names
-on connect_bluetooth_devices(bluetooth_devices)
-	activate application &quot;SystemUIServer&quot;
-	tell application &quot;System Events&quot; to tell process &quot;SystemUIServer&quot;
-		set bluetooth_menu_bar_item to (menu bar item 1 of menu bar 1 whose description contains &quot;bluetooth&quot;)
-		tell bluetooth_menu_bar_item
-			repeat with bluetooth_device in bluetooth_devices
-				click
-				if exists menu item bluetooth_device of menu 1 then
-					tell (menu item bluetooth_device of menu 1)
-						click
-						if exists menu item &quot;Connect&quot; of menu 1 then
-							click menu item &quot;Connect&quot; of menu 1
-						else
-							-- Exit Bluetooth menu bar item
-							key code 53
-						end if
-					end tell
-				end if
-			end repeat
-			-- Exit Bluetooth menu bar item
-			key code 53
-		end tell
-	end tell
-end connect_bluetooth_devices
-</code></pre>
+<span class="c">-- Handler to connect to Bluetooth devices</span>
+<span class="c">-- @param bluetooth_devices : List(String) - the device names</span>
+<span class="k">on</span> <span class="nv">connect_bluetooth_devices</span><span class="p">(</span><span class="nv">bluetooth_devices</span><span class="p">)</span>
+	<span class="nb">activate</span> <span class="nb">application</span> <span class="s2">&#34;SystemUIServer&#34;</span>
+	<span class="k">tell</span> <span class="nb">application</span> <span class="s2">&#34;System Events&#34;</span> <span class="k">to</span> <span class="k">tell</span> <span class="nv">process</span> <span class="s2">&#34;SystemUIServer&#34;</span>
+		<span class="k">set</span> <span class="nv">bluetooth_menu_bar_item</span> <span class="k">to</span> <span class="p">(</span><span class="na">menu</span> <span class="nv">bar</span> <span class="nb">item</span> <span class="mi">1</span> <span class="k">of</span> <span class="na">menu</span> <span class="nv">bar</span> <span class="mi">1</span> <span class="nb">whose</span> <span class="nv">description</span> <span class="ow">contains</span> <span class="s2">&#34;bluetooth&#34;</span><span class="p">)</span>
+		<span class="k">tell</span> <span class="nv">bluetooth_menu_bar_item</span>
+			<span class="k">repeat</span> <span class="k">with</span> <span class="nv">bluetooth_device</span> <span class="k">in</span> <span class="nv">bluetooth_devices</span>
+				<span class="nv">click</span>
+				<span class="k">if</span> <span class="nb">exists</span> <span class="na">menu</span> <span class="nb">item</span> <span class="nv">bluetooth_device</span> <span class="k">of</span> <span class="na">menu</span> <span class="mi">1</span> <span class="k">then</span>
+					<span class="k">tell</span> <span class="p">(</span><span class="na">menu</span> <span class="nb">item</span> <span class="nv">bluetooth_device</span> <span class="k">of</span> <span class="na">menu</span> <span class="mi">1</span><span class="p">)</span>
+						<span class="nv">click</span>
+						<span class="k">if</span> <span class="nb">exists</span> <span class="na">menu</span> <span class="nb">item</span> <span class="s2">&#34;Connect&#34;</span> <span class="k">of</span> <span class="na">menu</span> <span class="mi">1</span> <span class="k">then</span>
+							<span class="nv">click</span> <span class="na">menu</span> <span class="nb">item</span> <span class="s2">&#34;Connect&#34;</span> <span class="k">of</span> <span class="na">menu</span> <span class="mi">1</span>
+						<span class="k">else</span>
+							<span class="c">-- Exit Bluetooth menu bar item</span>
+							<span class="na">key code</span> <span class="mi">53</span>
+						<span class="k">end</span> <span class="k">if</span>
+					<span class="k">end</span> <span class="k">tell</span>
+				<span class="k">end</span> <span class="k">if</span>
+			<span class="k">end</span> <span class="k">repeat</span>
+			<span class="c">-- Exit Bluetooth menu bar item</span>
+			<span class="na">key code</span> <span class="mi">53</span>
+		<span class="k">end</span> <span class="k">tell</span>
+	<span class="k">end</span> <span class="k">tell</span>
+<span class="k">end</span> <span class="nv">connect_bluetooth_devices</span></code></pre></div>
 ]]></content>
         </item>
         
@@ -129,85 +102,59 @@ end connect_bluetooth_devices
             <description>AppleScript is a scripting language bundled within all versions of macOS, which allows for scripting of elements of the operating system and compatible applications.
 I&amp;rsquo;d never touched it before, but decided to try to use it to automate setting the resolutions of my external displays when switching between my personal and work MacBook Pros. Sometimes the resolutions stick when switching between the two, sometimes they don&amp;rsquo;t. Rather than have to go into System Preferences &amp;gt; Displays and set them whenever the settings don&amp;rsquo;t stick, I quite liked the idea of just running a script and having something else take care of it for me.</description>
             <content type="html"><![CDATA[<p>AppleScript is a scripting language bundled within all versions of macOS, which allows for scripting of elements of the operating system and compatible applications.</p>
-
 <p>I&rsquo;d never touched it before, but decided to try to use it to automate setting the resolutions of my external displays when switching between my personal and work MacBook Pros.
 Sometimes the resolutions stick when switching between the two, sometimes they don&rsquo;t. Rather than have to go into <code>System Preferences &gt; Displays</code> and set them whenever the
 settings don&rsquo;t stick, I quite liked the idea of just running a script and having something else take care of it for me. That&rsquo;s where AppleScript comes in.</p>
-
 <p>There are different ways of running AppleScripts - I&rsquo;m not going to cover that here. Options include running from the command line, running as a bundled application, running
 from <a href="https://www.alfredapp.com">Alfred</a>, etc.</p>
-
 <p>I managed to cobble together a sloppy script to automate setting the resolution of my displays, which I&rsquo;ll detail below. Prior warning - I haven&rsquo;t done any cleanup; there&rsquo;s
 plenty that could be refactored - for example, it could be one function which you pass parameters to and call for each display you want to set. Go with it for now.</p>
-
-<pre><code class="language-applescript">tell application &quot;System Preferences&quot;
-	reveal anchor &quot;displaysDisplayTab&quot; of pane id &quot;com.apple.preference.displays&quot;
-end tell
-</code></pre>
-
-<p>This opens <code>System Preferences &gt; Displays</code> and then ensures that the <code>Display</code> tab is open.</p>
-
-<p><img src="/img/20200427-display.png" alt="System Preferences &gt; Displays" /></p>
-
-<pre><code class="language-applescript">tell application &quot;System Events&quot; to tell process &quot;System Preferences&quot; to tell window &quot;Built-in Retina Display&quot;
-	set is_scaled to value of radio button &quot;Scaled&quot; of tab group 1
-	if is_scaled = 0 then
-		click radio button &quot;Scaled&quot; of tab group 1
-		click radio button 5 of radio group 1 of group 1 of tab group 1
-	else
-		set scale_value to value of radio group 1 of group 1 of tab group 1
-		if scale_value is not equal to 5 then
-			click radio button 5 of radio group 1 of group 1 of tab group 1
-		end if
-	end if
-end tell
-</code></pre>
-
-<p>This is the bulk of the script, which I essentially duplicate this for both external displays. Let&rsquo;s break down what&rsquo;s happening here.</p>
-
-<pre><code class="language-applescript">tell application &quot;System Events&quot; to tell process &quot;System Preferences&quot; to tell window &quot;Built-in Retina Display&quot;
-...
-end tell
-</code></pre>
-
-<p>This <code>tell</code> block ensures that I&rsquo;m targeting the &ldquo;Built-in Retina Display&rdquo; window. I also have two separate <code>tell</code> blocks for my external displays, where instead of using
+<div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="k">tell</span> <span class="nb">application</span> <span class="s2">&#34;System Preferences&#34;</span>
+	<span class="nv">reveal</span> <span class="nv">anchor</span> <span class="s2">&#34;displaysDisplayTab&#34;</span> <span class="k">of</span> <span class="nv">pane</span> <span class="na">id</span> <span class="s2">&#34;com.apple.preference.displays&#34;</span>
+<span class="k">end</span> <span class="k">tell</span>
+</code></pre></div><p>This opens <code>System Preferences &gt; Displays</code> and then ensures that the <code>Display</code> tab is open.</p>
+<p><img src="/img/20200427-display.png" alt="System Preferences > Displays"></p>
+<div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="k">tell</span> <span class="nb">application</span> <span class="s2">&#34;System Events&#34;</span> <span class="k">to</span> <span class="k">tell</span> <span class="nv">process</span> <span class="s2">&#34;System Preferences&#34;</span> <span class="k">to</span> <span class="k">tell</span> <span class="na">window</span> <span class="s2">&#34;Built-in Retina Display&#34;</span>
+	<span class="k">set</span> <span class="nv">is_scaled</span> <span class="k">to</span> <span class="nv">value</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="s2">&#34;Scaled&#34;</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+	<span class="k">if</span> <span class="nv">is_scaled</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span>
+		<span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="s2">&#34;Scaled&#34;</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+		<span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="mi">5</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+	<span class="k">else</span>
+		<span class="k">set</span> <span class="nv">scale_value</span> <span class="k">to</span> <span class="nv">value</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+		<span class="k">if</span> <span class="nv">scale_value</span> <span class="ow">is not</span> <span class="ow">equal to</span> <span class="mi">5</span> <span class="k">then</span>
+			<span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="mi">5</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+		<span class="k">end</span> <span class="k">if</span>
+	<span class="k">end</span> <span class="k">if</span>
+<span class="k">end</span> <span class="k">tell</span>
+</code></pre></div><p>This is the bulk of the script, which I essentially duplicate this for both external displays. Let&rsquo;s break down what&rsquo;s happening here.</p>
+<div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="k">tell</span> <span class="nb">application</span> <span class="s2">&#34;System Events&#34;</span> <span class="k">to</span> <span class="k">tell</span> <span class="nv">process</span> <span class="s2">&#34;System Preferences&#34;</span> <span class="k">to</span> <span class="k">tell</span> <span class="na">window</span> <span class="s2">&#34;Built-in Retina Display&#34;</span>
+<span class="p">...</span>
+<span class="k">end</span> <span class="k">tell</span>
+</code></pre></div><p>This <code>tell</code> block ensures that I&rsquo;m targeting the &ldquo;Built-in Retina Display&rdquo; window. I also have two separate <code>tell</code> blocks for my external displays, where instead of using
 <code>tell window &quot;Built-in Retina Display&quot;</code>, I use <code>tell window &quot;U28E590 (1)&quot;</code> and <code>tell window &quot;U28E590 (2)&quot;</code>. This is what I meant about my lack of refactoring; you could easily
 make this a function and pass the display name as an argument.</p>
-
-<pre><code class="language-applescript">set is_scaled to value of radio button &quot;Scaled&quot; of tab group 1
-</code></pre>
-
-<p>This sets the value of the &ldquo;Scaled&rdquo; radio button to a variable, which we can then check.</p>
-
-<pre><code class="language-applescript">if is_scaled = 0 then
-		click radio button &quot;Scaled&quot; of tab group 1
-		click radio button 5 of radio group 1 of group 1 of tab group 1
-	else
-		...
-	end if
-</code></pre>
-
-<p>If the &ldquo;Scaled&rdquo; radio button has a value of <code>0</code>, then that means that it hasn&rsquo;t been clicked. We click the &ldquo;Scaled&rdquo; radio button and then select the appropriate resolution
+<div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="k">set</span> <span class="nv">is_scaled</span> <span class="k">to</span> <span class="nv">value</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="s2">&#34;Scaled&#34;</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+</code></pre></div><p>This sets the value of the &ldquo;Scaled&rdquo; radio button to a variable, which we can then check.</p>
+<div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="k">if</span> <span class="nv">is_scaled</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span>
+		<span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="s2">&#34;Scaled&#34;</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+		<span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="mi">5</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+	<span class="k">else</span>
+		<span class="p">...</span>
+	<span class="k">end</span> <span class="k">if</span>
+</code></pre></div><p>If the &ldquo;Scaled&rdquo; radio button has a value of <code>0</code>, then that means that it hasn&rsquo;t been clicked. We click the &ldquo;Scaled&rdquo; radio button and then select the appropriate resolution
 size from within the &ldquo;Scaled&rdquo; submenu. In this code example, <code>radio button 5</code> is the &ldquo;More Space&rdquo; setting.</p>
-
-<pre><code class="language-applescript">if is_scaled = 0 then
-		...
-	else
-		set scale_value to value of radio group 1 of group 1 of tab group 1
-		if scale_value is not equal to 5 then
-			click radio button 5 of radio group 1 of group 1 of tab group 1
-		end if
-	end if
-</code></pre>
-
-<p>In the <code>else</code> block, &ldquo;Scaled&rdquo; was already selected. In this case, we want to make sure that the appropriate resolution size from within the &ldquo;Scaled&rdquo; submenu is selected. Here,
+<div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="k">if</span> <span class="nv">is_scaled</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span>
+		<span class="p">...</span>
+	<span class="k">else</span>
+		<span class="k">set</span> <span class="nv">scale_value</span> <span class="k">to</span> <span class="nv">value</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+		<span class="k">if</span> <span class="nv">scale_value</span> <span class="ow">is not</span> <span class="ow">equal to</span> <span class="mi">5</span> <span class="k">then</span>
+			<span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="mi">5</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+		<span class="k">end</span> <span class="k">if</span>
+	<span class="k">end</span> <span class="k">if</span>
+</code></pre></div><p>In the <code>else</code> block, &ldquo;Scaled&rdquo; was already selected. In this case, we want to make sure that the appropriate resolution size from within the &ldquo;Scaled&rdquo; submenu is selected. Here,
 we set the currently selected resolution size to the <code>scale_value</code> variable. We then check whether it&rsquo;s equal to the value we want (in this case <code>5</code>). If it isn&rsquo;t, then we set it. If it&rsquo;s already set to <code>5</code>, then we don&rsquo;t need to click it again.</p>
-
-<pre><code class="language-applescript">quit application &quot;System Preferences&quot;
-</code></pre>
-
-<p>This line is self-explanatory.</p>
-
+<div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="nb">quit</span> <span class="nb">application</span> <span class="s2">&#34;System Preferences&#34;</span>
+</code></pre></div><p>This line is self-explanatory.</p>
 <p>And that&rsquo;s it.</p>
 ]]></content>
         </item>
@@ -220,269 +167,16 @@ we set the currently selected resolution size to the <code>scale_value</code> va
             <guid>/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</guid>
             <description>I moved hosting of my domains recently from tsoHost to Amazon Web Services, as uptime on tsoHost seems to have been slowly getting worse. Rather than using disparate providers for different services, I chose AWS to sit everything under one provider.
 Shifting to AWS itself was relatively easy - I&amp;rsquo;m now using Amazon WorkMail for my email service and Amazon Route 53 for DNS. The documentation for switching to both from another provider was straight forward and I was up and running within a few days.</description>
-            <content type="html"><![CDATA[
-
-<p>I moved hosting of my domains recently from <a href="https://www.tsohost.com">tsoHost</a> to <a href="https://aws.amazon.com">Amazon Web Services</a>, as uptime on tsoHost seems to have been slowly getting worse. Rather than using disparate providers for different services, I chose AWS to sit everything under one provider.</p>
-
+            <content type="html"><![CDATA[<p>I moved hosting of my domains recently from <a href="https://www.tsohost.com">tsoHost</a> to <a href="https://aws.amazon.com">Amazon Web Services</a>, as uptime on tsoHost seems to have been slowly getting worse. Rather than using disparate providers for different services, I chose AWS to sit everything under one provider.</p>
 <p>Shifting to AWS itself was relatively easy - I&rsquo;m now using <a href="https://aws.amazon.com/workmail/">Amazon WorkMail</a> for my email service and <a href="https://aws.amazon.com/route53/">Amazon Route 53</a> for DNS. The documentation for switching to both from another provider was straight forward and I was up and running within a few days.</p>
-
 <p>Out of the box, Route 53 doesn&rsquo;t provide the ability to redirect to sites hosted outside of AWS. It&rsquo;s achievable with the use of another Amazon service, S3 (Simple Storage Bucket).</p>
-
 <h2 id="guide">Guide</h2>
-
 <p>Create a new S3 bucket in the <a href="https://console.aws.amazon.com/s3/">Amazon S3 console</a>. Give it a name which matches your domain - <code>example.com</code>. Keep all of the default settings.</p>
-
 <p>Once created, enter the &lsquo;Properties&rsquo; section of the bucket, and select &lsquo;Static Website Hosting&rsquo;. In here, select &lsquo;Redirect all request to another host name&rsquo;, which will provide you with two input fields to fill in. Add the domain to redirect to in the first, let&rsquo;s assume it&rsquo;s <code>https://www.example.net</code>, and enter one of <code>http</code> or <code>https</code> in the second, before saving.</p>
-
 <p>In the <a href="https://console.aws.amazon.com/route53/">Route 53 console</a>, choose your matching hosted zone - in this case it&rsquo;d be <code>example.com</code>.</p>
-
 <p>In here, create a new resource record (by clicking &lsquo;Create Record Set&rsquo;). Select a &lsquo;Record type&rsquo; of &lsquo;A - IPv4 address&rsquo;. Select the &lsquo;Alias&rsquo; option, and within &lsquo;Alias Target&rsquo;, you&rsquo;ll be provided with a list of your AWS resources which you can redirect to. Your S3 bucket will be listed under a heading of &lsquo;S3 Website Endpoints&rsquo;. Leave &lsquo;Routing Policy&rsquo; as &lsquo;Simple&rsquo; and &lsquo;Evaluate Health Target&rsquo; as &lsquo;No&rsquo;, then click &lsquo;Create&rsquo; to create the record.</p>
-
 <p>The change might take a little bit of time to propogate. It was instant for me. You can test this by running <code>curl --head example.com</code>. This returned the following headers for my request <code>HTTP/1.1 301 Moved Permanently</code>, <code>Server: AmazonS3</code>, and <code>Location: https://www.example.net/</code>, confirming that the change had propogated.</p>
-
 <p>To ensure redirects for both <code>example.com</code> and <code>www.example.com</code>, you&rsquo;ll want to follow the same process as above, this time creating an S3 bucket with a name of <code>www.example.com</code> and pointing another new record set for your domain at this second S3 bucket.</p>
-]]></content>
-        </item>
-        
-        <item>
-            <title>Weeknotes (05/07/19)</title>
-            <link>/posts/weeknotes-05/07/19/</link>
-            <pubDate>Sun, 14 Jul 2019 10:00:00 +0000</pubDate>
-            
-            <guid>/posts/weeknotes-05/07/19/</guid>
-            <description>The weeknotes for this week are incredibly late, but as I&amp;rsquo;d half-written them, I think it&amp;rsquo;s probably worthwhile to finish them. For best results, pretend you&amp;rsquo;re reading these a week ago.
-I feel like I&amp;rsquo;m already falling behind a little bit on my &amp;lsquo;start the week with a list of things to achieve&amp;rsquo; plan. I&amp;rsquo;ve been particularly busy at work to the point that I&amp;rsquo;ve barely looked at my list since writing it over the weekend.</description>
-            <content type="html"><![CDATA[
-
-<p>The weeknotes for this week are incredibly late, but as I&rsquo;d half-written them, I think it&rsquo;s probably worthwhile to finish them. For best results, pretend you&rsquo;re reading these a week ago.</p>
-
-<p>I feel like I&rsquo;m already falling behind a little bit on my &lsquo;start the week with a list of things to achieve&rsquo; plan. I&rsquo;ve been particularly busy at work to the point that I&rsquo;ve barely looked at my list since writing it over the weekend. It&rsquo;s still useful to think about the things I want to work on and achieve over the course of the week, but I need to be better at going back to this list during the week and iterating upon it. </p>
-
-<p>These weeknotes being as late as they are probably confirms the entire previous paragraph.</p>
-
-<hr />
-
-<h2 id="monday">Monday</h2>
-
-<p>This was a rare Monday where I didn&rsquo;t have an awful lot in my calendar.</p>
-
-<p>I did spend some time talking to the designers on the team about our approach to downloads within the service and what an initial iteration might look like. There&rsquo;s so much to think about in terms of what this looks like for a user before we even talk about how the file itself looks; how we name the file and the impact this has upon low-tech users; the file format and accessibility concerns; how the download is presented within the service journey, etc. It&rsquo;s not an easy problem to solve and it really takes a skilled, multi-disciplinary team to approach it, with a user-focus in mind.</p>
-
-<h2 id="tuesday">Tuesday</h2>
-
-<p>Tuesday had a couple of interesting non-project meetings. I got together with the rest of the team responsible for organising an upcoming hackathon, and we&rsquo;ve started getting in touch with possible off-site venues at which to host the event. I&rsquo;m surprised by the amount of venues in Plymouth that can&rsquo;t cope with the Wi-Fi considerations we&rsquo;re asking for. Some of these are dedicated conference venues and I find it slightly depressing that in 2019 we&rsquo;re struggling to find a space that can offer stable Wi-Fi connectivity for a couple hundred people.</p>
-
-<p>As well as the hackathon meeting, I was also part of a meeting to organise an upcoming open recruitment evening. I won&rsquo;t be about on the evening itself (annual leave 🎉), but I think it&rsquo;s a fantastic idea and want to help in any way I can with organising.</p>
-
-<p><img src="/img/gds-mission-patch-stickers.jpg" alt="A MacBook bearing GDS mission patch stickers" /></p>
-
-<p>I spent a little bit of time in the evening playing about with Affinity Designer, putting together a design for a mission patch sticker for the hackathon organising team - mostly inspired by Vicky Teinaki&rsquo;s &lsquo;<a href="https://medium.com/gov-design/metaphors-we-sticker-by-4e4ecdbf8d64">Metaphors we sticker by</a>&rsquo; post.</p>
-
-<h2 id="wednesday">Wednesday</h2>
-
-<p>Wednesday&rsquo;s are typically my busiest day of the week for meetings. The contractors within our team are all on-site, which makes it the best day for face-to-face conversations, rather than remote meetings.</p>
-
-<p>A couple of long meeting slots on Wednesday were taken up with working on the job profile and candidate packs for posts we&rsquo;ll be interviewing for shortly. I&rsquo;ve had a list kicking around in my head of things I&rsquo;d like to do to improve our approach to recruitment for software development posts, so these sessions were a good chance to discuss these with the panel chair and the technical lead who&rsquo;ll also be on the interview board, to determine whether said list of ideas was useful or not.</p>
-
-<h2 id="thursday">Thursday</h2>
-
-<p>I facilitated a retrospective for the software developer community of practice on Thursday. I&rsquo;m a core member of the community, along with a couple of colleagues, and we&rsquo;ve taken on the responsibility of organising community meetings. It&rsquo;s been hard work so far, and the community itself hasn&rsquo;t worked as I initially envisioned it would. The organisation has a long memory, and initiatives like this have been tried before and fizzled out, and people are therefore undertstandbly reluctant to involve themselves again. There&rsquo;s been a few rumblings recently that people weren&rsquo;t getting what they wanted from the community, so I thought that this retrospective session would be perfect for ironing out some assumptions and steering the community itself back on track.</p>
-
-<p>The meeting itself was fine and there was a general sense of positivity in the room. There were plenty of suggestions for things people would like to see (more technical sessions, deliberate practice activities), but it continues to be a real struggle to get people to volunteer to lead on these activities without relying on the same people each time. I&rsquo;d love to hear some suggestions from the weeknotes crowd on how to get people to engage more.</p>
-
-<h2 id="friday">Friday</h2>
-
-<p>I had a really useful catch-up in the morning with the other folks from the software development specialism who&rsquo;ve volunteered to help run the open recruitment evening. We&rsquo;ve got a good mix of long- and short-term service as well as differing career backgrounds, so it was a really interesting session on how we can sell the organisation to interested candidates during the open recruitment evening.</p>
-
-<p>Project-wise, I sat down with the service&rsquo;s solution architect and a lead software engineer in the morning to discuss an approach to reusability for part of the service journey. We don&rsquo;t always get the reusability of some of our components right, and that&rsquo;s partially down to delivery pressures, but it&rsquo;s also down to not involving the right people at the right stages of the process. It was good to have some of these discussions early on, and it&rsquo;s given us a good steer on what some of our service reusability could, and might, look like.</p>
-
-<hr />
-
-<p>I&rsquo;ve barely touched the two books I&rsquo;m reading this week, but instead I&rsquo;ve been guiltily eyeing up what might be added to my reading list next on the Waterstones website. It&rsquo;s been a month or two since I&rsquo;ve read anything but non-fiction, so I&rsquo;ll be attempting to get back into the habit of reading both fiction and non-fiction soon.</p>
-
-<p>I&rsquo;ve also fallen behind in the research I wanted to do towards writing my own book. I think I&rsquo;m going to need to approach this a little more seriously if it&rsquo;s ever going to go anywhere. Weeknotes crowd who&rsquo;ve written books, how do you organise your approach to both research and writing?</p>
-]]></content>
-        </item>
-        
-        <item>
-            <title>Weeknotes (12/07/19)</title>
-            <link>/posts/weeknotes-12/07/19/</link>
-            <pubDate>Sun, 14 Jul 2019 10:00:00 +0000</pubDate>
-            
-            <guid>/posts/weeknotes-12/07/19/</guid>
-            <description>Weeknotes are harder than I anticipated. Not actually writing them, but finding the time to write them. I&amp;rsquo;m actually writing these before I&amp;rsquo;ve written the previous weeks&amp;rsquo;, which probably isn&amp;rsquo;t the approach you&amp;rsquo;re supposed to take. I&amp;rsquo;m going to try and write up a section each day next time, rather than try to do it all in one go at the end of the week.
-No weeknotes next week, as I&amp;rsquo;m on annual leave 🎉.</description>
-            <content type="html"><![CDATA[
-
-<p>Weeknotes are harder than I anticipated. Not actually writing them, but finding the <em>time</em> to write them. I&rsquo;m actually writing these <em>before</em> I&rsquo;ve written the previous weeks&rsquo;, which probably isn&rsquo;t the approach you&rsquo;re supposed to take. I&rsquo;m going to try and write up a section each day next time, rather than try to do it all in one go at the end of the week.</p>
-
-<p>No weeknotes next week, as I&rsquo;m on annual leave 🎉.</p>
-
-<hr />
-
-<h2 id="monday">Monday</h2>
-
-<p>Great start to the week in that I actually spent a fair amount of time writing code and looking over pull requests on Monday. Now that we&rsquo;ve moved into our private beta phase I&rsquo;m expecting this to fill more and more of my time. I&rsquo;d like to reach a cadence where I&rsquo;ve already produced low-level architectural diagrams for upcoming user stories so that the rest of the team can simply work from these when we pull user stories into a sprint, but I think it&rsquo;s going to be a while before we hit this way of working.</p>
-
-<p>Monday afternoon featured an interesting senior engineering leadership forum meeting focused around domain modelling and how we map this to business capabilities that the architecture practice have produced. I&rsquo;ve added Eric Evan&rsquo;s &lsquo;<a href="https://www.amazon.co.uk/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215/">Domain-Driven Design: Tackling Complexity in the Heart of Software</a>&rsquo; to my reading list off the back of this.</p>
-
-<h2 id="tuesday">Tuesday</h2>
-
-<p>I managed to spend some more solid time on project-based work on Tuesday. It feels like it&rsquo;s been a while since I&rsquo;ve been able to commit reasonably-sized stretches of time to <em>just</em> project work.</p>
-
-<p>I did spend an hour on Tuesday afternoon in a meeting for our next recruitment wave, working with colleagues on fleshing out the job profile and candidate pack for one of the posts that I&rsquo;ll be interviewing for in August.</p>
-
-<h2 id="wednesday">Wednesday</h2>
-
-<p>Show and tell day - lots of last minute development to finish off the user stories we took in this sprint (we&rsquo;re yet to introduce a cut-off deadline). The show and tell itself went well, but I&rsquo;m sure there&rsquo;s things that we can improve in future presentations. Unfortunately we weren&rsquo;t able to get our cloud infrastructure running all of our components in time, which meant that we weren&rsquo;t able to <em>show</em> the service journey, short of a few screenshots.</p>
-
-<p>Our sprint retrospective followed show and tell, and was well-run by our scrum master. It&rsquo;s probably weird to have a favourite, but this is my favourite of the agile ceremonies. I like hearing everybody&rsquo;s honest opinions on how the sprint went, and it&rsquo;s always interesting to hear the different perspectives from different specialisms.</p>
-
-<h2 id="thursday">Thursday</h2>
-
-<p>Emails went out today asking for participants in a software developer skills mapping workshop that I&rsquo;ve helped put together in tandem with the lead software engineers and the work stream focused on growing capability within the Digital, Data and Technology directorate. I&rsquo;m excited to see what comes out of this. If it works, it should benefit the community in terms of being able to identify training and areas for improvement, as well as benefitting our efforts around recruitment; if we can better see where our gaps in knowledge are, we can better identify the gaps we need to recruit into.</p>
-
-<p>Project-wise we had our planning session for the next sprint, where we took in a couple of user stories and held over our infrastructure commitments from the last sprint. We also had a really interesting design-led whiteboarding session on how we approach the display of multi-title properties in our service. It&rsquo;s an interesting problem that&rsquo;s been solved in a few different ways previously, but we believe that we can improve upon these approaches. We came away with lots of questions and things to research over the next few weeks.</p>
-
-<h2 id="friday">Friday</h2>
-
-<p>Job profiles and candidate packs finalised for the two positions I&rsquo;ll be interviewing for in August. We&rsquo;ve had to concede on some things I&rsquo;d like to have included in an attempt to improve the process for both the organisation and potential candidates (there are more stakeholders and hard rules involved than I think I first realised), but I&rsquo;m pleased that we&rsquo;ve been able to do <em>some</em> of the things on my list.</p>
-
-<p>We&rsquo;re holding an open <a href="https://www.gradsouthwest.com/jobs/digital-data-and-technology-jobs-at-hm-land-registry-plymouth-devon/2397-1/">recruitment evening</a> which I&rsquo;ve had a very minor part in helping to organise (making up part of a team which shaped the things we want to show to potential software developers). It&rsquo;s short notice, but if you&rsquo;re interested, we have positions available. We&rsquo;ll be looking to run another one in a few weeks as part of the same recruitment wave.</p>
-
-<p>Out of office <em>on</em>, inbox empty.</p>
-
-<hr />
-
-<p>I&rsquo;ve been slacking a bit on my weekly list of non-work tasks. I <em>did</em> manage to get some reading time in this week, and am almost finished with Shoshana Zuboff&rsquo;s &lsquo;<a href="https//www.amazon.co.uk/Age-Surveillance-Capitalism-Future-Frontier/dp/1781256845/">The Age of Surveillance Capitalism: The Fight for a Human Future at the New Frontier of Power</a>&rsquo; now. I&rsquo;d definitely recommend it, but it&rsquo;s not always the easiest read. I&rsquo;ve got Tim Shipman&rsquo;s &lsquo;<a href="https://www.amazon.co.uk/All-Out-War-Britains-Political/dp/0008215170/">All Out War</a>&rsquo; up next. I&rsquo;m still juggling Robert C. Martin&rsquo;s &lsquo;<a href="https://www.amazon.co.uk/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164/">Clean Architecture</a>&rsquo;, which I&rsquo;m now reading in tandem with the <a href="https://www.codingblocks.net">Coding Blocks</a> podcast episodes which discuss the book (thanks <a href="https://twitter.com/TheAmandaLight">Amanda Light</a> for the recommendation 👋).</p>
-
-<p><img src="/img/lost-gardens-of-heligan.JPG" alt="The Lost Gardens of Heligan" /></p>
-
-<p>I don&rsquo;t have a huge amount planned for this week. Weather permitting, my wife and I are off to the <a href="https://www.heligan.com">Lost Gardens of Heligan</a> at some point, and we might squeeze in a <a href="https://www.nationaltrust.org.uk">National Trust</a> visit as well. Tech-wise I saw <a href="https://blog.alexellis.io/serverless-kubernetes-on-raspberry-pi/">this</a> blogpost on building out a Kubernetes cluster on Raspberry Pis, so I&rsquo;ll be digging out the handful I own which are sat in my desk drawer and attempting to get something spun up.</p>
-]]></content>
-        </item>
-        
-        <item>
-            <title>Weeknotes (28/06/19)</title>
-            <link>/posts/weeknotes-28/06/19/</link>
-            <pubDate>Thu, 04 Jul 2019 10:00:00 +0000</pubDate>
-            
-            <guid>/posts/weeknotes-28/06/19/</guid>
-            <description>I’m writing these later than I’d like to already (the Thursday of ‘next week’, as opposed to the intended Friday of ‘this’ week) and it’s only the second week of this commitment, which goes some way to explain how busy I’ve been this week.
-I started the week by writing a lighter version of my list of ‘things to achieve this week’ – three days this week were to be taken up with an off-site project kickoff session, which went really well.</description>
-            <content type="html"><![CDATA[
-
-<p>I’m writing these later than I’d like to already (the Thursday of ‘next week’, as opposed to the intended Friday of ‘this’ week) and it’s only the second week of this commitment, which goes some way to explain how busy I’ve been this week.</p>
-
-<p>I started the week by writing a lighter version of my list of ‘things to achieve this week’ – three days this week were to be taken up with an off-site project kickoff session, which went really well. I’m not always a fan of things like this as they’ve tended to, in my experience, veer towards ‘organised fun’-type activities, but this was organised excellently and struck a good balance between team-building and project-focussed work.</p>
-
-<hr />
-
-<h2 id="monday">Monday</h2>
-
-<p>Being out of the office for the majority of the week meant having to cram lots of meetings into the remaining in-office time.</p>
-
-<p>I gave a co-presentation on unit testing in Python to the software developer community of practice in the afternoon, which I think was received well. My section of the presentation was mostly centred around the theory of unit testing as opposed to practical examples, but the whole thing inspired a lot of conversation and ‘how would I do <em>this’</em>-type questions, which is what we wanted to see from it.</p>
-
-<p>The rest of the day was mostly spent in project-related meetings and looking over the job profile for an interview panel I’ll be sitting on.</p>
-
-<h2 id="tuesday">Tuesday</h2>
-
-<p>This was the first day of our off-site project kickoff. I can’t remember the last time I emptied my calendar for something that wasn’t annual leave!</p>
-
-<p>A good mix of icebreaker activities and project talk. I’d happily have played ‘agile beer pong jeopardy’ for the rest of the week, which had around the maximum level of sporting participation that I’m willing to commit to. I like things like this because they highlight the different understandings people have of agile based on the different flavours and approaches that they’ve been exposed to.</p>
-
-<h2 id="wednesday">Wednesday</h2>
-
-<p>Wednesday was the second day of our project kickoff, and the first all-day session.</p>
-
-<p>I presented a quick overview of the target architecture for the service on a whiteboard which enabled some good conversations within the team around some of our potential risks and dependencies.</p>
-
-<p>I’m yet to decide whether it’s a good thing that I can draw the entire component diagram for the service from memory 🤔.</p>
-
-<h2 id="thursday">Thursday</h2>
-
-<p>Thursday was the last day of our project kickoff, which meant lots of epics and user stories to refine to enable us to hit our beta phase running. These three days were the first time I’ve felt like we’ve spent some quality time as a team looking at the problems we’re trying to solve from all angles, and it really shone through in some of the approaches and outputs from these refinement sessions.</p>
-
-<h2 id="friday">Friday</h2>
-
-<p>Fridays always swing one of two ways for me; either no meetings at all, in which case I can devote some solid time to project work; or booked out for one-to-ones, either my own or for those colleagues whom I line manage.</p>
-
-<p>This Friday was no exception. I had a one-to-one with my line manager where we discussed what <em>good</em> looks like in terms of my role, as well as the kinds of things expected of a lead software engineer and how I might factor that into personal objectives.</p>
-
-<p>I also had a one-to-one with a colleague I line manage, where we discussed their current work and objectives. I watched <a href="https://twitter.com/mseckington">Melinda Seckington</a>’s ‘<a href="https://www.youtube.com/watch?v=18MI6n9hFDI">Levelling Up Developers</a>’ talk from <a href="https://london2019.theleaddeveloper.com/">Lead Dev London 2019</a> recently, which led me onto her blog, specifically the ‘<a href="https://missgeeky.com/2018/07/11/goal-setting-workshops-managers/">Goal-setting workshops for managers</a>’ post. It made me think about the way I enable staff to set personal objectives, and whether I could improve upon that by taking some of her ideas into consideration. I don’t think I’ve even scratched the surface of being a good line manager yet, so it’s always nice to stumble across things like this.</p>
-
-<hr />
-
-<p><img src="/img/concorde-alpha-foxtrot.jpeg" alt="Concorde Alpha Foxtrot on display at Aerospace Bristol" /></p>
-
-<p>I spent Saturday in Bristol visiting a friend and managed to squeeze in a visit to <a href="http://aerospacebristol.org/">Aerospace Bristol</a>, which is home to the last Concorde both to be built and to fly. It’s well worth a visit, and I’ll inevitably be dragging my wife back at some point.</p>
-]]></content>
-        </item>
-        
-        <item>
-            <title>Weeknotes (21/06/19)</title>
-            <link>/posts/weeknotes-21/06/19/</link>
-            <pubDate>Wed, 26 Jun 2019 10:00:00 +0000</pubDate>
-            
-            <guid>/posts/weeknotes-21/06/19/</guid>
-            <description>I moved into a new role semi-recently which also involved moving into a new team, which was coming to the end of the alpha phase of a project. In theory, the role shouldn’t be hugely different to the one I was already fulfilling (it’s an upgrade in seniority) and the differences that are there were things that I knew up front.
-Software development during the alpha phase of an agile project is very different to software development during the beta phase.</description>
-            <content type="html"><![CDATA[
-
-<p>I moved into a new role semi-recently which also involved moving into a new team, which was coming to the end of the alpha phase of a project. In theory, the role shouldn’t be hugely different to the one I was already fulfilling (it’s an upgrade in seniority) and the differences that <em>are</em> there were things that I knew up front.</p>
-
-<p>Software development during the alpha phase of an agile project is <em>very</em> different to software development during the beta phase. Working as a software developer during beta, I had been used to my days involving two things; either delivering features and bug fixes; or live support for the service I was working on. These two things play out very differently in reality, but both have tangible outputs which I can point at and say “I achieved these things today”.</p>
-
-<p>Working as a senior software developer during alpha feels very different. There’s no live service to support, no bugs to fix, and depending on the goals of the alpha phase, there isn’t necessarily any code to write. Much of my time is taken up with ‘bigger picture’-type discussions, ensuring that what we’re proposing from a technical point of view aligns strategically with other areas of the organisation, ensuring that the right things are being done to de-risk any identified risks, and mapping our dependencies. I’ve drawn some target architecture on a whiteboard and thought about how our components fit together, but I’ve spent <em>very</em> little time writing code.</p>
-
-<p>If I don’t have any of those ‘tangible outputs’ to show for the work I’ve done during the day, am I doing a good job? I’ve had a chat with a couple of colleagues in the same role about what <em>good</em> looks like and what their coping strategy is for not having those tangible outputs, and their experiences are very similar to mine. That’s reassuring in some ways, but it doesn’t stretch <em>all</em> the way.</p>
-
-<p>I’m experimenting with a combination of two things to try and combat that feeling of not having achieved x things during the day. First of which, you’re reading right now. I’ve been following the week notes community for a while (particularly <a href="https://medium.com/u/580b65df502c">Ian Ames</a> and <a href="https://medium.com/u/27dad6d7c304">Jonathan Kerr</a> 👋), and it seemed like something I could leverage in order to reassess the things I’d worked on during the week and to reflect on whether or not I consider that ‘doing a good job’. To aid this, the other thing I’m experimenting with is writing a list of things I want to achieve each week.</p>
-
-<hr />
-
-<h2 id="monday">Monday</h2>
-
-<p>I took Monday off to recover from my previous week which was filled with university exams (my penultimate year of undergraduate study in Computer Science with the Open University). I’d expected to spend it sleeping/vegetating, but I’d actually come out of the weekend already feeling refreshed and ready to hit the week running. Just having the knowledge that I didn’t have to spend all of my ‘spare’ time studying/revising felt like a massive weight had been lifted from my shoulders.</p>
-
-<p>I made the most of this and ploughed through a couple of the non-project related things I’d been pushing down my to-do list for the past few weeks and which had landed on my list of things I wanted to achieve this week.</p>
-
-<h2 id="tuesday">Tuesday</h2>
-
-<p><img src="/img/dilbert-meetings.png" alt="A Dilbert on meetings" /></p>
-
-<p>The combination of half a working week last week and taking Monday off meant that I’d squeezed a lot of meetings into Tuesday. Five hours worth of meetings, to be precise. With that feeling of refreshed energy quickly dissipating, I wanted to try and engineer something out of the situation and decided that moving forward I’m going to start tracking how long I spend in meetings and see if I can use this as some kind of foundation in being better at picking and choosing the meetings I attend. At least two of those five hours didn’t come with any outputs and that feels like time that I could and <em>should</em> be better utilising.</p>
-
-<h2 id="wednesday">Wednesday</h2>
-
-<p>I managed to progress a few of the things on my to-do list for the week, so a 👍 there.</p>
-
-<p>I was anticipating another meeting-heavy day but managed to knock this down to only two hours, leaving me with some substantial project time. Working with a colleague we came to an agreement on our branching strategy moving into the beta phase, and I was able to spend some time reviewing a couple of early pull requests. It had felt like weeks since I’d actually looked at a line of code, so it was nice to get involved at this level again.</p>
-
-<h2 id="thursday">Thursday</h2>
-
-<p>Most of today was spent working on the technology section of the slide deck for our end-of-alpha showcase and preparing to deliver this in the afternoon.</p>
-
-<p>I don’t consider myself a good public speaker. I don’t mind doing it, and that’s partly because I always think I’ll do a good job, but when I’m actually stood in front of a room full of people the things I was planning to say leave my brain, and not via my mouth, as intended. Sometimes, I’ll even say things that either don’t mean anything in reality, or that I <em>know</em> are the complete opposite of the thing that I was supposed to say. Unfortunately, I felt like I did exactly that on this occassion.</p>
-
-<p>I read Chris Anderson’s ‘<a href="https://www.amazon.co.uk/TED-Talks-official-public-speaking/dp/1472228065/">TED Talks: The Official TED Guide to Public Speaking</a>’ on the train to/from London recently, and I think that it <em>might</em> have contributed to some sort of incremental improvement in my public speaking, or at least in my approach to it. This is almost definitely an area that I both want and need to improve in and I think that’s only going to happen with increased exposure to it. Which is lucky, because I’ve got another presentation to give on Monday.</p>
-
-<h2 id="friday">Friday</h2>
-
-<p>Another thing ticked off the to-do list early on this morning 👍, which left me with only two of six work-related things left to complete. One of these I had anticipated doing over the weekend (the slide deck for Monday’s presentation; it just needs tidying and some rehearsal time) and the other was a stretch goal that I felt might rollover into next week.</p>
-
-<p>I worked a considerably shorter day on Friday, so meetings took up a large chunk of this; one of which was project-related, the other related to recruitment. I’ve taken an interest in our approach to recruitment within the software development practice recently, as I don’t think we do it as well as we could. There’s a perception that we struggle to recruit for a number of reasons, but I don’t necessarily agree with all of these. I think it partly stems from the fact that, although we’re the largest technology employer in the area, <em>nobody knows we’re here</em>. A few of us are beginning to challenge that by working on conference sponsorships (likely to feature on next week’s to-do list), and how we approach our job profiles, and I hope this pays off.</p>
-
-<hr />
-
-<p>As well as work-related things on my to-do list for the week, I decided to try and track some non-work-related tasks as well.</p>
-
-<p>I’m reading two books at the moment and one of these tasks was to get through a subsequent chunk of both. For my (sort of) non-work-related book I’m reading Shoshana Zuboff’s ‘<a href="https://www.amazon.co.uk/Age-Surveillance-Capitalism-Future-Frontier/dp/1781256845/">The Age of Surveillance Capitalism: The Fight for a Human Future at the New Frontier of Power</a>’. It’s heavy reading at times and frankly terrifying. For my work-related book I’m reading Robert C. Martin’s ‘<a href="https://www.amazon.co.uk/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164/">Clean Architecture</a>’. This came recommended (albeit by a number of ‘top lists’ of books on software architecture) and it’s been interesting so far.</p>
-
-<p>Another task was book-related, but from the opposite perspective. I’ve been toying with the idea of writing my own book around impostor syndrome with specific reference to the technology industry and possibly stretching this out wider from impostor syndrome to mental health in general. I started doing some research into this during the week, reading some early research papers on impostor syndrome (thanks to the Open University’s library) and starting to put together what the book’s structure might look like. I don’t expect to start writing it anytime soon (it’ll probably take a backseat again when my final year of undergraduate study begins in September), but it feels like I’ve made a start on <em>making a start</em>.</p>
-
-<p>The final task was to write this post, which, if you’re reading this, means I’ve achieved it 👍.</p>
 ]]></content>
         </item>
         
@@ -495,74 +189,19 @@ Software development during the alpha phase of an agile project is very differen
             <description>The aggregator design pattern is a simple way of providing a single, unified service capable of surfacing data from multiple microservices, and a commonly used pattern when implementing a microservice-based architecture.
 Let&amp;rsquo;s imagine that we&amp;rsquo;ve been tasked with developing an internal API for our organisation - a general practice clinic. The API needs to consume data from three existing microservices, each of which is used by other services within the practice&amp;rsquo;s architecture - some services call these individually, some call all three.</description>
             <content type="html"><![CDATA[<p>The aggregator design pattern is a simple way of providing a single, unified service capable of surfacing data from multiple microservices, and a commonly used pattern when implementing a microservice-based architecture.</p>
-
 <p>Let&rsquo;s imagine that we&rsquo;ve been tasked with developing an internal API for our organisation - a general practice clinic. The API needs to consume data from three existing microservices, each of which is used by other services within the practice&rsquo;s architecture - some services call these individually, some call all three.</p>
-
 <p>The requirements for the API are that it should return simple details for a patient, a list of their allergies and a list of medication that they are currently taking.</p>
-
 <p>Our three existing microservices are as follows:</p>
-
 <ul>
 <li><em>Existing Service #1</em> returns details about a patient - their name, age, etc.</li>
 <li><em>Existing Service #2</em> returns a list of allergies that the patient has.</li>
 <li><em>Existing Service #3</em> returns a list of medication that the patient is currently taking.</li>
 </ul>
-
 <p>Usually, we&rsquo;d expect an aggregator to make synchronous calls to relevant microservices, performing any necessary business logic on each result as it receives it and then packaging this up as an API endpoint for a consumer to use. This meets our requirements whilst opening up potential for re-use and decoupling.</p>
-
 <p>Rather than increasing the number of services which call these microservices directly, we can make use of the aggregator pattern here.</p>
-
-<p><img src="/img/aggregator-architecture.png" alt="Simple component diagram demonstrating an example of the aggregator design pattern" /></p>
-
+<p><img src="/img/aggregator-architecture.png" alt="Simple component diagram demonstrating an example of the aggregator design pattern"></p>
 <p>Our new internal API will call our new aggregator microservice, which will call the three existing microservices before then pushing the necessary results back up to the internal API.</p>
-
 <p>We can re-use our aggregator within other services which call <em>all three</em> existing services, decoupling these from direct interaction with the microservices, which will make it easier to replace one later down the line; if we want to suddenly commission a new allergies microservice, we only have to update the aggregator (and those services which don&rsquo;t call <em>all three</em> existing services).</p>
-]]></content>
-        </item>
-        
-        <item>
-            <title>HackTheBox Lernaen Write-Up</title>
-            <link>/posts/hackthebox-lernaen-write-up/</link>
-            <pubDate>Sun, 03 Feb 2019 10:10:32 +0000</pubDate>
-            
-            <guid>/posts/hackthebox-lernaen-write-up/</guid>
-            <description>HackTheBox is an online platform for testing and advancing skills in penetration testing and cyber security. The site provides vulnerable machines as well as dedicated challenges in areas such as forensics, cryptography and web applications. The following is a write-up after completion of HackTheBox&amp;rsquo;s Lernaen web challenge.
-Our instance of the challenge will be contained in a Docker container - after starting the instance you&amp;rsquo;ll be given an address, such as docker.</description>
-            <content type="html"><![CDATA[<p>HackTheBox is an online platform for testing and advancing skills in penetration testing and cyber security. The site provides vulnerable machines as well as dedicated challenges in areas such as forensics, cryptography and web applications. The following is a write-up after completion of HackTheBox&rsquo;s Lernaen web challenge.</p>
-
-<p>Our instance of the challenge will be contained in a Docker container - after starting the instance you&rsquo;ll be given an address, such as docker.hackthebox.eu, and a port number. Combine the two (in <code>address:port</code> format), and navigate to the full address in a web browser, where we&rsquo;ll see the following:</p>
-
-<p><img src="../assets/htb-lernaen-01.png" alt="Screenshot of the login page for the HackTheBox Lernaen challenge" /></p>
-
-<p>Looking at the source code, there&rsquo;s nothing obviously untoward that we can use to enable us to bypass the login functionality. Attempting some SQL injection, or guessing with common passwords simply dump us back on the same page with an &lsquo;Invalid password!&rsquo; message. So, we&rsquo;ll take the hint and brute force our way in.</p>
-
-<p>If we search the internet for &lsquo;Lernaean&rsquo; then the results reveal that the Lernaen Hydra is a monster in Greek and Roman mythology. This is another huge hint - <a href="https://tools.kali.org/password-attacks/hydra">THC Hydra</a> is a tool used to perform rapid dictionary attacks against a number of protocols, HTTP being one of them. Revisiting the source code again, we can see that the password is being sent to the server by way of a <code>POST</code> form. With this information, and the previously-returned &lsquo;Invalid password!&rsquo; message, combined with a reliable word list, we can use Hydra to brute force our way in.</p>
-
-<p><code>hydra -l admin -P /usr/share/wordlists/rockyou.txt.gz docker.hackthebox.eu http-post-form &quot;/:password=^PASS^:Invalid password!&quot; -s 99999</code></p>
-
-<p>Breaking down the above command, let&rsquo;s take a look at what we&rsquo;re actually doing:</p>
-
-<ul>
-<li><code>-l admin</code> - this is the username that we&rsquo;re attempting to login with. As it isn&rsquo;t being provided, we&rsquo;re taking a guess that it&rsquo;ll be a default, such as admin.</li>
-<li><code>-P /usr/share/wordlists/rockyou.txt.gz</code> - this is the name/location of the password file, or word list, that we&rsquo;re going to be using. I&rsquo;m running Kali Linux, which provides the reliable RockYou wordlist out of the box.</li>
-<li><code>docker.hackthebox.eu</code> - this is the address of the server that we&rsquo;re going to be running our attack against.</li>
-<li><code>http-post-form</code> - this is the type of request that we&rsquo;re going to be making, which we discovered in our earlier viewing of the source code.</li>
-<li><code>&quot;/:password=^PASS^:Invalid password!&quot;</code> - let&rsquo;s take a look at each instance of this in turn; <code>/</code> specifies the directory where the login page exists, which is the root directory for us; <code>:password=^PASS^</code> is where we assign the element on the page to the <code>PASS</code> variable; <code>:Invalid password!</code> is the message returned when our password has failed.</li>
-<li><code>-s 99999</code> - finally, this is the port on the server that we&rsquo;re going to be running our attack against.</li>
-</ul>
-
-<p>After running the command, Hydra will deliver the password which allowed for successful login - <code>leonardo</code>. Now we&rsquo;ve found the password, let&rsquo;s login and hopefully capture our flag.</p>
-
-<p><img src="../assets/htb-lernaen-02.png" alt="Screenshot of the successful login page for the HackTheBox Lernaen challenge" /></p>
-
-<p>Almost there, but not quite. The message &lsquo;Too slow&rsquo; makes it sound like there&rsquo;s something going on here that we&rsquo;ll need to intercept - perhaps a redirect. We could attempt to intercept this with a tool like BurpSuite, or, remaining in a terminal,  we could quickly spin up a Python interpreter and use the <a href="https://pypi.org/project/requests/">requests</a> module to make our <code>POST</code> request without following the redirect which we believe to be in place.</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; response = requests.post('http://docker.hackthebox.eu:99999', data={'password': 'leonardo'}, allow_redirects=False)
-&gt;&gt;&gt; response.content
-b'&lt;h1 style=\'color: #fff;\'&gt;HTB{l1k3_4_b0s5_s0n}&lt;/h1&gt;&lt;script type=&quot;text/javascript&quot;&gt;\n                   window.location = &quot;noooooooope.html&quot;\n              &lt;/script&gt;\n&lt;html&gt;\n&lt;head&gt;\n    &lt;title&gt;Login - Lernaean&lt;/title&gt;\n&lt;/head&gt;\n&lt;body style=&quot;background-color: #cd4e7b;&quot;&gt;\n    &lt;center&gt;\n        &lt;br&gt;&lt;br&gt;&lt;br&gt;\n        &lt;h1&gt;&lt;u&gt;Administrator Login&lt;/u&gt;&lt;/h1&gt;\n        &lt;h2&gt;--- CONFIDENTIAL ---&lt;/h2&gt;\n        &lt;h2&gt;Please do not try to guess my password!&lt;/h2&gt;\n        &lt;form method=&quot;POST&quot;&gt;\n            &lt;input type=&quot;password&quot; name=&quot;password&quot;&gt;&lt;br&gt;&lt;br&gt;\n            &lt;input type=&quot;submit&quot; value=&quot;Submit&quot;&gt;\n        &lt;/form&gt;\n    &lt;/center&gt;\n&lt;/body&gt;\n&lt;/html&gt;'
-</code></pre>
-
-<p>Look inside the first <code>h1</code> element and you&rsquo;ll find our flag.</p>
 ]]></content>
         </item>
         
@@ -574,118 +213,60 @@ b'&lt;h1 style=\'color: #fff;\'&gt;HTB{l1k3_4_b0s5_s0n}&lt;/h1&gt;&lt;script typ
             <guid>/posts/deploy-a-serverless-flask-application-with-aws-lambda/</guid>
             <description>AWS Lambda lets us run code without provisioning or managing servers, paying only for the compute time of the running code. There&amp;rsquo;s no permanent infrastructure, and the server only has a life cycle of 40 milliseconds. AWS provides automatic horizontal scaling for Lambda applications, spinning up and down as many instances as are necessary.
 An open source Python library, Zappa gives us the ability to build and deploy serverless, event-driven Python applications on AWS Lambda.</description>
-            <content type="html"><![CDATA[
-
-<p><a href="https://aws.amazon.com/lambda/">AWS Lambda</a> lets us run code without provisioning or managing servers, paying only for the compute time of the running code. There&rsquo;s no permanent infrastructure, and the server only has a life cycle of 40 <em>milliseconds</em>. AWS provides automatic horizontal scaling for Lambda applications, spinning up and down as many instances as are necessary.</p>
-
+            <content type="html"><![CDATA[<p><a href="https://aws.amazon.com/lambda/">AWS Lambda</a> lets us run code without provisioning or managing servers, paying only for the compute time of the running code. There&rsquo;s no permanent infrastructure, and the server only has a life cycle of 40 <em>milliseconds</em>. AWS provides automatic horizontal scaling for Lambda applications, spinning up and down as many instances as are necessary.</p>
 <p>An open source Python library, <a href="https://github.com/Miserlou/Zappa">Zappa</a> gives us the ability to build and deploy serverless, event-driven Python applications on <a href="https://aws.amazon.com/lambda/">AWS Lambda</a>. Zappa works out of the box with WSGI web applications, such as Flask and Django.</p>
-
 <p>It&rsquo;s quick and easy to deploy a Python WSGI application to AWS Lambda. The below guide assumes you have an AWS account and have created an IAM user with the relevant permissions.</p>
-
 <h3 id="configuration">Configuration</h3>
-
 <p>With <a href="https://pypi.org/project/pip/">pip</a> installed locally, we&rsquo;ll grab the <a href="https://pypi.org/project/awscli/">awscli</a> package.</p>
-
-<pre><code class="language-bash">$ pip install awscli
-</code></pre>
-
-<p>Once installed, the <code>aws configure</code> command will be the quickest way to configure our AWS credentials.</p>
-
-<pre><code class="language-bash">$ aws configure
-</code></pre>
-
-<p>This command will request four pieces of information.</p>
-
-<pre><code class="language-bash">AWS Access Key ID [None]:
-</code></pre>
-
-<p>This is the AWS Access Key ID of our IAM user with the relevant permissions.</p>
-
-<pre><code class="language-bash">AWS Secret Access Key [None]:
-</code></pre>
-
-<p>This is the AWS Secret Access Key of our IAM user with the relevant permissions.</p>
-
-<pre><code class="language-bash">Default region name [None]:
-</code></pre>
-
-<p>This can be left blank, which will default this value to <code>us-east-1</code>.</p>
-
-<pre><code class="language-bash">Default output format [None]:
-</code></pre>
-
-<p>This can also be left blank, which will default this value to <code>json</code>.</p>
-
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ pip install awscli
+</code></pre></div><p>Once installed, the <code>aws configure</code> command will be the quickest way to configure our AWS credentials.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ aws configure
+</code></pre></div><p>This command will request four pieces of information.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">AWS Access Key ID <span class="o">[</span>None<span class="o">]</span>:
+</code></pre></div><p>This is the AWS Access Key ID of our IAM user with the relevant permissions.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">AWS Secret Access Key <span class="o">[</span>None<span class="o">]</span>:
+</code></pre></div><p>This is the AWS Secret Access Key of our IAM user with the relevant permissions.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">Default region name <span class="o">[</span>None<span class="o">]</span>:
+</code></pre></div><p>This can be left blank, which will default this value to <code>us-east-1</code>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">Default output format <span class="o">[</span>None<span class="o">]</span>:
+</code></pre></div><p>This can also be left blank, which will default this value to <code>json</code>.</p>
 <p>After running the command, the credentials will be stored in the AWS credentials file, located at <code>~/.aws/credentials</code>.</p>
-
 <h3 id="deployment">Deployment</h3>
-
 <p>First, we&rsquo;ll create a <code>requirements.txt</code> file which will document the <a href="https://pypi.org/project/pip/">pip</a> libraries our application will be dependent upon. Run the command below.</p>
-
-<pre><code class="language-bash">$ touch requirements.txt
-</code></pre>
-
-<p>And then add the following to this file:</p>
-
-<pre><code class="language-bash">awscli
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ touch requirements.txt
+</code></pre></div><p>And then add the following to this file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">awscli
 flask
 zappa
-</code></pre>
-
-<p><a href="https://github.com/Miserlou/Zappa">Zappa</a> needs a virtual environment to run, which we can create like so (after running <code>pip install virtualenv</code>):</p>
-
-<pre><code class="language-bash">$ virtualenv venv
-</code></pre>
-
-<p>That command will create our virtual environment in a new directory named <code>venv</code>. We can activate our virtual environment with the following command:</p>
-
-<pre><code class="language-bash">$ source venv/bin/activate
-</code></pre>
-
-<p>If we need to deactivate our virtual environment, we can do so by running the command <code>deactivate</code> or by exiting the terminal.</p>
-
+</code></pre></div><p><a href="https://github.com/Miserlou/Zappa">Zappa</a> needs a virtual environment to run, which we can create like so (after running <code>pip install virtualenv</code>):</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ virtualenv venv
+</code></pre></div><p>That command will create our virtual environment in a new directory named <code>venv</code>. We can activate our virtual environment with the following command:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nb">source</span> venv/bin/activate
+</code></pre></div><p>If we need to deactivate our virtual environment, we can do so by running the command <code>deactivate</code> or by exiting the terminal.</p>
 <p>Once in the virtual environment, let&rsquo;s install the <a href="https://pypi.org/project/pip/">pip</a> libraries from our <code>requirements.txt</code> file.</p>
-
-<pre><code class="language-bash">$ pip install -r requirements.txt
-</code></pre>
-
-<p>Our Flask application will sit in a file named <code>app.py</code>, which will serve one route that will return a JSON key/value pair.</p>
-
-<pre><code class="language-python">from flask import Flask, jsonify
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ pip install -r requirements.txt
+</code></pre></div><p>Our Flask application will sit in a file named <code>app.py</code>, which will serve one route that will return a JSON key/value pair.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">jsonify</span>
 
 
-app = Flask(__name__)
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-@app.route(&quot;/&quot;)
-def index():
-	return jsonify({&quot;response&quot;: &quot;Hello world&quot;})
+<span class="nd">@app.route</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+	<span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&#34;response&#34;</span><span class="p">:</span> <span class="s2">&#34;Hello world&#34;</span><span class="p">})</span>
 
-if __name__ == &quot;__main__&quot;:
-	app.run()
-</code></pre>
-
-<p>In order to deploy our application to AWS, we&rsquo;ll need to run a couple of Zappa commands. The following command begins an interactive process.</p>
-
-<pre><code class="language-bash">$ zappa init
-</code></pre>
-
-<p>This will prompt us for a few different values, which we&rsquo;ll leave as their defaults.</p>
-
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+	<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div><p>In order to deploy our application to AWS, we&rsquo;ll need to run a couple of Zappa commands. The following command begins an interactive process.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ zappa init
+</code></pre></div><p>This will prompt us for a few different values, which we&rsquo;ll leave as their defaults.</p>
 <p>The next command we&rsquo;ll run will tell Zappa to bundle and upload our application and it&rsquo;s dependencies. As part of this process, Zappa will create the necessary API gateways.</p>
-
-<pre><code class="language-bash">$ zappa deploy dev
-</code></pre>
-
-<p>After running the above command, Zappa will return the URL where the application has been hosted. Hit this URL and we&rsquo;ll get back the following response:</p>
-
-<pre><code class="language-json">{&quot;response&quot;:&quot;Hello world&quot;}
-</code></pre>
-
-<p>To remove the AWS Lambda function, and associated API gateway and Cloudwatch logs, we can run the <code>undeploy</code> command.</p>
-
-<pre><code class="language-bash">$ zappa undeploy dev
-</code></pre>
-]]></content>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ zappa deploy dev
+</code></pre></div><p>After running the above command, Zappa will return the URL where the application has been hosted. Hit this URL and we&rsquo;ll get back the following response:</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span><span class="nt">&#34;response&#34;</span><span class="p">:</span><span class="s2">&#34;Hello world&#34;</span><span class="p">}</span>
+</code></pre></div><p>To remove the AWS Lambda function, and associated API gateway and Cloudwatch logs, we can run the <code>undeploy</code> command.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ zappa undeploy dev
+</code></pre></div>]]></content>
         </item>
         
         <item>
@@ -694,21 +275,13 @@ if __name__ == &quot;__main__&quot;:
             <pubDate>Sun, 02 Sep 2018 18:50:00 +0000</pubDate>
             
             <guid>/posts/designing-resilient-apis-with-idempotency/</guid>
-            <description>How can we design APIs to be resilient when our networks necessarily aren&amp;rsquo;t? An API should be robust enough to handle failure scenarios including connectivity drops, timeouts between resultant calls, and more. If a client makes a request to our API and loses connection during the request, how can we ensure that a successive identical request doesn&amp;rsquo;t alter the state of the system in a way that we weren&amp;rsquo;t expecting?</description>
-            <content type="html"><![CDATA[
-
-<p>How can we design APIs to be resilient when our networks necessarily aren&rsquo;t? An API should be robust enough to handle failure scenarios including connectivity drops, timeouts between resultant calls, and more. If a client makes a request to our API and loses connection during the request, how can we ensure that a successive identical request doesn&rsquo;t alter the state of the system in a way that we weren&rsquo;t expecting? This is where <a href="https://en.wikipedia.org/wiki/Idempotence">idempotence</a> comes into play. An idempotent request is one which can be made any number of times with the guarantee that any resulting logic, or side effects, only happen once.</p>
-
+            <description>How can we design APIs to be resilient when our networks necessarily aren&amp;rsquo;t? An API should be robust enough to handle failure scenarios including connectivity drops, timeouts between resultant calls, and more. If a client makes a request to our API and loses connection during the request, how can we ensure that a successive identical request doesn&amp;rsquo;t alter the state of the system in a way that we weren&amp;rsquo;t expecting? This is where idempotence comes into play.</description>
+            <content type="html"><![CDATA[<p>How can we design APIs to be resilient when our networks necessarily aren&rsquo;t? An API should be robust enough to handle failure scenarios including connectivity drops, timeouts between resultant calls, and more. If a client makes a request to our API and loses connection during the request, how can we ensure that a successive identical request doesn&rsquo;t alter the state of the system in a way that we weren&rsquo;t expecting? This is where <a href="https://en.wikipedia.org/wiki/Idempotence">idempotence</a> comes into play. An idempotent request is one which can be made any number of times with the guarantee that any resulting logic, or side effects, only happen once.</p>
 <p>HTTP has two methods as idempotent by default, the <code>PUT</code> and <code>DELETE</code> verbs. A <code>PUT</code> request is utilised to replace an entire entity with the payload included in the request. Therefore, we can safely make a <code>PUT</code> request multiple times, safe in the knowledge that we&rsquo;ll simply overwrite an entity with the <em>same</em> contents. <code>DELETE</code> requests are similar in that if a first <code>DELETE</code> request failed, then a subsequent request would leave the system in the same intended state. Multiple successful <code>DELETE</code> requests might return different status codes in the response (<code>200</code> for the first request, <code>410</code> or <code>404</code> for the second), but again, the state of the system would remain the same. We should be careful not to interpret idempotency as <em>&ldquo;I should receive the same response from multiple identical requests&rdquo;</em> but as <em>&ldquo;The state of the system should be the same when multiple identical requests are made&rdquo;</em>.</p>
-
 <h2 id="how-can-we-implement-idempotency-in-our-apis">How can we implement idempotency in our APIs?</h2>
-
 <p>We&rsquo;ve identified the need to ensure that our API is capable of serving multiple identical requests under conditions of volatility, but how do we implement that in practice? One such way of dealing with such cases is through the use of <strong>idempotency keys</strong>.</p>
-
 <p>An idempotency key is a unique token generated by the client and passed into the header of a request. When a server receives a request containing an idempotency key it stores it for potential later use. Once the server finishes handling the request, it will update the details stored against the idempotency key to mark this request as completed. If possible, the server could also store the result. If a client makes a further request containing the same idempotency key (perhaps they lost connection before the results were retrieved), the server identifies the key it stored previously and serves up the cached results, or, in scenarios where the server does not store a result, it could return a <code>409</code> status code response, detailing that a resource already exists against the idempotency key passed in the request header.</p>
-
 <p>Let&rsquo;s take a look at these examples in more detail. Firstly, our client makes a request to create a new resource by calling our <code>POST</code> HTTP endpoint, passing an idempotency key in the header and a payload in the request body:</p>
-
 <pre><code>POST https://an-api/v1/resources HTTP/1.1
 Idempotency-Key: 845c52a3-6b91-4358-9004-e2f94eec48fa
 {
@@ -716,28 +289,18 @@ Idempotency-Key: 845c52a3-6b91-4358-9004-e2f94eec48fa
     &quot;surname&quot;: &quot;Picard&quot;,
     &quot;rank&quot;: &quot;Captain&quot;
 }
-</code></pre>
-
-<p>Server side, we create a new resource with the attributes specified in the request body and store the idempotency key and the status of the request, which is &lsquo;<code>complete</code>&rsquo;. However, the connection between the client and the server dropped, so we&rsquo;ve been unable to return a response to the client. In this case, the client retries their request, re-sending an identical idempotency key and payload. The server cross references the incoming idempotency key with those contained in storage, identifies that it is a duplicate key and returns the following response:</p>
-
+</code></pre><p>Server side, we create a new resource with the attributes specified in the request body and store the idempotency key and the status of the request, which is &lsquo;<code>complete</code>&rsquo;. However, the connection between the client and the server dropped, so we&rsquo;ve been unable to return a response to the client. In this case, the client retries their request, re-sending an identical idempotency key and payload. The server cross references the incoming idempotency key with those contained in storage, identifies that it is a duplicate key and returns the following response:</p>
 <pre><code>HTTP/1.1 409 (Conflict)
 {
     &quot;error&quot;: &quot;A resource has previously been created using this idempotency key&quot;
 }
-</code></pre>
-
-<p>Let&rsquo;s re-use the above example, but consider this time that the server has stored the response it would have sent had the connection between client and server not dropped. Again, the client retries their request, re-sending the identical idempotency key and payload. The server again cross references the incoming idempotency key with those contained in storage, identifies that it is a duplicate key and returns the cached response:</p>
-
+</code></pre><p>Let&rsquo;s re-use the above example, but consider this time that the server has stored the response it would have sent had the connection between client and server not dropped. Again, the client retries their request, re-sending the identical idempotency key and payload. The server again cross references the incoming idempotency key with those contained in storage, identifies that it is a duplicate key and returns the cached response:</p>
 <pre><code>HTTP/1.1 201 (CREATED)
 {
     &quot;message&quot;: &quot;Resource created successfully&quot;
 }
-</code></pre>
-
-<p>In our final scenario, perhaps the server was unable to complete the request due to a failure part-way through processing. The logic and resultant behaviour here depends on how the idempotency is implemented on the server. In this situation, the server might have stored the state of the request against the idempotency key at certain points of operation, in which case upon a re-request from the client, the server can cross reference the incoming idempotency key in a re-request with those in storage and identify at which point the transaction was aborter. The server can then continue processing before sending back a response. Another implementation might be that the entire operation was rolled back via an ACID database, meaning that the server can re-process the request from scratch.</p>
-
+</code></pre><p>In our final scenario, perhaps the server was unable to complete the request due to a failure part-way through processing. The logic and resultant behaviour here depends on how the idempotency is implemented on the server. In this situation, the server might have stored the state of the request against the idempotency key at certain points of operation, in which case upon a re-request from the client, the server can cross reference the incoming idempotency key in a re-request with those in storage and identify at which point the transaction was aborter. The server can then continue processing before sending back a response. Another implementation might be that the entire operation was rolled back via an ACID database, meaning that the server can re-process the request from scratch.</p>
 <p>The server side storage of idempotency keys should be recycled periodically. We wouldn&rsquo;t expect a dropped connection re-request to happen 24 hours after the original request, so this isn&rsquo;t the kind of data which we need to store long term.</p>
-
 <p>In a future blog post I&rsquo;ll look at a lightweight implementation of idempotency in both Flask and Django web applications.</p>
 ]]></content>
         </item>
@@ -748,245 +311,164 @@ Idempotency-Key: 845c52a3-6b91-4358-9004-e2f94eec48fa
             <pubDate>Sun, 08 Jul 2018 19:50:00 +0000</pubDate>
             
             <guid>/posts/python-3.7-data-classes/</guid>
-            <description>PEP 557 in the recently-released [Python 3.7]() added data classes to the standard Python library. Data classes can be thought of as mutable data holders and are somewhat similar to named tuples, although named tuples are immutable.
+            <description>PEP 557 in the recently-released Python 3.7 added data classes to the standard Python library. Data classes can be thought of as mutable data holders and are somewhat similar to named tuples, although named tuples are immutable.
 Data classes provide a lot of boilerplate code, saving time and effort on the part of the Python programmer, although it could be argued that this layer of abstraction makes debugging more difficult.</description>
-            <content type="html"><![CDATA[
-
-<p><a href="https://www.python.org/dev/peps/pep-0557/">PEP 557</a> in the recently-released [Python 3.7]() added data classes to the standard Python library. Data classes can be thought of as mutable data holders and are somewhat similar to <a href="https://docs.python.org/2/library/collections.html#collections.namedtuple">named tuples</a>, although named tuples are immutable.</p>
-
+            <content type="html"><![CDATA[<p><a href="https://www.python.org/dev/peps/pep-0557/">PEP 557</a> in the recently-released <a href="">Python 3.7</a> added data classes to the standard Python library. Data classes can be thought of as mutable data holders and are somewhat similar to <a href="https://docs.python.org/2/library/collections.html#collections.namedtuple">named tuples</a>, although named tuples are immutable.</p>
 <p>Data classes provide a lot of boilerplate code, saving time and effort on the part of the Python programmer, although it could be argued that this layer of abstraction makes debugging more difficult.</p>
-
 <h2 id="comparing-regular-classes-and-data-classes">Comparing regular classes and data classes</h2>
-
 <p>Consider the following class:</p>
-
-<pre><code class="language-python">class BankAccount():
-	def __init__(self, id, balance, customer_id):
-		self.id = id
-		self.balance = balance
-		self.customer_id = customer_id
-</code></pre>
-
-<p>This provides us with the minimal ability to initialise a new BankAccount object, although we&rsquo;ve had to reference <code>id</code>, <code>balance</code>, and <code>customer_id</code> three times in this small piece of code.</p>
-
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">BankAccount</span><span class="p">():</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">balance</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">balance</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">customer_id</span> <span class="o">=</span> <span class="n">customer_id</span>
+</code></pre></div><p>This provides us with the minimal ability to initialise a new BankAccount object, although we&rsquo;ve had to reference <code>id</code>, <code>balance</code>, and <code>customer_id</code> three times in this small piece of code.</p>
 <p>Let&rsquo;s initialise two new objects using our <code>BankAccount</code> class - <code>my_account</code> and <code>your_account</code>. We&rsquo;ll initialise both with the same values, ignoring the fact that they should have different <code>id</code> and <code>customer_id</code> values, then try and compare them to each other.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">my_account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">your_account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_account</span> <span class="o">==</span> <span class="n">your_account</span>
+<span class="bp">False</span>
+</code></pre></div><p>In order to be able to compare our <code>my_account</code> and <code>your_account</code> objects successfully, we&rsquo;d need to add an <code>__eq__</code> method to our class.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">BankAccount</span><span class="p">():</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">balance</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">balance</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">customer_id</span> <span class="o">=</span> <span class="n">customer_id</span>
 
-<pre><code class="language-python">&gt;&gt;&gt; my_account = BankAccount(1, 0, 1)
-&gt;&gt;&gt; your_account = BankAccount(1, 0, 1)
-&gt;&gt;&gt; my_account == your_account
-False
-</code></pre>
+	<span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="ow">is</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span><span class="p">:</span>
+			<span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">balance</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">customer_id</span><span class="p">)</span>
+		<span class="k">return</span> <span class="bp">NotImplemented</span>
+</code></pre></div><p>If we initialise our two objects again and compare them now, we&rsquo;ll get the <code>True</code> response that we&rsquo;re expecting. If we were to initialise the <code>your_account</code> object with an <code>id</code> value of <code>2</code>, and a <code>customer_id</code> value of <code>2</code>, we&rsquo;d get the correct response of <code>False</code> when comparing the two objects.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">my_account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">your_account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_account</span> <span class="o">==</span> <span class="n">your_account</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">your_account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_account</span> <span class="o">==</span> <span class="n">your_account</span>
+<span class="bp">False</span>
+</code></pre></div><p>This all makes sense so far, but it&rsquo;s boilerplate code that we have to write each and every time that we write a new class. Let&rsquo;s take a look at how we&rsquo;d do the same thing with 3.7&rsquo;s data classes.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 
-<p>In order to be able to compare our <code>my_account</code> and <code>your_account</code> objects successfully, we&rsquo;d need to add an <code>__eq__</code> method to our class.</p>
-
-<pre><code class="language-python">class BankAccount():
-	def __init__(self, id, balance, customer_id):
-		self.id = id
-		self.balance = balance
-		self.customer_id = customer_id
-
-	def __eq__(self, other):
-		if self.__class__ is other.__class__:
-			return (self.id, self.balance, self.customer_id) == (other.id, other.balance, other.customer_id)
-		return NotImplemented
-</code></pre>
-
-<p>If we initialise our two objects again and compare them now, we&rsquo;ll get the <code>True</code> response that we&rsquo;re expecting. If we were to initialise the <code>your_account</code> object with an <code>id</code> value of <code>2</code>, and a <code>customer_id</code> value of <code>2</code>, we&rsquo;d get the correct response of <code>False</code> when comparing the two objects.</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; my_account = BankAccount(1, 0, 1)
-&gt;&gt;&gt; your_account = BankAccount(1, 0, 1)
-&gt;&gt;&gt; my_account == your_account
-True
-&gt;&gt;&gt; your_account = BankAccount(2, 0, 2)
-&gt;&gt;&gt; my_account == your_account
-False
-</code></pre>
-
-<p>This all makes sense so far, but it&rsquo;s boilerplate code that we have to write each and every time that we write a new class. Let&rsquo;s take a look at how we&rsquo;d do the same thing with 3.7&rsquo;s data classes.</p>
-
-<pre><code class="language-python">from dataclasses import dataclass
-
-@dataclass
-class DataClassBankAccount():
-	id: int
-	balance: int
-	customer_id: int
-</code></pre>
-
-<p>Data classes generate all of this boilerplate code for us, but they don&rsquo;t stop at just the <code>__init__</code> and <code>__eq__</code> methods - they can also generate <code>__repr__</code>, <code>__ne__</code>, <code>__lt__</code>, <code>__le__</code>, <code>__gt__</code>, and <code>__ge__</code> methods too, if the <code>order</code> parameter is specified as <code>True</code> (this is done at the <code>@dataclass</code> level, i.e. <code>@dataclass(order=True)</code>). Additional methods can be added to the data class as you would for a normal class. The <code>@dataclass</code> decorator inspects a class definition for fields with type annotations (added in <a href="https://www.python.org/dev/peps/pep-0526/">PEP 526</a>). These type annotations are <em>mandatory</em> when creating data classes as fields without type annotations will simply be ignored. We can now initialise and compare our two objects straight away:</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; my_account = DataClassBankAccount(1, 0, 1)
-&gt;&gt;&gt; your_account = DataClassBankAccount(1, 0, 1)
-&gt;&gt;&gt; my_account == your_account
-True
-&gt;&gt;&gt; your_account = DataClassBankAccount(2, 0, 2)
-&gt;&gt;&gt; my_account == your_account
-False
-</code></pre>
-
-<p>As mentioned in <a href="https://www.python.org/dev/peps/pep-0557/">PEP 557</a>, there isn&rsquo;t anything special about these classes. The decorator takes the class and adds generated methods to it, then returns the class it was given. This means adding your own methods to a data class is done in exactly the same way as you would for a regular class.</p>
-
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">DataClassBankAccount</span><span class="p">():</span>
+	<span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+	<span class="n">balance</span><span class="p">:</span> <span class="nb">int</span>
+	<span class="n">customer_id</span><span class="p">:</span> <span class="nb">int</span>
+</code></pre></div><p>Data classes generate all of this boilerplate code for us, but they don&rsquo;t stop at just the <code>__init__</code> and <code>__eq__</code> methods - they can also generate <code>__repr__</code>, <code>__ne__</code>, <code>__lt__</code>, <code>__le__</code>, <code>__gt__</code>, and <code>__ge__</code> methods too, if the <code>order</code> parameter is specified as <code>True</code> (this is done at the <code>@dataclass</code> level, i.e. <code>@dataclass(order=True)</code>). Additional methods can be added to the data class as you would for a normal class. The <code>@dataclass</code> decorator inspects a class definition for fields with type annotations (added in <a href="https://www.python.org/dev/peps/pep-0526/">PEP 526</a>). These type annotations are <em>mandatory</em> when creating data classes as fields without type annotations will simply be ignored. We can now initialise and compare our two objects straight away:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">my_account</span> <span class="o">=</span> <span class="n">DataClassBankAccount</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">your_account</span> <span class="o">=</span> <span class="n">DataClassBankAccount</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_account</span> <span class="o">==</span> <span class="n">your_account</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">your_account</span> <span class="o">=</span> <span class="n">DataClassBankAccount</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_account</span> <span class="o">==</span> <span class="n">your_account</span>
+<span class="bp">False</span>
+</code></pre></div><p>As mentioned in <a href="https://www.python.org/dev/peps/pep-0557/">PEP 557</a>, there isn&rsquo;t anything special about these classes. The decorator takes the class and adds generated methods to it, then returns the class it was given. This means adding your own methods to a data class is done in exactly the same way as you would for a regular class.</p>
 <h2 id="comparing-named-tuples-and-data-classes">Comparing named tuples and data classes</h2>
-
 <p>Let&rsquo;s compare for a moment our bank account data class and an implementation of the bank account using a named tuple.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NamedTuple</span>
 
-<pre><code class="language-python">from typing import NamedTuple
-
-class NamedTupleBankAccount(NamedTuple):
-	id: int
-	balance: int
-	customer_id: int
-</code></pre>
-
-<p>There&rsquo;s no great difference here, other than the fact that our data class was described using a decorator, whilst the named tuple subclasses <code>NamedTuple</code>. There are other similarities too. For instance, with our data class we can create a new object from an existing data class object.</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; from dataclasses import replace
-&gt;&gt;&gt;
-&gt;&gt;&gt; replace(my_account, balance=100)
-BankAccount(id=1, balance=100, customer_id=1)
-</code></pre>
-
-<p>We&rsquo;d do this in a similar way with a named tuple, but the replace method here is proceded by an underscore, indicating that it is a private method of our named tuple bank account object.</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; our_account = NamedTupleBankAccount(3, 0, 3)
-&gt;&gt;&gt;
-&gt;&gt;&gt; our_account._replace(balance=100)
-NamedTupleBankAccount(id=3, balance=100, customer_id=3)
-</code></pre>
-
-<p>Data classes also provide methods for conversion to dictionaries and tuples.</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; from dataclasses import asdict, astuple
-&gt;&gt;&gt;
-&gt;&gt;&gt; asdict(my_account)
-{'id': 1, 'balance': 0, 'customer_id': 1}
-&gt;&gt;&gt;
-&gt;&gt;&gt; astuple(my_account)
-(1, 0, 1)
-</code></pre>
-
-<p>And similarly, the <code>asdict</code> method exists as a private method of our named tuple object, with the key difference being that this returns an <code>OrderedDict</code> rather than a standard dict.</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; our_account._asdict()
-OrderedDict([('id', 3), ('balance', 0), ('customer_id', 3)])
-</code></pre>
-
-<p>You can unpack a named tuple rather simply, but must first wrap a data class object in a call to <code>astuple</code> before it is possible to unpack - this is because data classes don&rsquo;t iterate by default.</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; our_account_id, our_balance, our_customer_id = our_account
-&gt;&gt;&gt; our_account_id
-3
-&gt;&gt;&gt;
-&gt;&gt;&gt; my_account_id, my_balance, my_customer_id = astuple(my_account)
-&gt;&gt;&gt; my_account_id
-1
-</code></pre>
-
-<p>Data classes can&rsquo;t be hashed by default, whereas named tuples can - data classes actually set <code>__hash__</code> to <code>None</code> in order to avoid accidental hashability. Named tuples provide hashability and ordering out of the box, as they are inherited from tuples.</p>
-
+<span class="k">class</span> <span class="nc">NamedTupleBankAccount</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+	<span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+	<span class="n">balance</span><span class="p">:</span> <span class="nb">int</span>
+	<span class="n">customer_id</span><span class="p">:</span> <span class="nb">int</span>
+</code></pre></div><p>There&rsquo;s no great difference here, other than the fact that our data class was described using a decorator, whilst the named tuple subclasses <code>NamedTuple</code>. There are other similarities too. For instance, with our data class we can create a new object from an existing data class object.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">replace</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">replace</span><span class="p">(</span><span class="n">my_account</span><span class="p">,</span> <span class="n">balance</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">BankAccount</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">balance</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">customer_id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div><p>We&rsquo;d do this in a similar way with a named tuple, but the replace method here is proceded by an underscore, indicating that it is a private method of our named tuple bank account object.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">our_account</span> <span class="o">=</span> <span class="n">NamedTupleBankAccount</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">our_account</span><span class="o">.</span><span class="n">_replace</span><span class="p">(</span><span class="n">balance</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">NamedTupleBankAccount</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">balance</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">customer_id</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div><p>Data classes also provide methods for conversion to dictionaries and tuples.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">asdict</span><span class="p">,</span> <span class="n">astuple</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">asdict</span><span class="p">(</span><span class="n">my_account</span><span class="p">)</span>
+<span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;balance&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;customer_id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">astuple</span><span class="p">(</span><span class="n">my_account</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div><p>And similarly, the <code>asdict</code> method exists as a private method of our named tuple object, with the key difference being that this returns an <code>OrderedDict</code> rather than a standard dict.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">our_account</span><span class="o">.</span><span class="n">_asdict</span><span class="p">()</span>
+<span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;balance&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
+</code></pre></div><p>You can unpack a named tuple rather simply, but must first wrap a data class object in a call to <code>astuple</code> before it is possible to unpack - this is because data classes don&rsquo;t iterate by default.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">our_account_id</span><span class="p">,</span> <span class="n">our_balance</span><span class="p">,</span> <span class="n">our_customer_id</span> <span class="o">=</span> <span class="n">our_account</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">our_account_id</span>
+<span class="mi">3</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_account_id</span><span class="p">,</span> <span class="n">my_balance</span><span class="p">,</span> <span class="n">my_customer_id</span> <span class="o">=</span> <span class="n">astuple</span><span class="p">(</span><span class="n">my_account</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_account_id</span>
+<span class="mi">1</span>
+</code></pre></div><p>Data classes can&rsquo;t be hashed by default, whereas named tuples can - data classes actually set <code>__hash__</code> to <code>None</code> in order to avoid accidental hashability. Named tuples provide hashability and ordering out of the box, as they are inherited from tuples.</p>
 <p>Equality methods between the two types are different as well. It&rsquo;s possible to compare two different named tuple objects instantiated from two different named tuple classes which happen to have the same field naming - this is because named tuples lack the <code>if self.__class__ is other.__class__:</code> conditional that data classes provide in their equality methods.</p>
-
 <p>As of Python 3.7 it is slower to access fields of a named tuple than those of a data class, though <a href="https://twitter.com/raymondh">Raymond Hettinger</a> mentions in his PyCon 2018 talk &lsquo;<a href="https://www.youtube.com/watch?v=T-TwcmT6Rcw">Dataclasses: The code generator to end all code generators</a>&rsquo; that this timing will be improved significantly in Python 3.8. You can find the slides for Raymond&rsquo;s PyCon talk <a href="https://twitter.com/raymondh/status/995693882812915712">here</a>.</p>
-
 <p>You shouldn&rsquo;t think of data classes as an improvement upon a named tuple - if that&rsquo;s what fits the structure of your data, then that&rsquo;s what you should use.</p>
-
 <h2 id="additional-data-class-usages">Additional data class usages</h2>
-
 <h3 id="default-values">Default values</h3>
-
 <p>We can set default values for our specified data class fields. Let&rsquo;s take a look at how we&rsquo;d do that with a normal class.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">legs</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">legs</span> <span class="o">=</span> <span class="n">legs</span>
+</code></pre></div><p>When declaring our data class, we declare our default value(s) differently.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+	<span class="nb">type</span><span class="p">:</span> <span class="nb">str</span>
+	<span class="n">legs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
+</code></pre></div><p>The above data class will give the below output when initialising objects.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&#34;dog&#34;</span><span class="p">)</span>
+<span class="n">Animal</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&#34;dog&#34;</span><span class="p">,</span> <span class="n">legs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&#34;ostrich&#34;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">Animal</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&#34;ostrich&#34;</span><span class="p">,</span> <span class="n">legs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div><p>Building upon our original BankAccount class we can take a look at a more advanced default value. Let&rsquo;s say for each bank account object, we want to track who accessed the bank account and when. We&rsquo;ll create a more advanced BankAccount class that features this functionality.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">dataclass</span> <span class="kn">import</span> <span class="n">field</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
-<pre><code class="language-python">class Animal:
-	def __init__(self, type, legs=4):
-		self.type = type
-		self.legs = legs
-</code></pre>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">AdvancedBankAccount</span><span class="p">():</span>
+	<span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+	<span class="n">balance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&#34;currency&#34;</span><span class="p">:</span> <span class="s2">&#34;GBP&#34;</span><span class="p">})</span>
+	<span class="n">customer_id</span><span class="p">:</span> <span class="nb">int</span>
+	<span class="n">accessed_by</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
 
-<p>When declaring our data class, we declare our default value(s) differently.</p>
-
-<pre><code class="language-python">@dataclass
-class Animal:
-	type: str
-	legs: int = 4
-</code></pre>
-
-<p>The above data class will give the below output when initialising objects.</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; Animal(&quot;dog&quot;)
-Animal(type=&quot;dog&quot;, legs=4)
-&gt;&gt;&gt; Animal(&quot;ostrich&quot;, 2)
-Animal(type=&quot;ostrich&quot;, legs=2)
-</code></pre>
-
-<p>Building upon our original BankAccount class we can take a look at a more advanced default value. Let&rsquo;s say for each bank account object, we want to track who accessed the bank account and when. We&rsquo;ll create a more advanced BankAccount class that features this functionality.</p>
-
-<pre><code class="language-python">from dataclass import field
-from datetime import datetime
-
-@dataclass
-class AdvancedBankAccount():
-	id: int
-	balance: int = field(metadata={&quot;currency&quot;: &quot;GBP&quot;})
-	customer_id: int
-	accessed_by: list = field(default_factory=list)
-
-	def access(self, accessor_id):
-		self.accessed_by.append((accessor_id, datetime.now()))
-</code></pre>
-
-<pre><code class="language-python">&gt;&gt;&gt; advanced_account = AdvancedBankAccount(4, 10000, 4)
-&gt;&gt;&gt; advanced_account.access(1)
-&gt;&gt;&gt; advanced_account
-AdvancedBankAccount(id=4, balance=10000, customer_id=4, accessed_by=[(1, datetime.datetime(2018, 7, 8, 19, 30, 40, 783467))])
-</code></pre>
-
-<p>The <code>default_factory</code> is used to provide a mutable default value. Additionally, we&rsquo;ve also passed a metadata parameter which specifies some metadata about the field, in this case the currency of the <code>balance</code>. The dataclass itself won&rsquo;t do anything with this, but you can view it using the <code>fields</code> function.</p>
-
+	<span class="k">def</span> <span class="nf">access</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accessor_id</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">accessed_by</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">accessor_id</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()))</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">advanced_account</span> <span class="o">=</span> <span class="n">AdvancedBankAccount</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">advanced_account</span><span class="o">.</span><span class="n">access</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">advanced_account</span>
+<span class="n">AdvancedBankAccount</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">balance</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">customer_id</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">accessed_by</span><span class="o">=</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">783467</span><span class="p">))])</span>
+</code></pre></div><p>The <code>default_factory</code> is used to provide a mutable default value. Additionally, we&rsquo;ve also passed a metadata parameter which specifies some metadata about the field, in this case the currency of the <code>balance</code>. The dataclass itself won&rsquo;t do anything with this, but you can view it using the <code>fields</code> function.</p>
 <h3 id="field-arguments">Field arguments</h3>
-
 <p>We can pass some additional arguments when creating our data classes.</p>
-
 <p>We can not include a specific field in the output of the class <code>__repr__</code> method.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">field</span>
 
-<pre><code class="language-python">from dataclasses import field
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Animal</span><span class="p">():</span>
+	<span class="nb">type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="nb">repr</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+	<span class="n">legs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
+</code></pre></div><p>And we could also not include a specific field when comparing two objects from the same data class.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">field</span>
 
-@dataclass
-class Animal():
-	type: str = field(repr=False)
-	legs: int = 4
-</code></pre>
-
-<p>And we could also not include a specific field when comparing two objects from the same data class.</p>
-
-<pre><code class="language-python">from dataclasses import field
-
-@dataclass
-class Animal():
-	type: str = field(order=False)
-	legs: int = 4
-</code></pre>
-
-<h3 id="immutable-data-classes">Immutable data classes</h3>
-
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Animal</span><span class="p">():</span>
+	<span class="nb">type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+	<span class="n">legs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
+</code></pre></div><h3 id="immutable-data-classes">Immutable data classes</h3>
 <p>Data classes are mutable by default, but there might be scenarios where we want to maintain the immutability that a named tuple offers us.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">field</span>
 
-<pre><code class="language-python">from dataclasses import field
-
-@dataclass(frozen=True)
-class Animal():
-	type: str
-	legs: int
-</code></pre>
-
-<p>The <code>frozen=True</code> argument that we&rsquo;ve passed to the <code>@dataclass</code> decorator means that we won&rsquo;t be able to assign values to any objects created from this data class after their initialisation.</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; cat = Animal(&quot;cat&quot;, 4)
-&gt;&gt;&gt; cat.legs = 3
-dataclasses.FrozenInstanceError: cannot assign to field 'legs'
-</code></pre>
-
-<h2 id="further-reading">Further reading</h2>
-
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Animal</span><span class="p">():</span>
+	<span class="nb">type</span><span class="p">:</span> <span class="nb">str</span>
+	<span class="n">legs</span><span class="p">:</span> <span class="nb">int</span>
+</code></pre></div><p>The <code>frozen=True</code> argument that we&rsquo;ve passed to the <code>@dataclass</code> decorator means that we won&rsquo;t be able to assign values to any objects created from this data class after their initialisation.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">cat</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&#34;cat&#34;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">cat</span><span class="o">.</span><span class="n">legs</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">dataclasses</span><span class="o">.</span><span class="n">FrozenInstanceError</span><span class="p">:</span> <span class="n">cannot</span> <span class="n">assign</span> <span class="n">to</span> <span class="n">field</span> <span class="s1">&#39;legs&#39;</span>
+</code></pre></div><h2 id="further-reading">Further reading</h2>
 <ul>
 <li><a href="https://www.python.org/dev/peps/pep-0557/">PEP557</a></li>
 <li><a href="https://www.youtube.com/watch?v=T-TwcmT6Rcw">Dataclasses: The code generator to end all code generators</a></li>
@@ -1003,20 +485,12 @@ dataclasses.FrozenInstanceError: cannot assign to field 'legs'
             <description>I&amp;rsquo;ve recently written a small command line utility using Python 3.6 which will produce a CHANGELOG.md file from the commit differences between two different GitLab project branches. I&amp;rsquo;ve released this as an open source Python package and it&amp;rsquo;s available from PyPi here. Not intended to be a direct replacement for writing a manual changelog, the utility should be used as a draft upon which to build.
 This was a small project to trial a few things; Python&amp;rsquo;s type hinting, which was added in PEP484; Facebook Open Source&amp;rsquo;s type checker Pyre; and Black &amp;lsquo;the uncompromising Python code formatter&amp;rsquo;.</description>
             <content type="html"><![CDATA[<p>I&rsquo;ve recently written a small command line utility using Python 3.6 which will produce a <code>CHANGELOG.md</code> file from the commit differences between two different GitLab project branches. I&rsquo;ve released this as an open source Python package and it&rsquo;s available from PyPi <a href="https://pypi.org/project/pip/">here</a>. Not intended to be a direct replacement for writing a manual changelog, the utility should be used as a draft upon which to build.</p>
-
 <p>This was a small project to trial a few things; Python&rsquo;s type hinting, which was added in <a href="https://www.python.org/dev/peps/pep-0484/">PEP484</a>; <a href="https://opensource.fb.com/">Facebook Open Source&rsquo;s</a> type checker <a href="https://pyre-check.org/">Pyre</a>; and <a href="https://github.com/ambv/black">Black</a> &lsquo;the uncompromising Python code formatter&rsquo;.</p>
-
 <p>If you&rsquo;re interested in using this utility, you can install it using <a href="https://pypi.org/project/pip/">pip</a> by running the following command:</p>
-
-<pre><code class="language-bash">$ pip install gitlab-changelog-generator
-</code></pre>
-
-<p>An example command to generate a <code>CHANGELOG.md</code> file from the difference in commits between <code>master</code> and <code>release</code> branches for a locally hosted GitLab repository project named &lsquo;test-project&rsquo;, labelling the version as 1.1.</p>
-
-<pre><code class="language-bash">$ changegen --ip localhost --group test-projects --project test-project --branches master release --version 1.1
-</code></pre>
-
-<p>I&rsquo;ve got some tidying up left to do such as better exception handling and cleaner logging, but the package works in it&rsquo;s current state. You can contribute features or towards existing issues by raising a <a href="https://help.github.com/articles/creating-a-pull-request/">pull request</a> at the project GitHub <a href="https://github.com/stuartmccoll/gitlab-changelog-generator">repository</a>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ pip install gitlab-changelog-generator
+</code></pre></div><p>An example command to generate a <code>CHANGELOG.md</code> file from the difference in commits between <code>master</code> and <code>release</code> branches for a locally hosted GitLab repository project named &lsquo;test-project&rsquo;, labelling the version as 1.1.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ changegen --ip localhost --group test-projects --project test-project --branches master release --version 1.1
+</code></pre></div><p>I&rsquo;ve got some tidying up left to do such as better exception handling and cleaner logging, but the package works in it&rsquo;s current state. You can contribute features or towards existing issues by raising a <a href="https://help.github.com/articles/creating-a-pull-request/">pull request</a> at the project GitHub <a href="https://github.com/stuartmccoll/gitlab-changelog-generator">repository</a>.</p>
 ]]></content>
         </item>
         
@@ -1027,56 +501,37 @@ This was a small project to trial a few things; Python&amp;rsquo;s type hinting,
             
             <guid>/posts/add-a-flask-application-to-a-docker-container/</guid>
             <description>Flask is a microframework for Python, based on Werkzeug and Jinja2. The core Flask framework is extremely lightweight, albeit infinitely extensible, and it&amp;rsquo;s simple for an experienced developer to pick up. I had been using Laravel a lot at the beginning of the year and Flask has been a breeze to work with in comparison. With it&amp;rsquo;s extensibility I haven&amp;rsquo;t been locked into working with pre-defined components either; I&amp;rsquo;ve used different database abstraction layers across multiple projects, such as Redis and PostgreSQL.</description>
-            <content type="html"><![CDATA[
-
-<p><a href="http://flask.pocoo.org/">Flask</a> is a microframework for Python, based on <a href="http://werkzeug.pocoo.org/">Werkzeug</a> and <a href="http://jinja.pocoo.org/docs/2.9/">Jinja2</a>. The core Flask framework is extremely lightweight, albeit infinitely extensible, and it&rsquo;s simple for an experienced developer to pick up. I had been using Laravel a lot at the beginning of the year and Flask has been a breeze to work with in comparison. With it&rsquo;s extensibility I haven&rsquo;t been locked into working with pre-defined components either; I&rsquo;ve used different database abstraction layers across multiple projects, such as <a href="https://redis.io/">Redis</a> and <a href="https://www.postgresql.org/">PostgreSQL</a>.</p>
-
+            <content type="html"><![CDATA[<p><a href="http://flask.pocoo.org/">Flask</a> is a microframework for Python, based on <a href="http://werkzeug.pocoo.org/">Werkzeug</a> and <a href="http://jinja.pocoo.org/docs/2.9/">Jinja2</a>. The core Flask framework is extremely lightweight, albeit infinitely extensible, and it&rsquo;s simple for an experienced developer to pick up. I had been using Laravel a lot at the beginning of the year and Flask has been a breeze to work with in comparison. With it&rsquo;s extensibility I haven&rsquo;t been locked into working with pre-defined components either; I&rsquo;ve used different database abstraction layers across multiple projects, such as <a href="https://redis.io/">Redis</a> and <a href="https://www.postgresql.org/">PostgreSQL</a>.</p>
 <p>We&rsquo;ll need a few things to begin, the first of which is a directory to house our Flask application, which we&rsquo;ll call <strong>flask_docker</strong>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ mkdir flask_docker
+</code></pre></div><p>Within this directory we&rsquo;re going to need to create two different files. Firstly, we&rsquo;ll create our Flask application. For this, I&rsquo;m going to create a simple Flask app that&rsquo;ll return a string of text when the root directory is hit within a web browser.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-<pre><code class="language-bash">$ mkdir flask_docker
-</code></pre>
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">simple</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;Flask running within Docker container&#39;</span>
 
-<p>Within this directory we&rsquo;re going to need to create two different files. Firstly, we&rsquo;ll create our Flask application. For this, I&rsquo;m going to create a simple Flask app that&rsquo;ll return a string of text when the root directory is hit within a web browser.</p>
-
-<pre><code class="language-python">from flask import Flask
-app = Flask(__name__)
-
-@app.route('/')
-def simple():
-    return 'Flask running within Docker container'
-
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
-</code></pre>
-
-<p>With our basic Flask app written, we now want to be able to build our Docker image. We have a few options here, in that we could build from a base image of Ubuntu or something similar, but in this instance I&rsquo;m just going to use the base Python 2.7 Docker image.</p>
-
-<pre><code class="language-docker">FROM python:2.7
-
-RUN pip install flask
-
-ADD . /app
-
-WORKDIR /app
-
-EXPOSE 5000
-
-CMD [&quot;python&quot;, &quot;app.py&quot;]
-</code></pre>
-
-<p>Once our base image has been established, our Dockerfile has a few more commands within it. Firstly, we&rsquo;re installing the Flask pip package (pip is included within the Python 2.7 Docker image that we our basing our own Docker image upon). After this, we copy the contents of the current directory to the &lsquo;/app&rsquo; directory within our Docker container, and then we set that as the current working directory. Following this, we expose port 5000 before lastly running the command that&rsquo;ll run our Flask application.</p>
-
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">)</span>
+</code></pre></div><p>With our basic Flask app written, we now want to be able to build our Docker image. We have a few options here, in that we could build from a base image of Ubuntu or something similar, but in this instance I&rsquo;m just going to use the base Python 2.7 Docker image.</p>
+<div class="highlight"><pre class="chroma"><code class="language-docker" data-lang="docker"><span class="k">FROM</span><span class="s"> python:2.7</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> pip install flask<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">ADD</span> . /app<span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /app</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 5000</span><span class="err">
+</span><span class="err">
+</span><span class="err"></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;python&#34;</span><span class="p">,</span> <span class="s2">&#34;app.py&#34;</span><span class="p">]</span><span class="err">
+</span></code></pre></div><p>Once our base image has been established, our Dockerfile has a few more commands within it. Firstly, we&rsquo;re installing the Flask pip package (pip is included within the Python 2.7 Docker image that we our basing our own Docker image upon). After this, we copy the contents of the current directory to the &lsquo;/app&rsquo; directory within our Docker container, and then we set that as the current working directory. Following this, we expose port 5000 before lastly running the command that&rsquo;ll run our Flask application.</p>
 <h2 id="building-the-docker-image">Building the Docker Image</h2>
-
-<pre><code class="language-bash">$ docker build -t our-flask-app .
-</code></pre>
-
-<p>This command will build the Dockerfile within the current working directory, giving the image a name of &lsquo;our-flask-app&rsquo;.</p>
-
-<pre><code class="language-bash">$ docker run -d -p 5000:5000 our-flask-app
-</code></pre>
-
-<p>Lastly, this command builds our Docker container, which in turn runs our Flask application. The arguments we pass in here run the container in headless mode and map port 5000 on our local machine to port 5000 within our Docker container. Now, if we visit <a href="http://0.0.0.0:5000/">http://0.0.0.0:5000/</a> in a web browser we&rsquo;ll be served the string that our Flask application returns.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ docker build -t our-flask-app .
+</code></pre></div><p>This command will build the Dockerfile within the current working directory, giving the image a name of &lsquo;our-flask-app&rsquo;.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ docker run -d -p 5000:5000 our-flask-app
+</code></pre></div><p>Lastly, this command builds our Docker container, which in turn runs our Flask application. The arguments we pass in here run the container in headless mode and map port 5000 on our local machine to port 5000 within our Docker container. Now, if we visit <a href="http://0.0.0.0:5000/">http://0.0.0.0:5000/</a> in a web browser we&rsquo;ll be served the string that our Flask application returns.</p>
 ]]></content>
         </item>
         
@@ -1088,133 +543,82 @@ CMD [&quot;python&quot;, &quot;app.py&quot;]
             <guid>/posts/quick-and-dirty-kombu/rabbitmq-application/</guid>
             <description>Kombu is an open-source messaging library available for Python which aims to make messaging as simple as possible. Kombu provides a high-level interface for the Advanced Message Queuing Protocol (AMQP), an open standard protocol for message orientation, queuing, routing, reliability, and security. The most popular implementation of AMQP is the RabbitMQ open-source messaging server.
 In the example application we&amp;rsquo;re going to create here, we&amp;rsquo;re going to use Kombu and RabbitMQ in combination to do the following:</description>
-            <content type="html"><![CDATA[
-
-<p><a href="https://github.com/celery/kombu">Kombu</a> is an open-source messaging library available for Python which aims to make messaging as simple as possible. Kombu provides a high-level interface for the <a href="http://amqp.org/">Advanced Message Queuing Protocol</a> (AMQP), an open standard protocol for message orientation, queuing, routing, reliability, and security. The most popular implementation of AMQP is the <a href="http://www.rabbitmq.com/">RabbitMQ</a> open-source messaging server.</p>
-
+            <content type="html"><![CDATA[<p><a href="https://github.com/celery/kombu">Kombu</a> is an open-source messaging library available for Python which aims to make messaging as simple as possible. Kombu provides a high-level interface for the <a href="http://amqp.org/">Advanced Message Queuing Protocol</a> (AMQP), an open standard protocol for message orientation, queuing, routing, reliability, and security. The most popular implementation of AMQP is the <a href="http://www.rabbitmq.com/">RabbitMQ</a> open-source messaging server.</p>
 <p>In the example application we&rsquo;re going to create here, we&rsquo;re going to use Kombu and RabbitMQ in combination to do the following:</p>
-
 <ul>
 <li>Send a message from a Kombu application (in this case a simple Python script).</li>
 <li>Receive the message at an exchange (our RabbitMQ server), which will then place the message on a queue.</li>
 <li>Read from the queue within another Kombu application (in this case, another simple Python script).</li>
 </ul>
-
 <p>The application we&rsquo;re going to create will only feature one queue, one script which will fire a message at the exchange (our producer), and another script that will read from the queue as soon as it finds something on it (our consumer). It&rsquo;s a basic example, but we could build upon and utilise this for any number of uses.</p>
-
 <h2 id="tutorial">Tutorial</h2>
-
 <p>Let&rsquo;s begin with our script that&rsquo;ll consume messages - <code>consumer.py</code>.</p>
-
 <p>In order to send and receive messages, we&rsquo;ll need to fulfil a few prerequisites. Firstly, we need to create a connection to our RabbitMQ server.</p>
-
-<pre><code class="language-python">conn = Connection(&quot;amqp://localhost:5672/&quot;)
-</code></pre>
-
-<p>We&rsquo;ll use this connection in a moment when we instantiate the Consumer class. Next, we&rsquo;ll create our exchange.</p>
-
-<pre><code class="language-python">test_exchange = Exchange(&quot;test_exchange&quot;, type=&quot;direct&quot;)
-</code></pre>
-
-<p>The first parameter passed gives the name of our exchange and the second parameter dictates what type of exchange we&rsquo;re creating. Here, we can pass either direct (matches  if the routing_key attribute and the routing key property of the message are identical), fanout (always matches), and topic (matches the routing key property of the message by a pattern matching scheme). For this small example we&rsquo;re going to create a simple direct exchange.</p>
-
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">conn</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="s2">&#34;amqp://localhost:5672/&#34;</span><span class="p">)</span>
+</code></pre></div><p>We&rsquo;ll use this connection in a moment when we instantiate the Consumer class. Next, we&rsquo;ll create our exchange.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">test_exchange</span> <span class="o">=</span> <span class="n">Exchange</span><span class="p">(</span><span class="s2">&#34;test_exchange&#34;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&#34;direct&#34;</span><span class="p">)</span>
+</code></pre></div><p>The first parameter passed gives the name of our exchange and the second parameter dictates what type of exchange we&rsquo;re creating. Here, we can pass either direct (matches  if the routing_key attribute and the routing key property of the message are identical), fanout (always matches), and topic (matches the routing key property of the message by a pattern matching scheme). For this small example we&rsquo;re going to create a simple direct exchange.</p>
 <p>With a connection and an exchange created, we&rsquo;re now going to create our queue. This is what we&rsquo;ll drop our messages onto before consuming them.</p>
-
-<pre><code class="language-python">queue = Queue(name=&quot;queue&quot;, exchange=test_exchange, routing_key=&quot;test&quot;)
-</code></pre>
-
-<p>To configure our queue, we&rsquo;re simply giving it a name, passing an exchange to it, and a routing key. The routing key will be utilised based on the type of the exchange, as we&rsquo;ve set above.</p>
-
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;queue&#34;</span><span class="p">,</span> <span class="n">exchange</span><span class="o">=</span><span class="n">test_exchange</span><span class="p">,</span> <span class="n">routing_key</span><span class="o">=</span><span class="s2">&#34;test&#34;</span><span class="p">)</span>
+</code></pre></div><p>To configure our queue, we&rsquo;re simply giving it a name, passing an exchange to it, and a routing key. The routing key will be utilised based on the type of the exchange, as we&rsquo;ve set above.</p>
 <p>Lastly, we need to set up our Consumer. A Consumer needs a connection (or channel) and a list of queues to consume from. We&rsquo;re also going to pass it a callback, which is a function which it&rsquo;ll call when it finds an event on our queue.</p>
-
-<pre><code class="language-python">with Consumer(conn, queues=queue, callbacks=[process_message], accept=[&quot;text/plain&quot;]):
-    conn.drain_events()
-</code></pre>
-
-<p>Our Consumer takes our connection variable, our queue, and a callback to a process_message function which we&rsquo;ll create in a moment. We&rsquo;re not passing any kind of timeout only because for this example we want it to consume messages indefinitely to give an idea of how Kombu and RabbitMQ work. I&rsquo;ll expand upon this further in future posts where I&rsquo;ll be looking at putting Kombu to a more functional use.</p>
-
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">with</span> <span class="n">Consumer</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">queues</span><span class="o">=</span><span class="n">queue</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">process_message</span><span class="p">],</span> <span class="n">accept</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;text/plain&#34;</span><span class="p">]):</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">drain_events</span><span class="p">()</span>
+</code></pre></div><p>Our Consumer takes our connection variable, our queue, and a callback to a process_message function which we&rsquo;ll create in a moment. We&rsquo;re not passing any kind of timeout only because for this example we want it to consume messages indefinitely to give an idea of how Kombu and RabbitMQ work. I&rsquo;ll expand upon this further in future posts where I&rsquo;ll be looking at putting Kombu to a more functional use.</p>
 <p>Here&rsquo;s our <code>consumer.py</code> file in full:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">kombu</span> <span class="kn">import</span> <span class="n">Connection</span><span class="p">,</span> <span class="n">Exchange</span><span class="p">,</span> <span class="n">Consumer</span><span class="p">,</span> <span class="n">Queue</span>
+<span class="kn">from</span> <span class="nn">process_message</span> <span class="kn">import</span> <span class="n">process_message</span>
 
-<pre><code class="language-python">from kombu import Connection, Exchange, Consumer, Queue
-from process_message import process_message
+<span class="c1"># Create the connection</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="s2">&#34;amqp://localhost:5672/&#34;</span><span class="p">)</span>
 
-# Create the connection
-conn = Connection(&quot;amqp://localhost:5672/&quot;)
+<span class="c1"># Create the exchange</span>
+<span class="n">test_exchange</span> <span class="o">=</span> <span class="n">Exchange</span><span class="p">(</span><span class="s2">&#34;test_exchange&#34;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&#34;direct&#34;</span><span class="p">)</span>
 
-# Create the exchange
-test_exchange = Exchange(&quot;test_exchange&quot;, type=&quot;direct&quot;)
+<span class="c1"># Create the queue</span>
+<span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;queue&#34;</span><span class="p">,</span> <span class="n">exchange</span><span class="o">=</span><span class="n">test_exchange</span><span class="p">,</span> <span class="n">routing_key</span><span class="o">=</span><span class="s2">&#34;test&#34;</span><span class="p">)</span>
 
-# Create the queue
-queue = Queue(name=&quot;queue&quot;, exchange=test_exchange, routing_key=&quot;test&quot;)
+<span class="c1"># Create the consumer</span>
+<span class="k">with</span> <span class="n">Consumer</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">queues</span><span class="o">=</span><span class="n">queue</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">process_message</span><span class="p">],</span>
+              <span class="n">accept</span><span class="o">=</span><span class="p">[</span><span class="s2">&#34;text/plain&#34;</span><span class="p">]):</span>
+</code></pre></div><p>Now, to create our <code>process_message</code> function. This is going to live in it&rsquo;s own <code>process_message.py</code> file.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">process_message</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s2">&#34;The following message has been received: </span><span class="si">%s</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">body</span>
 
-# Create the consumer
-with Consumer(conn, queues=queue, callbacks=[process_message],
-              accept=[&quot;text/plain&quot;]):
-</code></pre>
-
-<p>Now, to create our <code>process_message</code> function. This is going to live in it&rsquo;s own <code>process_message.py</code> file.</p>
-
-<pre><code class="language-python">def process_message(body, message):
-    print &quot;The following message has been received: %s&quot; % body
-
-    # Acknowledge the message
-    message.ack()
-</code></pre>
-
-<p>This function receives the body and message of our event, prints a statement to the console detailing what has been received, then acknowledges the message. By acknowledging the message we remove it from the queue.</p>
-
+    <span class="c1"># Acknowledge the message</span>
+    <span class="n">message</span><span class="o">.</span><span class="n">ack</span><span class="p">()</span>
+</code></pre></div><p>This function receives the body and message of our event, prints a statement to the console detailing what has been received, then acknowledges the message. By acknowledging the message we remove it from the queue.</p>
 <p>At this stage, we have our queue ready to put messages on, we&rsquo;ve got a consumer that&rsquo;s ready to grab messages off the queue, and we&rsquo;ve also got a function that&rsquo;s going to process the message once we&rsquo;ve taken it from the queue. The only thing left to do is to set up our producer, which is what will drop our messages onto the queue.</p>
-
 <p>A lot of our <code>producer.py</code> file is going to look similar to our <code>consumer.py</code> file.</p>
-
-<pre><code class="language-python">conn = Connection(&quot;amqp://localhost:5672/&quot;)
-</code></pre>
-
-<p>We need to set up our connection as before.</p>
-
-<pre><code class="language-python">channel = conn.channel()
-</code></pre>
-
-<p>Then we create and return a new channel.</p>
-
-<pre><code class="language-python">test_exchange = Exchange(&quot;test_exchange&quot;, type=&quot;direct&quot;)
-</code></pre>
-
-<p>We create our exchange in the same way that we did within our <code>consumer.py</code> file.</p>
-
-<pre><code class="language-python">producer = Producer(exchange=test_exchange, channel=channel, routing_key=&quot;test&quot;)
-</code></pre>
-
-<p>Our instantiation of the Producer class looks similar to the way we instantiated our Consumer class. We pass in our exchange and our channel, and then we also pass in the same routing_key that we gave to our consumer. As we&rsquo;re using a direct exchange, we need to make sure that our messages are going to the same place, which is why we ensure that we pass in the same routing_key to both the producer and the consumer.</p>
-
-<pre><code class="language-python">producer.publish(&quot;Hello World!&quot;)
-</code></pre>
-
-<p>Lastly, we call the publish method and pass through a string as our message. Whenever we run the <code>producer.py</code> script this will send our message to the exchange.</p>
-
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">conn</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="s2">&#34;amqp://localhost:5672/&#34;</span><span class="p">)</span>
+</code></pre></div><p>We need to set up our connection as before.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">channel</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
+</code></pre></div><p>Then we create and return a new channel.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">test_exchange</span> <span class="o">=</span> <span class="n">Exchange</span><span class="p">(</span><span class="s2">&#34;test_exchange&#34;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&#34;direct&#34;</span><span class="p">)</span>
+</code></pre></div><p>We create our exchange in the same way that we did within our <code>consumer.py</code> file.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">producer</span> <span class="o">=</span> <span class="n">Producer</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="n">test_exchange</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="n">channel</span><span class="p">,</span> <span class="n">routing_key</span><span class="o">=</span><span class="s2">&#34;test&#34;</span><span class="p">)</span>
+</code></pre></div><p>Our instantiation of the Producer class looks similar to the way we instantiated our Consumer class. We pass in our exchange and our channel, and then we also pass in the same routing_key that we gave to our consumer. As we&rsquo;re using a direct exchange, we need to make sure that our messages are going to the same place, which is why we ensure that we pass in the same routing_key to both the producer and the consumer.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">producer</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="s2">&#34;Hello World!&#34;</span><span class="p">)</span>
+</code></pre></div><p>Lastly, we call the publish method and pass through a string as our message. Whenever we run the <code>producer.py</code> script this will send our message to the exchange.</p>
 <p>Here&rsquo;s our <code>producer.py</code> in full:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">kombu</span> <span class="kn">import</span> <span class="n">Connection</span><span class="p">,</span> <span class="n">Exchange</span><span class="p">,</span> <span class="n">Producer</span>
 
-<pre><code class="language-python">from kombu import Connection, Exchange, Producer
+<span class="c1"># Create the connection</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">Connection</span><span class="p">(</span><span class="s2">&#34;amqp://localhost:5672/&#34;</span><span class="p">)</span>
 
-# Create the connection
-conn = Connection(&quot;amqp://localhost:5672/&quot;)
+<span class="c1"># Create a new channel</span>
+<span class="n">channel</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
 
-# Create a new channel
-channel = conn.channel()
+<span class="c1"># Create the exchange</span>
+<span class="n">test_exchange</span> <span class="o">=</span> <span class="n">Exchange</span><span class="p">(</span><span class="s2">&#34;test_exchange&#34;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&#34;direct&#34;</span><span class="p">)</span>
 
-# Create the exchange
-test_exchange = Exchange(&quot;test_exchange&quot;, type=&quot;direct&quot;)
+<span class="c1"># Create the producer</span>
+<span class="n">producer</span> <span class="o">=</span> <span class="n">Producer</span><span class="p">(</span><span class="n">exchange</span><span class="o">=</span><span class="n">test_exchange</span><span class="p">,</span> <span class="n">channel</span><span class="o">=</span><span class="n">channel</span><span class="p">,</span>
+                    <span class="n">routing_key</span><span class="o">=</span><span class="s2">&#34;test&#34;</span><span class="p">)</span>
 
-# Create the producer
-producer = Producer(exchange=test_exchange, channel=channel,
-                    routing_key=&quot;test&quot;)
-
-# Publish a message
-producer.publish(&quot;Hello World!&quot;)
-</code></pre>
-
-<p>If we run our <code>consumer.py</code> script now, it&rsquo;ll run indefinitely and wait until it finds something on the queue we&rsquo;ve created. Now, if we run <code>producer.py</code> it&rsquo;ll fire a message at the exchange which will route it onto the queue. The already-running <code>consumer.py</code> will find it on the queue and process it, which removes it from the queue.</p>
-
+<span class="c1"># Publish a message</span>
+<span class="n">producer</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="s2">&#34;Hello World!&#34;</span><span class="p">)</span>
+</code></pre></div><p>If we run our <code>consumer.py</code> script now, it&rsquo;ll run indefinitely and wait until it finds something on the queue we&rsquo;ve created. Now, if we run <code>producer.py</code> it&rsquo;ll fire a message at the exchange which will route it onto the queue. The already-running <code>consumer.py</code> will find it on the queue and process it, which removes it from the queue.</p>
 <p>A simple example that doesn&rsquo;t do anything of use, but I hope it&rsquo;s given you an insight into the way Kombu and RabbitMQ work together.</p>
 ]]></content>
         </item>

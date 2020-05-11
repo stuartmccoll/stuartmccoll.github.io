@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
+<html lang="en-GB">
+
+<head>
+    <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author"
@@ -9,233 +10,147 @@
 <meta name="description"
     content="The aggregator design pattern is a simple way of providing a single, unified service capable of surfacing data from multiple microservices, and a commonly used pattern when implementing a microservice-based architecture.
 Let&amp;rsquo;s imagine that we&amp;rsquo;ve been tasked with developing an internal API for our organisation - a general practice clinic. The API needs to consume data from three existing microservices, each of which is used by other services within the practice&amp;rsquo;s architecture - some services call these individually, some call all three." />
-<meta name="keywords" content="" />
+<meta name="keywords" content="homepage, blog, development, programming" />
 <meta name="robots" content="noodp" />
 <link rel="canonical" href="/posts/microservice-design-patterns-aggregator/" />
-
-
 <title>
-    
-    Microservice Design Patterns: Aggregator :: Stuart McColl  — Software Design and Development
-    
+    Microservice Design Patterns: Aggregator ::  
 </title>
-
-
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
-    type="text/css">
-
-
-
-<link rel="stylesheet" href="/main.min.91687bbfc139d7ff1a244bb6d7324425f9c4f424eaaad242b478e3b3cf56396a.css">
-
-
-
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/main.min.9b276610b5993837f29d9c1e20b9e04db4f387b683b8034a6bf96f7fbfad81dc.css"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
 <link rel="shortcut icon" href="/favicon.ico">
-<meta name="theme-color" content="#252627">
-<meta itemprop="name" content="Microservice Design Patterns: Aggregator">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Microservice Design Patterns: Aggregator">
 <meta itemprop="description" content="Microservice Design Patterns: Aggregator">
-
-
 <meta itemprop="datePublished" content="2019-06-17T10:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-06-17T10:00:00&#43;00:00" />
 <meta itemprop="wordCount" content="319">
+<meta itemprop="image" content="/"/>
 
 
 
-<meta itemprop="keywords" content="microservices,design patterns,software," />
-<meta name="twitter:card" content="summary_large_image"/>
+<meta itemprop="keywords" content="microservices,design patterns,software," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="/"/>
 
 <meta name="twitter:title" content="Microservice Design Patterns: Aggregator"/>
 <meta name="twitter:description" content="Microservice Design Patterns: Aggregator"/>
 
-
-
-
 <meta property="article:published_time" content="2019-06-17 10:00:00 &#43;0000 &#43;0000" />
+</head>
 
-
-
-
-
-<script async defer data-domain="stuartmccoll.co.uk" src="https://plausible.io/js/plausible.js"></script>
-
-    </head>
-
-    <body class="">
-        <div class="container">
-            <header class="header">
-    <span class="header__inner">
-        <a href="/" style="text-decoration: none;">
-    <div class="logo">
-        
-            <span class="logo__mark">></span>
-            <span class="logo__text">cd ~/</span>
-            <span class="logo__cursor"></span>
-        
-    </div>
-</a>
-
-
-        <span class="header__right">
-            
-                <nav class="menu">
-    <ul class="menu__inner"><li><a href="/about">about</a></li><li><a href="/posts">blog</a></li>
-    </ul>
-</nav>
-
-                <span class="menu-trigger">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-                    </svg>
-                </span>
-            
-
-            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
-  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
-  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
-</svg>
-</span>
-        </span>
-    </span>
+<body>
+    <div class="container">
+        <header>
+    <section>
+        <h1 class="site-heading">Stuart McColl</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Blog</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+    </section>
 </header>
 
+<hr />
 
-            <div class="content">
-                
-    <main class="post">
-
-        <div class="post-info">
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>2 minutes
-
+        <div class="content">
             
+<main class="post">
 
-            </p>
-        </div>
+    <article>
+        <header>
+            <h1 class="post-title">Microservice Design Patterns: Aggregator</h1>
+            <p class="post-date">June 17, 2019</p>
+        </header>
 
-        <article>
-            <h1 class="post-title"><a href="/posts/microservice-design-patterns-aggregator/">Microservice Design Patterns: Aggregator</a></h1>
+        <hr class="post-rule" />
 
-            
-
-            <div class="post-content">
-                <p>The aggregator design pattern is a simple way of providing a single, unified service capable of surfacing data from multiple microservices, and a commonly used pattern when implementing a microservice-based architecture.</p>
-
+        <div class="post-content">
+            <p>The aggregator design pattern is a simple way of providing a single, unified service capable of surfacing data from multiple microservices, and a commonly used pattern when implementing a microservice-based architecture.</p>
 <p>Let&rsquo;s imagine that we&rsquo;ve been tasked with developing an internal API for our organisation - a general practice clinic. The API needs to consume data from three existing microservices, each of which is used by other services within the practice&rsquo;s architecture - some services call these individually, some call all three.</p>
-
 <p>The requirements for the API are that it should return simple details for a patient, a list of their allergies and a list of medication that they are currently taking.</p>
-
 <p>Our three existing microservices are as follows:</p>
-
 <ul>
 <li><em>Existing Service #1</em> returns details about a patient - their name, age, etc.</li>
 <li><em>Existing Service #2</em> returns a list of allergies that the patient has.</li>
 <li><em>Existing Service #3</em> returns a list of medication that the patient is currently taking.</li>
 </ul>
-
 <p>Usually, we&rsquo;d expect an aggregator to make synchronous calls to relevant microservices, performing any necessary business logic on each result as it receives it and then packaging this up as an API endpoint for a consumer to use. This meets our requirements whilst opening up potential for re-use and decoupling.</p>
-
 <p>Rather than increasing the number of services which call these microservices directly, we can make use of the aggregator pattern here.</p>
-
-<p><img src="/img/aggregator-architecture.png" alt="Simple component diagram demonstrating an example of the aggregator design pattern" /></p>
-
+<p><img src="/img/aggregator-architecture.png" alt="Simple component diagram demonstrating an example of the aggregator design pattern"></p>
 <p>Our new internal API will call our new aggregator microservice, which will call the three existing microservices before then pushing the necessary results back up to the internal API.</p>
-
 <p>We can re-use our aggregator within other services which call <em>all three</em> existing services, decoupling these from direct interaction with the microservices, which will make it easier to replace one later down the line; if we want to suddenly commission a new allergies microservice, we only have to update the aggregator (and those services which don&rsquo;t call <em>all three</em> existing services).</p>
 
-            </div>
-        </article>
+        </div>
+    </article>
 
+</main>
+
+        </div>
+
+        
         <hr />
-
-        <div class="post-info">
-                <p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="/tags/microservices">microservices</a></span><span class="tag"><a href="/tags/design-patterns">design patterns</a></span><span class="tag"><a href="/tags/software">software</a></span>
-                </p>
-
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>319 Words</p>
-
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-06-17 11:00 &#43;0100</p>
-        </div>
-
-        
-            <div class="pagination">
-                <div class="pagination__title">
-                    <span class="pagination__title-h">Read other posts</span>
-                    <hr />
-                </div>
-
-                <div class="pagination__buttons">
-                    
-                        <span class="button previous">
-                            <a href="/posts/weeknotes-21/06/19/">
-                                <span class="button__icon">←</span>
-                                <span class="button__text">Weeknotes (21/06/19)</span>
-                            </a>
-                        </span>
-                    
-
-                    
-                        <span class="button next">
-                            <a href="/posts/hackthebox-lernaen-write-up/">
-                                <span class="button__text">HackTheBox Lernaen Write-Up</span>
-                                <span class="button__icon">→</span>
-                            </a>
-                        </span>
-                    
-                </div>
-            </div>
-        
-
-        
-    </main>
-
-            </div>
-
+        <footer>
+    
+    
+    
+    <section>
+        <h3>Share this content</h3>
+        <p>
+            <a
+                href="https://twitter.com/intent/tweet?url=https://stuartmccoll.github.io%2fposts%2fmicroservice-design-patterns-aggregator%2f&via=itstuartmccoll&text=I%27m%20reading">
+                Tweet this blog post</a>
+        </p>
+    </section>
+    <hr />
+    
+    
+    
+    <section>
+        <h3>More</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://twitter.com/intent/tweet?text=%40itstuartmccoll%20Hello%2C%20%3Cinsert%20message%20here%3E">
+                    Contact me on Twitter
+                </a>
+            </li>
+            <li>Spotted a bug in the site?
+                <a href="https://github.com/stuartmccoll/stuartmccoll.github.io/issues/new">
+                    Raise an issue on GitHub
+                </a>
+            </li>
+            <li>Get notifications of new posts by
+                <a href="https://stuartmccoll.github.io/index.xml">
+                    subscribing to my RSS feed
+                </a>
+            </li>
+            <li>This static site was generated using
+                <a href="https://github.com/gohugoio/hugo/releases/tag/v0.70.0">
+                    Hugo version 0.70.0
+                </a>
+            </li>
+        </ul>
+    </section>
+    <hr />
+    <section>
+        <h3>Attribution</h3>
+        <p xmlns:dct="http://purl.org/dc/terms/" xmlns:cc="http://creativecommons.org/ns#" class="license-text">
             
-                <footer class="footer">
-    <div class="footer__inner">
-        <div class="footer__content">
-            <span>&copy; 2020</span>
+            This blog post <span rel="dct:title">(Microservice Design Patterns: Aggregator)</span> is licensed under
+            <a href="https://creativecommons.org/licenses/by/4.0">CC BY 4.0</a>. Any code contained within
+            this article may be subject to other licenses.
             
-                <span><a href="/">Stuart McColl</a></span>
-            
-            <span></span>
-            <span> <a href="/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
-        </div>
-    </div>
-    <div class="footer__inner">
-        <div class="footer__content">
-
-        </div>
-    </div>
-    <div class="footer__inner">
-        <div class="footer__content">
-            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
-            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
-        </div>
-    </div>
+        </p>
+    </section>
 </footer>
-
-            
-        </div>
-
         
+    </div>
 
+    
+</body>
 
-
-
-<script type="text/javascript" src="/bundle.min.cf7871ed49474a80ed457154d24e61f7881adbe0f9384951a74ac46b688a39a4dbfa68bc6d37baeb058186de354ead3487d4ee7f083ea4cba860c48600b694f3.js" integrity="sha512-z3hx7UlHSoDtRXFU0k5h94ga2&#43;D5OElRp0rEa2iKOaTb&#43;mi8bTe66wWBht41Tq00h9Tufwg&#43;pMuoYMSGALaU8w=="></script>
-
-
-
-    </body>
 </html>

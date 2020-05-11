@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Stuart McColl</title>
+    <title>Tags on </title>
     <link>/tags/</link>
-    <description>Recent content in Tags on Stuart McColl</description>
+    <description>Recent content in Tags on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 27 Apr 2020 20:00:00 +0000</lastBuildDate>
@@ -93,47 +93,20 @@
     </item>
     
     <item>
+      <title>software</title>
+      <link>/tags/software/</link>
+      <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
+      
+      <guid>/tags/software/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>software development</title>
       <link>/tags/software-development/</link>
       <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
       
       <guid>/tags/software-development/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>agile</title>
-      <link>/tags/agile/</link>
-      <pubDate>Sun, 14 Jul 2019 10:00:00 +0000</pubDate>
-      
-      <guid>/tags/agile/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>digital</title>
-      <link>/tags/digital/</link>
-      <pubDate>Sun, 14 Jul 2019 10:00:00 +0000</pubDate>
-      
-      <guid>/tags/digital/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>weeknotes</title>
-      <link>/tags/weeknotes/</link>
-      <pubDate>Sun, 14 Jul 2019 10:00:00 +0000</pubDate>
-      
-      <guid>/tags/weeknotes/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>impostor syndrome</title>
-      <link>/tags/impostor-syndrome/</link>
-      <pubDate>Wed, 26 Jun 2019 10:00:00 +0000</pubDate>
-      
-      <guid>/tags/impostor-syndrome/</guid>
       <description></description>
     </item>
     
@@ -152,15 +125,6 @@
       <pubDate>Mon, 17 Jun 2019 10:00:00 +0000</pubDate>
       
       <guid>/tags/microservices/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>software</title>
-      <link>/tags/software/</link>
-      <pubDate>Mon, 17 Jun 2019 10:00:00 +0000</pubDate>
-      
-      <guid>/tags/software/</guid>
       <description></description>
     </item>
     

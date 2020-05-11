@@ -1,420 +1,302 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
+<html lang="en-GB">
+
+<head>
+    <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author"
     content="Stuart McColl ">
 <meta name="description"
-    content="PEP 557 in the recently-released [Python 3.7]() added data classes to the standard Python library. Data classes can be thought of as mutable data holders and are somewhat similar to named tuples, although named tuples are immutable.
+    content="PEP 557 in the recently-released Python 3.7 added data classes to the standard Python library. Data classes can be thought of as mutable data holders and are somewhat similar to named tuples, although named tuples are immutable.
 Data classes provide a lot of boilerplate code, saving time and effort on the part of the Python programmer, although it could be argued that this layer of abstraction makes debugging more difficult." />
-<meta name="keywords" content="" />
+<meta name="keywords" content="homepage, blog, development, programming" />
 <meta name="robots" content="noodp" />
 <link rel="canonical" href="/posts/python-3.7-data-classes/" />
-
-
 <title>
-    
-    Python 3.7 Data Classes :: Stuart McColl  — Software Design and Development
-    
+    Python 3.7 Data Classes ::  
 </title>
-
-
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
-    type="text/css">
-
-
-
-<link rel="stylesheet" href="/main.min.91687bbfc139d7ff1a244bb6d7324425f9c4f424eaaad242b478e3b3cf56396a.css">
-
-
-
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/main.min.9b276610b5993837f29d9c1e20b9e04db4f387b683b8034a6bf96f7fbfad81dc.css"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
 <link rel="shortcut icon" href="/favicon.ico">
-<meta name="theme-color" content="#252627">
-<meta itemprop="name" content="Python 3.7 Data Classes">
+<meta name="theme-color" content="#252627"><meta itemprop="name" content="Python 3.7 Data Classes">
 <meta itemprop="description" content="Python 3.7 Data Classes">
-
-
 <meta itemprop="datePublished" content="2018-07-08T19:50:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-07-08T19:50:00&#43;00:00" />
 <meta itemprop="wordCount" content="1419">
+<meta itemprop="image" content="/"/>
 
 
 
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary_large_image"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="/"/>
 
 <meta name="twitter:title" content="Python 3.7 Data Classes"/>
 <meta name="twitter:description" content="Python 3.7 Data Classes"/>
 
-
-
-
 <meta property="article:published_time" content="2018-07-08 19:50:00 &#43;0000 &#43;0000" />
+</head>
 
-
-
-
-
-<script async defer data-domain="stuartmccoll.co.uk" src="https://plausible.io/js/plausible.js"></script>
-
-    </head>
-
-    <body class="">
-        <div class="container">
-            <header class="header">
-    <span class="header__inner">
-        <a href="/" style="text-decoration: none;">
-    <div class="logo">
-        
-            <span class="logo__mark">></span>
-            <span class="logo__text">cd ~/</span>
-            <span class="logo__cursor"></span>
-        
-    </div>
-</a>
-
-
-        <span class="header__right">
-            
-                <nav class="menu">
-    <ul class="menu__inner"><li><a href="/about">about</a></li><li><a href="/posts">blog</a></li>
-    </ul>
-</nav>
-
-                <span class="menu-trigger">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-                    </svg>
-                </span>
-            
-
-            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
-  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
-  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
-</svg>
-</span>
-        </span>
-    </span>
+<body>
+    <div class="container">
+        <header>
+    <section>
+        <h1 class="site-heading">Stuart McColl</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Blog</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+    </section>
 </header>
 
+<hr />
 
-            <div class="content">
-                
-    <main class="post">
-
-        <div class="post-info">
+        <div class="content">
             
-            </p>
-        </div>
+<main class="post">
 
-        <article>
-            <h2 class="post-title"><a href="/posts/python-3.7-data-classes/">Python 3.7 Data Classes</a></h2>
+    <article>
+        <header>
+            <h1 class="post-title">Python 3.7 Data Classes</h1>
+            <p class="post-date">July 8, 8080</p>
+        </header>
 
-            
+        <hr class="post-rule" />
 
-            <div class="post-content">
-                
-
-<p><a href="https://www.python.org/dev/peps/pep-0557/">PEP 557</a> in the recently-released [Python 3.7]() added data classes to the standard Python library. Data classes can be thought of as mutable data holders and are somewhat similar to <a href="https://docs.python.org/2/library/collections.html#collections.namedtuple">named tuples</a>, although named tuples are immutable.</p>
-
+        <div class="post-content">
+            <p><a href="https://www.python.org/dev/peps/pep-0557/">PEP 557</a> in the recently-released <a href="">Python 3.7</a> added data classes to the standard Python library. Data classes can be thought of as mutable data holders and are somewhat similar to <a href="https://docs.python.org/2/library/collections.html#collections.namedtuple">named tuples</a>, although named tuples are immutable.</p>
 <p>Data classes provide a lot of boilerplate code, saving time and effort on the part of the Python programmer, although it could be argued that this layer of abstraction makes debugging more difficult.</p>
-
 <h2 id="comparing-regular-classes-and-data-classes">Comparing regular classes and data classes</h2>
-
 <p>Consider the following class:</p>
-
-<pre><code class="language-python">class BankAccount():
-	def __init__(self, id, balance, customer_id):
-		self.id = id
-		self.balance = balance
-		self.customer_id = customer_id
-</code></pre>
-
-<p>This provides us with the minimal ability to initialise a new BankAccount object, although we&rsquo;ve had to reference <code>id</code>, <code>balance</code>, and <code>customer_id</code> three times in this small piece of code.</p>
-
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">BankAccount</span><span class="p">():</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">balance</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">balance</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">customer_id</span> <span class="o">=</span> <span class="n">customer_id</span>
+</code></pre></div><p>This provides us with the minimal ability to initialise a new BankAccount object, although we&rsquo;ve had to reference <code>id</code>, <code>balance</code>, and <code>customer_id</code> three times in this small piece of code.</p>
 <p>Let&rsquo;s initialise two new objects using our <code>BankAccount</code> class - <code>my_account</code> and <code>your_account</code>. We&rsquo;ll initialise both with the same values, ignoring the fact that they should have different <code>id</code> and <code>customer_id</code> values, then try and compare them to each other.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">my_account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">your_account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_account</span> <span class="o">==</span> <span class="n">your_account</span>
+<span class="bp">False</span>
+</code></pre></div><p>In order to be able to compare our <code>my_account</code> and <code>your_account</code> objects successfully, we&rsquo;d need to add an <code>__eq__</code> method to our class.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">BankAccount</span><span class="p">():</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">balance</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">balance</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">customer_id</span> <span class="o">=</span> <span class="n">customer_id</span>
 
-<pre><code class="language-python">&gt;&gt;&gt; my_account = BankAccount(1, 0, 1)
-&gt;&gt;&gt; your_account = BankAccount(1, 0, 1)
-&gt;&gt;&gt; my_account == your_account
-False
-</code></pre>
+	<span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="ow">is</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span><span class="p">:</span>
+			<span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">balance</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">customer_id</span><span class="p">)</span>
+		<span class="k">return</span> <span class="bp">NotImplemented</span>
+</code></pre></div><p>If we initialise our two objects again and compare them now, we&rsquo;ll get the <code>True</code> response that we&rsquo;re expecting. If we were to initialise the <code>your_account</code> object with an <code>id</code> value of <code>2</code>, and a <code>customer_id</code> value of <code>2</code>, we&rsquo;d get the correct response of <code>False</code> when comparing the two objects.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">my_account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">your_account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_account</span> <span class="o">==</span> <span class="n">your_account</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">your_account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_account</span> <span class="o">==</span> <span class="n">your_account</span>
+<span class="bp">False</span>
+</code></pre></div><p>This all makes sense so far, but it&rsquo;s boilerplate code that we have to write each and every time that we write a new class. Let&rsquo;s take a look at how we&rsquo;d do the same thing with 3.7&rsquo;s data classes.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 
-<p>In order to be able to compare our <code>my_account</code> and <code>your_account</code> objects successfully, we&rsquo;d need to add an <code>__eq__</code> method to our class.</p>
-
-<pre><code class="language-python">class BankAccount():
-	def __init__(self, id, balance, customer_id):
-		self.id = id
-		self.balance = balance
-		self.customer_id = customer_id
-
-	def __eq__(self, other):
-		if self.__class__ is other.__class__:
-			return (self.id, self.balance, self.customer_id) == (other.id, other.balance, other.customer_id)
-		return NotImplemented
-</code></pre>
-
-<p>If we initialise our two objects again and compare them now, we&rsquo;ll get the <code>True</code> response that we&rsquo;re expecting. If we were to initialise the <code>your_account</code> object with an <code>id</code> value of <code>2</code>, and a <code>customer_id</code> value of <code>2</code>, we&rsquo;d get the correct response of <code>False</code> when comparing the two objects.</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; my_account = BankAccount(1, 0, 1)
-&gt;&gt;&gt; your_account = BankAccount(1, 0, 1)
-&gt;&gt;&gt; my_account == your_account
-True
-&gt;&gt;&gt; your_account = BankAccount(2, 0, 2)
-&gt;&gt;&gt; my_account == your_account
-False
-</code></pre>
-
-<p>This all makes sense so far, but it&rsquo;s boilerplate code that we have to write each and every time that we write a new class. Let&rsquo;s take a look at how we&rsquo;d do the same thing with 3.7&rsquo;s data classes.</p>
-
-<pre><code class="language-python">from dataclasses import dataclass
-
-@dataclass
-class DataClassBankAccount():
-	id: int
-	balance: int
-	customer_id: int
-</code></pre>
-
-<p>Data classes generate all of this boilerplate code for us, but they don&rsquo;t stop at just the <code>__init__</code> and <code>__eq__</code> methods - they can also generate <code>__repr__</code>, <code>__ne__</code>, <code>__lt__</code>, <code>__le__</code>, <code>__gt__</code>, and <code>__ge__</code> methods too, if the <code>order</code> parameter is specified as <code>True</code> (this is done at the <code>@dataclass</code> level, i.e. <code>@dataclass(order=True)</code>). Additional methods can be added to the data class as you would for a normal class. The <code>@dataclass</code> decorator inspects a class definition for fields with type annotations (added in <a href="https://www.python.org/dev/peps/pep-0526/">PEP 526</a>). These type annotations are <em>mandatory</em> when creating data classes as fields without type annotations will simply be ignored. We can now initialise and compare our two objects straight away:</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; my_account = DataClassBankAccount(1, 0, 1)
-&gt;&gt;&gt; your_account = DataClassBankAccount(1, 0, 1)
-&gt;&gt;&gt; my_account == your_account
-True
-&gt;&gt;&gt; your_account = DataClassBankAccount(2, 0, 2)
-&gt;&gt;&gt; my_account == your_account
-False
-</code></pre>
-
-<p>As mentioned in <a href="https://www.python.org/dev/peps/pep-0557/">PEP 557</a>, there isn&rsquo;t anything special about these classes. The decorator takes the class and adds generated methods to it, then returns the class it was given. This means adding your own methods to a data class is done in exactly the same way as you would for a regular class.</p>
-
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">DataClassBankAccount</span><span class="p">():</span>
+	<span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+	<span class="n">balance</span><span class="p">:</span> <span class="nb">int</span>
+	<span class="n">customer_id</span><span class="p">:</span> <span class="nb">int</span>
+</code></pre></div><p>Data classes generate all of this boilerplate code for us, but they don&rsquo;t stop at just the <code>__init__</code> and <code>__eq__</code> methods - they can also generate <code>__repr__</code>, <code>__ne__</code>, <code>__lt__</code>, <code>__le__</code>, <code>__gt__</code>, and <code>__ge__</code> methods too, if the <code>order</code> parameter is specified as <code>True</code> (this is done at the <code>@dataclass</code> level, i.e. <code>@dataclass(order=True)</code>). Additional methods can be added to the data class as you would for a normal class. The <code>@dataclass</code> decorator inspects a class definition for fields with type annotations (added in <a href="https://www.python.org/dev/peps/pep-0526/">PEP 526</a>). These type annotations are <em>mandatory</em> when creating data classes as fields without type annotations will simply be ignored. We can now initialise and compare our two objects straight away:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">my_account</span> <span class="o">=</span> <span class="n">DataClassBankAccount</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">your_account</span> <span class="o">=</span> <span class="n">DataClassBankAccount</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_account</span> <span class="o">==</span> <span class="n">your_account</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">your_account</span> <span class="o">=</span> <span class="n">DataClassBankAccount</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_account</span> <span class="o">==</span> <span class="n">your_account</span>
+<span class="bp">False</span>
+</code></pre></div><p>As mentioned in <a href="https://www.python.org/dev/peps/pep-0557/">PEP 557</a>, there isn&rsquo;t anything special about these classes. The decorator takes the class and adds generated methods to it, then returns the class it was given. This means adding your own methods to a data class is done in exactly the same way as you would for a regular class.</p>
 <h2 id="comparing-named-tuples-and-data-classes">Comparing named tuples and data classes</h2>
-
 <p>Let&rsquo;s compare for a moment our bank account data class and an implementation of the bank account using a named tuple.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NamedTuple</span>
 
-<pre><code class="language-python">from typing import NamedTuple
-
-class NamedTupleBankAccount(NamedTuple):
-	id: int
-	balance: int
-	customer_id: int
-</code></pre>
-
-<p>There&rsquo;s no great difference here, other than the fact that our data class was described using a decorator, whilst the named tuple subclasses <code>NamedTuple</code>. There are other similarities too. For instance, with our data class we can create a new object from an existing data class object.</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; from dataclasses import replace
-&gt;&gt;&gt;
-&gt;&gt;&gt; replace(my_account, balance=100)
-BankAccount(id=1, balance=100, customer_id=1)
-</code></pre>
-
-<p>We&rsquo;d do this in a similar way with a named tuple, but the replace method here is proceded by an underscore, indicating that it is a private method of our named tuple bank account object.</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; our_account = NamedTupleBankAccount(3, 0, 3)
-&gt;&gt;&gt;
-&gt;&gt;&gt; our_account._replace(balance=100)
-NamedTupleBankAccount(id=3, balance=100, customer_id=3)
-</code></pre>
-
-<p>Data classes also provide methods for conversion to dictionaries and tuples.</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; from dataclasses import asdict, astuple
-&gt;&gt;&gt;
-&gt;&gt;&gt; asdict(my_account)
-{'id': 1, 'balance': 0, 'customer_id': 1}
-&gt;&gt;&gt;
-&gt;&gt;&gt; astuple(my_account)
-(1, 0, 1)
-</code></pre>
-
-<p>And similarly, the <code>asdict</code> method exists as a private method of our named tuple object, with the key difference being that this returns an <code>OrderedDict</code> rather than a standard dict.</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; our_account._asdict()
-OrderedDict([('id', 3), ('balance', 0), ('customer_id', 3)])
-</code></pre>
-
-<p>You can unpack a named tuple rather simply, but must first wrap a data class object in a call to <code>astuple</code> before it is possible to unpack - this is because data classes don&rsquo;t iterate by default.</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; our_account_id, our_balance, our_customer_id = our_account
-&gt;&gt;&gt; our_account_id
-3
-&gt;&gt;&gt;
-&gt;&gt;&gt; my_account_id, my_balance, my_customer_id = astuple(my_account)
-&gt;&gt;&gt; my_account_id
-1
-</code></pre>
-
-<p>Data classes can&rsquo;t be hashed by default, whereas named tuples can - data classes actually set <code>__hash__</code> to <code>None</code> in order to avoid accidental hashability. Named tuples provide hashability and ordering out of the box, as they are inherited from tuples.</p>
-
+<span class="k">class</span> <span class="nc">NamedTupleBankAccount</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+	<span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+	<span class="n">balance</span><span class="p">:</span> <span class="nb">int</span>
+	<span class="n">customer_id</span><span class="p">:</span> <span class="nb">int</span>
+</code></pre></div><p>There&rsquo;s no great difference here, other than the fact that our data class was described using a decorator, whilst the named tuple subclasses <code>NamedTuple</code>. There are other similarities too. For instance, with our data class we can create a new object from an existing data class object.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">replace</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">replace</span><span class="p">(</span><span class="n">my_account</span><span class="p">,</span> <span class="n">balance</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">BankAccount</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">balance</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">customer_id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div><p>We&rsquo;d do this in a similar way with a named tuple, but the replace method here is proceded by an underscore, indicating that it is a private method of our named tuple bank account object.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">our_account</span> <span class="o">=</span> <span class="n">NamedTupleBankAccount</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">our_account</span><span class="o">.</span><span class="n">_replace</span><span class="p">(</span><span class="n">balance</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">NamedTupleBankAccount</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">balance</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">customer_id</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div><p>Data classes also provide methods for conversion to dictionaries and tuples.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">asdict</span><span class="p">,</span> <span class="n">astuple</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">asdict</span><span class="p">(</span><span class="n">my_account</span><span class="p">)</span>
+<span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;balance&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;customer_id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">astuple</span><span class="p">(</span><span class="n">my_account</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div><p>And similarly, the <code>asdict</code> method exists as a private method of our named tuple object, with the key difference being that this returns an <code>OrderedDict</code> rather than a standard dict.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">our_account</span><span class="o">.</span><span class="n">_asdict</span><span class="p">()</span>
+<span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;balance&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
+</code></pre></div><p>You can unpack a named tuple rather simply, but must first wrap a data class object in a call to <code>astuple</code> before it is possible to unpack - this is because data classes don&rsquo;t iterate by default.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">our_account_id</span><span class="p">,</span> <span class="n">our_balance</span><span class="p">,</span> <span class="n">our_customer_id</span> <span class="o">=</span> <span class="n">our_account</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">our_account_id</span>
+<span class="mi">3</span>
+<span class="o">&gt;&gt;&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_account_id</span><span class="p">,</span> <span class="n">my_balance</span><span class="p">,</span> <span class="n">my_customer_id</span> <span class="o">=</span> <span class="n">astuple</span><span class="p">(</span><span class="n">my_account</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">my_account_id</span>
+<span class="mi">1</span>
+</code></pre></div><p>Data classes can&rsquo;t be hashed by default, whereas named tuples can - data classes actually set <code>__hash__</code> to <code>None</code> in order to avoid accidental hashability. Named tuples provide hashability and ordering out of the box, as they are inherited from tuples.</p>
 <p>Equality methods between the two types are different as well. It&rsquo;s possible to compare two different named tuple objects instantiated from two different named tuple classes which happen to have the same field naming - this is because named tuples lack the <code>if self.__class__ is other.__class__:</code> conditional that data classes provide in their equality methods.</p>
-
 <p>As of Python 3.7 it is slower to access fields of a named tuple than those of a data class, though <a href="https://twitter.com/raymondh">Raymond Hettinger</a> mentions in his PyCon 2018 talk &lsquo;<a href="https://www.youtube.com/watch?v=T-TwcmT6Rcw">Dataclasses: The code generator to end all code generators</a>&rsquo; that this timing will be improved significantly in Python 3.8. You can find the slides for Raymond&rsquo;s PyCon talk <a href="https://twitter.com/raymondh/status/995693882812915712">here</a>.</p>
-
 <p>You shouldn&rsquo;t think of data classes as an improvement upon a named tuple - if that&rsquo;s what fits the structure of your data, then that&rsquo;s what you should use.</p>
-
 <h2 id="additional-data-class-usages">Additional data class usages</h2>
-
 <h3 id="default-values">Default values</h3>
-
 <p>We can set default values for our specified data class fields. Let&rsquo;s take a look at how we&rsquo;d do that with a normal class.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">legs</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">legs</span> <span class="o">=</span> <span class="n">legs</span>
+</code></pre></div><p>When declaring our data class, we declare our default value(s) differently.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+	<span class="nb">type</span><span class="p">:</span> <span class="nb">str</span>
+	<span class="n">legs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
+</code></pre></div><p>The above data class will give the below output when initialising objects.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&#34;dog&#34;</span><span class="p">)</span>
+<span class="n">Animal</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&#34;dog&#34;</span><span class="p">,</span> <span class="n">legs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&#34;ostrich&#34;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">Animal</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&#34;ostrich&#34;</span><span class="p">,</span> <span class="n">legs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div><p>Building upon our original BankAccount class we can take a look at a more advanced default value. Let&rsquo;s say for each bank account object, we want to track who accessed the bank account and when. We&rsquo;ll create a more advanced BankAccount class that features this functionality.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">dataclass</span> <span class="kn">import</span> <span class="n">field</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
-<pre><code class="language-python">class Animal:
-	def __init__(self, type, legs=4):
-		self.type = type
-		self.legs = legs
-</code></pre>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">AdvancedBankAccount</span><span class="p">():</span>
+	<span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+	<span class="n">balance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&#34;currency&#34;</span><span class="p">:</span> <span class="s2">&#34;GBP&#34;</span><span class="p">})</span>
+	<span class="n">customer_id</span><span class="p">:</span> <span class="nb">int</span>
+	<span class="n">accessed_by</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
 
-<p>When declaring our data class, we declare our default value(s) differently.</p>
-
-<pre><code class="language-python">@dataclass
-class Animal:
-	type: str
-	legs: int = 4
-</code></pre>
-
-<p>The above data class will give the below output when initialising objects.</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; Animal(&quot;dog&quot;)
-Animal(type=&quot;dog&quot;, legs=4)
-&gt;&gt;&gt; Animal(&quot;ostrich&quot;, 2)
-Animal(type=&quot;ostrich&quot;, legs=2)
-</code></pre>
-
-<p>Building upon our original BankAccount class we can take a look at a more advanced default value. Let&rsquo;s say for each bank account object, we want to track who accessed the bank account and when. We&rsquo;ll create a more advanced BankAccount class that features this functionality.</p>
-
-<pre><code class="language-python">from dataclass import field
-from datetime import datetime
-
-@dataclass
-class AdvancedBankAccount():
-	id: int
-	balance: int = field(metadata={&quot;currency&quot;: &quot;GBP&quot;})
-	customer_id: int
-	accessed_by: list = field(default_factory=list)
-
-	def access(self, accessor_id):
-		self.accessed_by.append((accessor_id, datetime.now()))
-</code></pre>
-
-<pre><code class="language-python">&gt;&gt;&gt; advanced_account = AdvancedBankAccount(4, 10000, 4)
-&gt;&gt;&gt; advanced_account.access(1)
-&gt;&gt;&gt; advanced_account
-AdvancedBankAccount(id=4, balance=10000, customer_id=4, accessed_by=[(1, datetime.datetime(2018, 7, 8, 19, 30, 40, 783467))])
-</code></pre>
-
-<p>The <code>default_factory</code> is used to provide a mutable default value. Additionally, we&rsquo;ve also passed a metadata parameter which specifies some metadata about the field, in this case the currency of the <code>balance</code>. The dataclass itself won&rsquo;t do anything with this, but you can view it using the <code>fields</code> function.</p>
-
+	<span class="k">def</span> <span class="nf">access</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accessor_id</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">accessed_by</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">accessor_id</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()))</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">advanced_account</span> <span class="o">=</span> <span class="n">AdvancedBankAccount</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">advanced_account</span><span class="o">.</span><span class="n">access</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">advanced_account</span>
+<span class="n">AdvancedBankAccount</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">balance</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">customer_id</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">accessed_by</span><span class="o">=</span><span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">783467</span><span class="p">))])</span>
+</code></pre></div><p>The <code>default_factory</code> is used to provide a mutable default value. Additionally, we&rsquo;ve also passed a metadata parameter which specifies some metadata about the field, in this case the currency of the <code>balance</code>. The dataclass itself won&rsquo;t do anything with this, but you can view it using the <code>fields</code> function.</p>
 <h3 id="field-arguments">Field arguments</h3>
-
 <p>We can pass some additional arguments when creating our data classes.</p>
-
 <p>We can not include a specific field in the output of the class <code>__repr__</code> method.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">field</span>
 
-<pre><code class="language-python">from dataclasses import field
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Animal</span><span class="p">():</span>
+	<span class="nb">type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="nb">repr</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+	<span class="n">legs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
+</code></pre></div><p>And we could also not include a specific field when comparing two objects from the same data class.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">field</span>
 
-@dataclass
-class Animal():
-	type: str = field(repr=False)
-	legs: int = 4
-</code></pre>
-
-<p>And we could also not include a specific field when comparing two objects from the same data class.</p>
-
-<pre><code class="language-python">from dataclasses import field
-
-@dataclass
-class Animal():
-	type: str = field(order=False)
-	legs: int = 4
-</code></pre>
-
-<h3 id="immutable-data-classes">Immutable data classes</h3>
-
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Animal</span><span class="p">():</span>
+	<span class="nb">type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+	<span class="n">legs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
+</code></pre></div><h3 id="immutable-data-classes">Immutable data classes</h3>
 <p>Data classes are mutable by default, but there might be scenarios where we want to maintain the immutability that a named tuple offers us.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">field</span>
 
-<pre><code class="language-python">from dataclasses import field
-
-@dataclass(frozen=True)
-class Animal():
-	type: str
-	legs: int
-</code></pre>
-
-<p>The <code>frozen=True</code> argument that we&rsquo;ve passed to the <code>@dataclass</code> decorator means that we won&rsquo;t be able to assign values to any objects created from this data class after their initialisation.</p>
-
-<pre><code class="language-python">&gt;&gt;&gt; cat = Animal(&quot;cat&quot;, 4)
-&gt;&gt;&gt; cat.legs = 3
-dataclasses.FrozenInstanceError: cannot assign to field 'legs'
-</code></pre>
-
-<h2 id="further-reading">Further reading</h2>
-
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Animal</span><span class="p">():</span>
+	<span class="nb">type</span><span class="p">:</span> <span class="nb">str</span>
+	<span class="n">legs</span><span class="p">:</span> <span class="nb">int</span>
+</code></pre></div><p>The <code>frozen=True</code> argument that we&rsquo;ve passed to the <code>@dataclass</code> decorator means that we won&rsquo;t be able to assign values to any objects created from this data class after their initialisation.</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">cat</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&#34;cat&#34;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">cat</span><span class="o">.</span><span class="n">legs</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">dataclasses</span><span class="o">.</span><span class="n">FrozenInstanceError</span><span class="p">:</span> <span class="n">cannot</span> <span class="n">assign</span> <span class="n">to</span> <span class="n">field</span> <span class="s1">&#39;legs&#39;</span>
+</code></pre></div><h2 id="further-reading">Further reading</h2>
 <ul>
 <li><a href="https://www.python.org/dev/peps/pep-0557/">PEP557</a></li>
 <li><a href="https://www.youtube.com/watch?v=T-TwcmT6Rcw">Dataclasses: The code generator to end all code generators</a></li>
 </ul>
 
-            </div>
-        </article>
+        </div>
+    </article>
 
+</main>
+
+        </div>
+
+        
         <hr />
-
-        <div class="post-info">
-  			</div>
-
-        
-    </main>
-
-            </div>
-
+        <footer>
+    
+    
+    
+    <section>
+        <h3>Share this content</h3>
+        <p>
+            <a
+                href="https://twitter.com/intent/tweet?url=https://stuartmccoll.github.io%2fposts%2fpython-3.7-data-classes%2f&via=itstuartmccoll&text=I%27m%20reading">
+                Tweet this blog post</a>
+        </p>
+    </section>
+    <hr />
+    
+    
+    
+    <section>
+        <h3>More</h3>
+        <ul>
+            <li>
+                <a
+                    href="https://twitter.com/intent/tweet?text=%40itstuartmccoll%20Hello%2C%20%3Cinsert%20message%20here%3E">
+                    Contact me on Twitter
+                </a>
+            </li>
+            <li>Spotted a bug in the site?
+                <a href="https://github.com/stuartmccoll/stuartmccoll.github.io/issues/new">
+                    Raise an issue on GitHub
+                </a>
+            </li>
+            <li>Get notifications of new posts by
+                <a href="https://stuartmccoll.github.io/index.xml">
+                    subscribing to my RSS feed
+                </a>
+            </li>
+            <li>This static site was generated using
+                <a href="https://github.com/gohugoio/hugo/releases/tag/v0.70.0">
+                    Hugo version 0.70.0
+                </a>
+            </li>
+        </ul>
+    </section>
+    <hr />
+    <section>
+        <h3>Attribution</h3>
+        <p xmlns:dct="http://purl.org/dc/terms/" xmlns:cc="http://creativecommons.org/ns#" class="license-text">
             
-                <footer class="footer">
-    <div class="footer__inner">
-        <div class="footer__content">
-            <span>&copy; 2020</span>
+            This blog post <span rel="dct:title">(Python 3.7 Data Classes)</span> is licensed under
+            <a href="https://creativecommons.org/licenses/by/4.0">CC BY 4.0</a>. Any code contained within
+            this article may be subject to other licenses.
             
-                <span><a href="/">Stuart McColl</a></span>
-            
-            <span></span>
-            <span> <a href="/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
-        </div>
-    </div>
-    <div class="footer__inner">
-        <div class="footer__content">
-
-        </div>
-    </div>
-    <div class="footer__inner">
-        <div class="footer__content">
-            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
-            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
-        </div>
-    </div>
+        </p>
+    </section>
 </footer>
-
-            
-        </div>
-
         
+    </div>
 
+    
+</body>
 
-
-
-<script type="text/javascript" src="/bundle.min.cf7871ed49474a80ed457154d24e61f7881adbe0f9384951a74ac46b688a39a4dbfa68bc6d37baeb058186de354ead3487d4ee7f083ea4cba860c48600b694f3.js" integrity="sha512-z3hx7UlHSoDtRXFU0k5h94ga2&#43;D5OElRp0rEa2iKOaTb&#43;mi8bTe66wWBht41Tq00h9Tufwg&#43;pMuoYMSGALaU8w=="></script>
-
-
-
-    </body>
 </html>
