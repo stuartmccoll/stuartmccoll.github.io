@@ -5,8 +5,37 @@
         <description>Recent content in Posts on </description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
-        <lastBuildDate>Sat, 02 May 2020 10:50:44 +0100</lastBuildDate>
+        <lastBuildDate>Fri, 15 May 2020 20:01:32 +0100</lastBuildDate>
         <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Fixing Azure Account Active Directory Association Error</title>
+            <link>/posts/2020-05-15-azure-account-active-directory-error/</link>
+            <pubDate>Fri, 15 May 2020 20:01:32 +0100</pubDate>
+            
+            <guid>/posts/2020-05-15-azure-account-active-directory-error/</guid>
+            <description>If you&amp;rsquo;ve tried to create a Microsoft Azure subscription using an existing Microsoft 365 (formerly Office 365) or Microsoft Power BI account, depending on how the account is setup you might have been redirected to this static page which displays the following error message:
+   Your account belongs to a directory that cannot be associated with an Azure subscription. Please sign in with a different account.
+   It&amp;rsquo;s not immediately clear what this means.</description>
+            <content type="html"><![CDATA[<p>If you&rsquo;ve tried to create a Microsoft Azure subscription using an existing Microsoft 365 (formerly Office 365) or Microsoft Power BI account, depending on how the account is setup you might have been redirected to <a href="https://account.azure.com/Error/NoValidTenant/100">this static page</a> which displays the following error message:</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Your account belongs to a directory that cannot be associated with an Azure subscription. Please sign in with a different account.</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>It&rsquo;s not immediately clear what this means. After a bit of research, I was able to establish that the directory referred to is an Azure Active Directory. When signing up for a Microsoft 365 or Power BI account, an unmanaged Azure Active Directory is created in the background which your account is then assigned to. The problem here is that we can&rsquo;t create an Azure subscription unless this account has the <strong>Global Administrator</strong> role within the Azure Active Directory.</p>
+<p>The resolution is mentioned in <a href="https://support.microsoft.com/en-us/help/4052156/account-to-a-directory-cannot-associated-with-an-azure-subscription">this Microsoft Support page</a>. A simplified version is as follows:</p>
+<ol>
+<li>Head to <a href="https://portal.office.com/admintakeover">the admin takeover page</a> within the Microsoft 365 portal.</li>
+<li>If you&rsquo;re not already signed in, ensure that you&rsquo;re signed in using your Microsoft 365 account, which should have the same domain as the one which you&rsquo;re receiving the Azure subscription error on. If you have a Power BI account rather than a Microsoft 365 account, then sign in using those credentials instead.</li>
+<li>You&rsquo;ll be presented with an option to verify that you&rsquo;re the owner of the domain. Add the <code>TXT</code> record within the settings of your DNS. This could take up to 72 hours to propogate, depending on your DNS provider.</li>
+<li>Click to verify - Azure will check that the <code>TXT</code> record exists on the domain.</li>
+</ol>
+<p>You should now be able to create an Azure subscription using this account.</p>
+]]></content>
+        </item>
         
         <item>
             <title>AppleScript for Connecting Bluetooth Devices</title>

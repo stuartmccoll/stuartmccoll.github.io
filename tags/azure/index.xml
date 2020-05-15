@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>azure on </title>
+    <link>/tags/azure/</link>
+    <description>Recent content in azure on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 15 May 2020 20:01:32 +0100</lastBuildDate>
+    
+	<atom:link href="/tags/azure/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fixing Azure Account Active Directory Association Error</title>
+      <link>/posts/2020-05-15-azure-account-active-directory-error/</link>
+      <pubDate>Fri, 15 May 2020 20:01:32 +0100</pubDate>
+      
+      <guid>/posts/2020-05-15-azure-account-active-directory-error/</guid>
+      <description>If you&amp;rsquo;ve tried to create a Microsoft Azure subscription using an existing Microsoft 365 (formerly Office 365) or Microsoft Power BI account, depending on how the account is setup you might have been redirected to this static page which displays the following error message:
+   Your account belongs to a directory that cannot be associated with an Azure subscription. Please sign in with a different account.
+   It&amp;rsquo;s not immediately clear what this means.</description>
+    </item>
+    
+  </channel>
+</rss>

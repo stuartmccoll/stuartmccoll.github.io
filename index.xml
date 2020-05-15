@@ -6,10 +6,21 @@
     <description>Recent content on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 02 May 2020 10:50:44 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 15 May 2020 20:01:32 +0100</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Fixing Azure Account Active Directory Association Error</title>
+      <link>/posts/2020-05-15-azure-account-active-directory-error/</link>
+      <pubDate>Fri, 15 May 2020 20:01:32 +0100</pubDate>
+      
+      <guid>/posts/2020-05-15-azure-account-active-directory-error/</guid>
+      <description>If you&amp;rsquo;ve tried to create a Microsoft Azure subscription using an existing Microsoft 365 (formerly Office 365) or Microsoft Power BI account, depending on how the account is setup you might have been redirected to this static page which displays the following error message:
+   Your account belongs to a directory that cannot be associated with an Azure subscription. Please sign in with a different account.
+   It&amp;rsquo;s not immediately clear what this means.</description>
+    </item>
     
     <item>
       <title>AppleScript for Connecting Bluetooth Devices</title>

@@ -4,16 +4,51 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-05-02T10:50:44+01:00</lastmod>
+    <lastmod>2020-05-15T20:01:32+01:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/2020-05-02-applescript-bluetooth-devices/</loc>
-    <lastmod>2020-05-02T10:50:44+01:00</lastmod>
+    <loc>/tags/azure/</loc>
+    <lastmod>2020-05-15T20:01:32+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/azure-active-directory/</loc>
+    <lastmod>2020-05-15T20:01:32+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2020-05-15-azure-account-active-directory-error/</loc>
+    <lastmod>2020-05-15T20:01:32+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/microsoft/</loc>
+    <lastmod>2020-05-15T20:01:32+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/microsoft-365/</loc>
+    <lastmod>2020-05-15T20:01:32+01:00</lastmod>
   </url>
   
   <url>
     <loc>/posts/</loc>
+    <lastmod>2020-05-15T20:01:32+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/power-bi/</loc>
+    <lastmod>2020-05-15T20:01:32+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-05-15T20:01:32+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2020-05-02-applescript-bluetooth-devices/</loc>
     <lastmod>2020-05-02T10:50:44+01:00</lastmod>
   </url>
   
@@ -44,11 +79,6 @@
   
   <url>
     <loc>/tags/resolution/</loc>
-    <lastmod>2020-04-27T20:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2020-04-27T20:00:00+00:00</lastmod>
   </url>
   
