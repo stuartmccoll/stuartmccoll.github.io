@@ -4,7 +4,42 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-05-15T20:01:32+01:00</lastmod>
+    <lastmod>2020-06-16T21:30:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/api/</loc>
+    <lastmod>2020-06-16T21:30:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/microsoft/</loc>
+    <lastmod>2020-06-16T21:30:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2020-06-16-sharepoint-api-authentication-with-postman/</loc>
+    <lastmod>2020-06-16T21:30:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/postman/</loc>
+    <lastmod>2020-06-16T21:30:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2020-06-16T21:30:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/sharepoint/</loc>
+    <lastmod>2020-06-16T21:30:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-06-16T21:30:00+01:00</lastmod>
   </url>
   
   <url>
@@ -23,27 +58,12 @@
   </url>
   
   <url>
-    <loc>/tags/microsoft/</loc>
-    <lastmod>2020-05-15T20:01:32+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/microsoft-365/</loc>
     <lastmod>2020-05-15T20:01:32+01:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/</loc>
-    <lastmod>2020-05-15T20:01:32+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/power-bi/</loc>
-    <lastmod>2020-05-15T20:01:32+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2020-05-15T20:01:32+01:00</lastmod>
   </url>
   
@@ -140,11 +160,6 @@
   <url>
     <loc>/posts/deploy-a-serverless-flask-application-with-aws-lambda/</loc>
     <lastmod>2018-10-17T22:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/api/</loc>
-    <lastmod>2018-09-02T18:50:00+00:00</lastmod>
   </url>
   
   <url>

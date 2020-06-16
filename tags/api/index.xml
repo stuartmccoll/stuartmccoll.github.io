@@ -6,10 +6,19 @@
     <description>Recent content in api on </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 02 Sep 2018 18:50:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 16 Jun 2020 21:30:00 +0100</lastBuildDate>
     
 	<atom:link href="/tags/api/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Microsoft SharePoint API Access with Postman</title>
+      <link>/posts/2020-06-16-sharepoint-api-authentication-with-postman/</link>
+      <pubDate>Tue, 16 Jun 2020 21:30:00 +0100</pubDate>
+      
+      <guid>/posts/2020-06-16-sharepoint-api-authentication-with-postman/</guid>
+      <description>Microsoft Graph API has largely superceded v1 of the SharePoint REST API for API-driven interaction with SharePoint online, but there are still a few things that you can&amp;rsquo;t do with it. For example, at the time of writing, it&amp;rsquo;s not possible to use Microsoft Graph API to add attachments to a list item, or retrieve attachments from an existing list item. The legacy SharePoint REST API does allow for this functionality.</description>
+    </item>
     
     <item>
       <title>Designing Resilient APIs with Idempotency</title>
