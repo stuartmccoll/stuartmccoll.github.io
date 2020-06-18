@@ -3,192 +3,202 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/</loc>
+    <loc>https://stuartmccoll.github.io/tags/api/</loc>
+    <lastmod>2020-06-18T19:30:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stuartmccoll.github.io/posts/2020-06-18-creating-list-items-with-sharepoint-rest-api/</loc>
+    <lastmod>2020-06-18T19:30:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stuartmccoll.github.io/tags/microsoft/</loc>
+    <lastmod>2020-06-18T19:30:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stuartmccoll.github.io/tags/postman/</loc>
+    <lastmod>2020-06-18T19:30:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stuartmccoll.github.io/posts/</loc>
+    <lastmod>2020-06-18T19:30:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stuartmccoll.github.io/tags/rest/</loc>
+    <lastmod>2020-06-18T19:30:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stuartmccoll.github.io/tags/sharepoint/</loc>
+    <lastmod>2020-06-18T19:30:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stuartmccoll.github.io/</loc>
+    <lastmod>2020-06-18T19:30:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stuartmccoll.github.io/tags/</loc>
+    <lastmod>2020-06-18T19:30:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stuartmccoll.github.io/posts/2020-06-16-sharepoint-api-authentication-with-postman/</loc>
     <lastmod>2020-06-16T21:30:00+01:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/api/</loc>
-    <lastmod>2020-06-16T21:30:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/microsoft/</loc>
-    <lastmod>2020-06-16T21:30:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/2020-06-16-sharepoint-api-authentication-with-postman/</loc>
-    <lastmod>2020-06-16T21:30:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/postman/</loc>
-    <lastmod>2020-06-16T21:30:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/</loc>
-    <lastmod>2020-06-16T21:30:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/sharepoint/</loc>
-    <lastmod>2020-06-16T21:30:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2020-06-16T21:30:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/azure/</loc>
+    <loc>https://stuartmccoll.github.io/tags/azure/</loc>
     <lastmod>2020-05-15T20:01:32+01:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/azure-active-directory/</loc>
+    <loc>https://stuartmccoll.github.io/tags/azure-active-directory/</loc>
     <lastmod>2020-05-15T20:01:32+01:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/2020-05-15-azure-account-active-directory-error/</loc>
+    <loc>https://stuartmccoll.github.io/posts/2020-05-15-azure-account-active-directory-error/</loc>
     <lastmod>2020-05-15T20:01:32+01:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/microsoft-365/</loc>
+    <loc>https://stuartmccoll.github.io/tags/microsoft-365/</loc>
     <lastmod>2020-05-15T20:01:32+01:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/power-bi/</loc>
+    <loc>https://stuartmccoll.github.io/tags/power-bi/</loc>
     <lastmod>2020-05-15T20:01:32+01:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/2020-05-02-applescript-bluetooth-devices/</loc>
+    <loc>https://stuartmccoll.github.io/posts/2020-05-02-applescript-bluetooth-devices/</loc>
     <lastmod>2020-05-02T10:50:44+01:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/applescript/</loc>
+    <loc>https://stuartmccoll.github.io/tags/applescript/</loc>
     <lastmod>2020-04-27T20:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/2020-04-27-applescript-external-displays/</loc>
+    <loc>https://stuartmccoll.github.io/posts/2020-04-27-applescript-external-displays/</loc>
     <lastmod>2020-04-27T20:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/display/</loc>
+    <loc>https://stuartmccoll.github.io/tags/display/</loc>
     <lastmod>2020-04-27T20:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/external/</loc>
+    <loc>https://stuartmccoll.github.io/tags/external/</loc>
     <lastmod>2020-04-27T20:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/macos/</loc>
+    <loc>https://stuartmccoll.github.io/tags/macos/</loc>
     <lastmod>2020-04-27T20:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/resolution/</loc>
+    <loc>https://stuartmccoll.github.io/tags/resolution/</loc>
     <lastmod>2020-04-27T20:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/aws/</loc>
+    <loc>https://stuartmccoll.github.io/tags/aws/</loc>
     <lastmod>2020-02-07T20:45:35+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/devops/</loc>
+    <loc>https://stuartmccoll.github.io/tags/devops/</loc>
     <lastmod>2020-02-07T20:45:35+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</loc>
+    <loc>https://stuartmccoll.github.io/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</loc>
     <lastmod>2020-02-07T20:45:35+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/route53/</loc>
+    <loc>https://stuartmccoll.github.io/tags/route53/</loc>
     <lastmod>2020-02-07T20:45:35+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/s3/</loc>
+    <loc>https://stuartmccoll.github.io/tags/s3/</loc>
     <lastmod>2020-02-07T20:45:35+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/software/</loc>
+    <loc>https://stuartmccoll.github.io/tags/software/</loc>
     <lastmod>2020-02-07T20:45:35+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/software-development/</loc>
+    <loc>https://stuartmccoll.github.io/tags/software-development/</loc>
     <lastmod>2020-02-07T20:45:35+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/design-patterns/</loc>
+    <loc>https://stuartmccoll.github.io/tags/design-patterns/</loc>
     <lastmod>2019-06-17T10:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/microservice-design-patterns-aggregator/</loc>
+    <loc>https://stuartmccoll.github.io/posts/microservice-design-patterns-aggregator/</loc>
     <lastmod>2019-06-17T10:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/microservices/</loc>
+    <loc>https://stuartmccoll.github.io/tags/microservices/</loc>
     <lastmod>2019-06-17T10:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/about/</loc>
+    <loc>https://stuartmccoll.github.io/about/</loc>
     <lastmod>2019-05-06T17:58:41+01:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/deploy-a-serverless-flask-application-with-aws-lambda/</loc>
+    <loc>https://stuartmccoll.github.io/posts/deploy-a-serverless-flask-application-with-aws-lambda/</loc>
     <lastmod>2018-10-17T22:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/designing-resilient-apis-with-idempotency/</loc>
+    <loc>https://stuartmccoll.github.io/posts/designing-resilient-apis-with-idempotency/</loc>
     <lastmod>2018-09-02T18:50:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/idempotency/</loc>
+    <loc>https://stuartmccoll.github.io/tags/idempotency/</loc>
     <lastmod>2018-09-02T18:50:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/python-3.7-data-classes/</loc>
+    <loc>https://stuartmccoll.github.io/posts/python-3.7-data-classes/</loc>
     <lastmod>2018-07-08T19:50:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/gitlab-changelog-generator/</loc>
+    <loc>https://stuartmccoll.github.io/posts/gitlab-changelog-generator/</loc>
     <lastmod>2018-06-23T22:50:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/add-a-flask-application-to-a-docker-container/</loc>
+    <loc>https://stuartmccoll.github.io/posts/add-a-flask-application-to-a-docker-container/</loc>
     <lastmod>2017-05-14T10:10:32+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/posts/quick-and-dirty-kombu/rabbitmq-application/</loc>
+    <loc>https://stuartmccoll.github.io/posts/quick-and-dirty-kombu/rabbitmq-application/</loc>
     <lastmod>2017-05-14T10:10:32+00:00</lastmod>
   </url>
   

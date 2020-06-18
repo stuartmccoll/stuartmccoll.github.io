@@ -1,211 +1,220 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on </title>
-    <link>/tags/</link>
-    <description>Recent content in Tags on </description>
+    <title>Tags on Stuart McColl</title>
+    <link>https://stuartmccoll.github.io/tags/</link>
+    <description>Recent content in Tags on Stuart McColl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 16 Jun 2020 21:30:00 +0100</lastBuildDate>
+    <lastBuildDate>Thu, 18 Jun 2020 19:30:00 +0100</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://stuartmccoll.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>api</title>
-      <link>/tags/api/</link>
-      <pubDate>Tue, 16 Jun 2020 21:30:00 +0100</pubDate>
+      <link>https://stuartmccoll.github.io/tags/api/</link>
+      <pubDate>Thu, 18 Jun 2020 19:30:00 +0100</pubDate>
       
-      <guid>/tags/api/</guid>
+      <guid>https://stuartmccoll.github.io/tags/api/</guid>
       <description></description>
     </item>
     
     <item>
       <title>microsoft</title>
-      <link>/tags/microsoft/</link>
-      <pubDate>Tue, 16 Jun 2020 21:30:00 +0100</pubDate>
+      <link>https://stuartmccoll.github.io/tags/microsoft/</link>
+      <pubDate>Thu, 18 Jun 2020 19:30:00 +0100</pubDate>
       
-      <guid>/tags/microsoft/</guid>
+      <guid>https://stuartmccoll.github.io/tags/microsoft/</guid>
       <description></description>
     </item>
     
     <item>
       <title>postman</title>
-      <link>/tags/postman/</link>
-      <pubDate>Tue, 16 Jun 2020 21:30:00 +0100</pubDate>
+      <link>https://stuartmccoll.github.io/tags/postman/</link>
+      <pubDate>Thu, 18 Jun 2020 19:30:00 +0100</pubDate>
       
-      <guid>/tags/postman/</guid>
+      <guid>https://stuartmccoll.github.io/tags/postman/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rest</title>
+      <link>https://stuartmccoll.github.io/tags/rest/</link>
+      <pubDate>Thu, 18 Jun 2020 19:30:00 +0100</pubDate>
+      
+      <guid>https://stuartmccoll.github.io/tags/rest/</guid>
       <description></description>
     </item>
     
     <item>
       <title>sharepoint</title>
-      <link>/tags/sharepoint/</link>
-      <pubDate>Tue, 16 Jun 2020 21:30:00 +0100</pubDate>
+      <link>https://stuartmccoll.github.io/tags/sharepoint/</link>
+      <pubDate>Thu, 18 Jun 2020 19:30:00 +0100</pubDate>
       
-      <guid>/tags/sharepoint/</guid>
+      <guid>https://stuartmccoll.github.io/tags/sharepoint/</guid>
       <description></description>
     </item>
     
     <item>
       <title>azure</title>
-      <link>/tags/azure/</link>
+      <link>https://stuartmccoll.github.io/tags/azure/</link>
       <pubDate>Fri, 15 May 2020 20:01:32 +0100</pubDate>
       
-      <guid>/tags/azure/</guid>
+      <guid>https://stuartmccoll.github.io/tags/azure/</guid>
       <description></description>
     </item>
     
     <item>
       <title>azure active directory</title>
-      <link>/tags/azure-active-directory/</link>
+      <link>https://stuartmccoll.github.io/tags/azure-active-directory/</link>
       <pubDate>Fri, 15 May 2020 20:01:32 +0100</pubDate>
       
-      <guid>/tags/azure-active-directory/</guid>
+      <guid>https://stuartmccoll.github.io/tags/azure-active-directory/</guid>
       <description></description>
     </item>
     
     <item>
       <title>microsoft 365</title>
-      <link>/tags/microsoft-365/</link>
+      <link>https://stuartmccoll.github.io/tags/microsoft-365/</link>
       <pubDate>Fri, 15 May 2020 20:01:32 +0100</pubDate>
       
-      <guid>/tags/microsoft-365/</guid>
+      <guid>https://stuartmccoll.github.io/tags/microsoft-365/</guid>
       <description></description>
     </item>
     
     <item>
       <title>power bi</title>
-      <link>/tags/power-bi/</link>
+      <link>https://stuartmccoll.github.io/tags/power-bi/</link>
       <pubDate>Fri, 15 May 2020 20:01:32 +0100</pubDate>
       
-      <guid>/tags/power-bi/</guid>
+      <guid>https://stuartmccoll.github.io/tags/power-bi/</guid>
       <description></description>
     </item>
     
     <item>
       <title>applescript</title>
-      <link>/tags/applescript/</link>
+      <link>https://stuartmccoll.github.io/tags/applescript/</link>
       <pubDate>Mon, 27 Apr 2020 20:00:00 +0000</pubDate>
       
-      <guid>/tags/applescript/</guid>
+      <guid>https://stuartmccoll.github.io/tags/applescript/</guid>
       <description></description>
     </item>
     
     <item>
       <title>display</title>
-      <link>/tags/display/</link>
+      <link>https://stuartmccoll.github.io/tags/display/</link>
       <pubDate>Mon, 27 Apr 2020 20:00:00 +0000</pubDate>
       
-      <guid>/tags/display/</guid>
+      <guid>https://stuartmccoll.github.io/tags/display/</guid>
       <description></description>
     </item>
     
     <item>
       <title>external</title>
-      <link>/tags/external/</link>
+      <link>https://stuartmccoll.github.io/tags/external/</link>
       <pubDate>Mon, 27 Apr 2020 20:00:00 +0000</pubDate>
       
-      <guid>/tags/external/</guid>
+      <guid>https://stuartmccoll.github.io/tags/external/</guid>
       <description></description>
     </item>
     
     <item>
       <title>macos</title>
-      <link>/tags/macos/</link>
+      <link>https://stuartmccoll.github.io/tags/macos/</link>
       <pubDate>Mon, 27 Apr 2020 20:00:00 +0000</pubDate>
       
-      <guid>/tags/macos/</guid>
+      <guid>https://stuartmccoll.github.io/tags/macos/</guid>
       <description></description>
     </item>
     
     <item>
       <title>resolution</title>
-      <link>/tags/resolution/</link>
+      <link>https://stuartmccoll.github.io/tags/resolution/</link>
       <pubDate>Mon, 27 Apr 2020 20:00:00 +0000</pubDate>
       
-      <guid>/tags/resolution/</guid>
+      <guid>https://stuartmccoll.github.io/tags/resolution/</guid>
       <description></description>
     </item>
     
     <item>
       <title>aws</title>
-      <link>/tags/aws/</link>
+      <link>https://stuartmccoll.github.io/tags/aws/</link>
       <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
       
-      <guid>/tags/aws/</guid>
+      <guid>https://stuartmccoll.github.io/tags/aws/</guid>
       <description></description>
     </item>
     
     <item>
       <title>devops</title>
-      <link>/tags/devops/</link>
+      <link>https://stuartmccoll.github.io/tags/devops/</link>
       <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
       
-      <guid>/tags/devops/</guid>
+      <guid>https://stuartmccoll.github.io/tags/devops/</guid>
       <description></description>
     </item>
     
     <item>
       <title>route53</title>
-      <link>/tags/route53/</link>
+      <link>https://stuartmccoll.github.io/tags/route53/</link>
       <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
       
-      <guid>/tags/route53/</guid>
+      <guid>https://stuartmccoll.github.io/tags/route53/</guid>
       <description></description>
     </item>
     
     <item>
       <title>s3</title>
-      <link>/tags/s3/</link>
+      <link>https://stuartmccoll.github.io/tags/s3/</link>
       <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
       
-      <guid>/tags/s3/</guid>
+      <guid>https://stuartmccoll.github.io/tags/s3/</guid>
       <description></description>
     </item>
     
     <item>
       <title>software</title>
-      <link>/tags/software/</link>
+      <link>https://stuartmccoll.github.io/tags/software/</link>
       <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
       
-      <guid>/tags/software/</guid>
+      <guid>https://stuartmccoll.github.io/tags/software/</guid>
       <description></description>
     </item>
     
     <item>
       <title>software development</title>
-      <link>/tags/software-development/</link>
+      <link>https://stuartmccoll.github.io/tags/software-development/</link>
       <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
       
-      <guid>/tags/software-development/</guid>
+      <guid>https://stuartmccoll.github.io/tags/software-development/</guid>
       <description></description>
     </item>
     
     <item>
       <title>design patterns</title>
-      <link>/tags/design-patterns/</link>
+      <link>https://stuartmccoll.github.io/tags/design-patterns/</link>
       <pubDate>Mon, 17 Jun 2019 10:00:00 +0000</pubDate>
       
-      <guid>/tags/design-patterns/</guid>
+      <guid>https://stuartmccoll.github.io/tags/design-patterns/</guid>
       <description></description>
     </item>
     
     <item>
       <title>microservices</title>
-      <link>/tags/microservices/</link>
+      <link>https://stuartmccoll.github.io/tags/microservices/</link>
       <pubDate>Mon, 17 Jun 2019 10:00:00 +0000</pubDate>
       
-      <guid>/tags/microservices/</guid>
+      <guid>https://stuartmccoll.github.io/tags/microservices/</guid>
       <description></description>
     </item>
     
     <item>
       <title>idempotency</title>
-      <link>/tags/idempotency/</link>
+      <link>https://stuartmccoll.github.io/tags/idempotency/</link>
       <pubDate>Sun, 02 Sep 2018 18:50:00 +0000</pubDate>
       
-      <guid>/tags/idempotency/</guid>
+      <guid>https://stuartmccoll.github.io/tags/idempotency/</guid>
       <description></description>
     </item>
     

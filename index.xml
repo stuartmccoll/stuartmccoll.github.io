@@ -1,31 +1,41 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title></title>
-    <link>/</link>
-    <description>Recent content on </description>
+    <title>Stuart McColl</title>
+    <link>https://stuartmccoll.github.io/</link>
+    <description>Recent content on Stuart McColl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 16 Jun 2020 21:30:00 +0100</lastBuildDate>
+    <lastBuildDate>Thu, 18 Jun 2020 19:30:00 +0100</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://stuartmccoll.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Creating list items with the Microsoft SharePoint REST API</title>
+      <link>https://stuartmccoll.github.io/posts/2020-06-18-creating-list-items-with-sharepoint-rest-api/</link>
+      <pubDate>Thu, 18 Jun 2020 19:30:00 +0100</pubDate>
+      
+      <guid>https://stuartmccoll.github.io/posts/2020-06-18-creating-list-items-with-sharepoint-rest-api/</guid>
+      <description>In my last blog post I explained how to authenticate requests to Microsoft&amp;rsquo;s legacy SharePoint REST API using Postman. This post builds on that work to store our access token as a Postman environment variable and to then send POST requests to the SharePoint REST API to create new items within an existing SharePoint list.
+ If you were following along previously, the last thing we did was to request an access token to use in future requests.</description>
+    </item>
+    
+    <item>
       <title>Microsoft SharePoint API Access with Postman</title>
-      <link>/posts/2020-06-16-sharepoint-api-authentication-with-postman/</link>
+      <link>https://stuartmccoll.github.io/posts/2020-06-16-sharepoint-api-authentication-with-postman/</link>
       <pubDate>Tue, 16 Jun 2020 21:30:00 +0100</pubDate>
       
-      <guid>/posts/2020-06-16-sharepoint-api-authentication-with-postman/</guid>
+      <guid>https://stuartmccoll.github.io/posts/2020-06-16-sharepoint-api-authentication-with-postman/</guid>
       <description>Microsoft Graph API has largely superceded v1 of the SharePoint REST API for API-driven interaction with SharePoint online, but there are still a few things that you can&amp;rsquo;t do with it. For example, at the time of writing, it&amp;rsquo;s not possible to use Microsoft Graph API to add attachments to a list item, or retrieve attachments from an existing list item. The legacy SharePoint REST API does allow for this functionality.</description>
     </item>
     
     <item>
       <title>Fixing Azure Account Active Directory Association Error</title>
-      <link>/posts/2020-05-15-azure-account-active-directory-error/</link>
+      <link>https://stuartmccoll.github.io/posts/2020-05-15-azure-account-active-directory-error/</link>
       <pubDate>Fri, 15 May 2020 20:01:32 +0100</pubDate>
       
-      <guid>/posts/2020-05-15-azure-account-active-directory-error/</guid>
+      <guid>https://stuartmccoll.github.io/posts/2020-05-15-azure-account-active-directory-error/</guid>
       <description>If you&amp;rsquo;ve tried to create a Microsoft Azure subscription using an existing Microsoft 365 (formerly Office 365) or Microsoft Power BI account, depending on how the account is setup you might have been redirected to this static page which displays the following error message:
    Your account belongs to a directory that cannot be associated with an Azure subscription. Please sign in with a different account.
    It&amp;rsquo;s not immediately clear what this means.</description>
@@ -33,98 +43,98 @@
     
     <item>
       <title>AppleScript for Connecting Bluetooth Devices</title>
-      <link>/posts/2020-05-02-applescript-bluetooth-devices/</link>
+      <link>https://stuartmccoll.github.io/posts/2020-05-02-applescript-bluetooth-devices/</link>
       <pubDate>Sat, 02 May 2020 10:50:44 +0100</pubDate>
       
-      <guid>/posts/2020-05-02-applescript-bluetooth-devices/</guid>
+      <guid>https://stuartmccoll.github.io/posts/2020-05-02-applescript-bluetooth-devices/</guid>
       <description>Last week I wrote another AppleScript for automating a manual task I have to carry out each time I switch between my personal MacBook Pro and my work device. This time, I needed to write a script which would connect to my Bluetooth devices - a Magic Mouse, Magic Keyboard and my AirPods.
 Rather than accessing the System Preferences application, which I demonstrated in my last AppleScript, this script needed to directly access the Bluetooth icon in the menu bar.</description>
     </item>
     
     <item>
       <title>AppleScript for Configuring External Displays</title>
-      <link>/posts/2020-04-27-applescript-external-displays/</link>
+      <link>https://stuartmccoll.github.io/posts/2020-04-27-applescript-external-displays/</link>
       <pubDate>Mon, 27 Apr 2020 20:00:00 +0000</pubDate>
       
-      <guid>/posts/2020-04-27-applescript-external-displays/</guid>
+      <guid>https://stuartmccoll.github.io/posts/2020-04-27-applescript-external-displays/</guid>
       <description>AppleScript is a scripting language bundled within all versions of macOS, which allows for scripting of elements of the operating system and compatible applications.
 I&amp;rsquo;d never touched it before, but decided to try to use it to automate setting the resolutions of my external displays when switching between my personal and work MacBook Pros. Sometimes the resolutions stick when switching between the two, sometimes they don&amp;rsquo;t. Rather than have to go into System Preferences &amp;gt; Displays and set them whenever the settings don&amp;rsquo;t stick, I quite liked the idea of just running a script and having something else take care of it for me.</description>
     </item>
     
     <item>
       <title>HTTP/S Redirects for AWS Route 53 Using S3</title>
-      <link>/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</link>
+      <link>https://stuartmccoll.github.io/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</link>
       <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
       
-      <guid>/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</guid>
+      <guid>https://stuartmccoll.github.io/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</guid>
       <description>I moved hosting of my domains recently from tsoHost to Amazon Web Services, as uptime on tsoHost seems to have been slowly getting worse. Rather than using disparate providers for different services, I chose AWS to sit everything under one provider.
 Shifting to AWS itself was relatively easy - I&amp;rsquo;m now using Amazon WorkMail for my email service and Amazon Route 53 for DNS. The documentation for switching to both from another provider was straight forward and I was up and running within a few days.</description>
     </item>
     
     <item>
       <title>Microservice Design Patterns: Aggregator</title>
-      <link>/posts/microservice-design-patterns-aggregator/</link>
+      <link>https://stuartmccoll.github.io/posts/microservice-design-patterns-aggregator/</link>
       <pubDate>Mon, 17 Jun 2019 10:00:00 +0000</pubDate>
       
-      <guid>/posts/microservice-design-patterns-aggregator/</guid>
+      <guid>https://stuartmccoll.github.io/posts/microservice-design-patterns-aggregator/</guid>
       <description>The aggregator design pattern is a simple way of providing a single, unified service capable of surfacing data from multiple microservices, and a commonly used pattern when implementing a microservice-based architecture.
 Let&amp;rsquo;s imagine that we&amp;rsquo;ve been tasked with developing an internal API for our organisation - a general practice clinic. The API needs to consume data from three existing microservices, each of which is used by other services within the practice&amp;rsquo;s architecture - some services call these individually, some call all three.</description>
     </item>
     
     <item>
       <title>Deploy a Serverless Flask Application with AWS Lambda</title>
-      <link>/posts/deploy-a-serverless-flask-application-with-aws-lambda/</link>
+      <link>https://stuartmccoll.github.io/posts/deploy-a-serverless-flask-application-with-aws-lambda/</link>
       <pubDate>Wed, 17 Oct 2018 22:00:00 +0000</pubDate>
       
-      <guid>/posts/deploy-a-serverless-flask-application-with-aws-lambda/</guid>
+      <guid>https://stuartmccoll.github.io/posts/deploy-a-serverless-flask-application-with-aws-lambda/</guid>
       <description>AWS Lambda lets us run code without provisioning or managing servers, paying only for the compute time of the running code. There&amp;rsquo;s no permanent infrastructure, and the server only has a life cycle of 40 milliseconds. AWS provides automatic horizontal scaling for Lambda applications, spinning up and down as many instances as are necessary.
 An open source Python library, Zappa gives us the ability to build and deploy serverless, event-driven Python applications on AWS Lambda.</description>
     </item>
     
     <item>
       <title>Designing Resilient APIs with Idempotency</title>
-      <link>/posts/designing-resilient-apis-with-idempotency/</link>
+      <link>https://stuartmccoll.github.io/posts/designing-resilient-apis-with-idempotency/</link>
       <pubDate>Sun, 02 Sep 2018 18:50:00 +0000</pubDate>
       
-      <guid>/posts/designing-resilient-apis-with-idempotency/</guid>
+      <guid>https://stuartmccoll.github.io/posts/designing-resilient-apis-with-idempotency/</guid>
       <description>How can we design APIs to be resilient when our networks necessarily aren&amp;rsquo;t? An API should be robust enough to handle failure scenarios including connectivity drops, timeouts between resultant calls, and more. If a client makes a request to our API and loses connection during the request, how can we ensure that a successive identical request doesn&amp;rsquo;t alter the state of the system in a way that we weren&amp;rsquo;t expecting? This is where idempotence comes into play.</description>
     </item>
     
     <item>
       <title>Python 3.7 Data Classes</title>
-      <link>/posts/python-3.7-data-classes/</link>
+      <link>https://stuartmccoll.github.io/posts/python-3.7-data-classes/</link>
       <pubDate>Sun, 08 Jul 2018 19:50:00 +0000</pubDate>
       
-      <guid>/posts/python-3.7-data-classes/</guid>
+      <guid>https://stuartmccoll.github.io/posts/python-3.7-data-classes/</guid>
       <description>PEP 557 in the recently-released Python 3.7 added data classes to the standard Python library. Data classes can be thought of as mutable data holders and are somewhat similar to named tuples, although named tuples are immutable.
 Data classes provide a lot of boilerplate code, saving time and effort on the part of the Python programmer, although it could be argued that this layer of abstraction makes debugging more difficult.</description>
     </item>
     
     <item>
       <title>GitLab Changelog Generator</title>
-      <link>/posts/gitlab-changelog-generator/</link>
+      <link>https://stuartmccoll.github.io/posts/gitlab-changelog-generator/</link>
       <pubDate>Sat, 23 Jun 2018 22:50:00 +0000</pubDate>
       
-      <guid>/posts/gitlab-changelog-generator/</guid>
+      <guid>https://stuartmccoll.github.io/posts/gitlab-changelog-generator/</guid>
       <description>I&amp;rsquo;ve recently written a small command line utility using Python 3.6 which will produce a CHANGELOG.md file from the commit differences between two different GitLab project branches. I&amp;rsquo;ve released this as an open source Python package and it&amp;rsquo;s available from PyPi here. Not intended to be a direct replacement for writing a manual changelog, the utility should be used as a draft upon which to build.
 This was a small project to trial a few things; Python&amp;rsquo;s type hinting, which was added in PEP484; Facebook Open Source&amp;rsquo;s type checker Pyre; and Black &amp;lsquo;the uncompromising Python code formatter&amp;rsquo;.</description>
     </item>
     
     <item>
       <title>Add a Flask Application to a Docker Container</title>
-      <link>/posts/add-a-flask-application-to-a-docker-container/</link>
+      <link>https://stuartmccoll.github.io/posts/add-a-flask-application-to-a-docker-container/</link>
       <pubDate>Sun, 14 May 2017 10:10:32 +0000</pubDate>
       
-      <guid>/posts/add-a-flask-application-to-a-docker-container/</guid>
+      <guid>https://stuartmccoll.github.io/posts/add-a-flask-application-to-a-docker-container/</guid>
       <description>Flask is a microframework for Python, based on Werkzeug and Jinja2. The core Flask framework is extremely lightweight, albeit infinitely extensible, and it&amp;rsquo;s simple for an experienced developer to pick up. I had been using Laravel a lot at the beginning of the year and Flask has been a breeze to work with in comparison. With it&amp;rsquo;s extensibility I haven&amp;rsquo;t been locked into working with pre-defined components either; I&amp;rsquo;ve used different database abstraction layers across multiple projects, such as Redis and PostgreSQL.</description>
     </item>
     
     <item>
       <title>Quick and Dirty Kombu/RabbitMQ Application</title>
-      <link>/posts/quick-and-dirty-kombu/rabbitmq-application/</link>
+      <link>https://stuartmccoll.github.io/posts/quick-and-dirty-kombu/rabbitmq-application/</link>
       <pubDate>Sun, 14 May 2017 10:10:32 +0000</pubDate>
       
-      <guid>/posts/quick-and-dirty-kombu/rabbitmq-application/</guid>
+      <guid>https://stuartmccoll.github.io/posts/quick-and-dirty-kombu/rabbitmq-application/</guid>
       <description>Kombu is an open-source messaging library available for Python which aims to make messaging as simple as possible. Kombu provides a high-level interface for the Advanced Message Queuing Protocol (AMQP), an open standard protocol for message orientation, queuing, routing, reliability, and security. The most popular implementation of AMQP is the RabbitMQ open-source messaging server.
 In the example application we&amp;rsquo;re going to create here, we&amp;rsquo;re going to use Kombu and RabbitMQ in combination to do the following:</description>
     </item>

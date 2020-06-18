@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>microservices on </title>
-    <link>/tags/microservices/</link>
-    <description>Recent content in microservices on </description>
+    <title>microservices on Stuart McColl</title>
+    <link>https://stuartmccoll.github.io/tags/microservices/</link>
+    <description>Recent content in microservices on Stuart McColl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Mon, 17 Jun 2019 10:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/microservices/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://stuartmccoll.github.io/tags/microservices/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Microservice Design Patterns: Aggregator</title>
-      <link>/posts/microservice-design-patterns-aggregator/</link>
+      <link>https://stuartmccoll.github.io/posts/microservice-design-patterns-aggregator/</link>
       <pubDate>Mon, 17 Jun 2019 10:00:00 +0000</pubDate>
       
-      <guid>/posts/microservice-design-patterns-aggregator/</guid>
+      <guid>https://stuartmccoll.github.io/posts/microservice-design-patterns-aggregator/</guid>
       <description>The aggregator design pattern is a simple way of providing a single, unified service capable of surfacing data from multiple microservices, and a commonly used pattern when implementing a microservice-based architecture.
 Let&amp;rsquo;s imagine that we&amp;rsquo;ve been tasked with developing an internal API for our organisation - a general practice clinic. The API needs to consume data from three existing microservices, each of which is used by other services within the practice&amp;rsquo;s architecture - some services call these individually, some call all three.</description>
     </item>
