@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>sharepoint on </title>
-    <link>/tags/sharepoint/</link>
-    <description>Recent content in sharepoint on </description>
+    <title>sharepoint on Stuart McColl</title>
+    <link>https://stuartmccoll.github.io/tags/sharepoint/</link>
+    <description>Recent content in sharepoint on Stuart McColl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 16 Jun 2020 21:30:00 +0100</lastBuildDate>
+    <lastBuildDate>Thu, 18 Jun 2020 19:30:00 +0100</lastBuildDate>
     
-	<atom:link href="/tags/sharepoint/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://stuartmccoll.github.io/tags/sharepoint/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Creating list items with the Microsoft SharePoint REST API</title>
+      <link>https://stuartmccoll.github.io/posts/2020-06-18-creating-list-items-with-sharepoint-rest-api/</link>
+      <pubDate>Thu, 18 Jun 2020 19:30:00 +0100</pubDate>
+      
+      <guid>https://stuartmccoll.github.io/posts/2020-06-18-creating-list-items-with-sharepoint-rest-api/</guid>
+      <description>In my last blog post I explained how to authenticate requests to Microsoft&amp;rsquo;s legacy SharePoint REST API using Postman. This post builds on that work to store our access token as a Postman environment variable and to then send POST requests to the SharePoint REST API to create new items within an existing SharePoint list.
+ If you were following along previously, the last thing we did was to request an access token to use in future requests.</description>
+    </item>
+    
+    <item>
       <title>Microsoft SharePoint API Access with Postman</title>
-      <link>/posts/2020-06-16-sharepoint-api-authentication-with-postman/</link>
+      <link>https://stuartmccoll.github.io/posts/2020-06-16-sharepoint-api-authentication-with-postman/</link>
       <pubDate>Tue, 16 Jun 2020 21:30:00 +0100</pubDate>
       
-      <guid>/posts/2020-06-16-sharepoint-api-authentication-with-postman/</guid>
+      <guid>https://stuartmccoll.github.io/posts/2020-06-16-sharepoint-api-authentication-with-postman/</guid>
       <description>Microsoft Graph API has largely superceded v1 of the SharePoint REST API for API-driven interaction with SharePoint online, but there are still a few things that you can&amp;rsquo;t do with it. For example, at the time of writing, it&amp;rsquo;s not possible to use Microsoft Graph API to add attachments to a list item, or retrieve attachments from an existing list item. The legacy SharePoint REST API does allow for this functionality.</description>
     </item>
     

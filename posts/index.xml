@@ -1,19 +1,70 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Posts on </title>
-        <link>/posts/</link>
-        <description>Recent content in Posts on </description>
+        <title>Posts on Stuart McColl</title>
+        <link>https://stuartmccoll.github.io/posts/</link>
+        <description>Recent content in Posts on Stuart McColl</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
-        <lastBuildDate>Tue, 16 Jun 2020 21:30:00 +0100</lastBuildDate>
-        <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+        <lastBuildDate>Thu, 18 Jun 2020 19:30:00 +0100</lastBuildDate>
+        <atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Creating list items with the Microsoft SharePoint REST API</title>
+            <link>https://stuartmccoll.github.io/posts/2020-06-18-creating-list-items-with-sharepoint-rest-api/</link>
+            <pubDate>Thu, 18 Jun 2020 19:30:00 +0100</pubDate>
+            
+            <guid>https://stuartmccoll.github.io/posts/2020-06-18-creating-list-items-with-sharepoint-rest-api/</guid>
+            <description>In my last blog post I explained how to authenticate requests to Microsoft&amp;rsquo;s legacy SharePoint REST API using Postman. This post builds on that work to store our access token as a Postman environment variable and to then send POST requests to the SharePoint REST API to create new items within an existing SharePoint list.
+ If you were following along previously, the last thing we did was to request an access token to use in future requests.</description>
+            <content type="html"><![CDATA[<p>In my <a href="../2020-06-16-sharepoint-api-authentication-with-postman">last blog post</a> I explained how to authenticate requests to Microsoft&rsquo;s legacy SharePoint REST API using Postman. This post builds on that work to store our access token as a Postman environment variable and to then send <code>POST</code> requests to the SharePoint REST API to create new items within an existing SharePoint list.</p>
+<hr>
+<p>If you were following along previously, the last thing we did was to request an access token to use in future requests. We&rsquo;re going to write a couple of lines of JavaScript code within Postman which will parse the API response containing the access token and add it to our previously-created Postman environment.</p>
+<p>You should still have a Postman tab open ready to send a request to the following URL:</p>
+<pre><code>https://accounts.accesscontrol.windows.net/{{realm}}/tokens/OAuth/2
+</code></pre><p>Click on the &lsquo;Tests&rsquo; tab. In the empty window, add the following two lines of code:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">json_response_body</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">responseBody</span><span class="p">);</span>
+<span class="nx">postman</span><span class="p">.</span><span class="nx">setEnvironmentVariable</span><span class="p">(</span><span class="s2">&#34;appReg_bearerToken&#34;</span><span class="p">,</span> <span class="nx">json_response_body</span><span class="p">.</span><span class="nx">access_token</span><span class="p">);</span>
+</code></pre></div><p>Click &lsquo;Send&rsquo; to send our <code>POST</code> request. You should receive a response body containing an <code>access_token</code> key/value pair. The value of the <code>access_token</code> key will now have been added as the &lsquo;Current Value&rsquo; of our <code>appReg_bearerToken</code> Postman environment variable. You can confirm this by clicking the eye icon next to the environments dropdown and checking the environment variable values.</p>
+<p>We&rsquo;re now ready to create a new item within an existing SharePoint list. To do so, we need to know the <code>ListItemEntityTypeFullName</code> of the list. Let&rsquo;s open a new request in Postman, which we&rsquo;re going to send to the following URL (replacing <code>contoso</code> with your tenant name, and &lsquo;Test list&rsquo; with your own list name):</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">GET https://contoso.sharepoint.com/_api/web/lists/GetByTitle(&#39;Test list&#39;)?$select=ListItemEntityTypeFullName
+</span><span class="err">Authorization: Bearer {{appReg_bearerToken}}
+</span><span class="err">Accept: application/json;odata=nometadata
+</span></code></pre></div><p>Before sending, let&rsquo;s add a test to this Postman request which will grab the <code>ListItemEntityTypeFullName</code> value and store it as a Postman environment variable. Click the &lsquo;Tests&rsquo; tab and in the empty window add the following two lines of code:</p>
+<div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">json_response_body</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">responseBody</span><span class="p">);</span>
+<span class="nx">postman</span><span class="p">.</span><span class="nx">setEnvironmentVariable</span><span class="p">(</span><span class="s2">&#34;ListItemEntityTypeFullName&#34;</span><span class="p">,</span> <span class="nx">json_response_body</span><span class="p">.</span><span class="nx">ListItemEntityTypeFullName</span><span class="p">);</span>
+</code></pre></div><p>You should receive a response body which looks something like the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;ListItemEntityTypeFullName&#34;</span><span class="p">:</span> <span class="s2">&#34;SP.Data.Test_x0020_listListItem&#34;</span>
+<span class="p">}</span>
+</code></pre></div><p>The value of the <code>ListItemEntityTypeFullName</code> key will now have been added as the &lsquo;Current Value&rsquo; of our <code>ListItemEntityTypeFullName</code> Postman environment variable. You can confirm this by clicking the eye icon next to the environments dropdown and checking the environment variable values.</p>
+<p>We&rsquo;re now ready to create our test item in our existing SharePoint list. Open a new Postman request, which we&rsquo;ll be sending as a <code>POST</code>. Use the following details, where <code>contoso</code> is replaced with your own tenant name and &lsquo;Test list&rsquo; is replaced with your own SharePoint list name (note the <strong>double</strong> underscore before <code>metadata</code>):</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">POST https://contoso.sharepoint.com/_api/web/lists/GetByTitle(&#39;Test list&#39;)/items
+</span><span class="err">Authorization: Bearer {{appReg_bearerToken}}
+</span><span class="err">Accept: application/json;odata=verbose
+</span><span class="err">Content-Type: application/json;odata=verbose
+</span><span class="err">
+</span><span class="err">{
+</span><span class="err">    &#34;__metadata&#34;: {
+</span><span class="err">        &#34;type&#34;: &#34;{{ListItemEntityTypeFullName}}&#34;
+</span><span class="err">    },
+</span><span class="err">    &#34;Title&#34;: &#34;My test item&#34;
+</span><span class="err">}
+</span></code></pre></div><p>Send this request and you should receive a <code>201</code> status code in response, as well as a lengthy response body. Check your SharePoint list and you should see that the item has been successfully created.</p>
+<p>We can also use the API to retrieve this item. Create a new Postman request and send the following (replacing <code>contoso</code> with your own tenant name, &lsquo;Test list&rsquo; with your own list name and <code>1</code> with the id you will have received in the previous response body after creating your item):</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">GET https://contoso.sharepoint.com/_api/web/lists/GetByTitle(&#39;Test list&#39;)/items(1)
+</span><span class="err">Authorization: Bearer {{appReg_bearerToken}}
+</span><span class="err">Accept: application/json;odata=verbose
+</span></code></pre></div><p>You should receive a <code>200</code> status code in response, as well as a response body containing your chosen SharePoint list item.</p>
+<p>In my next blog post I&rsquo;ll look at how we can use the SharePoint REST API to add attachments to our list items.</p>
+]]></content>
+        </item>
         
         <item>
             <title>Microsoft SharePoint API Access with Postman</title>
-            <link>/posts/2020-06-16-sharepoint-api-authentication-with-postman/</link>
+            <link>https://stuartmccoll.github.io/posts/2020-06-16-sharepoint-api-authentication-with-postman/</link>
             <pubDate>Tue, 16 Jun 2020 21:30:00 +0100</pubDate>
             
-            <guid>/posts/2020-06-16-sharepoint-api-authentication-with-postman/</guid>
+            <guid>https://stuartmccoll.github.io/posts/2020-06-16-sharepoint-api-authentication-with-postman/</guid>
             <description>Microsoft Graph API has largely superceded v1 of the SharePoint REST API for API-driven interaction with SharePoint online, but there are still a few things that you can&amp;rsquo;t do with it. For example, at the time of writing, it&amp;rsquo;s not possible to use Microsoft Graph API to add attachments to a list item, or retrieve attachments from an existing list item. The legacy SharePoint REST API does allow for this functionality.</description>
             <content type="html"><![CDATA[<p><a href="https://developer.microsoft.com/en-us/graph/">Microsoft Graph API</a> has largely superceded <a href="https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/get-to-know-the-sharepoint-rest-service?tabs=csom">v1 of the SharePoint REST API</a> for API-driven interaction with SharePoint online, but there are still a few things that you can&rsquo;t do with it. For example, at the time of writing, it&rsquo;s not possible to use Microsoft Graph API to add attachments to a list item, or retrieve attachments from an existing list item. The legacy SharePoint REST API <em>does</em> allow for this functionality. Authentication with the Graph API and the legacy SharePoint REST API also differs - the following acts as a tutorial for configuring interaction with the legacy SharePoint REST API using <a href="https://www.postman.com">Postman</a>.</p>
 <p>For my SharePoint setup, I&rsquo;ve used a developer subscription from the <a href="https://developer.microsoft.com/en-us/microsoft-365/dev-program">Microsoft 365 Developer Program</a>. This allows me to administrate my own free SharePoint configuration, add pre-configured users from a sample data pack, and more.</p>
@@ -61,10 +112,10 @@
         
         <item>
             <title>Fixing Azure Account Active Directory Association Error</title>
-            <link>/posts/2020-05-15-azure-account-active-directory-error/</link>
+            <link>https://stuartmccoll.github.io/posts/2020-05-15-azure-account-active-directory-error/</link>
             <pubDate>Fri, 15 May 2020 20:01:32 +0100</pubDate>
             
-            <guid>/posts/2020-05-15-azure-account-active-directory-error/</guid>
+            <guid>https://stuartmccoll.github.io/posts/2020-05-15-azure-account-active-directory-error/</guid>
             <description>If you&amp;rsquo;ve tried to create a Microsoft Azure subscription using an existing Microsoft 365 (formerly Office 365) or Microsoft Power BI account, depending on how the account is setup you might have been redirected to this static page which displays the following error message:
    Your account belongs to a directory that cannot be associated with an Azure subscription. Please sign in with a different account.
    It&amp;rsquo;s not immediately clear what this means.</description>
@@ -90,10 +141,10 @@
         
         <item>
             <title>AppleScript for Connecting Bluetooth Devices</title>
-            <link>/posts/2020-05-02-applescript-bluetooth-devices/</link>
+            <link>https://stuartmccoll.github.io/posts/2020-05-02-applescript-bluetooth-devices/</link>
             <pubDate>Sat, 02 May 2020 10:50:44 +0100</pubDate>
             
-            <guid>/posts/2020-05-02-applescript-bluetooth-devices/</guid>
+            <guid>https://stuartmccoll.github.io/posts/2020-05-02-applescript-bluetooth-devices/</guid>
             <description>Last week I wrote another AppleScript for automating a manual task I have to carry out each time I switch between my personal MacBook Pro and my work device. This time, I needed to write a script which would connect to my Bluetooth devices - a Magic Mouse, Magic Keyboard and my AirPods.
 Rather than accessing the System Preferences application, which I demonstrated in my last AppleScript, this script needed to directly access the Bluetooth icon in the menu bar.</description>
             <content type="html"><![CDATA[<p>Last week I wrote another AppleScript for automating a manual task I have to carry out each time I switch between my personal MacBook Pro and my work device. This time, I needed
@@ -175,10 +226,10 @@ then we click the device name. If the submenu that opens contains a <code>Connec
         
         <item>
             <title>AppleScript for Configuring External Displays</title>
-            <link>/posts/2020-04-27-applescript-external-displays/</link>
+            <link>https://stuartmccoll.github.io/posts/2020-04-27-applescript-external-displays/</link>
             <pubDate>Mon, 27 Apr 2020 20:00:00 +0000</pubDate>
             
-            <guid>/posts/2020-04-27-applescript-external-displays/</guid>
+            <guid>https://stuartmccoll.github.io/posts/2020-04-27-applescript-external-displays/</guid>
             <description>AppleScript is a scripting language bundled within all versions of macOS, which allows for scripting of elements of the operating system and compatible applications.
 I&amp;rsquo;d never touched it before, but decided to try to use it to automate setting the resolutions of my external displays when switching between my personal and work MacBook Pros. Sometimes the resolutions stick when switching between the two, sometimes they don&amp;rsquo;t. Rather than have to go into System Preferences &amp;gt; Displays and set them whenever the settings don&amp;rsquo;t stick, I quite liked the idea of just running a script and having something else take care of it for me.</description>
             <content type="html"><![CDATA[<p>AppleScript is a scripting language bundled within all versions of macOS, which allows for scripting of elements of the operating system and compatible applications.</p>
@@ -241,10 +292,10 @@ we set the currently selected resolution size to the <code>scale_value</code> va
         
         <item>
             <title>HTTP/S Redirects for AWS Route 53 Using S3</title>
-            <link>/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</link>
+            <link>https://stuartmccoll.github.io/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</link>
             <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
             
-            <guid>/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</guid>
+            <guid>https://stuartmccoll.github.io/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</guid>
             <description>I moved hosting of my domains recently from tsoHost to Amazon Web Services, as uptime on tsoHost seems to have been slowly getting worse. Rather than using disparate providers for different services, I chose AWS to sit everything under one provider.
 Shifting to AWS itself was relatively easy - I&amp;rsquo;m now using Amazon WorkMail for my email service and Amazon Route 53 for DNS. The documentation for switching to both from another provider was straight forward and I was up and running within a few days.</description>
             <content type="html"><![CDATA[<p>I moved hosting of my domains recently from <a href="https://www.tsohost.com">tsoHost</a> to <a href="https://aws.amazon.com">Amazon Web Services</a>, as uptime on tsoHost seems to have been slowly getting worse. Rather than using disparate providers for different services, I chose AWS to sit everything under one provider.</p>
@@ -262,10 +313,10 @@ Shifting to AWS itself was relatively easy - I&amp;rsquo;m now using Amazon Work
         
         <item>
             <title>Microservice Design Patterns: Aggregator</title>
-            <link>/posts/microservice-design-patterns-aggregator/</link>
+            <link>https://stuartmccoll.github.io/posts/microservice-design-patterns-aggregator/</link>
             <pubDate>Mon, 17 Jun 2019 10:00:00 +0000</pubDate>
             
-            <guid>/posts/microservice-design-patterns-aggregator/</guid>
+            <guid>https://stuartmccoll.github.io/posts/microservice-design-patterns-aggregator/</guid>
             <description>The aggregator design pattern is a simple way of providing a single, unified service capable of surfacing data from multiple microservices, and a commonly used pattern when implementing a microservice-based architecture.
 Let&amp;rsquo;s imagine that we&amp;rsquo;ve been tasked with developing an internal API for our organisation - a general practice clinic. The API needs to consume data from three existing microservices, each of which is used by other services within the practice&amp;rsquo;s architecture - some services call these individually, some call all three.</description>
             <content type="html"><![CDATA[<p>The aggregator design pattern is a simple way of providing a single, unified service capable of surfacing data from multiple microservices, and a commonly used pattern when implementing a microservice-based architecture.</p>
@@ -287,10 +338,10 @@ Let&amp;rsquo;s imagine that we&amp;rsquo;ve been tasked with developing an inte
         
         <item>
             <title>Deploy a Serverless Flask Application with AWS Lambda</title>
-            <link>/posts/deploy-a-serverless-flask-application-with-aws-lambda/</link>
+            <link>https://stuartmccoll.github.io/posts/deploy-a-serverless-flask-application-with-aws-lambda/</link>
             <pubDate>Wed, 17 Oct 2018 22:00:00 +0000</pubDate>
             
-            <guid>/posts/deploy-a-serverless-flask-application-with-aws-lambda/</guid>
+            <guid>https://stuartmccoll.github.io/posts/deploy-a-serverless-flask-application-with-aws-lambda/</guid>
             <description>AWS Lambda lets us run code without provisioning or managing servers, paying only for the compute time of the running code. There&amp;rsquo;s no permanent infrastructure, and the server only has a life cycle of 40 milliseconds. AWS provides automatic horizontal scaling for Lambda applications, spinning up and down as many instances as are necessary.
 An open source Python library, Zappa gives us the ability to build and deploy serverless, event-driven Python applications on AWS Lambda.</description>
             <content type="html"><![CDATA[<p><a href="https://aws.amazon.com/lambda/">AWS Lambda</a> lets us run code without provisioning or managing servers, paying only for the compute time of the running code. There&rsquo;s no permanent infrastructure, and the server only has a life cycle of 40 <em>milliseconds</em>. AWS provides automatic horizontal scaling for Lambda applications, spinning up and down as many instances as are necessary.</p>
@@ -351,10 +402,10 @@ zappa
         
         <item>
             <title>Designing Resilient APIs with Idempotency</title>
-            <link>/posts/designing-resilient-apis-with-idempotency/</link>
+            <link>https://stuartmccoll.github.io/posts/designing-resilient-apis-with-idempotency/</link>
             <pubDate>Sun, 02 Sep 2018 18:50:00 +0000</pubDate>
             
-            <guid>/posts/designing-resilient-apis-with-idempotency/</guid>
+            <guid>https://stuartmccoll.github.io/posts/designing-resilient-apis-with-idempotency/</guid>
             <description>How can we design APIs to be resilient when our networks necessarily aren&amp;rsquo;t? An API should be robust enough to handle failure scenarios including connectivity drops, timeouts between resultant calls, and more. If a client makes a request to our API and loses connection during the request, how can we ensure that a successive identical request doesn&amp;rsquo;t alter the state of the system in a way that we weren&amp;rsquo;t expecting? This is where idempotence comes into play.</description>
             <content type="html"><![CDATA[<p>How can we design APIs to be resilient when our networks necessarily aren&rsquo;t? An API should be robust enough to handle failure scenarios including connectivity drops, timeouts between resultant calls, and more. If a client makes a request to our API and loses connection during the request, how can we ensure that a successive identical request doesn&rsquo;t alter the state of the system in a way that we weren&rsquo;t expecting? This is where <a href="https://en.wikipedia.org/wiki/Idempotence">idempotence</a> comes into play. An idempotent request is one which can be made any number of times with the guarantee that any resulting logic, or side effects, only happen once.</p>
 <p>HTTP has two methods as idempotent by default, the <code>PUT</code> and <code>DELETE</code> verbs. A <code>PUT</code> request is utilised to replace an entire entity with the payload included in the request. Therefore, we can safely make a <code>PUT</code> request multiple times, safe in the knowledge that we&rsquo;ll simply overwrite an entity with the <em>same</em> contents. <code>DELETE</code> requests are similar in that if a first <code>DELETE</code> request failed, then a subsequent request would leave the system in the same intended state. Multiple successful <code>DELETE</code> requests might return different status codes in the response (<code>200</code> for the first request, <code>410</code> or <code>404</code> for the second), but again, the state of the system would remain the same. We should be careful not to interpret idempotency as <em>&ldquo;I should receive the same response from multiple identical requests&rdquo;</em> but as <em>&ldquo;The state of the system should be the same when multiple identical requests are made&rdquo;</em>.</p>
@@ -387,10 +438,10 @@ Idempotency-Key: 845c52a3-6b91-4358-9004-e2f94eec48fa
         
         <item>
             <title>Python 3.7 Data Classes</title>
-            <link>/posts/python-3.7-data-classes/</link>
+            <link>https://stuartmccoll.github.io/posts/python-3.7-data-classes/</link>
             <pubDate>Sun, 08 Jul 2018 19:50:00 +0000</pubDate>
             
-            <guid>/posts/python-3.7-data-classes/</guid>
+            <guid>https://stuartmccoll.github.io/posts/python-3.7-data-classes/</guid>
             <description>PEP 557 in the recently-released Python 3.7 added data classes to the standard Python library. Data classes can be thought of as mutable data holders and are somewhat similar to named tuples, although named tuples are immutable.
 Data classes provide a lot of boilerplate code, saving time and effort on the part of the Python programmer, although it could be argued that this layer of abstraction makes debugging more difficult.</description>
             <content type="html"><![CDATA[<p><a href="https://www.python.org/dev/peps/pep-0557/">PEP 557</a> in the recently-released <a href="">Python 3.7</a> added data classes to the standard Python library. Data classes can be thought of as mutable data holders and are somewhat similar to <a href="https://docs.python.org/2/library/collections.html#collections.namedtuple">named tuples</a>, although named tuples are immutable.</p>
@@ -558,10 +609,10 @@ Data classes provide a lot of boilerplate code, saving time and effort on the pa
         
         <item>
             <title>GitLab Changelog Generator</title>
-            <link>/posts/gitlab-changelog-generator/</link>
+            <link>https://stuartmccoll.github.io/posts/gitlab-changelog-generator/</link>
             <pubDate>Sat, 23 Jun 2018 22:50:00 +0000</pubDate>
             
-            <guid>/posts/gitlab-changelog-generator/</guid>
+            <guid>https://stuartmccoll.github.io/posts/gitlab-changelog-generator/</guid>
             <description>I&amp;rsquo;ve recently written a small command line utility using Python 3.6 which will produce a CHANGELOG.md file from the commit differences between two different GitLab project branches. I&amp;rsquo;ve released this as an open source Python package and it&amp;rsquo;s available from PyPi here. Not intended to be a direct replacement for writing a manual changelog, the utility should be used as a draft upon which to build.
 This was a small project to trial a few things; Python&amp;rsquo;s type hinting, which was added in PEP484; Facebook Open Source&amp;rsquo;s type checker Pyre; and Black &amp;lsquo;the uncompromising Python code formatter&amp;rsquo;.</description>
             <content type="html"><![CDATA[<p>I&rsquo;ve recently written a small command line utility using Python 3.6 which will produce a <code>CHANGELOG.md</code> file from the commit differences between two different GitLab project branches. I&rsquo;ve released this as an open source Python package and it&rsquo;s available from PyPi <a href="https://pypi.org/project/pip/">here</a>. Not intended to be a direct replacement for writing a manual changelog, the utility should be used as a draft upon which to build.</p>
@@ -576,10 +627,10 @@ This was a small project to trial a few things; Python&amp;rsquo;s type hinting,
         
         <item>
             <title>Add a Flask Application to a Docker Container</title>
-            <link>/posts/add-a-flask-application-to-a-docker-container/</link>
+            <link>https://stuartmccoll.github.io/posts/add-a-flask-application-to-a-docker-container/</link>
             <pubDate>Sun, 14 May 2017 10:10:32 +0000</pubDate>
             
-            <guid>/posts/add-a-flask-application-to-a-docker-container/</guid>
+            <guid>https://stuartmccoll.github.io/posts/add-a-flask-application-to-a-docker-container/</guid>
             <description>Flask is a microframework for Python, based on Werkzeug and Jinja2. The core Flask framework is extremely lightweight, albeit infinitely extensible, and it&amp;rsquo;s simple for an experienced developer to pick up. I had been using Laravel a lot at the beginning of the year and Flask has been a breeze to work with in comparison. With it&amp;rsquo;s extensibility I haven&amp;rsquo;t been locked into working with pre-defined components either; I&amp;rsquo;ve used different database abstraction layers across multiple projects, such as Redis and PostgreSQL.</description>
             <content type="html"><![CDATA[<p><a href="http://flask.pocoo.org/">Flask</a> is a microframework for Python, based on <a href="http://werkzeug.pocoo.org/">Werkzeug</a> and <a href="http://jinja.pocoo.org/docs/2.9/">Jinja2</a>. The core Flask framework is extremely lightweight, albeit infinitely extensible, and it&rsquo;s simple for an experienced developer to pick up. I had been using Laravel a lot at the beginning of the year and Flask has been a breeze to work with in comparison. With it&rsquo;s extensibility I haven&rsquo;t been locked into working with pre-defined components either; I&rsquo;ve used different database abstraction layers across multiple projects, such as <a href="https://redis.io/">Redis</a> and <a href="https://www.postgresql.org/">PostgreSQL</a>.</p>
 <p>We&rsquo;ll need a few things to begin, the first of which is a directory to house our Flask application, which we&rsquo;ll call <strong>flask_docker</strong>.</p>
@@ -617,10 +668,10 @@ This was a small project to trial a few things; Python&amp;rsquo;s type hinting,
         
         <item>
             <title>Quick and Dirty Kombu/RabbitMQ Application</title>
-            <link>/posts/quick-and-dirty-kombu/rabbitmq-application/</link>
+            <link>https://stuartmccoll.github.io/posts/quick-and-dirty-kombu/rabbitmq-application/</link>
             <pubDate>Sun, 14 May 2017 10:10:32 +0000</pubDate>
             
-            <guid>/posts/quick-and-dirty-kombu/rabbitmq-application/</guid>
+            <guid>https://stuartmccoll.github.io/posts/quick-and-dirty-kombu/rabbitmq-application/</guid>
             <description>Kombu is an open-source messaging library available for Python which aims to make messaging as simple as possible. Kombu provides a high-level interface for the Advanced Message Queuing Protocol (AMQP), an open standard protocol for message orientation, queuing, routing, reliability, and security. The most popular implementation of AMQP is the RabbitMQ open-source messaging server.
 In the example application we&amp;rsquo;re going to create here, we&amp;rsquo;re going to use Kombu and RabbitMQ in combination to do the following:</description>
             <content type="html"><![CDATA[<p><a href="https://github.com/celery/kombu">Kombu</a> is an open-source messaging library available for Python which aims to make messaging as simple as possible. Kombu provides a high-level interface for the <a href="http://amqp.org/">Advanced Message Queuing Protocol</a> (AMQP), an open standard protocol for message orientation, queuing, routing, reliability, and security. The most popular implementation of AMQP is the <a href="http://www.rabbitmq.com/">RabbitMQ</a> open-source messaging server.</p>

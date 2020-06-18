@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>idempotency on </title>
-    <link>/tags/idempotency/</link>
-    <description>Recent content in idempotency on </description>
+    <title>idempotency on Stuart McColl</title>
+    <link>https://stuartmccoll.github.io/tags/idempotency/</link>
+    <description>Recent content in idempotency on Stuart McColl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <lastBuildDate>Sun, 02 Sep 2018 18:50:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/idempotency/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://stuartmccoll.github.io/tags/idempotency/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Designing Resilient APIs with Idempotency</title>
-      <link>/posts/designing-resilient-apis-with-idempotency/</link>
+      <link>https://stuartmccoll.github.io/posts/designing-resilient-apis-with-idempotency/</link>
       <pubDate>Sun, 02 Sep 2018 18:50:00 +0000</pubDate>
       
-      <guid>/posts/designing-resilient-apis-with-idempotency/</guid>
+      <guid>https://stuartmccoll.github.io/posts/designing-resilient-apis-with-idempotency/</guid>
       <description>How can we design APIs to be resilient when our networks necessarily aren&amp;rsquo;t? An API should be robust enough to handle failure scenarios including connectivity drops, timeouts between resultant calls, and more. If a client makes a request to our API and loses connection during the request, how can we ensure that a successive identical request doesn&amp;rsquo;t alter the state of the system in a way that we weren&amp;rsquo;t expecting? This is where idempotence comes into play.</description>
     </item>
     
