@@ -6,10 +6,20 @@
     <description>Recent content in postman on Stuart McColl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 18 Jun 2020 19:30:00 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 22 Jun 2020 16:00:48 +0100</lastBuildDate>
     
 	<atom:link href="https://stuartmccoll.github.io/tags/postman/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Attaching to list items with the Microsoft SharePoint REST API</title>
+      <link>https://stuartmccoll.github.io/posts/2020-06-22-attaching-to-list-items-with-sharepoint-rest-api/</link>
+      <pubDate>Mon, 22 Jun 2020 16:00:48 +0100</pubDate>
+      
+      <guid>https://stuartmccoll.github.io/posts/2020-06-22-attaching-to-list-items-with-sharepoint-rest-api/</guid>
+      <description>In my last blog post I explained how to create list items with Microsoft&amp;rsquo;s legacy SharePoint REST API using Postman. This post builds on that work to attach a file to an existing list item.
+ Assuming you&amp;rsquo;ve been following along, we have a SharePoint list with at least one item in it that we&amp;rsquo;ve created through a request sent from Postman to the Microsoft SharePoint REST API. The item we created will have been assigned an id within SharePoint.</description>
+    </item>
     
     <item>
       <title>Creating list items with the Microsoft SharePoint REST API</title>

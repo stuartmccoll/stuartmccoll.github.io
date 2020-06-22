@@ -5,8 +5,30 @@
         <description>Recent content in Posts on Stuart McColl</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
-        <lastBuildDate>Thu, 18 Jun 2020 19:30:00 +0100</lastBuildDate>
+        <lastBuildDate>Mon, 22 Jun 2020 16:00:48 +0100</lastBuildDate>
         <atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Attaching to list items with the Microsoft SharePoint REST API</title>
+            <link>https://stuartmccoll.github.io/posts/2020-06-22-attaching-to-list-items-with-sharepoint-rest-api/</link>
+            <pubDate>Mon, 22 Jun 2020 16:00:48 +0100</pubDate>
+            
+            <guid>https://stuartmccoll.github.io/posts/2020-06-22-attaching-to-list-items-with-sharepoint-rest-api/</guid>
+            <description>In my last blog post I explained how to create list items with Microsoft&amp;rsquo;s legacy SharePoint REST API using Postman. This post builds on that work to attach a file to an existing list item.
+ Assuming you&amp;rsquo;ve been following along, we have a SharePoint list with at least one item in it that we&amp;rsquo;ve created through a request sent from Postman to the Microsoft SharePoint REST API. The item we created will have been assigned an id within SharePoint.</description>
+            <content type="html"><![CDATA[<p>In my <a href="../2020-06-18-creating-list-items-with-sharepoint-rest-api">last blog post</a> I explained how to create list items with Microsoft&rsquo;s legacy SharePoint REST API using Postman. This post builds on that work to attach a file to an existing list item.</p>
+<hr>
+<p>Assuming you&rsquo;ve been following along, we have a SharePoint list with at least one item in it that we&rsquo;ve created through a request sent from Postman to the Microsoft SharePoint REST API. The item we created will have been assigned an <code>id</code> within SharePoint. If you don&rsquo;t still have the response from our creation request to hand (which will have contained the ID in the response body), you can obtain it from SharePoint. Access the list item and then click the &lsquo;Copy Link&rsquo; shortcut. A URL will be copied to your clipboard which looks like the following:</p>
+<pre><code>https://contoso.sharepoint.com/Lists/Test%20list/DispForm.aspx?ID=1&amp;e=...
+</code></pre><p>The <code>id</code> we need is right there in the URL, within the <code>ID</code> parameter.</p>
+<p>Let&rsquo;s add an attachment to this list item. Open a new Postman request, which we&rsquo;ll be sending as a <code>POST</code>. Use the following details, where <code>contoso</code> is replaced with your own tenant name, <code>Test list</code> is replaced with your own SharePoint list name, and <code>id</code> with your own list item identifier as discussed above:</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">POST https://contoso.sharepoint.com/_api/web/lists/GetByTitle(&#39;Test list&#39;)/items(1)/AttachmentFiles/add(FileName=&#39;microsoft-logo.jpg&#39;)
+</span><span class="err">Authorization: Bearer {{appReg_bearerToken}}
+</span></code></pre></div><p>We&rsquo;re going to do something different this time. Select the &lsquo;Body&rsquo; tab and then the &lsquo;binary&rsquo; radio button. You should see a &lsquo;Select File&rsquo; button. We&rsquo;re going to upload the following image as our attachment:</p>
+<p><img src="/img/microsoft-logo.jpg" alt="Microsoft logo"></p>
+<p>Click the &lsquo;Select File&rsquo; button and then select the <code>microsoft-logo.jpg</code> file. Now click &lsquo;Send&rsquo; to send our <code>POST</code> request to the SharePoint REST API. You should receive a <code>200</code> HTTP status code in response, with an XML response body. The XML will contain some details about the attachment, such as the server relative path, etc. If you now browse to your list item within SharePoint you should be able to see that we&rsquo;ve successfully attached our file.</p>
+]]></content>
+        </item>
         
         <item>
             <title>Creating list items with the Microsoft SharePoint REST API</title>
