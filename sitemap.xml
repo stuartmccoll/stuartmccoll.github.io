@@ -3,6 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://stuartmccoll.github.io/posts/2020-07-16-github-secret-repository-readme/</loc>
+    <lastmod>2020-07-16T18:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stuartmccoll.github.io/posts/</loc>
+    <lastmod>2020-07-16T18:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stuartmccoll.github.io/</loc>
+    <lastmod>2020-07-16T18:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://stuartmccoll.github.io/tags/api/</loc>
     <lastmod>2020-06-22T16:00:48+01:00</lastmod>
   </url>
@@ -23,22 +38,12 @@
   </url>
   
   <url>
-    <loc>https://stuartmccoll.github.io/posts/</loc>
-    <lastmod>2020-06-22T16:00:48+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://stuartmccoll.github.io/tags/rest/</loc>
     <lastmod>2020-06-22T16:00:48+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://stuartmccoll.github.io/tags/sharepoint/</loc>
-    <lastmod>2020-06-22T16:00:48+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stuartmccoll.github.io/</loc>
     <lastmod>2020-06-22T16:00:48+01:00</lastmod>
   </url>
   
