@@ -6,11 +6,7 @@
     <description>Recent content in rest on Stuart McColl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 22 Jun 2020 16:00:48 +0100</lastBuildDate>
-    
-	<atom:link href="https://stuartmccoll.github.io/tags/rest/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 22 Jun 2020 16:00:48 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/tags/rest/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Attaching to list items with the Microsoft SharePoint REST API</title>
       <link>https://stuartmccoll.github.io/posts/2020-06-22-attaching-to-list-items-with-sharepoint-rest-api/</link>

@@ -6,11 +6,7 @@
     <description>Recent content in Tags on Stuart McColl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 22 Jun 2020 16:00:48 +0100</lastBuildDate>
-    
-	<atom:link href="https://stuartmccoll.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 22 Jun 2020 16:00:48 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>api</title>
       <link>https://stuartmccoll.github.io/tags/api/</link>
@@ -174,15 +170,6 @@
     </item>
     
     <item>
-      <title>software</title>
-      <link>https://stuartmccoll.github.io/tags/software/</link>
-      <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
-      
-      <guid>https://stuartmccoll.github.io/tags/software/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>software development</title>
       <link>https://stuartmccoll.github.io/tags/software-development/</link>
       <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
@@ -206,6 +193,15 @@
       <pubDate>Mon, 17 Jun 2019 10:00:00 +0000</pubDate>
       
       <guid>https://stuartmccoll.github.io/tags/microservices/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>software</title>
+      <link>https://stuartmccoll.github.io/tags/software/</link>
+      <pubDate>Mon, 17 Jun 2019 10:00:00 +0000</pubDate>
+      
+      <guid>https://stuartmccoll.github.io/tags/software/</guid>
       <description></description>
     </item>
     

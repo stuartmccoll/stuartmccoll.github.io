@@ -6,10 +6,26 @@
     <description>Recent content on Stuart McColl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 22 Jun 2020 16:00:48 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 21 Sep 2020 18:08:50 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Retrieving files from Microsoft Azure blob storage</title>
+      <link>https://stuartmccoll.github.io/posts/2020-09-21-azure-storage-api/</link>
+      <pubDate>Mon, 21 Sep 2020 18:08:50 +0100</pubDate>
+      
+      <guid>https://stuartmccoll.github.io/posts/2020-09-21-azure-storage-api/</guid>
+      <description>Recently on the Digital Service Design Team at The National Lottery Heritage Fund we&amp;rsquo;ve been investigating Microsoft Azure blob storage as an option for storing files as part of a service we&amp;rsquo;re building.
+Before writing any code, we tested some of our assumptions about things like access and structure by calling the Microsoft Azure Storage REST API from Postman. This post documents a few of those tests using a basic Azure blob storage setup, using a Shared Key authorisation scheme to list files in a container; list files using a prefix; and to retrieve a specific file.</description>
+    </item>
     
-	<atom:link href="https://stuartmccoll.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
+    <item>
+      <title>Enabling the GitHub Secret Profile README.md</title>
+      <link>https://stuartmccoll.github.io/posts/2020-07-16-github-secret-repository-readme/</link>
+      <pubDate>Thu, 16 Jul 2020 18:00:00 +0100</pubDate>
+      
+      <guid>https://stuartmccoll.github.io/posts/2020-07-16-github-secret-repository-readme/</guid>
+      <description>People on Twitter have recently discovered a GitHub secret. If you create a new GitHub repository with the same name as your profile name, you can add a README.md to your GitHub profile 1.
+How to create a GitHub profile README.md   Create a new GitHub repository. You&amp;rsquo;ll see two mandatory options when creating your repository - the &amp;lsquo;Owner&amp;rsquo; dropdown field and the &amp;lsquo;Repository name&amp;rsquo; input field. Ensure that the &amp;lsquo;Repository name&amp;rsquo; value is the same as the value in the &amp;lsquo;Owner&amp;rsquo; dropdown field.</description>
+    </item>
     
     <item>
       <title>Attaching to list items with the Microsoft SharePoint REST API</title>
