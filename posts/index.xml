@@ -5,8 +5,38 @@
         <description>Recent content in Posts on Stuart McColl</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
-        <lastBuildDate>Mon, 21 Sep 2020 18:08:50 +0100</lastBuildDate>
+        <lastBuildDate>Sat, 10 Oct 2020 11:41:22 +0100</lastBuildDate>
         <atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>The Push Declined Due to Email Privacy Restrictions error</title>
+            <link>https://stuartmccoll.github.io/posts/2020-10-10-push-declined-due-to-email-privacy-restrictions/</link>
+            <pubDate>Sat, 10 Oct 2020 11:41:22 +0100</pubDate>
+            
+            <guid>https://stuartmccoll.github.io/posts/2020-10-10-push-declined-due-to-email-privacy-restrictions/</guid>
+            <description>This is a quick blog post detailing what to do if you receive the push declined due to email privacy restrictions error when attempting to push to a GitHub repository.
+The error message tells us that your GitHub account has been configured to disallow the pushing of commits which might reveal a personal email address.
+This means that in order to push commits to this remote repository, you&amp;rsquo;ll need to do one of two things:</description>
+            <content type="html"><![CDATA[<p>This is a quick blog post detailing what to do if you receive the <code>push declined due to email privacy restrictions</code> error when attempting to push to a GitHub repository.</p>
+<p>The error message tells us that your GitHub account has been configured to disallow the pushing of commits which might reveal a personal email address.</p>
+<p>This means that in order to push commits to this remote repository, you&rsquo;ll need to do one of two things:</p>
+<ol>
+<li>Enable command line pushes that will expose a personal email address.</li>
+<li>Or, configure Git to use your GitHub noreply address.</li>
+</ol>
+<p>I&rsquo;m going to assume that you&rsquo;ve configured your GitHub account to block command line pushes that expose a personal email address - however, if you didn&rsquo;t mean to do this and are happy to disable this setting then you can do so within the <a href="https://github.com/settings/emails">emails settings</a> in GitHub. Find the &lsquo;<em>Block command line pushes that expose my email</em>&rsquo; setting and disable it by unchecking the checkbox.</p>
+<p>If you&rsquo;d like to keep this setting enabled and push commits to your remote repository, then you&rsquo;ll need to configure Git to use your GitHub no reply address. Let&rsquo;s start by grabbing that.</p>
+<p>Head to the <a href="https://github.com/settings/profile">Settings</a> section of GitHub, and then select the <a href="https://github.com/settings/emails">Emails</a> menu item. In here, you&rsquo;ll find a checkbox labeled &lsquo;<em>Keep my email addresses private</em>'. Within the description for this label, you&rsquo;ll find your GitHub noreply address. It&rsquo;ll be in the format <code>&lt;number&gt;+&lt;your_github_username&gt;@users.noreply.github.com</code>. Copy this to your clipboard, as we&rsquo;ll need it in a second.</p>
+<p>In a terminal run the following command to add your GitHub noreply address to your global Git configuration:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git config --global user.email &lt;number&gt;+&lt;your_github_username&gt;@users.noreply.github.com
+</code></pre></div><p>With that in place, we&rsquo;re going to want to reset the author on your previous commit. If you only made <em>one</em> commit, then you&rsquo;ll want to run the following command:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git commit --amend --reset-author
+</code></pre></div><p>If you made multiple commits using your private email address, then you&rsquo;ll need to find the SHA for the commit <em>before</em> your first commit using your private email address. Once you have this, you&rsquo;ll want to run the following command (replacing <code>&lt;sha_of_previous_commit&gt;</code> with the SHA value found):</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git rebase -i &lt;sha_of_previous_commit&gt; -x <span class="s2">&#34;git commit --amend --reset-author -CHEAD&#34;</span>
+</code></pre></div><p>The <code>-x</code> parameter allows us to append a shell command after each line creating a commit in the final history.</p>
+<p>Assuming everything worked okay, you&rsquo;ll now be able to run <code>git push</code> to push your commits to GitHub.</p>
+]]></content>
+        </item>
         
         <item>
             <title>Retrieving files from Microsoft Azure blob storage</title>
