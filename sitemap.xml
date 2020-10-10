@@ -4,16 +4,21 @@
   
   <url>
     <loc>https://stuartmccoll.github.io/posts/</loc>
-    <lastmod>2020-09-21T18:08:50+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stuartmccoll.github.io/posts/2020-09-21-azure-storage-api/</loc>
-    <lastmod>2020-09-21T18:08:50+01:00</lastmod>
+    <lastmod>2020-10-10T11:41:22+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://stuartmccoll.github.io/</loc>
+    <lastmod>2020-10-10T11:41:22+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stuartmccoll.github.io/posts/2020-10-10-push-declined-due-to-email-privacy-restrictions/</loc>
+    <lastmod>2020-10-10T11:41:22+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://stuartmccoll.github.io/posts/2020-09-21-azure-storage-api/</loc>
     <lastmod>2020-09-21T18:08:50+01:00</lastmod>
   </url>
   
@@ -153,6 +158,11 @@
   </url>
   
   <url>
+    <loc>https://stuartmccoll.github.io/tags/software/</loc>
+    <lastmod>2020-02-07T20:45:35+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://stuartmccoll.github.io/tags/software-development/</loc>
     <lastmod>2020-02-07T20:45:35+00:00</lastmod>
   </url>
@@ -169,11 +179,6 @@
   
   <url>
     <loc>https://stuartmccoll.github.io/tags/microservices/</loc>
-    <lastmod>2019-06-17T10:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://stuartmccoll.github.io/tags/software/</loc>
     <lastmod>2019-06-17T10:00:00+00:00</lastmod>
   </url>
   
