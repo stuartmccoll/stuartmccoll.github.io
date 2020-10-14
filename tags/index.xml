@@ -6,10 +6,55 @@
     <description>Recent content in Tags on Stuart McColl</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 22 Jun 2020 16:00:48 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 14 Oct 2020 10:00:00 +0100</lastBuildDate>
     
 	<atom:link href="https://stuartmccoll.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>automation</title>
+      <link>https://stuartmccoll.github.io/tags/automation/</link>
+      <pubDate>Wed, 14 Oct 2020 10:00:00 +0100</pubDate>
+      
+      <guid>https://stuartmccoll.github.io/tags/automation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>microsoft</title>
+      <link>https://stuartmccoll.github.io/tags/microsoft/</link>
+      <pubDate>Wed, 14 Oct 2020 10:00:00 +0100</pubDate>
+      
+      <guid>https://stuartmccoll.github.io/tags/microsoft/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PowerShell</title>
+      <link>https://stuartmccoll.github.io/tags/powershell/</link>
+      <pubDate>Wed, 14 Oct 2020 10:00:00 +0100</pubDate>
+      
+      <guid>https://stuartmccoll.github.io/tags/powershell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>windows</title>
+      <link>https://stuartmccoll.github.io/tags/windows/</link>
+      <pubDate>Wed, 14 Oct 2020 10:00:00 +0100</pubDate>
+      
+      <guid>https://stuartmccoll.github.io/tags/windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>windows 10</title>
+      <link>https://stuartmccoll.github.io/tags/windows-10/</link>
+      <pubDate>Wed, 14 Oct 2020 10:00:00 +0100</pubDate>
+      
+      <guid>https://stuartmccoll.github.io/tags/windows-10/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>api</title>
@@ -17,15 +62,6 @@
       <pubDate>Mon, 22 Jun 2020 16:00:48 +0100</pubDate>
       
       <guid>https://stuartmccoll.github.io/tags/api/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>microsoft</title>
-      <link>https://stuartmccoll.github.io/tags/microsoft/</link>
-      <pubDate>Mon, 22 Jun 2020 16:00:48 +0100</pubDate>
-      
-      <guid>https://stuartmccoll.github.io/tags/microsoft/</guid>
       <description></description>
     </item>
     
