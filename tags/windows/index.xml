@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>windows on Stuart McColl</title>
+    <link>https://stuartmccoll.github.io/tags/windows/</link>
+    <description>Recent content in windows on Stuart McColl</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 14 Oct 2020 10:00:00 +0100</lastBuildDate>
+    
+	<atom:link href="https://stuartmccoll.github.io/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Automate the shutdown of a Windows 10 PC</title>
+      <link>https://stuartmccoll.github.io/posts/2020-10-14-automate-windows-10-shutdown/</link>
+      <pubDate>Wed, 14 Oct 2020 10:00:00 +0100</pubDate>
+      
+      <guid>https://stuartmccoll.github.io/posts/2020-10-14-automate-windows-10-shutdown/</guid>
+      <description>Using the shutdown command Setting a single, non-repeatable shutdown timer can be done using the shutdown command, which can be run in the Command Prompt or PowerShell. Let&amp;rsquo;s use PowerShell as an example.
+ Search for &amp;lsquo;PowerShell&amp;rsquo; in the start menu and open the app that is returned. Run the command shutdown -s -t TimeInSeconds where TimeInSeconds is replaced with the number of seconds after which you want the Windows 10 PC to shutdown.</description>
+    </item>
+    
+  </channel>
+</rss>
