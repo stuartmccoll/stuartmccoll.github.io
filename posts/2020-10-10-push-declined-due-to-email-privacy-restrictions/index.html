@@ -17,7 +17,7 @@ This means that in order to push commits to this remote repository, you&amp;rsqu
 <title>
     The Push Declined Due to Email Privacy Restrictions error :: Stuart McColl 
 </title>
-<link rel="stylesheet" href="/main.min.9b276610b5993837f29d9c1e20b9e04db4f387b683b8034a6bf96f7fbfad81dc.css"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/main.min.eb1b7d3000a8275af4d8e79188963265e6f59cededf319c3200e043f9b86a0ab.css"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
@@ -26,14 +26,9 @@ This means that in order to push commits to this remote repository, you&amp;rsqu
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="The Push Declined Due to Email Privacy Restrictions error">
 <meta itemprop="description" content="This is a quick blog post detailing what to do if you receive the push declined due to email privacy restrictions error when attempting to push to a GitHub repository.
 The error message tells us that your GitHub account has been configured to disallow the pushing of commits which might reveal a personal email address.
-This means that in order to push commits to this remote repository, you&rsquo;ll need to do one of two things:">
-<meta itemprop="datePublished" content="2020-10-10T11:41:22&#43;01:00" />
+This means that in order to push commits to this remote repository, you&rsquo;ll need to do one of two things:"><meta itemprop="datePublished" content="2020-10-10T11:41:22&#43;01:00" />
 <meta itemprop="dateModified" content="2020-10-10T11:41:22&#43;01:00" />
-<meta itemprop="wordCount" content="402">
-<meta itemprop="image" content="https://stuartmccoll.github.io"/>
-
-
-
+<meta itemprop="wordCount" content="402"><meta itemprop="image" content="https://stuartmccoll.github.io"/>
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://stuartmccoll.github.io"/>
 
@@ -83,7 +78,7 @@ This means that in order to push commits to this remote repository, you&rsquo;ll
 </ol>
 <p>I&rsquo;m going to assume that you&rsquo;ve configured your GitHub account to block command line pushes that expose a personal email address - however, if you didn&rsquo;t mean to do this and are happy to disable this setting then you can do so within the <a href="https://github.com/settings/emails">emails settings</a> in GitHub. Find the &lsquo;<em>Block command line pushes that expose my email</em>&rsquo; setting and disable it by unchecking the checkbox.</p>
 <p>If you&rsquo;d like to keep this setting enabled and push commits to your remote repository, then you&rsquo;ll need to configure Git to use your GitHub no reply address. Let&rsquo;s start by grabbing that.</p>
-<p>Head to the <a href="https://github.com/settings/profile">Settings</a> section of GitHub, and then select the <a href="https://github.com/settings/emails">Emails</a> menu item. In here, you&rsquo;ll find a checkbox labeled &lsquo;<em>Keep my email addresses private</em>'. Within the description for this label, you&rsquo;ll find your GitHub noreply address. It&rsquo;ll be in the format <code>&lt;number&gt;+&lt;your_github_username&gt;@users.noreply.github.com</code>. Copy this to your clipboard, as we&rsquo;ll need it in a second.</p>
+<p>Head to the <a href="https://github.com/settings/profile">Settings</a> section of GitHub, and then select the <a href="https://github.com/settings/emails">Emails</a> menu item. In here, you&rsquo;ll find a checkbox labeled &lsquo;<em>Keep my email addresses private</em>&rsquo;. Within the description for this label, you&rsquo;ll find your GitHub noreply address. It&rsquo;ll be in the format <code>&lt;number&gt;+&lt;your_github_username&gt;@users.noreply.github.com</code>. Copy this to your clipboard, as we&rsquo;ll need it in a second.</p>
 <p>In a terminal run the following command to add your GitHub noreply address to your global Git configuration:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git config --global user.email &lt;number&gt;+&lt;your_github_username&gt;@users.noreply.github.com
 </code></pre></div><p>With that in place, we&rsquo;re going to want to reset the author on your previous commit. If you only made <em>one</em> commit, then you&rsquo;ll want to run the following command:</p>
@@ -146,8 +141,8 @@ This means that in order to push commits to this remote repository, you&rsquo;ll
             </li>
             
             <li>This static site was generated using
-                <a href="https://github.com/gohugoio/hugo/releases/tag/v0.68.3">
-                    Hugo version 0.68.3
+                <a href="https://github.com/gohugoio/hugo/releases/tag/v0.82.0">
+                    Hugo version 0.82.0
                 </a>
             </li>
             
