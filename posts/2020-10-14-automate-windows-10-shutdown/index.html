@@ -16,7 +16,7 @@
 <title>
     Automate the shutdown of a Windows 10 PC :: Stuart McColl 
 </title>
-<link rel="stylesheet" href="/main.min.9b276610b5993837f29d9c1e20b9e04db4f387b683b8034a6bf96f7fbfad81dc.css"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/main.min.eb1b7d3000a8275af4d8e79188963265e6f59cededf319c3200e043f9b86a0ab.css"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
@@ -24,14 +24,9 @@
 <link rel="shortcut icon" href="/favicon.ico">
 <meta name="theme-color" content="#252627"><meta itemprop="name" content="Automate the shutdown of a Windows 10 PC">
 <meta itemprop="description" content="Using the shutdown command Setting a single, non-repeatable shutdown timer can be done using the shutdown command, which can be run in the Command Prompt or PowerShell. Let&rsquo;s use PowerShell as an example.
- Search for &lsquo;PowerShell&rsquo; in the start menu and open the app that is returned. Run the command shutdown -s -t TimeInSeconds where TimeInSeconds is replaced with the number of seconds after which you want the Windows 10 PC to shutdown.">
-<meta itemprop="datePublished" content="2020-10-14T10:00:00&#43;01:00" />
+ Search for &lsquo;PowerShell&rsquo; in the start menu and open the app that is returned. Run the command shutdown -s -t TimeInSeconds where TimeInSeconds is replaced with the number of seconds after which you want the Windows 10 PC to shutdown."><meta itemprop="datePublished" content="2020-10-14T10:00:00&#43;01:00" />
 <meta itemprop="dateModified" content="2020-10-14T10:00:00&#43;01:00" />
-<meta itemprop="wordCount" content="433">
-<meta itemprop="image" content="https://stuartmccoll.github.io/img/microsoft-windows-logo.png">
-
-
-
+<meta itemprop="wordCount" content="433"><meta itemprop="image" content="https://stuartmccoll.github.io/img/microsoft-windows-logo.png">
 <meta itemprop="keywords" content="microsoft,windows,windows 10,automation,PowerShell," /><meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://stuartmccoll.github.io/img/microsoft-windows-logo.png"/>
 
@@ -83,9 +78,9 @@
 <h2 id="using-task-scheduler">Using Task Scheduler</h2>
 <ol>
 <li>Search for &lsquo;<em>Task Scheduler</em>&rsquo; in the start menu and open the app that is returned.</li>
-<li>Once opened, select the &lsquo;<em>Create basic task</em>&rsquo; option. This will open a &lsquo;<em>Basic Task Creation Wizard</em>'.</li>
-<li>Within the wizard, enter a name for this task. The description field is optional. Let&rsquo;s call ours &lsquo;<strong>Shutdown</strong>', then click the &lsquo;<em>Next</em>&rsquo; button.</li>
-<li>The wizard will present you with a list of radio button options for how often you want your task to run. You can choose options such as daily or weekly, as well as other more specific options such as &lsquo;<em>one time</em>&rsquo; or &lsquo;<em>when the computer starts</em>'. Choose the option appropriate to your use case, here we&rsquo;ll go with &lsquo;<em>one time</em>'.</li>
+<li>Once opened, select the &lsquo;<em>Create basic task</em>&rsquo; option. This will open a &lsquo;<em>Basic Task Creation Wizard</em>&rsquo;.</li>
+<li>Within the wizard, enter a name for this task. The description field is optional. Let&rsquo;s call ours &lsquo;<strong>Shutdown</strong>&rsquo;, then click the &lsquo;<em>Next</em>&rsquo; button.</li>
+<li>The wizard will present you with a list of radio button options for how often you want your task to run. You can choose options such as daily or weekly, as well as other more specific options such as &lsquo;<em>one time</em>&rsquo; or &lsquo;<em>when the computer starts</em>&rsquo;. Choose the option appropriate to your use case, here we&rsquo;ll go with &lsquo;<em>one time</em>&rsquo;.</li>
 <li>The wizard will present you with the option of specifying a date and time for the task to run. Again, choose the option appropriate to your use case.</li>
 <li>Finally, the wizard will present you with the option of a program or script to run, as well as aguments to pass when running. As we&rsquo;re creating a task to shutdown our Windows 10 PC, enter <code>shutdown.exe</code> in the <em>&lsquo;Program/script</em>&rsquo; field, and then enter <code>/s</code> in the &lsquo;<em>Add arguments (optional)</em>&rsquo; field. Click the &lsquo;<em>Next</em>&rsquo; button.</li>
 <li>The wizard will present you with an overview of your task. Confirm that everything is okay by clicking the &lsquo;<em>Finish</em>&rsquo; button.</li>
@@ -145,8 +140,8 @@
             </li>
             
             <li>This static site was generated using
-                <a href="https://github.com/gohugoio/hugo/releases/tag/v0.68.3">
-                    Hugo version 0.68.3
+                <a href="https://github.com/gohugoio/hugo/releases/tag/v0.82.0">
+                    Hugo version 0.82.0
                 </a>
             </li>
             
