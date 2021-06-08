@@ -19,7 +19,7 @@ To authorise our external system - in this case Postman, but it could also be an
 
 To begin, login to your SharePoint site. Then, access the following URL (where `contoso` is your own tenant name):
 
-```
+```http
 https://contoso.sharepoint.com/_layouts/15/appregnew.aspx
 ```
 
@@ -29,7 +29,7 @@ This page allows us to register our SharePoint Add-In. You should see five input
 
 Assuming you're still logged into your SharePoint site, access the following URL (again, where `contoso` is your own tenant name):
 
-```
+```http
 https://contoso.sharepoint.com/_layouts/15/appinv.aspx
 ```
 
@@ -63,7 +63,7 @@ Enter a descriptive environment name - such as `Microsoft SharePoint REST API`. 
 
 To find your tenant ID, you can send a `GET` request to (where `contoso` is your own tenant name):
 
-```
+```http
 https://contoso.sharepoint.com/_vti_bin/client.svc/
 ```
 
@@ -77,7 +77,7 @@ With that done, click 'Add' to save our Postman environment.
 
 Let's create a new Postman request, with an HTTP method of `POST`. Our URL should be:
 
-```
+```http
 https://accounts.accesscontrol.windows.net/{{realm}}/tokens/OAuth/2
 ```
 

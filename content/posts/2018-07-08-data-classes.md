@@ -7,7 +7,7 @@ slug = "Python 3.7 Data Classes"
 type = "post"
 +++
 
-[PEP 557](https://www.python.org/dev/peps/pep-0557/) in the recently-released [Python 3.7]() added data classes to the standard Python library. Data classes can be thought of as mutable data holders and are somewhat similar to [named tuples](https://docs.python.org/2/library/collections.html#collections.namedtuple), although named tuples are immutable.
+[PEP 557](https://www.python.org/dev/peps/pep-0557/) in the recently-released [Python 3.7](https://www.python.org/downloads/release/python-370/) added data classes to the standard Python library. Data classes can be thought of as mutable data holders and are somewhat similar to [named tuples](https://docs.python.org/2/library/collections.html#collections.namedtuple), although named tuples are immutable.
 
 Data classes provide a lot of boilerplate code, saving time and effort on the part of the Python programmer, although it could be argued that this layer of abstraction makes debugging more difficult.
 
@@ -17,10 +17,10 @@ Consider the following class:
 
 ```python
 class BankAccount():
-	def __init__(self, id, balance, customer_id):
-		self.id = id
-		self.balance = balance
-		self.customer_id = customer_id
+  def __init__(self, id, balance, customer_id):
+    self.id = id
+    self.balance = balance
+    self.customer_id = customer_id
 ```
 
 This provides us with the minimal ability to initialise a new BankAccount object, although we've had to reference `id`, `balance`, and `customer_id` three times in this small piece of code.
@@ -38,15 +38,15 @@ In order to be able to compare our `my_account` and `your_account` objects succe
 
 ```python
 class BankAccount():
-	def __init__(self, id, balance, customer_id):
-		self.id = id
-		self.balance = balance
-		self.customer_id = customer_id
+  def __init__(self, id, balance, customer_id):
+    self.id = id
+    self.balance = balance
+    self.customer_id = customer_id
 
-	def __eq__(self, other):
-		if self.__class__ is other.__class__:
-			return (self.id, self.balance, self.customer_id) == (other.id, other.balance, other.customer_id)
-		return NotImplemented
+  def __eq__(self, other):
+    if self.__class__ is other.__class__:
+      return (self.id, self.balance, self.customer_id) == (other.id, other.balance, other.customer_id)
+    return NotImplemented
 ```
 
 If we initialise our two objects again and compare them now, we'll get the `True` response that we're expecting. If we were to initialise the `your_account` object with an `id` value of `2`, and a `customer_id` value of `2`, we'd get the correct response of `False` when comparing the two objects.
@@ -68,9 +68,9 @@ from dataclasses import dataclass
 
 @dataclass
 class DataClassBankAccount():
-	id: int
-	balance: int
-	customer_id: int
+  id: int
+  balance: int
+  customer_id: int
 ```
 
 Data classes generate all of this boilerplate code for us, but they don't stop at just the `__init__` and `__eq__` methods - they can also generate `__repr__`, `__ne__`, `__lt__`, `__le__`, `__gt__`, and `__ge__` methods too, if the `order` parameter is specified as `True` (this is done at the `@dataclass` level, i.e. `@dataclass(order=True)`). Additional methods can be added to the data class as you would for a normal class. The `@dataclass` decorator inspects a class definition for fields with type annotations (added in [PEP 526](https://www.python.org/dev/peps/pep-0526/)). These type annotations are _mandatory_ when creating data classes as fields without type annotations will simply be ignored. We can now initialise and compare our two objects straight away:
@@ -95,9 +95,9 @@ Let's compare for a moment our bank account data class and an implementation of 
 from typing import NamedTuple
 
 class NamedTupleBankAccount(NamedTuple):
-	id: int
-	balance: int
-	customer_id: int
+  id: int
+  balance: int
+  customer_id: int
 ```
 
 There's no great difference here, other than the fact that our data class was described using a decorator, whilst the named tuple subclasses `NamedTuple`. There are other similarities too. For instance, with our data class we can create a new object from an existing data class object.
@@ -165,9 +165,9 @@ We can set default values for our specified data class fields. Let's take a look
 
 ```python
 class Animal:
-	def __init__(self, type, legs=4):
-		self.type = type
-		self.legs = legs
+  def __init__(self, type, legs=4):
+    self.type = type
+    self.legs = legs
 ```
 
 When declaring our data class, we declare our default value(s) differently.
@@ -175,8 +175,8 @@ When declaring our data class, we declare our default value(s) differently.
 ```python
 @dataclass
 class Animal:
-	type: str
-	legs: int = 4
+  type: str
+  legs: int = 4
 ```
 
 The above data class will give the below output when initialising objects.
@@ -196,13 +196,13 @@ from datetime import datetime
 
 @dataclass
 class AdvancedBankAccount():
-	id: int
-	balance: int = field(metadata={"currency": "GBP"})
-	customer_id: int
-	accessed_by: list = field(default_factory=list)
+  id: int
+  balance: int = field(metadata={"currency": "GBP"})
+  customer_id: int
+  accessed_by: list = field(default_factory=list)
 
-	def access(self, accessor_id):
-		self.accessed_by.append((accessor_id, datetime.now()))
+  def access(self, accessor_id):
+    self.accessed_by.append((accessor_id, datetime.now()))
 ```
 
 ```python
@@ -225,8 +225,8 @@ from dataclasses import field
 
 @dataclass
 class Animal():
-	type: str = field(repr=False)
-	legs: int = 4
+  type: str = field(repr=False)
+  legs: int = 4
 ```
 
 And we could also not include a specific field when comparing two objects from the same data class.
@@ -236,8 +236,8 @@ from dataclasses import field
 
 @dataclass
 class Animal():
-	type: str = field(order=False)
-	legs: int = 4
+  type: str = field(order=False)
+  legs: int = 4
 ```
 
 ### Immutable data classes
@@ -249,8 +249,8 @@ from dataclasses import field
 
 @dataclass(frozen=True)
 class Animal():
-	type: str
-	legs: int
+  type: str
+  legs: int
 ```
 
 The `frozen=True` argument that we've passed to the `@dataclass` decorator means that we won't be able to assign values to any objects created from this data class after their initialisation.

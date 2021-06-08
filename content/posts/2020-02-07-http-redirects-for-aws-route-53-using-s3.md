@@ -13,7 +13,7 @@ Out of the box, Route 53 doesn't provide the ability to redirect to sites hosted
 
 ## Guide
 
-Create a new S3 bucket in the [Amazon S3 console](https://console.aws.amazon.com/s3/). Give it a name which matches your domain - `example.com`. Keep all of the default settings. 
+Create a new S3 bucket in the [Amazon S3 console](https://console.aws.amazon.com/s3/). Give it a name which matches your domain - `example.com`. Keep all of the default settings.
 
 Once created, enter the 'Properties' section of the bucket, and select 'Static Website Hosting'. In here, select 'Redirect all request to another host name', which will provide you with two input fields to fill in. Add the domain to redirect to in the first, let's assume it's `https://www.example.net`, and enter one of `http` or `https` in the second, before saving.
 

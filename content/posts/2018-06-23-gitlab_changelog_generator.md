@@ -14,13 +14,13 @@ This was a small project to trial a few things; Python's type hinting, which was
 If you're interested in using this utility, you can install it using [pip](https://pypi.org/project/pip/) by running the following command:
 
 ```bash
-$ pip install gitlab-changelog-generator
+pip install gitlab-changelog-generator
 ```
 
 An example command to generate a `CHANGELOG.md` file from the difference in commits between `master` and `release` branches for a locally hosted GitLab repository project named 'test-project', labelling the version as 1.1.
 
 ```bash
-$ changegen --ip localhost --group test-projects --project test-project --branches master release --version 1.1
+changegen --ip localhost --group test-projects --project test-project --branches master release --version 1.1
 ```
 
 I've got some tidying up left to do such as better exception handling and cleaner logging, but the package works in it's current state. You can contribute features or towards existing issues by raising a [pull request](https://help.github.com/articles/creating-a-pull-request/) at the project GitHub [repository](https://github.com/stuartmccoll/gitlab-changelog-generator).

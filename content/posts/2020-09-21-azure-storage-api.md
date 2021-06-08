@@ -6,7 +6,7 @@ images:
 - img/microsoft-azure-logo.png
 ---
 
-Recently on the Digital Service Design Team at [The National Lottery Heritage Fund](https://www.heritagefund.org.uk/) we've been investigating [Microsoft Azure blob storage](https://azure.microsoft.com/en-gb/services/storage/blobs/) as an option for storing files as part of a service we're building. 
+Recently on the Digital Service Design Team at [The National Lottery Heritage Fund](https://www.heritagefund.org.uk/) we've been investigating [Microsoft Azure blob storage](https://azure.microsoft.com/en-gb/services/storage/blobs/) as an option for storing files as part of a service we're building.
 
 Before writing any code, we tested some of our assumptions about things like access and structure by calling the [Microsoft Azure Storage REST API](https://docs.microsoft.com/en-us/rest/api/storageservices/) from [Postman](https://www.postman.com). This post documents a few of those tests using a basic Azure blob storage setup, using a Shared Key authorisation scheme to list files in a container; list files using a prefix; and to retrieve a specific file.
 
@@ -50,7 +50,7 @@ That's the end of our preparation. In our Azure account we now have a Storage Ac
 
 Our file in Azure will have a URI that looks something like:
 
-```
+```http
 https://storage_account_name.blob.core.windows.net/container_name/test.txt
 ```
 
@@ -64,7 +64,7 @@ In Postman, click the **Eye** (Environment quick look) icon in the top right-han
 
 Now, let's create a new Postman request - choose `GET` as the HTTP method. For our URI, let's begin by listing the files within the container. To do so, the URI will have the following format:
 
-```
+```http
 https://storage_account_name.blob.core.windows.net/container_name?restype=container&comp=list
 ```
 
@@ -146,7 +146,7 @@ Now, hit the **Send** button in Postman. You should receive back something simil
 
 Listing files using a prefix isn't too dissimilar. First, let's try with a prefix that won't match anything. Start with the same request as above, but this time let's set our request URI to:
 
-```
+```http
 https://storage_account_name.blob.core.windows.net/container_name?restype=container&comp=list&prefix=nofileshere
 ```
 
@@ -194,7 +194,7 @@ Finally, we want to retrieve the contents of our file. We know it's there, so ho
 
 Change the URI in your Postman request to:
 
-```
+```http
 https://storage_account_name.blob.core.windows.net/container_name/test.txt
 ```
 

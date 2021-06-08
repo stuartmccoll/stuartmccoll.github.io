@@ -13,7 +13,7 @@ If you were following along previously, the last thing we did was to request an 
 
 You should still have a Postman tab open ready to send a request to the following URL:
 
-```
+```http
 https://accounts.accesscontrol.windows.net/{{realm}}/tokens/OAuth/2
 ```
 
