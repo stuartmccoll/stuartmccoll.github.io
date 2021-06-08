@@ -12,7 +12,7 @@ type = "post"
 We'll need a few things to begin, the first of which is a directory to house our Flask application, which we'll call **flask_docker**.
 
 ```bash
-$ mkdir flask_docker
+mkdir flask_docker
 ```
 
 Within this directory we're going to need to create two different files. Firstly, we'll create our Flask application. For this, I'm going to create a simple Flask app that'll return a string of text when the root directory is hit within a web browser.
@@ -50,13 +50,13 @@ Once our base image has been established, our Dockerfile has a few more commands
 ## Building the Docker Image
 
 ```bash
-$ docker build -t our-flask-app .
+docker build -t our-flask-app .
 ```
 
 This command will build the Dockerfile within the current working directory, giving the image a name of 'our-flask-app'.
 
 ```bash
-$ docker run -d -p 5000:5000 our-flask-app
+docker run -d -p 5000:5000 our-flask-app
 ```
 
 Lastly, this command builds our Docker container, which in turn runs our Flask application. The arguments we pass in here run the container in headless mode and map port 5000 on our local machine to port 5000 within our Docker container. Now, if we visit [http://0.0.0.0:5000/](http://0.0.0.0:5000/) in a web browser we'll be served the string that our Flask application returns.

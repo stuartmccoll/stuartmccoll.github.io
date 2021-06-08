@@ -4,7 +4,7 @@ date: 2019-05-06T17:58:41+01:00
 draft: false
 ---
 
-# About
+## About
 
 Stuart McColl is a Senior Software Developer for the [National Lottery Heritage Fund](https://www.heritagefund.org.uk). He's helping to build user-centered digital services to give a rewarding, usable experience to applicants and grantees, from their first tentative look at the Fund all the way through to them being awarded funding and becoming a grantee.
 

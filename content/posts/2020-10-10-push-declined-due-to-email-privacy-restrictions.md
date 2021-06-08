@@ -6,7 +6,7 @@ draft: false
 
 This is a quick blog post detailing what to do if you receive the `push declined due to email privacy restrictions` error when attempting to push to a GitHub repository.
 
-The error message tells us that your GitHub account has been configured to disallow the pushing of commits which might reveal a personal email address. 
+The error message tells us that your GitHub account has been configured to disallow the pushing of commits which might reveal a personal email address.
 
 This means that in order to push commits to this remote repository, you'll need to do one of two things:
 

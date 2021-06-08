@@ -10,7 +10,7 @@ tags = ["microservices", "design patterns", "software"]
 
 The aggregator design pattern is a simple way of providing a single, unified service capable of surfacing data from multiple microservices, and a commonly used pattern when implementing a microservice-based architecture.
 
-Let's imagine that we've been tasked with developing an internal API for our organisation - a general practice clinic. The API needs to consume data from three existing microservices, each of which is used by other services within the practice's architecture - some services call these individually, some call all three. 
+Let's imagine that we've been tasked with developing an internal API for our organisation - a general practice clinic. The API needs to consume data from three existing microservices, each of which is used by other services within the practice's architecture - some services call these individually, some call all three.
 
 The requirements for the API are that it should return simple details for a patient, a list of their allergies and a list of medication that they are currently taking.
 
@@ -26,7 +26,7 @@ Rather than increasing the number of services which call these microservices dir
 
 ![Simple component diagram demonstrating an example of the aggregator design pattern][real-example-architecture]
 
-Our new internal API will call our new aggregator microservice, which will call the three existing microservices before then pushing the necessary results back up to the internal API. 
+Our new internal API will call our new aggregator microservice, which will call the three existing microservices before then pushing the necessary results back up to the internal API.
 
 We can re-use our aggregator within other services which call *all three* existing services, decoupling these from direct interaction with the microservices, which will make it easier to replace one later down the line; if we want to suddenly commission a new allergies microservice, we only have to update the aggregator (and those services which don't call *all three* existing services).
 

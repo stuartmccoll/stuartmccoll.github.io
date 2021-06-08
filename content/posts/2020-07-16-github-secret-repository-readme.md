@@ -23,4 +23,3 @@ People on Twitter have recently discovered a GitHub _secret_. If you create a ne
 [^1]: You can see my own `README.md` on [my GitHub profile](https://github.com/stuartmccoll).
 
 [^2]: For tips on writing markdown check out [the Markdown Guide](https://www.markdownguide.org).
-

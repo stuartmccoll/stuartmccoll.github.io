@@ -11,7 +11,7 @@ In my [last blog post](../2020-06-18-creating-list-items-with-sharepoint-rest-ap
 
 Assuming you've been following along, we have a SharePoint list with at least one item in it that we've created through a request sent from Postman to the Microsoft SharePoint REST API. The item we created will have been assigned an `id` within SharePoint. If you don't still have the response from our creation request to hand (which will have contained the ID in the response body), you can obtain it from SharePoint. Access the list item and then click the 'Copy Link' shortcut. A URL will be copied to your clipboard which looks like the following:
 
-```
+```http
 https://contoso.sharepoint.com/Lists/Test%20list/DispForm.aspx?ID=1&e=...
 ```
 
