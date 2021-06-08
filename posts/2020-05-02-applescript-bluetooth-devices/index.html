@@ -7,7 +7,8 @@ menu bar. If you&rsquo;re repurposing anything within this script, you&rsquo;ll 
 <span class=c>-- @param bluetooth_devices : List(String) - the device names</span>
 <span class=k>on</span> <span class=nv>connect_bluetooth_devices</span><span class=p>(</span><span class=nv>bluetooth_devices</span><span class=p>)</span>
     <span class=p>...</span>
-<span class=k>end</span> <span class=nv>connect_bluetooth_devices</span></code></pre></div><p>I&rsquo;ve written a <a href=https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptLangGuide/conceptual/ASLR_about_handlers.html#//apple_ref/doc/uid/TP40000983-CH206-SW3>handler</a> (think &lsquo;function&rsquo;), which takes an array of Bluetooth device names. The idea here is that we&rsquo;ll pass all of the Bluetooth devices which we want
+<span class=k>end</span> <span class=nv>connect_bluetooth_devices</span></code></pre></div><p>I&rsquo;ve written a <a href=https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptLangGuide/conceptual/ASLR_about_handlers.html#//apple_ref/doc/uid/TP40000983-CH206-SW3>handler</a>
+(think &lsquo;function&rsquo;), which takes an array of Bluetooth device names. The idea here is that we&rsquo;ll pass all of the Bluetooth devices which we want
 to connect to into the handler, loop through them and for each one connect to it using the Bluetooth icon in the menu bar.</p><div class=highlight><pre class=chroma><code class=language-applescript data-lang=applescript><span class=nb>activate</span> <span class=nb>application</span> <span class=s2>&#34;SystemUIServer&#34;</span></code></pre></div><p>SystemUIServer is responsible for the system tray side of the menu bar - things like Bluetooth, Networking, Clock, etc.</p><div class=highlight><pre class=chroma><code class=language-applescript data-lang=applescript><span class=k>tell</span> <span class=nb>application</span> <span class=s2>&#34;System Events&#34;</span> <span class=k>to</span> <span class=k>tell</span> <span class=nv>process</span> <span class=s2>&#34;SystemUIServer&#34;</span>
     <span class=p>...</span>
 <span class=k>end</span> <span class=k>tell</span></code></pre></div><p>This is us enabling ourselves to be able to access items within the menu bar.</p><div class=highlight><pre class=chroma><code class=language-applescript data-lang=applescript><span class=k>set</span> <span class=nv>bluetooth_menu_bar_item</span> <span class=k>to</span> <span class=p>(</span><span class=na>menu</span> <span class=nv>bar</span> <span class=nb>item</span> <span class=mi>1</span> <span class=k>of</span> <span class=na>menu</span> <span class=nv>bar</span> <span class=mi>1</span> <span class=nb>whose</span> <span class=nv>description</span> <span class=ow>contains</span> <span class=s2>&#34;bluetooth&#34;</span><span class=p>)</span>
@@ -33,28 +34,28 @@ then we click the device name. If the submenu that opens contains a <code>Connec
 <span class=c>-- Handler to connect to Bluetooth devices</span>
 <span class=c>-- @param bluetooth_devices : List(String) - the device names</span>
 <span class=k>on</span> <span class=nv>connect_bluetooth_devices</span><span class=p>(</span><span class=nv>bluetooth_devices</span><span class=p>)</span>
-	<span class=nb>activate</span> <span class=nb>application</span> <span class=s2>&#34;SystemUIServer&#34;</span>
-	<span class=k>tell</span> <span class=nb>application</span> <span class=s2>&#34;System Events&#34;</span> <span class=k>to</span> <span class=k>tell</span> <span class=nv>process</span> <span class=s2>&#34;SystemUIServer&#34;</span>
-		<span class=k>set</span> <span class=nv>bluetooth_menu_bar_item</span> <span class=k>to</span> <span class=p>(</span><span class=na>menu</span> <span class=nv>bar</span> <span class=nb>item</span> <span class=mi>1</span> <span class=k>of</span> <span class=na>menu</span> <span class=nv>bar</span> <span class=mi>1</span> <span class=nb>whose</span> <span class=nv>description</span> <span class=ow>contains</span> <span class=s2>&#34;bluetooth&#34;</span><span class=p>)</span>
-		<span class=k>tell</span> <span class=nv>bluetooth_menu_bar_item</span>
-			<span class=k>repeat</span> <span class=k>with</span> <span class=nv>bluetooth_device</span> <span class=k>in</span> <span class=nv>bluetooth_devices</span>
-				<span class=nv>click</span>
-				<span class=k>if</span> <span class=nb>exists</span> <span class=na>menu</span> <span class=nb>item</span> <span class=nv>bluetooth_device</span> <span class=k>of</span> <span class=na>menu</span> <span class=mi>1</span> <span class=k>then</span>
-					<span class=k>tell</span> <span class=p>(</span><span class=na>menu</span> <span class=nb>item</span> <span class=nv>bluetooth_device</span> <span class=k>of</span> <span class=na>menu</span> <span class=mi>1</span><span class=p>)</span>
-						<span class=nv>click</span>
-						<span class=k>if</span> <span class=nb>exists</span> <span class=na>menu</span> <span class=nb>item</span> <span class=s2>&#34;Connect&#34;</span> <span class=k>of</span> <span class=na>menu</span> <span class=mi>1</span> <span class=k>then</span>
-							<span class=nv>click</span> <span class=na>menu</span> <span class=nb>item</span> <span class=s2>&#34;Connect&#34;</span> <span class=k>of</span> <span class=na>menu</span> <span class=mi>1</span>
-						<span class=k>else</span>
-							<span class=c>-- Exit Bluetooth menu bar item</span>
-							<span class=na>key code</span> <span class=mi>53</span>
-						<span class=k>end</span> <span class=k>if</span>
-					<span class=k>end</span> <span class=k>tell</span>
-				<span class=k>end</span> <span class=k>if</span>
-			<span class=k>end</span> <span class=k>repeat</span>
-			<span class=c>-- Exit Bluetooth menu bar item</span>
-			<span class=na>key code</span> <span class=mi>53</span>
-		<span class=k>end</span> <span class=k>tell</span>
-	<span class=k>end</span> <span class=k>tell</span>
+  <span class=nb>activate</span> <span class=nb>application</span> <span class=s2>&#34;SystemUIServer&#34;</span>
+  <span class=k>tell</span> <span class=nb>application</span> <span class=s2>&#34;System Events&#34;</span> <span class=k>to</span> <span class=k>tell</span> <span class=nv>process</span> <span class=s2>&#34;SystemUIServer&#34;</span>
+    <span class=k>set</span> <span class=nv>bluetooth_menu_bar_item</span> <span class=k>to</span> <span class=p>(</span><span class=na>menu</span> <span class=nv>bar</span> <span class=nb>item</span> <span class=mi>1</span> <span class=k>of</span> <span class=na>menu</span> <span class=nv>bar</span> <span class=mi>1</span> <span class=nb>whose</span> <span class=nv>description</span> <span class=ow>contains</span> <span class=s2>&#34;bluetooth&#34;</span><span class=p>)</span>
+    <span class=k>tell</span> <span class=nv>bluetooth_menu_bar_item</span>
+      <span class=k>repeat</span> <span class=k>with</span> <span class=nv>bluetooth_device</span> <span class=k>in</span> <span class=nv>bluetooth_devices</span>
+        <span class=nv>click</span>
+        <span class=k>if</span> <span class=nb>exists</span> <span class=na>menu</span> <span class=nb>item</span> <span class=nv>bluetooth_device</span> <span class=k>of</span> <span class=na>menu</span> <span class=mi>1</span> <span class=k>then</span>
+          <span class=k>tell</span> <span class=p>(</span><span class=na>menu</span> <span class=nb>item</span> <span class=nv>bluetooth_device</span> <span class=k>of</span> <span class=na>menu</span> <span class=mi>1</span><span class=p>)</span>
+            <span class=nv>click</span>
+            <span class=k>if</span> <span class=nb>exists</span> <span class=na>menu</span> <span class=nb>item</span> <span class=s2>&#34;Connect&#34;</span> <span class=k>of</span> <span class=na>menu</span> <span class=mi>1</span> <span class=k>then</span>
+              <span class=nv>click</span> <span class=na>menu</span> <span class=nb>item</span> <span class=s2>&#34;Connect&#34;</span> <span class=k>of</span> <span class=na>menu</span> <span class=mi>1</span>
+            <span class=k>else</span>
+              <span class=c>-- Exit Bluetooth menu bar item</span>
+              <span class=na>key code</span> <span class=mi>53</span>
+            <span class=k>end</span> <span class=k>if</span>
+          <span class=k>end</span> <span class=k>tell</span>
+        <span class=k>end</span> <span class=k>if</span>
+      <span class=k>end</span> <span class=k>repeat</span>
+      <span class=c>-- Exit Bluetooth menu bar item</span>
+      <span class=na>key code</span> <span class=mi>53</span>
+    <span class=k>end</span> <span class=k>tell</span>
+  <span class=k>end</span> <span class=k>tell</span>
 <span class=k>end</span> <span class=nv>connect_bluetooth_devices</span></code></pre></div></div></article></main></div><hr><footer><section><h3>Share this content</h3><p><a href="https://twitter.com/intent/tweet?url=https://stuartmccoll.github.io%2fposts%2f2020-05-02-applescript-bluetooth-devices%2f&via=itstuartmccoll&text=I%27m%20reading">Tweet this blog post</a></p></section><hr><section><h3>More</h3><ul><li><a href="https://twitter.com/intent/tweet?text=%40itstuartmccoll%20Hello%2C%20%3Cinsert%20message%20here%3E">Contact me on Twitter</a></li><li>Spotted a bug in the site?
 <a href=https://github.com/stuartmccoll/hugo-theme-refresh/issues/new>Raise an issue on GitHub</a></li><li>Get notifications of new posts by
 <a href=https://stuartmccoll.github.io/index.xml>subscribing to my RSS feed</a></li><li>This static site was generated using

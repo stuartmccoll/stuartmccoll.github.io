@@ -107,14 +107,14 @@ Before writing any code, we tested some of our assumptions about things like acc
 <p>That&rsquo;s the end of our preparation. In our Azure account we now have a Storage Account, within which we have a single container, within which we have a single file.</p>
 <hr>
 <p>Our file in Azure will have a URI that looks something like:</p>
-<pre><code>https://storage_account_name.blob.core.windows.net/container_name/test.txt
-</code></pre><p>Because we&rsquo;ve restricted the access level to our Storage Account, we can&rsquo;t simply access this URI to retrieve our file - we&rsquo;ll need to authorise our request. To do this, we&rsquo;re going to use <a href="https://docs.microsoft.com/en-us/rest/api/storageservices/authorize-with-shared-key">Shared Key authorisation</a> (authorisation with Azure Active Directory is also available).</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://storage_account_name.blob.core.windows.net/container_name/test.txt
+</span></code></pre></div><p>Because we&rsquo;ve restricted the access level to our Storage Account, we can&rsquo;t simply access this URI to retrieve our file - we&rsquo;ll need to authorise our request. To do this, we&rsquo;re going to use <a href="https://docs.microsoft.com/en-us/rest/api/storageservices/authorize-with-shared-key">Shared Key authorisation</a> (authorisation with Azure Active Directory is also available).</p>
 <p>Shared Key authorisation requires that we set two headers in our request; <code>x-ms-date</code> (or <code>Date</code>) and <code>Authorization</code>.</p>
 <p>To start with, let&rsquo;s set Postman up so that it will send through the correct <code>x-ms-date</code> header.</p>
 <p>In Postman, click the <strong>Eye</strong> (Environment quick look) icon in the top right-hand corner, then click <strong>Add</strong> in the top right-hand corner of the modal that appears. In the <strong>Environment Name</strong> field, let&rsquo;s enter <code>Microsoft Azure Storage REST API</code> and then let&rsquo;s add two empty environment variables; <code>dateHeader</code> and <code>authSig</code>. They&rsquo;re going to be initialised as empty, as we&rsquo;re going to set them programmatically when we make our API request. Click the <strong>Add</strong> button.</p>
 <p>Now, let&rsquo;s create a new Postman request - choose <code>GET</code> as the HTTP method. For our URI, let&rsquo;s begin by listing the files within the container. To do so, the URI will have the following format:</p>
-<pre><code>https://storage_account_name.blob.core.windows.net/container_name?restype=container&amp;comp=list
-</code></pre><p>The arguments in this URI are telling Azure that we&rsquo;re providing a resource type of <code>container</code>, of which we want to <code>list</code> the contents.</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://storage_account_name.blob.core.windows.net/container_name?restype=container&amp;comp=list
+</span></code></pre></div><p>The arguments in this URI are telling Azure that we&rsquo;re providing a resource type of <code>container</code>, of which we want to <code>list</code> the contents.</p>
 <p>In the <strong>Headers</strong> tab, add an <code>x-ms-date</code> header and set the value as <code>{{dateHeader}}</code>, and add an <code>Authorization</code> header with a value of <code>{{authSig}}</code>.</p>
 <p>If you send the request at this point, you&rsquo;ll get back the following error:</p>
 <div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
@@ -176,8 +176,8 @@ Time:{{TIMESTAMP}}<span class="nt">&lt;/Message&gt;</span>
     <span class="nt">&lt;NextMarker</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/EnumerationResults&gt;</span>
 </code></pre></div><p>Listing files using a prefix isn&rsquo;t too dissimilar. First, let&rsquo;s try with a prefix that won&rsquo;t match anything. Start with the same request as above, but this time let&rsquo;s set our request URI to:</p>
-<pre><code>https://storage_account_name.blob.core.windows.net/container_name?restype=container&amp;comp=list&amp;prefix=nofileshere
-</code></pre><p>We don&rsquo;t have a file in our container whose filename begins with <code>nofileshere</code>, so this won&rsquo;t bring back any matches. In this case, we don&rsquo;t need to amend the <code>strToSign</code> variable, it&rsquo;ll work as before. Hit the <strong>Send</strong> button and your response should look as follows:</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://storage_account_name.blob.core.windows.net/container_name?restype=container&amp;comp=list&amp;prefix=nofileshere
+</span></code></pre></div><p>We don&rsquo;t have a file in our container whose filename begins with <code>nofileshere</code>, so this won&rsquo;t bring back any matches. In this case, we don&rsquo;t need to amend the <code>strToSign</code> variable, it&rsquo;ll work as before. Hit the <strong>Send</strong> button and your response should look as follows:</p>
 <div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
 <span class="nt">&lt;EnumerationResults</span> <span class="na">ServiceEndpoint=</span><span class="s">&#34;https://storage_account_name.blob.core.windows.net/&#34;</span> <span class="na">ContainerName=</span><span class="s">&#34;container_name&#34;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;Prefix&gt;</span>nofileshere<span class="nt">&lt;/Prefix&gt;</span>
@@ -211,8 +211,8 @@ Time:{{TIMESTAMP}}<span class="nt">&lt;/Message&gt;</span>
 <span class="nt">&lt;/EnumerationResults&gt;</span>
 </code></pre></div><p>Finally, we want to retrieve the contents of our file. We know it&rsquo;s there, so how can we bring back what&rsquo;s inside it?</p>
 <p>Change the URI in your Postman request to:</p>
-<pre><code>https://storage_account_name.blob.core.windows.net/container_name/test.txt
-</code></pre><p>If you try and <strong>Send</strong> this request now, it won&rsquo;t work - the hashed and encoded string we&rsquo;re sending in our <code>Authorization</code> header doesn&rsquo;t match what the server is expecting. Update the <code>strToSign</code> variable declaration in the <strong>Pre-request Script</strong> tab to the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://storage_account_name.blob.core.windows.net/container_name/test.txt
+</span></code></pre></div><p>If you try and <strong>Send</strong> this request now, it won&rsquo;t work - the hashed and encoded string we&rsquo;re sending in our <code>Authorization</code> header doesn&rsquo;t match what the server is expecting. Update the <code>strToSign</code> variable declaration in the <strong>Pre-request Script</strong> tab to the following:</p>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">strToSign</span> <span class="o">=</span> <span class="s1">&#39;GET\n\n\n\nx-ms-date:&#39;</span> <span class="o">+</span> <span class="nx">pm</span><span class="p">.</span><span class="nx">environment</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&#34;dateHeader&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;\n/storage_account_name/container_name/test.txt&#39;</span><span class="p">;</span>
 </code></pre></div><p>What you get in response will depend on the file you&rsquo;ve added - in my case, it&rsquo;s a <code>.txt</code> file containing <code>These are my file contents</code>, which is exactly what gets returned in Postman&rsquo;s response body output.</p>
 ]]></content></item><item><title>Enabling the GitHub Secret Profile README.md</title><link>https://stuartmccoll.github.io/posts/2020-07-16-github-secret-repository-readme/</link><pubDate>Thu, 16 Jul 2020 18:00:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2020-07-16-github-secret-repository-readme/</guid><description>People on Twitter have recently discovered a GitHub secret. If you create a new GitHub repository with the same name as your profile name, you can add a README.md to your GitHub profile 1.
@@ -253,8 +253,8 @@ How to create a GitHub profile README.md Create a new GitHub repository. You&amp
 Assuming you&amp;rsquo;ve been following along, we have a SharePoint list with at least one item in it that we&amp;rsquo;ve created through a request sent from Postman to the Microsoft SharePoint REST API. The item we created will have been assigned an id within SharePoint.</description><content type="html"><![CDATA[<p>In my <a href="../2020-06-18-creating-list-items-with-sharepoint-rest-api">last blog post</a> I explained how to create list items with Microsoft&rsquo;s legacy SharePoint REST API using Postman. This post builds on that work to attach a file to an existing list item.</p>
 <hr>
 <p>Assuming you&rsquo;ve been following along, we have a SharePoint list with at least one item in it that we&rsquo;ve created through a request sent from Postman to the Microsoft SharePoint REST API. The item we created will have been assigned an <code>id</code> within SharePoint. If you don&rsquo;t still have the response from our creation request to hand (which will have contained the ID in the response body), you can obtain it from SharePoint. Access the list item and then click the &lsquo;Copy Link&rsquo; shortcut. A URL will be copied to your clipboard which looks like the following:</p>
-<pre><code>https://contoso.sharepoint.com/Lists/Test%20list/DispForm.aspx?ID=1&amp;e=...
-</code></pre><p>The <code>id</code> we need is right there in the URL, within the <code>ID</code> parameter.</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://contoso.sharepoint.com/Lists/Test%20list/DispForm.aspx?ID=1&amp;e=...
+</span></code></pre></div><p>The <code>id</code> we need is right there in the URL, within the <code>ID</code> parameter.</p>
 <p>Let&rsquo;s add an attachment to this list item. Open a new Postman request, which we&rsquo;ll be sending as a <code>POST</code>. Use the following details, where <code>contoso</code> is replaced with your own tenant name, <code>Test list</code> is replaced with your own SharePoint list name, and <code>id</code> with your own list item identifier as discussed above:</p>
 <div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">POST https://contoso.sharepoint.com/_api/web/lists/GetByTitle(&#39;Test list&#39;)/items(1)/AttachmentFiles/add(FileName=&#39;microsoft-logo.jpg&#39;)
 </span><span class="err">Authorization: Bearer {{appReg_bearerToken}}
@@ -266,8 +266,8 @@ If you were following along previously, the last thing we did was to request an 
 <hr>
 <p>If you were following along previously, the last thing we did was to request an access token to use in future requests. We&rsquo;re going to write a couple of lines of JavaScript code within Postman which will parse the API response containing the access token and add it to our previously-created Postman environment.</p>
 <p>You should still have a Postman tab open ready to send a request to the following URL:</p>
-<pre><code>https://accounts.accesscontrol.windows.net/{{realm}}/tokens/OAuth/2
-</code></pre><p>Click on the &lsquo;Tests&rsquo; tab. In the empty window, add the following two lines of code:</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://accounts.accesscontrol.windows.net/{{realm}}/tokens/OAuth/2
+</span></code></pre></div><p>Click on the &lsquo;Tests&rsquo; tab. In the empty window, add the following two lines of code:</p>
 <div class="highlight"><pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">json_response_body</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">responseBody</span><span class="p">);</span>
 <span class="nx">postman</span><span class="p">.</span><span class="nx">setEnvironmentVariable</span><span class="p">(</span><span class="s2">&#34;appReg_bearerToken&#34;</span><span class="p">,</span> <span class="nx">json_response_body</span><span class="p">.</span><span class="nx">access_token</span><span class="p">);</span>
 </code></pre></div><p>Click &lsquo;Send&rsquo; to send our <code>POST</code> request. You should receive a response body containing an <code>access_token</code> key/value pair. The value of the <code>access_token</code> key will now have been added as the &lsquo;Current Value&rsquo; of our <code>appReg_bearerToken</code> Postman environment variable. You can confirm this by clicking the eye icon next to the environments dropdown and checking the environment variable values.</p>
@@ -309,12 +309,12 @@ If you were following along previously, the last thing we did was to request an 
 <h2 id="register-a-sharepoint-add-in">Register a SharePoint Add-In</h2>
 <p>To authorise our external system - in this case Postman, but it could also be an external application - SharePoint needs to know about it.</p>
 <p>To begin, login to your SharePoint site. Then, access the following URL (where <code>contoso</code> is your own tenant name):</p>
-<pre><code>https://contoso.sharepoint.com/_layouts/15/appregnew.aspx
-</code></pre><p>This page allows us to register our SharePoint Add-In. You should see five input fields - <code>Client Id</code>, <code>Client Secret</code>, <code>Title</code>, <code>App Domain</code>, <code>Redirect URI</code>. Click the &lsquo;Generate&rsquo; button next to both &lsquo;Client Id&rsquo; and &lsquo;Client Secret&rsquo;, then make a note of the values populated - we&rsquo;ll need these later. You can enter anything in &lsquo;Title&rsquo; - we&rsquo;ll go with &lsquo;Postman&rsquo; for now. &lsquo;App Domain&rsquo; should be <code>localhost</code> and &lsquo;Redirect URI&rsquo; should be <code>https://localhost</code>. Click the &lsquo;Create&rsquo; button. You should see a success message returned, with the information you added to the input fields.</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://contoso.sharepoint.com/_layouts/15/appregnew.aspx
+</span></code></pre></div><p>This page allows us to register our SharePoint Add-In. You should see five input fields - <code>Client Id</code>, <code>Client Secret</code>, <code>Title</code>, <code>App Domain</code>, <code>Redirect URI</code>. Click the &lsquo;Generate&rsquo; button next to both &lsquo;Client Id&rsquo; and &lsquo;Client Secret&rsquo;, then make a note of the values populated - we&rsquo;ll need these later. You can enter anything in &lsquo;Title&rsquo; - we&rsquo;ll go with &lsquo;Postman&rsquo; for now. &lsquo;App Domain&rsquo; should be <code>localhost</code> and &lsquo;Redirect URI&rsquo; should be <code>https://localhost</code>. Click the &lsquo;Create&rsquo; button. You should see a success message returned, with the information you added to the input fields.</p>
 <h2 id="grant-permissions-to-a-sharepoint-add-in">Grant permissions to a SharePoint Add-In</h2>
 <p>Assuming you&rsquo;re still logged into your SharePoint site, access the following URL (again, where <code>contoso</code> is your own tenant name):</p>
-<pre><code>https://contoso.sharepoint.com/_layouts/15/appinv.aspx
-</code></pre><p>We can use this page to grant different permissions to any registered SharePoint Add-Ins. Paste the &lsquo;Client Id&rsquo; that we generated when registering our Add-In into the &lsquo;App Id&rsquo; field, and then click the &lsquo;Lookup&rsquo; button. This should prepopulate the other fields on the page. However, it won&rsquo;t populate the &lsquo;Permission Request XML&rsquo; field. In this field, paste the following XML:</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://contoso.sharepoint.com/_layouts/15/appinv.aspx
+</span></code></pre></div><p>We can use this page to grant different permissions to any registered SharePoint Add-Ins. Paste the &lsquo;Client Id&rsquo; that we generated when registering our Add-In into the &lsquo;App Id&rsquo; field, and then click the &lsquo;Lookup&rsquo; button. This should prepopulate the other fields on the page. However, it won&rsquo;t populate the &lsquo;Permission Request XML&rsquo; field. In this field, paste the following XML:</p>
 <div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;AppPermissionRequests</span> <span class="na">AllowAppOnlyPolicy=</span><span class="s">&#34;true&#34;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;AppPermissionRequest</span> <span class="na">Scope=</span><span class="s">&#34;http://sharepoint/content/sitecollection/web&#34;</span> <span class="na">Right=</span><span class="s">&#34;FullControl&#34;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/AppPermissionRequests&gt;</span>
@@ -329,14 +329,14 @@ If you were following along previously, the last thing we did was to request an 
 <p><code>principal</code> should contain <code>00000003-0000-0ff1-ce00-000000000000</code>.</p>
 <p><code>realm</code> should contain your tenant ID.</p>
 <p>To find your tenant ID, you can send a <code>GET</code> request to (where <code>contoso</code> is your own tenant name):</p>
-<pre><code>https://contoso.sharepoint.com/_vti_bin/client.svc/
-</code></pre><p>You&rsquo;ll receive a <code>System.UnauthorizedAccessException</code> in the response body, but we&rsquo;re interested in the headers here. Inside the <code>WWW-Authenticate</code> header, you&rsquo;ll see <code>Bearer realm=&quot;&lt;GUID&gt;&quot;...</code>. The GUID value is your tenant ID, which you&rsquo;ll want to set as the value of <code>realm</code> in our environment variables.</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://contoso.sharepoint.com/_vti_bin/client.svc/
+</span></code></pre></div><p>You&rsquo;ll receive a <code>System.UnauthorizedAccessException</code> in the response body, but we&rsquo;re interested in the headers here. Inside the <code>WWW-Authenticate</code> header, you&rsquo;ll see <code>Bearer realm=&quot;&lt;GUID&gt;&quot;...</code>. The GUID value is your tenant ID, which you&rsquo;ll want to set as the value of <code>realm</code> in our environment variables.</p>
 <p>Be careful here to check that the &lsquo;Current Value&rsquo; column for each environment variable doesn&rsquo;t contain a new line at the end of each value. If it does, it&rsquo;ll stop us from being able to use these environment variables correctly.</p>
 <p>With that done, click &lsquo;Add&rsquo; to save our Postman environment.</p>
 <h2 id="requesting-an-access-token">Requesting an access token</h2>
 <p>Let&rsquo;s create a new Postman request, with an HTTP method of <code>POST</code>. Our URL should be:</p>
-<pre><code>https://accounts.accesscontrol.windows.net/{{realm}}/tokens/OAuth/2
-</code></pre><p>The <code>{{realm}}</code> in the middle of the URL will pull from our <code>realm</code> environment variable.</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="err">https://accounts.accesscontrol.windows.net/{{realm}}/tokens/OAuth/2
+</span></code></pre></div><p>The <code>{{realm}}</code> in the middle of the URL will pull from our <code>realm</code> environment variable.</p>
 <p>In the &lsquo;Body&rsquo; section, select <code>x-www-form-urlencoded</code>. We&rsquo;re going to create four key/value pairs.</p>
 <p><code>grant_type</code> should have a value of <code>client_credentials</code>.</p>
 <p><code>client_id</code> should have a value of <code>{{appReg_clientId}}@{{realm}}</code>.</p>
@@ -372,7 +372,8 @@ menu bar. If you&rsquo;re repurposing anything within this script, you&rsquo;ll 
 <span class="k">on</span> <span class="nv">connect_bluetooth_devices</span><span class="p">(</span><span class="nv">bluetooth_devices</span><span class="p">)</span>
     <span class="p">...</span>
 <span class="k">end</span> <span class="nv">connect_bluetooth_devices</span></code></pre></div>
-<p>I&rsquo;ve written a <a href="https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptLangGuide/conceptual/ASLR_about_handlers.html#//apple_ref/doc/uid/TP40000983-CH206-SW3">handler</a> (think &lsquo;function&rsquo;), which takes an array of Bluetooth device names. The idea here is that we&rsquo;ll pass all of the Bluetooth devices which we want
+<p>I&rsquo;ve written a <a href="https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptLangGuide/conceptual/ASLR_about_handlers.html#//apple_ref/doc/uid/TP40000983-CH206-SW3">handler</a>
+(think &lsquo;function&rsquo;), which takes an array of Bluetooth device names. The idea here is that we&rsquo;ll pass all of the Bluetooth devices which we want
 to connect to into the handler, loop through them and for each one connect to it using the Bluetooth icon in the menu bar.</p>
 <div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="nb">activate</span> <span class="nb">application</span> <span class="s2">&#34;SystemUIServer&#34;</span></code></pre></div>
 <p>SystemUIServer is responsible for the system tray side of the menu bar - things like Bluetooth, Networking, Clock, etc.</p>
@@ -414,28 +415,28 @@ then we click the device name. If the submenu that opens contains a <code>Connec
 <span class="c">-- Handler to connect to Bluetooth devices</span>
 <span class="c">-- @param bluetooth_devices : List(String) - the device names</span>
 <span class="k">on</span> <span class="nv">connect_bluetooth_devices</span><span class="p">(</span><span class="nv">bluetooth_devices</span><span class="p">)</span>
-	<span class="nb">activate</span> <span class="nb">application</span> <span class="s2">&#34;SystemUIServer&#34;</span>
-	<span class="k">tell</span> <span class="nb">application</span> <span class="s2">&#34;System Events&#34;</span> <span class="k">to</span> <span class="k">tell</span> <span class="nv">process</span> <span class="s2">&#34;SystemUIServer&#34;</span>
-		<span class="k">set</span> <span class="nv">bluetooth_menu_bar_item</span> <span class="k">to</span> <span class="p">(</span><span class="na">menu</span> <span class="nv">bar</span> <span class="nb">item</span> <span class="mi">1</span> <span class="k">of</span> <span class="na">menu</span> <span class="nv">bar</span> <span class="mi">1</span> <span class="nb">whose</span> <span class="nv">description</span> <span class="ow">contains</span> <span class="s2">&#34;bluetooth&#34;</span><span class="p">)</span>
-		<span class="k">tell</span> <span class="nv">bluetooth_menu_bar_item</span>
-			<span class="k">repeat</span> <span class="k">with</span> <span class="nv">bluetooth_device</span> <span class="k">in</span> <span class="nv">bluetooth_devices</span>
-				<span class="nv">click</span>
-				<span class="k">if</span> <span class="nb">exists</span> <span class="na">menu</span> <span class="nb">item</span> <span class="nv">bluetooth_device</span> <span class="k">of</span> <span class="na">menu</span> <span class="mi">1</span> <span class="k">then</span>
-					<span class="k">tell</span> <span class="p">(</span><span class="na">menu</span> <span class="nb">item</span> <span class="nv">bluetooth_device</span> <span class="k">of</span> <span class="na">menu</span> <span class="mi">1</span><span class="p">)</span>
-						<span class="nv">click</span>
-						<span class="k">if</span> <span class="nb">exists</span> <span class="na">menu</span> <span class="nb">item</span> <span class="s2">&#34;Connect&#34;</span> <span class="k">of</span> <span class="na">menu</span> <span class="mi">1</span> <span class="k">then</span>
-							<span class="nv">click</span> <span class="na">menu</span> <span class="nb">item</span> <span class="s2">&#34;Connect&#34;</span> <span class="k">of</span> <span class="na">menu</span> <span class="mi">1</span>
-						<span class="k">else</span>
-							<span class="c">-- Exit Bluetooth menu bar item</span>
-							<span class="na">key code</span> <span class="mi">53</span>
-						<span class="k">end</span> <span class="k">if</span>
-					<span class="k">end</span> <span class="k">tell</span>
-				<span class="k">end</span> <span class="k">if</span>
-			<span class="k">end</span> <span class="k">repeat</span>
-			<span class="c">-- Exit Bluetooth menu bar item</span>
-			<span class="na">key code</span> <span class="mi">53</span>
-		<span class="k">end</span> <span class="k">tell</span>
-	<span class="k">end</span> <span class="k">tell</span>
+  <span class="nb">activate</span> <span class="nb">application</span> <span class="s2">&#34;SystemUIServer&#34;</span>
+  <span class="k">tell</span> <span class="nb">application</span> <span class="s2">&#34;System Events&#34;</span> <span class="k">to</span> <span class="k">tell</span> <span class="nv">process</span> <span class="s2">&#34;SystemUIServer&#34;</span>
+    <span class="k">set</span> <span class="nv">bluetooth_menu_bar_item</span> <span class="k">to</span> <span class="p">(</span><span class="na">menu</span> <span class="nv">bar</span> <span class="nb">item</span> <span class="mi">1</span> <span class="k">of</span> <span class="na">menu</span> <span class="nv">bar</span> <span class="mi">1</span> <span class="nb">whose</span> <span class="nv">description</span> <span class="ow">contains</span> <span class="s2">&#34;bluetooth&#34;</span><span class="p">)</span>
+    <span class="k">tell</span> <span class="nv">bluetooth_menu_bar_item</span>
+      <span class="k">repeat</span> <span class="k">with</span> <span class="nv">bluetooth_device</span> <span class="k">in</span> <span class="nv">bluetooth_devices</span>
+        <span class="nv">click</span>
+        <span class="k">if</span> <span class="nb">exists</span> <span class="na">menu</span> <span class="nb">item</span> <span class="nv">bluetooth_device</span> <span class="k">of</span> <span class="na">menu</span> <span class="mi">1</span> <span class="k">then</span>
+          <span class="k">tell</span> <span class="p">(</span><span class="na">menu</span> <span class="nb">item</span> <span class="nv">bluetooth_device</span> <span class="k">of</span> <span class="na">menu</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="nv">click</span>
+            <span class="k">if</span> <span class="nb">exists</span> <span class="na">menu</span> <span class="nb">item</span> <span class="s2">&#34;Connect&#34;</span> <span class="k">of</span> <span class="na">menu</span> <span class="mi">1</span> <span class="k">then</span>
+              <span class="nv">click</span> <span class="na">menu</span> <span class="nb">item</span> <span class="s2">&#34;Connect&#34;</span> <span class="k">of</span> <span class="na">menu</span> <span class="mi">1</span>
+            <span class="k">else</span>
+              <span class="c">-- Exit Bluetooth menu bar item</span>
+              <span class="na">key code</span> <span class="mi">53</span>
+            <span class="k">end</span> <span class="k">if</span>
+          <span class="k">end</span> <span class="k">tell</span>
+        <span class="k">end</span> <span class="k">if</span>
+      <span class="k">end</span> <span class="k">repeat</span>
+      <span class="c">-- Exit Bluetooth menu bar item</span>
+      <span class="na">key code</span> <span class="mi">53</span>
+    <span class="k">end</span> <span class="k">tell</span>
+  <span class="k">end</span> <span class="k">tell</span>
 <span class="k">end</span> <span class="nv">connect_bluetooth_devices</span></code></pre></div>
 ]]></content></item><item><title>AppleScript for Configuring External Displays</title><link>https://stuartmccoll.github.io/posts/2020-04-27-applescript-external-displays/</link><pubDate>Mon, 27 Apr 2020 20:00:00 +0000</pubDate><guid>https://stuartmccoll.github.io/posts/2020-04-27-applescript-external-displays/</guid><description>AppleScript is a scripting language bundled within all versions of macOS, which allows for scripting of elements of the operating system and compatible applications.
 I&amp;rsquo;d never touched it before, but decided to try to use it to automate setting the resolutions of my external displays when switching between my personal and work MacBook Pros. Sometimes the resolutions stick when switching between the two, sometimes they don&amp;rsquo;t. Rather than have to go into System Preferences &amp;gt; Displays and set them whenever the settings don&amp;rsquo;t stick, I quite liked the idea of just running a script and having something else take care of it for me.</description><content type="html"><![CDATA[<p>AppleScript is a scripting language bundled within all versions of macOS, which allows for scripting of elements of the operating system and compatible applications.</p>
@@ -447,21 +448,21 @@ from <a href="https://www.alfredapp.com">Alfred</a>, etc.</p>
 <p>I managed to cobble together a sloppy script to automate setting the resolution of my displays, which I&rsquo;ll detail below. Prior warning - I haven&rsquo;t done any cleanup; there&rsquo;s
 plenty that could be refactored - for example, it could be one function which you pass parameters to and call for each display you want to set. Go with it for now.</p>
 <div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="k">tell</span> <span class="nb">application</span> <span class="s2">&#34;System Preferences&#34;</span>
-	<span class="nv">reveal</span> <span class="nv">anchor</span> <span class="s2">&#34;displaysDisplayTab&#34;</span> <span class="k">of</span> <span class="nv">pane</span> <span class="na">id</span> <span class="s2">&#34;com.apple.preference.displays&#34;</span>
+  <span class="nv">reveal</span> <span class="nv">anchor</span> <span class="s2">&#34;displaysDisplayTab&#34;</span> <span class="k">of</span> <span class="nv">pane</span> <span class="na">id</span> <span class="s2">&#34;com.apple.preference.displays&#34;</span>
 <span class="k">end</span> <span class="k">tell</span>
 </code></pre></div><p>This opens <code>System Preferences &gt; Displays</code> and then ensures that the <code>Display</code> tab is open.</p>
 <p><img src="/img/20200427-display.png" alt="System Preferences > Displays"></p>
 <div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="k">tell</span> <span class="nb">application</span> <span class="s2">&#34;System Events&#34;</span> <span class="k">to</span> <span class="k">tell</span> <span class="nv">process</span> <span class="s2">&#34;System Preferences&#34;</span> <span class="k">to</span> <span class="k">tell</span> <span class="na">window</span> <span class="s2">&#34;Built-in Retina Display&#34;</span>
-	<span class="k">set</span> <span class="nv">is_scaled</span> <span class="k">to</span> <span class="nv">value</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="s2">&#34;Scaled&#34;</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
-	<span class="k">if</span> <span class="nv">is_scaled</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span>
-		<span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="s2">&#34;Scaled&#34;</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
-		<span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="mi">5</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
-	<span class="k">else</span>
-		<span class="k">set</span> <span class="nv">scale_value</span> <span class="k">to</span> <span class="nv">value</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
-		<span class="k">if</span> <span class="nv">scale_value</span> <span class="ow">is not</span> <span class="ow">equal to</span> <span class="mi">5</span> <span class="k">then</span>
-			<span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="mi">5</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
-		<span class="k">end</span> <span class="k">if</span>
-	<span class="k">end</span> <span class="k">if</span>
+  <span class="k">set</span> <span class="nv">is_scaled</span> <span class="k">to</span> <span class="nv">value</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="s2">&#34;Scaled&#34;</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+  <span class="k">if</span> <span class="nv">is_scaled</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span>
+    <span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="s2">&#34;Scaled&#34;</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+    <span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="mi">5</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+  <span class="k">else</span>
+    <span class="k">set</span> <span class="nv">scale_value</span> <span class="k">to</span> <span class="nv">value</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="nv">scale_value</span> <span class="ow">is not</span> <span class="ow">equal to</span> <span class="mi">5</span> <span class="k">then</span>
+      <span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="mi">5</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+    <span class="k">end</span> <span class="k">if</span>
+  <span class="k">end</span> <span class="k">if</span>
 <span class="k">end</span> <span class="k">tell</span>
 </code></pre></div><p>This is the bulk of the script, which I essentially duplicate this for both external displays. Let&rsquo;s break down what&rsquo;s happening here.</p>
 <div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="k">tell</span> <span class="nb">application</span> <span class="s2">&#34;System Events&#34;</span> <span class="k">to</span> <span class="k">tell</span> <span class="nv">process</span> <span class="s2">&#34;System Preferences&#34;</span> <span class="k">to</span> <span class="k">tell</span> <span class="na">window</span> <span class="s2">&#34;Built-in Retina Display&#34;</span>
@@ -473,21 +474,21 @@ make this a function and pass the display name as an argument.</p>
 <div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="k">set</span> <span class="nv">is_scaled</span> <span class="k">to</span> <span class="nv">value</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="s2">&#34;Scaled&#34;</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
 </code></pre></div><p>This sets the value of the &ldquo;Scaled&rdquo; radio button to a variable, which we can then check.</p>
 <div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="k">if</span> <span class="nv">is_scaled</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span>
-		<span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="s2">&#34;Scaled&#34;</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
-		<span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="mi">5</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
-	<span class="k">else</span>
-		<span class="p">...</span>
-	<span class="k">end</span> <span class="k">if</span>
+    <span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="s2">&#34;Scaled&#34;</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+    <span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="mi">5</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+  <span class="k">else</span>
+    <span class="p">...</span>
+  <span class="k">end</span> <span class="k">if</span>
 </code></pre></div><p>If the &ldquo;Scaled&rdquo; radio button has a value of <code>0</code>, then that means that it hasn&rsquo;t been clicked. We click the &ldquo;Scaled&rdquo; radio button and then select the appropriate resolution
 size from within the &ldquo;Scaled&rdquo; submenu. In this code example, <code>radio button 5</code> is the &ldquo;More Space&rdquo; setting.</p>
 <div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="k">if</span> <span class="nv">is_scaled</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span>
-		<span class="p">...</span>
-	<span class="k">else</span>
-		<span class="k">set</span> <span class="nv">scale_value</span> <span class="k">to</span> <span class="nv">value</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
-		<span class="k">if</span> <span class="nv">scale_value</span> <span class="ow">is not</span> <span class="ow">equal to</span> <span class="mi">5</span> <span class="k">then</span>
-			<span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="mi">5</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
-		<span class="k">end</span> <span class="k">if</span>
-	<span class="k">end</span> <span class="k">if</span>
+    <span class="p">...</span>
+  <span class="k">else</span>
+    <span class="k">set</span> <span class="nv">scale_value</span> <span class="k">to</span> <span class="nv">value</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="nv">scale_value</span> <span class="ow">is not</span> <span class="ow">equal to</span> <span class="mi">5</span> <span class="k">then</span>
+      <span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="mi">5</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+    <span class="k">end</span> <span class="k">if</span>
+  <span class="k">end</span> <span class="k">if</span>
 </code></pre></div><p>In the <code>else</code> block, &ldquo;Scaled&rdquo; was already selected. In this case, we want to make sure that the appropriate resolution size from within the &ldquo;Scaled&rdquo; submenu is selected. Here,
 we set the currently selected resolution size to the <code>scale_value</code> variable. We then check whether it&rsquo;s equal to the value we want (in this case <code>5</code>). If it isn&rsquo;t, then we set it. If it&rsquo;s already set to <code>5</code>, then we don&rsquo;t need to click it again.</p>
 <div class="highlight"><pre class="chroma"><code class="language-applescript" data-lang="applescript"><span class="nb">quit</span> <span class="nb">application</span> <span class="s2">&#34;System Preferences&#34;</span>
@@ -525,9 +526,9 @@ An open source Python library, Zappa gives us the ability to build and deploy se
 <p>It&rsquo;s quick and easy to deploy a Python WSGI application to AWS Lambda. The below guide assumes you have an AWS account and have created an IAM user with the relevant permissions.</p>
 <h3 id="configuration">Configuration</h3>
 <p>With <a href="https://pypi.org/project/pip/">pip</a> installed locally, we&rsquo;ll grab the <a href="https://pypi.org/project/awscli/">awscli</a> package.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ pip install awscli
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pip install awscli
 </code></pre></div><p>Once installed, the <code>aws configure</code> command will be the quickest way to configure our AWS credentials.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ aws configure
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">aws configure
 </code></pre></div><p>This command will request four pieces of information.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">AWS Access Key ID <span class="o">[</span>None<span class="o">]</span>:
 </code></pre></div><p>This is the AWS Access Key ID of our IAM user with the relevant permissions.</p>
@@ -540,18 +541,18 @@ An open source Python library, Zappa gives us the ability to build and deploy se
 <p>After running the command, the credentials will be stored in the AWS credentials file, located at <code>~/.aws/credentials</code>.</p>
 <h3 id="deployment">Deployment</h3>
 <p>First, we&rsquo;ll create a <code>requirements.txt</code> file which will document the <a href="https://pypi.org/project/pip/">pip</a> libraries our application will be dependent upon. Run the command below.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ touch requirements.txt
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">touch requirements.txt
 </code></pre></div><p>And then add the following to this file:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">awscli
 flask
 zappa
 </code></pre></div><p><a href="https://github.com/Miserlou/Zappa">Zappa</a> needs a virtual environment to run, which we can create like so (after running <code>pip install virtualenv</code>):</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ virtualenv venv
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">virtualenv venv
 </code></pre></div><p>That command will create our virtual environment in a new directory named <code>venv</code>. We can activate our virtual environment with the following command:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ <span class="nb">source</span> venv/bin/activate
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">source</span> venv/bin/activate
 </code></pre></div><p>If we need to deactivate our virtual environment, we can do so by running the command <code>deactivate</code> or by exiting the terminal.</p>
 <p>Once in the virtual environment, let&rsquo;s install the <a href="https://pypi.org/project/pip/">pip</a> libraries from our <code>requirements.txt</code> file.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ pip install -r requirements.txt
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pip install -r requirements.txt
 </code></pre></div><p>Our Flask application will sit in a file named <code>app.py</code>, which will serve one route that will return a JSON key/value pair.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">jsonify</span>
 
@@ -560,55 +561,55 @@ zappa
 
 <span class="nd">@app.route</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
-	<span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&#34;response&#34;</span><span class="p">:</span> <span class="s2">&#34;Hello world&#34;</span><span class="p">})</span>
+  <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&#34;response&#34;</span><span class="p">:</span> <span class="s2">&#34;Hello world&#34;</span><span class="p">})</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
-	<span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+  <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </code></pre></div><p>In order to deploy our application to AWS, we&rsquo;ll need to run a couple of Zappa commands. The following command begins an interactive process.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ zappa init
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">zappa init
 </code></pre></div><p>This will prompt us for a few different values, which we&rsquo;ll leave as their defaults.</p>
 <p>The next command we&rsquo;ll run will tell Zappa to bundle and upload our application and it&rsquo;s dependencies. As part of this process, Zappa will create the necessary API gateways.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ zappa deploy dev
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">zappa deploy dev
 </code></pre></div><p>After running the above command, Zappa will return the URL where the application has been hosted. Hit this URL and we&rsquo;ll get back the following response:</p>
 <div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span><span class="nt">&#34;response&#34;</span><span class="p">:</span><span class="s2">&#34;Hello world&#34;</span><span class="p">}</span>
 </code></pre></div><p>To remove the AWS Lambda function, and associated API gateway and Cloudwatch logs, we can run the <code>undeploy</code> command.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ zappa undeploy dev
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">zappa undeploy dev
 </code></pre></div>]]></content></item><item><title>Designing Resilient APIs with Idempotency</title><link>https://stuartmccoll.github.io/posts/designing-resilient-apis-with-idempotency/</link><pubDate>Sun, 02 Sep 2018 18:50:00 +0000</pubDate><guid>https://stuartmccoll.github.io/posts/designing-resilient-apis-with-idempotency/</guid><description>How can we design APIs to be resilient when our networks necessarily aren&amp;rsquo;t? An API should be robust enough to handle failure scenarios including connectivity drops, timeouts between resultant calls, and more. If a client makes a request to our API and loses connection during the request, how can we ensure that a successive identical request doesn&amp;rsquo;t alter the state of the system in a way that we weren&amp;rsquo;t expecting? This is where idempotence comes into play.</description><content type="html"><![CDATA[<p>How can we design APIs to be resilient when our networks necessarily aren&rsquo;t? An API should be robust enough to handle failure scenarios including connectivity drops, timeouts between resultant calls, and more. If a client makes a request to our API and loses connection during the request, how can we ensure that a successive identical request doesn&rsquo;t alter the state of the system in a way that we weren&rsquo;t expecting? This is where <a href="https://en.wikipedia.org/wiki/Idempotence">idempotence</a> comes into play. An idempotent request is one which can be made any number of times with the guarantee that any resulting logic, or side effects, only happen once.</p>
 <p>HTTP has two methods as idempotent by default, the <code>PUT</code> and <code>DELETE</code> verbs. A <code>PUT</code> request is utilised to replace an entire entity with the payload included in the request. Therefore, we can safely make a <code>PUT</code> request multiple times, safe in the knowledge that we&rsquo;ll simply overwrite an entity with the <em>same</em> contents. <code>DELETE</code> requests are similar in that if a first <code>DELETE</code> request failed, then a subsequent request would leave the system in the same intended state. Multiple successful <code>DELETE</code> requests might return different status codes in the response (<code>200</code> for the first request, <code>410</code> or <code>404</code> for the second), but again, the state of the system would remain the same. We should be careful not to interpret idempotency as <em>&ldquo;I should receive the same response from multiple identical requests&rdquo;</em> but as <em>&ldquo;The state of the system should be the same when multiple identical requests are made&rdquo;</em>.</p>
 <h2 id="how-can-we-implement-idempotency-in-our-apis">How can we implement idempotency in our APIs?</h2>
 <p>We&rsquo;ve identified the need to ensure that our API is capable of serving multiple identical requests under conditions of volatility, but how do we implement that in practice? One such way of dealing with such cases is through the use of <strong>idempotency keys</strong>.</p>
 <p>An idempotency key is a unique token generated by the client and passed into the header of a request. When a server receives a request containing an idempotency key it stores it for potential later use. Once the server finishes handling the request, it will update the details stored against the idempotency key to mark this request as completed. If possible, the server could also store the result. If a client makes a further request containing the same idempotency key (perhaps they lost connection before the results were retrieved), the server identifies the key it stored previously and serves up the cached results, or, in scenarios where the server does not store a result, it could return a <code>409</code> status code response, detailing that a resource already exists against the idempotency key passed in the request header.</p>
 <p>Let&rsquo;s take a look at these examples in more detail. Firstly, our client makes a request to create a new resource by calling our <code>POST</code> HTTP endpoint, passing an idempotency key in the header and a payload in the request body:</p>
-<pre><code>POST https://an-api/v1/resources HTTP/1.1
-Idempotency-Key: 845c52a3-6b91-4358-9004-e2f94eec48fa
-{
-    &quot;first_name&quot;: &quot;Jean Luc&quot;,
-    &quot;surname&quot;: &quot;Picard&quot;,
-    &quot;rank&quot;: &quot;Captain&quot;
-}
-</code></pre><p>Server side, we create a new resource with the attributes specified in the request body and store the idempotency key and the status of the request, which is &lsquo;<code>complete</code>&rsquo;. However, the connection between the client and the server dropped, so we&rsquo;ve been unable to return a response to the client. In this case, the client retries their request, re-sending an identical idempotency key and payload. The server cross references the incoming idempotency key with those contained in storage, identifies that it is a duplicate key and returns the following response:</p>
-<pre><code>HTTP/1.1 409 (Conflict)
-{
-    &quot;error&quot;: &quot;A resource has previously been created using this idempotency key&quot;
-}
-</code></pre><p>Let&rsquo;s re-use the above example, but consider this time that the server has stored the response it would have sent had the connection between client and server not dropped. Again, the client retries their request, re-sending the identical idempotency key and payload. The server again cross references the incoming idempotency key with those contained in storage, identifies that it is a duplicate key and returns the cached response:</p>
-<pre><code>HTTP/1.1 201 (CREATED)
-{
-    &quot;message&quot;: &quot;Resource created successfully&quot;
-}
-</code></pre><p>In our final scenario, perhaps the server was unable to complete the request due to a failure part-way through processing. The logic and resultant behaviour here depends on how the idempotency is implemented on the server. In this situation, the server might have stored the state of the request against the idempotency key at certain points of operation, in which case upon a re-request from the client, the server can cross reference the incoming idempotency key in a re-request with those in storage and identify at which point the transaction was aborter. The server can then continue processing before sending back a response. Another implementation might be that the entire operation was rolled back via an ACID database, meaning that the server can re-process the request from scratch.</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="nf">POST</span> <span class="nn">https://an-api/v1/resources</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="n">Idempotency-Key</span><span class="o">:</span> <span class="l">845c52a3-6b91-4358-9004-e2f94eec48fa</span>
+<span class="err">{</span>
+<span class="g">    &#34;first_name&#34;: &#34;Jean Luc&#34;,
+</span><span class="g">    &#34;surname&#34;: &#34;Picard&#34;,
+</span><span class="g">    &#34;rank&#34;: &#34;Captain&#34;
+</span><span class="g">}
+</span></code></pre></div><p>Server side, we create a new resource with the attributes specified in the request body and store the idempotency key and the status of the request, which is &lsquo;<code>complete</code>&rsquo;. However, the connection between the client and the server dropped, so we&rsquo;ve been unable to return a response to the client. In this case, the client retries their request, re-sending an identical idempotency key and payload. The server cross references the incoming idempotency key with those contained in storage, identifies that it is a duplicate key and returns the following response:</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">409</span> <span class="ne">(Conflict)</span>
+<span class="err">{</span>
+<span class="g">    &#34;error&#34;: &#34;A resource has previously been created using this idempotency key&#34;
+</span><span class="g">}
+</span></code></pre></div><p>Let&rsquo;s re-use the above example, but consider this time that the server has stored the response it would have sent had the connection between client and server not dropped. Again, the client retries their request, re-sending the identical idempotency key and payload. The server again cross references the incoming idempotency key with those contained in storage, identifies that it is a duplicate key and returns the cached response:</p>
+<div class="highlight"><pre class="chroma"><code class="language-http" data-lang="http"><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">(CREATED)</span>
+<span class="err">{</span>
+<span class="g">    &#34;message&#34;: &#34;Resource created successfully&#34;
+</span><span class="g">}
+</span></code></pre></div><p>In our final scenario, perhaps the server was unable to complete the request due to a failure part-way through processing. The logic and resultant behaviour here depends on how the idempotency is implemented on the server. In this situation, the server might have stored the state of the request against the idempotency key at certain points of operation, in which case upon a re-request from the client, the server can cross reference the incoming idempotency key in a re-request with those in storage and identify at which point the transaction was aborter. The server can then continue processing before sending back a response. Another implementation might be that the entire operation was rolled back via an ACID database, meaning that the server can re-process the request from scratch.</p>
 <p>The server side storage of idempotency keys should be recycled periodically. We wouldn&rsquo;t expect a dropped connection re-request to happen 24 hours after the original request, so this isn&rsquo;t the kind of data which we need to store long term.</p>
 <p>In a future blog post I&rsquo;ll look at a lightweight implementation of idempotency in both Flask and Django web applications.</p>
 ]]></content></item><item><title>Python 3.7 Data Classes</title><link>https://stuartmccoll.github.io/posts/python-3.7-data-classes/</link><pubDate>Sun, 08 Jul 2018 19:50:00 +0000</pubDate><guid>https://stuartmccoll.github.io/posts/python-3.7-data-classes/</guid><description>PEP 557 in the recently-released Python 3.7 added data classes to the standard Python library. Data classes can be thought of as mutable data holders and are somewhat similar to named tuples, although named tuples are immutable.
-Data classes provide a lot of boilerplate code, saving time and effort on the part of the Python programmer, although it could be argued that this layer of abstraction makes debugging more difficult.</description><content type="html"><![CDATA[<p><a href="https://www.python.org/dev/peps/pep-0557/">PEP 557</a> in the recently-released <a href="">Python 3.7</a> added data classes to the standard Python library. Data classes can be thought of as mutable data holders and are somewhat similar to <a href="https://docs.python.org/2/library/collections.html#collections.namedtuple">named tuples</a>, although named tuples are immutable.</p>
+Data classes provide a lot of boilerplate code, saving time and effort on the part of the Python programmer, although it could be argued that this layer of abstraction makes debugging more difficult.</description><content type="html"><![CDATA[<p><a href="https://www.python.org/dev/peps/pep-0557/">PEP 557</a> in the recently-released <a href="https://www.python.org/downloads/release/python-370/">Python 3.7</a> added data classes to the standard Python library. Data classes can be thought of as mutable data holders and are somewhat similar to <a href="https://docs.python.org/2/library/collections.html#collections.namedtuple">named tuples</a>, although named tuples are immutable.</p>
 <p>Data classes provide a lot of boilerplate code, saving time and effort on the part of the Python programmer, although it could be argued that this layer of abstraction makes debugging more difficult.</p>
 <h2 id="comparing-regular-classes-and-data-classes">Comparing regular classes and data classes</h2>
 <p>Consider the following class:</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">BankAccount</span><span class="p">():</span>
-	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">balance</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">):</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">balance</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">customer_id</span> <span class="o">=</span> <span class="n">customer_id</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">balance</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">balance</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">customer_id</span> <span class="o">=</span> <span class="n">customer_id</span>
 </code></pre></div><p>This provides us with the minimal ability to initialise a new BankAccount object, although we&rsquo;ve had to reference <code>id</code>, <code>balance</code>, and <code>customer_id</code> three times in this small piece of code.</p>
 <p>Let&rsquo;s initialise two new objects using our <code>BankAccount</code> class - <code>my_account</code> and <code>your_account</code>. We&rsquo;ll initialise both with the same values, ignoring the fact that they should have different <code>id</code> and <code>customer_id</code> values, then try and compare them to each other.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">my_account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -617,15 +618,15 @@ Data classes provide a lot of boilerplate code, saving time and effort on the pa
 <span class="bp">False</span>
 </code></pre></div><p>In order to be able to compare our <code>my_account</code> and <code>your_account</code> objects successfully, we&rsquo;d need to add an <code>__eq__</code> method to our class.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">BankAccount</span><span class="p">():</span>
-	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">balance</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">):</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">balance</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">customer_id</span> <span class="o">=</span> <span class="n">customer_id</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">balance</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">balance</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">customer_id</span> <span class="o">=</span> <span class="n">customer_id</span>
 
-	<span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="ow">is</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span><span class="p">:</span>
-			<span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">balance</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">customer_id</span><span class="p">)</span>
-		<span class="k">return</span> <span class="bp">NotImplemented</span>
+  <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="ow">is</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">customer_id</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">balance</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">customer_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">NotImplemented</span>
 </code></pre></div><p>If we initialise our two objects again and compare them now, we&rsquo;ll get the <code>True</code> response that we&rsquo;re expecting. If we were to initialise the <code>your_account</code> object with an <code>id</code> value of <code>2</code>, and a <code>customer_id</code> value of <code>2</code>, we&rsquo;d get the correct response of <code>False</code> when comparing the two objects.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">my_account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">your_account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -639,9 +640,9 @@ Data classes provide a lot of boilerplate code, saving time and effort on the pa
 
 <span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">DataClassBankAccount</span><span class="p">():</span>
-	<span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
-	<span class="n">balance</span><span class="p">:</span> <span class="nb">int</span>
-	<span class="n">customer_id</span><span class="p">:</span> <span class="nb">int</span>
+  <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+  <span class="n">balance</span><span class="p">:</span> <span class="nb">int</span>
+  <span class="n">customer_id</span><span class="p">:</span> <span class="nb">int</span>
 </code></pre></div><p>Data classes generate all of this boilerplate code for us, but they don&rsquo;t stop at just the <code>__init__</code> and <code>__eq__</code> methods - they can also generate <code>__repr__</code>, <code>__ne__</code>, <code>__lt__</code>, <code>__le__</code>, <code>__gt__</code>, and <code>__ge__</code> methods too, if the <code>order</code> parameter is specified as <code>True</code> (this is done at the <code>@dataclass</code> level, i.e. <code>@dataclass(order=True)</code>). Additional methods can be added to the data class as you would for a normal class. The <code>@dataclass</code> decorator inspects a class definition for fields with type annotations (added in <a href="https://www.python.org/dev/peps/pep-0526/">PEP 526</a>). These type annotations are <em>mandatory</em> when creating data classes as fields without type annotations will simply be ignored. We can now initialise and compare our two objects straight away:</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">my_account</span> <span class="o">=</span> <span class="n">DataClassBankAccount</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">your_account</span> <span class="o">=</span> <span class="n">DataClassBankAccount</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -656,9 +657,9 @@ Data classes provide a lot of boilerplate code, saving time and effort on the pa
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NamedTuple</span>
 
 <span class="k">class</span> <span class="nc">NamedTupleBankAccount</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-	<span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
-	<span class="n">balance</span><span class="p">:</span> <span class="nb">int</span>
-	<span class="n">customer_id</span><span class="p">:</span> <span class="nb">int</span>
+  <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+  <span class="n">balance</span><span class="p">:</span> <span class="nb">int</span>
+  <span class="n">customer_id</span><span class="p">:</span> <span class="nb">int</span>
 </code></pre></div><p>There&rsquo;s no great difference here, other than the fact that our data class was described using a decorator, whilst the named tuple subclasses <code>NamedTuple</code>. There are other similarities too. For instance, with our data class we can create a new object from an existing data class object.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">replace</span>
 <span class="o">&gt;&gt;&gt;</span>
@@ -696,14 +697,14 @@ Data classes provide a lot of boilerplate code, saving time and effort on the pa
 <h3 id="default-values">Default values</h3>
 <p>We can set default values for our specified data class fields. Let&rsquo;s take a look at how we&rsquo;d do that with a normal class.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
-	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">legs</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">legs</span> <span class="o">=</span> <span class="n">legs</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">legs</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">legs</span> <span class="o">=</span> <span class="n">legs</span>
 </code></pre></div><p>When declaring our data class, we declare our default value(s) differently.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
-	<span class="nb">type</span><span class="p">:</span> <span class="nb">str</span>
-	<span class="n">legs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="n">legs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
 </code></pre></div><p>The above data class will give the below output when initialising objects.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&#34;dog&#34;</span><span class="p">)</span>
 <span class="n">Animal</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&#34;dog&#34;</span><span class="p">,</span> <span class="n">legs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
@@ -715,13 +716,13 @@ Data classes provide a lot of boilerplate code, saving time and effort on the pa
 
 <span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">AdvancedBankAccount</span><span class="p">():</span>
-	<span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
-	<span class="n">balance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&#34;currency&#34;</span><span class="p">:</span> <span class="s2">&#34;GBP&#34;</span><span class="p">})</span>
-	<span class="n">customer_id</span><span class="p">:</span> <span class="nb">int</span>
-	<span class="n">accessed_by</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+  <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span>
+  <span class="n">balance</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&#34;currency&#34;</span><span class="p">:</span> <span class="s2">&#34;GBP&#34;</span><span class="p">})</span>
+  <span class="n">customer_id</span><span class="p">:</span> <span class="nb">int</span>
+  <span class="n">accessed_by</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
 
-	<span class="k">def</span> <span class="nf">access</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accessor_id</span><span class="p">):</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">accessed_by</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">accessor_id</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()))</span>
+  <span class="k">def</span> <span class="nf">access</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accessor_id</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">accessed_by</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">accessor_id</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()))</span>
 </code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">advanced_account</span> <span class="o">=</span> <span class="n">AdvancedBankAccount</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">advanced_account</span><span class="o">.</span><span class="n">access</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">advanced_account</span>
@@ -734,23 +735,23 @@ Data classes provide a lot of boilerplate code, saving time and effort on the pa
 
 <span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">Animal</span><span class="p">():</span>
-	<span class="nb">type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="nb">repr</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-	<span class="n">legs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="nb">repr</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+  <span class="n">legs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
 </code></pre></div><p>And we could also not include a specific field when comparing two objects from the same data class.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">field</span>
 
 <span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">Animal</span><span class="p">():</span>
-	<span class="nb">type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-	<span class="n">legs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+  <span class="n">legs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
 </code></pre></div><h3 id="immutable-data-classes">Immutable data classes</h3>
 <p>Data classes are mutable by default, but there might be scenarios where we want to maintain the immutability that a named tuple offers us.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">field</span>
 
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">Animal</span><span class="p">():</span>
-	<span class="nb">type</span><span class="p">:</span> <span class="nb">str</span>
-	<span class="n">legs</span><span class="p">:</span> <span class="nb">int</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span>
+  <span class="n">legs</span><span class="p">:</span> <span class="nb">int</span>
 </code></pre></div><p>The <code>frozen=True</code> argument that we&rsquo;ve passed to the <code>@dataclass</code> decorator means that we won&rsquo;t be able to assign values to any objects created from this data class after their initialisation.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">cat</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&#34;cat&#34;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">cat</span><span class="o">.</span><span class="n">legs</span> <span class="o">=</span> <span class="mi">3</span>
@@ -764,13 +765,13 @@ Data classes provide a lot of boilerplate code, saving time and effort on the pa
 This was a small project to trial a few things; Python&amp;rsquo;s type hinting, which was added in PEP484; Facebook Open Source&amp;rsquo;s type checker Pyre; and Black &amp;lsquo;the uncompromising Python code formatter&amp;rsquo;.</description><content type="html"><![CDATA[<p>I&rsquo;ve recently written a small command line utility using Python 3.6 which will produce a <code>CHANGELOG.md</code> file from the commit differences between two different GitLab project branches. I&rsquo;ve released this as an open source Python package and it&rsquo;s available from PyPi <a href="https://pypi.org/project/pip/">here</a>. Not intended to be a direct replacement for writing a manual changelog, the utility should be used as a draft upon which to build.</p>
 <p>This was a small project to trial a few things; Python&rsquo;s type hinting, which was added in <a href="https://www.python.org/dev/peps/pep-0484/">PEP484</a>; <a href="https://opensource.fb.com/">Facebook Open Source&rsquo;s</a> type checker <a href="https://pyre-check.org/">Pyre</a>; and <a href="https://github.com/ambv/black">Black</a> &lsquo;the uncompromising Python code formatter&rsquo;.</p>
 <p>If you&rsquo;re interested in using this utility, you can install it using <a href="https://pypi.org/project/pip/">pip</a> by running the following command:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ pip install gitlab-changelog-generator
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pip install gitlab-changelog-generator
 </code></pre></div><p>An example command to generate a <code>CHANGELOG.md</code> file from the difference in commits between <code>master</code> and <code>release</code> branches for a locally hosted GitLab repository project named &lsquo;test-project&rsquo;, labelling the version as 1.1.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ changegen --ip localhost --group test-projects --project test-project --branches master release --version 1.1
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">changegen --ip localhost --group test-projects --project test-project --branches master release --version 1.1
 </code></pre></div><p>I&rsquo;ve got some tidying up left to do such as better exception handling and cleaner logging, but the package works in it&rsquo;s current state. You can contribute features or towards existing issues by raising a <a href="https://help.github.com/articles/creating-a-pull-request/">pull request</a> at the project GitHub <a href="https://github.com/stuartmccoll/gitlab-changelog-generator">repository</a>.</p>
 ]]></content></item><item><title>Add a Flask Application to a Docker Container</title><link>https://stuartmccoll.github.io/posts/add-a-flask-application-to-a-docker-container/</link><pubDate>Sun, 14 May 2017 10:10:32 +0000</pubDate><guid>https://stuartmccoll.github.io/posts/add-a-flask-application-to-a-docker-container/</guid><description>Flask is a microframework for Python, based on Werkzeug and Jinja2. The core Flask framework is extremely lightweight, albeit infinitely extensible, and it&amp;rsquo;s simple for an experienced developer to pick up. I had been using Laravel a lot at the beginning of the year and Flask has been a breeze to work with in comparison. With it&amp;rsquo;s extensibility I haven&amp;rsquo;t been locked into working with pre-defined components either; I&amp;rsquo;ve used different database abstraction layers across multiple projects, such as Redis and PostgreSQL.</description><content type="html"><![CDATA[<p><a href="http://flask.pocoo.org/">Flask</a> is a microframework for Python, based on <a href="http://werkzeug.pocoo.org/">Werkzeug</a> and <a href="http://jinja.pocoo.org/docs/2.9/">Jinja2</a>. The core Flask framework is extremely lightweight, albeit infinitely extensible, and it&rsquo;s simple for an experienced developer to pick up. I had been using Laravel a lot at the beginning of the year and Flask has been a breeze to work with in comparison. With it&rsquo;s extensibility I haven&rsquo;t been locked into working with pre-defined components either; I&rsquo;ve used different database abstraction layers across multiple projects, such as <a href="https://redis.io/">Redis</a> and <a href="https://www.postgresql.org/">PostgreSQL</a>.</p>
 <p>We&rsquo;ll need a few things to begin, the first of which is a directory to house our Flask application, which we&rsquo;ll call <strong>flask_docker</strong>.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ mkdir flask_docker
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">mkdir flask_docker
 </code></pre></div><p>Within this directory we&rsquo;re going to need to create two different files. Firstly, we&rsquo;ll create our Flask application. For this, I&rsquo;m going to create a simple Flask app that&rsquo;ll return a string of text when the root directory is hit within a web browser.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
@@ -795,9 +796,9 @@ This was a small project to trial a few things; Python&amp;rsquo;s type hinting,
 </span><span class="err"></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;python&#34;</span><span class="p">,</span> <span class="s2">&#34;app.py&#34;</span><span class="p">]</span><span class="err">
 </span></code></pre></div><p>Once our base image has been established, our Dockerfile has a few more commands within it. Firstly, we&rsquo;re installing the Flask pip package (pip is included within the Python 2.7 Docker image that we our basing our own Docker image upon). After this, we copy the contents of the current directory to the &lsquo;/app&rsquo; directory within our Docker container, and then we set that as the current working directory. Following this, we expose port 5000 before lastly running the command that&rsquo;ll run our Flask application.</p>
 <h2 id="building-the-docker-image">Building the Docker Image</h2>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ docker build -t our-flask-app .
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">docker build -t our-flask-app .
 </code></pre></div><p>This command will build the Dockerfile within the current working directory, giving the image a name of &lsquo;our-flask-app&rsquo;.</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ docker run -d -p 5000:5000 our-flask-app
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">docker run -d -p 5000:5000 our-flask-app
 </code></pre></div><p>Lastly, this command builds our Docker container, which in turn runs our Flask application. The arguments we pass in here run the container in headless mode and map port 5000 on our local machine to port 5000 within our Docker container. Now, if we visit <a href="http://0.0.0.0:5000/">http://0.0.0.0:5000/</a> in a web browser we&rsquo;ll be served the string that our Flask application returns.</p>
 ]]></content></item><item><title>Quick and Dirty Kombu/RabbitMQ Application</title><link>https://stuartmccoll.github.io/posts/quick-and-dirty-kombu/rabbitmq-application/</link><pubDate>Sun, 14 May 2017 10:10:32 +0000</pubDate><guid>https://stuartmccoll.github.io/posts/quick-and-dirty-kombu/rabbitmq-application/</guid><description>Kombu is an open-source messaging library available for Python which aims to make messaging as simple as possible. Kombu provides a high-level interface for the Advanced Message Queuing Protocol (AMQP), an open standard protocol for message orientation, queuing, routing, reliability, and security. The most popular implementation of AMQP is the RabbitMQ open-source messaging server.
 In the example application we&amp;rsquo;re going to create here, we&amp;rsquo;re going to use Kombu and RabbitMQ in combination to do the following:</description><content type="html"><![CDATA[<p><a href="https://github.com/celery/kombu">Kombu</a> is an open-source messaging library available for Python which aims to make messaging as simple as possible. Kombu provides a high-level interface for the <a href="http://amqp.org/">Advanced Message Queuing Protocol</a> (AMQP), an open standard protocol for message orientation, queuing, routing, reliability, and security. The most popular implementation of AMQP is the <a href="http://www.rabbitmq.com/">RabbitMQ</a> open-source messaging server.</p>
