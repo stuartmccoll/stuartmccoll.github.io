@@ -1,4 +1,46 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 14 Oct 2020 10:00:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Automate the shutdown of a Windows 10 PC</title><link>https://stuartmccoll.github.io/posts/2020-10-14-automate-windows-10-shutdown/</link><pubDate>Wed, 14 Oct 2020 10:00:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2020-10-14-automate-windows-10-shutdown/</guid><description>Using the shutdown command Setting a single, non-repeatable shutdown timer can be done using the shutdown command, which can be run in the Command Prompt or PowerShell. Let&amp;rsquo;s use PowerShell as an example.
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 08 Jun 2021 10:00:13 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Set WSL as the default integrated terminal in Visual Studio Code</title><link>https://stuartmccoll.github.io/posts/2021-06-08-set-wsl-as-default-vscode-terminal/</link><pubDate>Tue, 08 Jun 2021 10:00:13 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2021-06-08-set-wsl-as-default-vscode-terminal/</guid><description>If you&amp;rsquo;re using Windows Subsystem for Linux (WSL) in tandem with Visual Studio Code, you might be wondering how to change your default integrated terminal from PowerShell to WSL.
+Previously, you could set this in a single line in your settings.json file using terminal.integrated.shell.windows, but this has since been deprecated in a later version of Visual Studio Code.
+Add the following snippet of JSON to your settings.json file in Visual Studio Code (you can access this file by clicking the gear icon in the bottom left hand corner of the screen, selecting the &amp;lsquo;Settings&amp;rsquo; menu option, and then clicking on the &amp;lsquo;Open settings (JSON)&amp;rsquo; icon in the top right hand corner of the subsequent screen - alternatively you can open the Command Palette with CTRL + Shift + P and then type in &amp;lsquo;Open settings (JSON)'):</description><content type="html"><![CDATA[<p>If you&rsquo;re using <a href="https://docs.microsoft.com/en-us/windows/wsl/about">Windows Subsystem for Linux</a>
+(WSL) in tandem with Visual Studio Code, you might be wondering how to change
+your default integrated terminal from PowerShell to WSL.</p>
+<p>Previously, you could set this in a single line in your <code>settings.json</code> file
+using <code>terminal.integrated.shell.windows</code>, but this has since been deprecated
+in a later version of Visual Studio Code.</p>
+<p>Add the following snippet of JSON to your <code>settings.json</code> file in Visual Studio
+Code (you can access this file by clicking the gear icon in the bottom left
+hand corner of the screen, selecting the &lsquo;Settings&rsquo; menu option, and then
+clicking on the &lsquo;Open settings (JSON)&rsquo; icon in the top right hand corner
+of the subsequent screen - alternatively you can open the Command Palette
+with CTRL + Shift + P and then type in &lsquo;Open settings (JSON)'):</p>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json">  <span class="s2">&#34;terminal.integrated.defaultProfile.windows&#34;</span><span class="err">:</span> <span class="s2">&#34;WSL&#34;</span><span class="err">,</span>
+  <span class="s2">&#34;terminal.integrated.profiles.windows&#34;</span><span class="err">:</span> <span class="p">[</span>
+    <span class="s2">&#34;PowerShell&#34;</span><span class="err">:</span> <span class="p">{</span>
+      <span class="nt">&#34;source&#34;</span><span class="p">:</span> <span class="s2">&#34;PowerShell&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;icon&#34;</span><span class="p">:</span> <span class="s2">&#34;terminal-powershell&#34;</span>
+    <span class="p">},</span>
+    <span class="s2">&#34;Command Prompt&#34;</span><span class="err">:</span> <span class="p">{</span>
+      <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&#34;${env:windir}\\Sysnative\\cmd.exe&#34;</span><span class="p">,</span>
+        <span class="s2">&#34;${env:windir}\\System32\\cmd.exe&#34;</span>
+      <span class="p">],</span>
+      <span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&#34;icon&#34;</span><span class="p">:</span> <span class="s2">&#34;terminal-cmd&#34;</span>
+    <span class="p">},</span>
+    <span class="s2">&#34;Git Bash&#34;</span><span class="err">:</span> <span class="p">{</span>
+      <span class="nt">&#34;source&#34;</span><span class="p">:</span> <span class="s2">&#34;Git Bash&#34;</span>
+    <span class="p">},</span>
+    <span class="s2">&#34;WSL&#34;</span><span class="err">:</span> <span class="p">{</span>
+      <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&#34;C:\\WINDOWS\\System32\\wsl.exe&#34;</span>
+      <span class="p">],</span>
+      <span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&#34;icon&#34;</span><span class="p">:</span> <span class="s2">&#34;terminal-ubuntu-wsl&#34;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+</code></pre></div><p>Close any integrated terminals you had open in Visual Studio Code, and then
+open a new integrated terminal - WSL should now open by default, rather than
+PowerShell.</p>
+]]></content></item><item><title>Automate the shutdown of a Windows 10 PC</title><link>https://stuartmccoll.github.io/posts/2020-10-14-automate-windows-10-shutdown/</link><pubDate>Wed, 14 Oct 2020 10:00:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2020-10-14-automate-windows-10-shutdown/</guid><description>Using the shutdown command Setting a single, non-repeatable shutdown timer can be done using the shutdown command, which can be run in the Command Prompt or PowerShell. Let&amp;rsquo;s use PowerShell as an example.
 Search for &amp;lsquo;PowerShell&amp;rsquo; in the start menu and open the app that is returned. Run the command shutdown -s -t TimeInSeconds where TimeInSeconds is replaced with the number of seconds after which you want the Windows 10 PC to shutdown.</description><content type="html"><![CDATA[<h2 id="using-the-shutdown-command">Using the <code>shutdown</code> command</h2>
 <p>Setting a single, non-repeatable shutdown timer can be done using the <code>shutdown</code> command, which can be run in the Command Prompt or PowerShell. Let&rsquo;s use PowerShell as an example.</p>
 <ol>
