@@ -6,8 +6,6 @@ draft: false
 
 ## About
 
-Stuart McColl is a Senior Software Developer for the [National Lottery Heritage Fund](https://www.heritagefund.org.uk). He's helping to build user-centered digital services to give a rewarding, usable experience to applicants and grantees, from their first tentative look at the Fund all the way through to them being awarded funding and becoming a grantee.
+Former Senior Software Engineer at [The National Lottery Heritage Fund](https://www.heritagefund.org.uk), and [HM Land Registry](https://www.gov.uk/government/organisations/land-registry).
 
-Prior to joining the National Lottery Heritage Fund, he was a Senior Software Engineer at [HM Land Registry](https://www.gov.uk/government/organisations/land-registry).
-
-Away from the office he has recently graduated from the [Open University](http://open.ac.uk) with an undergraduate degree in Computer Science.
+[Open University](http://open.ac.uk) Computer Science undergraduate.
