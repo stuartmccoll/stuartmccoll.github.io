@@ -3,10 +3,6 @@ title = "Stuart McColl"
 languageCode = "en"
 theme = "hugo-theme-refresh"
 
-# GitHub Pages doesn't allow for a custom source directory,
-# so we use their non-root default of 'docs'
-publishDir = "docs"
-
 pygmentsStyle = "github"
 pygmentsUseClasses = true
 pygmentsCodeFencers = true
