@@ -21,9 +21,18 @@ site, execute the following command in your terminal:
 hugo
 ```
 
-If successful, this will re-populate the `docs` directory.
+If successful, this will re-populate the `public` directory if it already
+exists, or create and populate it if not.
 
-### GitHub Codespaces
+## Deployment
+
+This site is deployed via a GitHub Action.
+
+Upon merge of a pull request into the `main` branch, the GitHub Action
+will update the `gh-pages` branch with the latest build of the static files.
+This branch is then served via GitHub Pages.
+
+## GitHub Codespaces
 
 This repository contains all of the necessary configuration to run in a GitHub
 Codespace.
