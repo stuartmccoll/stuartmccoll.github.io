@@ -1,4 +1,36 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 11 Jul 2021 11:55:02 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>How to install Windows Package Manager (WinGet) on Windows 10</title><link>https://stuartmccoll.github.io/posts/2021-07-11-how-to-install-winget/</link><pubDate>Sun, 11 Jul 2021 11:55:02 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2021-07-11-how-to-install-winget/</guid><description>The Windows Package Manager client (also known as WinGet) celebrated it&amp;rsquo;s v1.0 release in May of 2021, after announcing at Microsoft Build 2020.
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 02 Oct 2021 14:16:33 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>How to lnstall local Powershell Modules</title><link>https://stuartmccoll.github.io/posts/2021-10-02-how-to-install-local-powershell-modules/</link><pubDate>Sat, 02 Oct 2021 14:16:33 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2021-10-02-how-to-install-local-powershell-modules/</guid><description>I keep some custom PowerShell modules stored locally on different machines, depending on the type of machine. For example, my work laptop has modules for setup and teardown of my development environment, which are modules that I don&amp;rsquo;t keep around on my personal desktop machine.
+Rather than have all of this live in a PowerShell profile which I do share between different machines, I keep a tiny bit of code in my shared profile which will import any custom modules found locally.</description><content type="html"><![CDATA[<p>I keep some custom PowerShell modules stored locally on different machines,
+depending on the type of machine. For example, my work laptop has modules
+for setup and teardown of my development environment, which are modules that
+I don&rsquo;t keep around on my personal desktop machine.</p>
+<p>Rather than have all of this live in a PowerShell profile which I <em>do</em> share
+between different machines, I keep a tiny bit of code in my shared profile
+which will import any custom modules found locally.</p>
+<p>For this, I create a <code>LocalModules</code> directory which sits alongside <code>Modules</code>
+and <code>Scripts</code> inside my <code>PowerShell</code> directory. As the name suggests, this
+is where I keep those custom modules.</p>
+<p>Then, within my shared PowerShell profile, I do the following:</p>
+<ul>
+<li>Check for the presence of the <code>LocalModules</code> directory.</li>
+<li>If found, get each module file within this directory.</li>
+<li>For each module file found, run the <code>Import-Module</code> cmdlet.</li>
+</ul>
+<p>It&rsquo;s very basic, but this section of my profile looks like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-PowerShell" data-lang="PowerShell"><span class="k">if</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="p">~\</span><span class="n">OneDrive</span><span class="p">\</span><span class="n">Documents</span><span class="p">\</span><span class="n">PowerShell</span><span class="p">\</span><span class="n">LocalModules</span><span class="p">)</span>
+<span class="p">{</span>
+
+  <span class="nv">$localModules</span> <span class="p">=</span> <span class="nb">Get-Item</span> <span class="p">~\</span><span class="n">OneDrive</span><span class="p">\</span><span class="n">Documents</span><span class="p">\</span><span class="n">PowerShell</span><span class="p">\</span><span class="n">LocalModules</span><span class="p">\*</span>
+
+  <span class="k">ForEach</span> <span class="p">(</span><span class="nv">$m</span> <span class="k">in</span> <span class="nv">$localModules</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="nb">Import-Module</span> <span class="nv">$m</span><span class="p">.</span><span class="n">FullName</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div><p>For something more robust, you might specifically look for files with a
+<code>pmsl</code> extension, to ensure you don&rsquo;t accidentally try to run the
+<code>Import-Module</code> cmdlet against something that isn&rsquo;t a PowerShell module.</p>
+]]></content></item><item><title>How to install Windows Package Manager (WinGet) on Windows 10</title><link>https://stuartmccoll.github.io/posts/2021-07-11-how-to-install-winget/</link><pubDate>Sun, 11 Jul 2021 11:55:02 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2021-07-11-how-to-install-winget/</guid><description>The Windows Package Manager client (also known as WinGet) celebrated it&amp;rsquo;s v1.0 release in May of 2021, after announcing at Microsoft Build 2020.
 At the time of writing, although the client is distributed within the App Installer package, it isn&amp;rsquo;t generally available unless you&amp;rsquo;re running a Windows 10 Insider build, or have signed up to the Preview flight ring.
 However, it&amp;rsquo;s simple to download and install the package from the official GitHub repository.</description><content type="html"><![CDATA[<p>The Windows Package Manager client (also known as WinGet)
 celebrated it&rsquo;s v1.0 release in May of 2021, after announcing at
