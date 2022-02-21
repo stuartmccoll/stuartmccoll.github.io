@@ -24,8 +24,9 @@ of the subsequent screen - alternatively you can open the Command Palette
 with CTRL + Shift + P and then type in 'Open settings (JSON)'):
 
 ```json
+{
   "terminal.integrated.defaultProfile.windows": "WSL",
-  "terminal.integrated.profiles.windows": [
+  "terminal.integrated.profiles.windows": {
     "PowerShell": {
       "source": "PowerShell",
       "icon": "terminal-powershell"
@@ -48,7 +49,8 @@ with CTRL + Shift + P and then type in 'Open settings (JSON)'):
       "args": [],
       "icon": "terminal-ubuntu-wsl"
     }
-  ]
+  }
+}
 ```
 
 Close any integrated terminals you had open in Visual Studio Code, and then
