@@ -114,13 +114,14 @@ hand corner of the screen, selecting the &lsquo;Settings&rsquo; menu option, and
 clicking on the &lsquo;Open settings (JSON)&rsquo; icon in the top right hand corner
 of the subsequent screen - alternatively you can open the Command Palette
 with CTRL + Shift + P and then type in &lsquo;Open settings (JSON)'):</p>
-<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json">  <span class="s2">&#34;terminal.integrated.defaultProfile.windows&#34;</span><span class="err">:</span> <span class="s2">&#34;WSL&#34;</span><span class="err">,</span>
-  <span class="s2">&#34;terminal.integrated.profiles.windows&#34;</span><span class="err">:</span> <span class="p">[</span>
-    <span class="s2">&#34;PowerShell&#34;</span><span class="err">:</span> <span class="p">{</span>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;terminal.integrated.defaultProfile.windows&#34;</span><span class="p">:</span> <span class="s2">&#34;WSL&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;terminal.integrated.profiles.windows&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;PowerShell&#34;</span><span class="p">:</span> <span class="p">{</span>
       <span class="nt">&#34;source&#34;</span><span class="p">:</span> <span class="s2">&#34;PowerShell&#34;</span><span class="p">,</span>
       <span class="nt">&#34;icon&#34;</span><span class="p">:</span> <span class="s2">&#34;terminal-powershell&#34;</span>
     <span class="p">},</span>
-    <span class="s2">&#34;Command Prompt&#34;</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nt">&#34;Command Prompt&#34;</span><span class="p">:</span> <span class="p">{</span>
       <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="p">[</span>
         <span class="s2">&#34;${env:windir}\\Sysnative\\cmd.exe&#34;</span><span class="p">,</span>
         <span class="s2">&#34;${env:windir}\\System32\\cmd.exe&#34;</span>
@@ -128,17 +129,18 @@ with CTRL + Shift + P and then type in &lsquo;Open settings (JSON)'):</p>
       <span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[],</span>
       <span class="nt">&#34;icon&#34;</span><span class="p">:</span> <span class="s2">&#34;terminal-cmd&#34;</span>
     <span class="p">},</span>
-    <span class="s2">&#34;Git Bash&#34;</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nt">&#34;Git Bash&#34;</span><span class="p">:</span> <span class="p">{</span>
       <span class="nt">&#34;source&#34;</span><span class="p">:</span> <span class="s2">&#34;Git Bash&#34;</span>
     <span class="p">},</span>
-    <span class="s2">&#34;WSL&#34;</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nt">&#34;WSL&#34;</span><span class="p">:</span> <span class="p">{</span>
       <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="p">[</span>
         <span class="s2">&#34;C:\\WINDOWS\\System32\\wsl.exe&#34;</span>
       <span class="p">],</span>
       <span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[],</span>
       <span class="nt">&#34;icon&#34;</span><span class="p">:</span> <span class="s2">&#34;terminal-ubuntu-wsl&#34;</span>
     <span class="p">}</span>
-  <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div><p>Close any integrated terminals you had open in Visual Studio Code, and then
 open a new integrated terminal - WSL should now open by default, rather than
 PowerShell.</p>
