@@ -1,4 +1,90 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 02 Oct 2021 14:16:33 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>How to lnstall local Powershell Modules</title><link>https://stuartmccoll.github.io/posts/2021-10-02-how-to-install-local-powershell-modules/</link><pubDate>Sat, 02 Oct 2021 14:16:33 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2021-10-02-how-to-install-local-powershell-modules/</guid><description>I keep some custom PowerShell modules stored locally on different machines, depending on the type of machine. For example, my work laptop has modules for setup and teardown of my development environment, which are modules that I don&amp;rsquo;t keep around on my personal desktop machine.
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 28 May 2022 11:30:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use PowerShell to create a .zip file</title><link>https://stuartmccoll.github.io/posts/2022-05-28-use-powershell-to-create-a-zip-file/</link><pubDate>Sat, 28 May 2022 11:30:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2022-05-28-use-powershell-to-create-a-zip-file/</guid><description>A simple automation need that I stumbled across recently was the ability to quickly create a .zip file from a static set of files and directories. Rather than run a long command in PowerShell each time, I bundled everything up into a quick function that I can run using New-StaticZipFile.
+The Compress-Archive cmdlet lets us create a compressed, or zipped, archive file. There are limitations (e.g. maximum file size is 2GB) to this cmdlet, as well as more advanced options, such as the level of compression needed, but we&amp;rsquo;ll be keeping it really simple here.</description><content type="html"><![CDATA[<p>A simple automation need that I stumbled across recently was the ability to
+quickly create a <code>.zip</code> file from a static set of files and directories. Rather
+than run a long command in PowerShell each time, I bundled everything up into a
+quick function that I can run using <code>New-StaticZipFile</code>.</p>
+<p>The <code>Compress-Archive</code> cmdlet lets us create a compressed, or zipped, archive
+file. There are limitations (e.g. maximum file size is 2GB) to this cmdlet, as
+well as more advanced options, such as the level of compression needed, but
+we&rsquo;ll be keeping it <em>really</em> simple here.</p>
+<pre><code>NAME
+    Compress-Archive
+
+SYNOPSIS
+    Creates a compressed archive, or zipped file, from specified files and
+    directories.
+
+SYNTAX
+    Compress-Archive [-Path] &lt;System.String[]&gt; [-DestinationPath] &lt;System.String&gt; [-CompressionLevel {Optimal | NoCompression |
+    Fastest}] -Force [-PassThru] [-Confirm] [-WhatIf] [&lt;CommonParameters&gt;]
+</code></pre><p>The <code>Path</code> argument we pass will be a list of the static files which we want
+to add to our <code>.zip</code> file. So, to begin our function we&rsquo;ll create and populate
+this list.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nv">$Files</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">-TypeName</span> <span class="s1">&#39;System.Collections.ArrayList&#39;</span>
+<span class="nv">$Files</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s1">&#39;C:\Users\StuartMcColl\OneDrive\Documents\Document.docx&#39;</span><span class="p">)</span>
+<span class="nv">$Files</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s1">&#39;C:\Users\StuartMcColl\OneDrive\Documents\Worksheet.xlsx&#39;</span><span class="p">)</span>
+</code></pre></div><p>With our list of static files populated, we&rsquo;re ready for them to be compressed.
+We&rsquo;ll also need to tell the <code>Compress-Archive</code> cmdlet where to put them, e.g.
+the path to our newly-created archive, which we do using the <code>DestinationPath</code>
+parameter.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Compress-Archive</span> <span class="n">-Path</span> <span class="p">$(</span><span class="n">Files</span><span class="p">)</span> <span class="n">-DestinationPath</span> <span class="s1">&#39;C:\Users\StuartMcColl\OneDrive\Documents\MyArchive.zip&#39;</span>
+</code></pre></div><p>Altogether, the function so far looks like:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="k">function</span> <span class="nb">New-StaticZipFile</span>
+<span class="p">{</span>
+  <span class="nv">$Files</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">-TypeName</span> <span class="s1">&#39;System.Collections.ArrayList&#39;</span>
+  <span class="nv">$Files</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s1">&#39;C:\Users\StuartMcColl\OneDrive\Documents\Document.docx&#39;</span><span class="p">)</span>
+  <span class="nv">$Files</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s1">&#39;C:\Users\StuartMcColl\OneDrive\Documents\Worksheet.xlsx&#39;</span><span class="p">)</span>
+  <span class="nb">Compress-Archive</span> <span class="n">-Path</span> <span class="p">$(</span><span class="n">Files</span><span class="p">)</span> <span class="n">-DestinationPath</span> <span class="s1">&#39;C:\Users\StuartMcColl\OneDrive\Documents\MyArchive.zip&#39;</span>
+<span class="p">}</span>
+</code></pre></div><p>This will work absolutely fine - on the first run. In your terminal, you&rsquo;ll see
+the following output:</p>
+<pre><code>0
+1
+</code></pre><p>These numbers are output when we add to our <code>$Files</code> list. If we then run a
+<code>Get-Item .\*</code> command, the output will be:</p>
+<pre><code>        Directory: C:\Users\StuartMcColl\Documents\
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+la---        28/05/2022     11:54           5475   MyArchive.zip
+la---        28/05/2022     11:42              0   Document.docx
+la---        28/05/2022     11:42           6191   Worksheet.xlsx
+</code></pre><p>We can see that we&rsquo;ve successfully created <code>MyArchive.zip</code>. If we run the
+<code>New-StaticZipFile</code> function again, we&rsquo;ll be met with the following error:</p>
+<pre><code>The archive file C:\Users\StuartMcColl\OneDrive\Documents\MyArchive.zip already
+exists. Use the -Update parameter to update the existing archive file or use
+the -Force parameter to overwrite the existing archive file.
+</code></pre><p>We <em>could</em> use the <code>Compress-Archive</code> cmdlet to update any existing
+<code>MyArchive.zip</code> file if we find one, but for my use case I&rsquo;m happy to remove
+any existing file and simply create a new one. Rather than simply <code>-Force</code> the
+overwrite of the existing archive file, I also want to <em>know</em> that there was
+already a <code>MyArchive.zip</code> file before I remove it.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="k">If</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="n">-Path</span> <span class="n">C:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">StuartMcColl</span><span class="p">\</span><span class="n">OneDrive</span><span class="p">\</span><span class="n">Documents</span><span class="p">\</span><span class="n">MyArchive</span><span class="p">.</span><span class="n">zip</span> <span class="n">-PathType</span> <span class="n">Leaf</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nb">Write-Host</span> <span class="s1">&#39;Deleting existing MyArchive.zip file&#39;</span>
+  <span class="nb">Remove-Item</span> <span class="n">-Path</span> <span class="n">C:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">StuartMcColl</span><span class="p">\</span><span class="n">OneDrive</span><span class="p">\</span><span class="n">Documents</span><span class="p">\</span><span class="n">MyArchive</span><span class="p">.</span><span class="n">zip</span>
+<span class="p">}</span>
+</code></pre></div><p>Altogether, with some additional output gives us:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="k">function</span> <span class="nb">New-StaticZipFile</span>
+<span class="p">{</span>
+  <span class="nb">Write-Host</span> <span class="s1">&#39;Creating new MyArchive.zip file&#39;</span>
+
+  <span class="nv">$Files</span> <span class="p">=</span> <span class="nb">New-Object</span> <span class="n">-TypeName</span> <span class="s1">&#39;System.Collections.ArrayList&#39;</span>
+  <span class="nv">$Files</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s1">&#39;C:\Users\StuartMcColl\OneDrive\Documents\Document.docx&#39;</span><span class="p">)</span>
+  <span class="nv">$Files</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s1">&#39;C:\Users\StuartMcColl\OneDrive\Documents\Worksheet.xlsx&#39;</span><span class="p">)</span>
+
+  <span class="k">If</span> <span class="p">(</span><span class="nb">Test-Path</span> <span class="n">-Path</span> <span class="n">C:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">StuartMcColl</span><span class="p">\</span><span class="n">OneDrive</span><span class="p">\</span><span class="n">Documents</span><span class="p">\</span><span class="n">MyArchive</span><span class="p">.</span><span class="n">zip</span> <span class="n">-PathType</span> <span class="n">Leaf</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="nb">Write-Host</span> <span class="s1">&#39;Deleting existing MyArchive.zip file&#39;</span>
+    <span class="nb">Remove-Item</span> <span class="n">-Path</span> <span class="n">C:</span><span class="p">\</span><span class="n">Users</span><span class="p">\</span><span class="n">StuartMcColl</span><span class="p">\</span><span class="n">OneDrive</span><span class="p">\</span><span class="n">Documents</span><span class="p">\</span><span class="n">MyArchive</span><span class="p">.</span><span class="n">zip</span>
+  <span class="p">}</span>
+
+  <span class="nb">Compress-Archive</span> <span class="n">-Path</span> <span class="p">$(</span><span class="n">Files</span><span class="p">)</span> <span class="n">-DestinationPath</span> <span class="s1">&#39;C:\Users\StuartMcColl\OneDrive\Documents\MyArchive.zip&#39;</span>
+
+  <span class="nb">Write-Host</span> <span class="s1">&#39;Finished creating new MyArchive.zip file&#39;</span>
+<span class="p">}</span>
+</code></pre></div>]]></content></item><item><title>How to lnstall local Powershell Modules</title><link>https://stuartmccoll.github.io/posts/2021-10-02-how-to-install-local-powershell-modules/</link><pubDate>Sat, 02 Oct 2021 14:16:33 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2021-10-02-how-to-install-local-powershell-modules/</guid><description>I keep some custom PowerShell modules stored locally on different machines, depending on the type of machine. For example, my work laptop has modules for setup and teardown of my development environment, which are modules that I don&amp;rsquo;t keep around on my personal desktop machine.
 Rather than have all of this live in a PowerShell profile which I do share between different machines, I keep a tiny bit of code in my shared profile which will import any custom modules found locally.</description><content type="html"><![CDATA[<p>I keep some custom PowerShell modules stored locally on different machines,
 depending on the type of machine. For example, my work laptop has modules
 for setup and teardown of my development environment, which are modules that
