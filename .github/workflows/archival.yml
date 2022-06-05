@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - feature/archival
 
 jobs:
   archival:
@@ -19,7 +18,7 @@ jobs:
         uses: 'azure/aci-deploy@v1'
         with:
           cpu: 0.1
-          dns-name-label: website-archiver
+          dns-name-label: websitearchiver
           environment-variables: AZURE_BLOB_STORAGE_CONTAINER_NAME=archives DOMAIN=https://stuartmccoll.github.io/
           image: ${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }}/websitearchiver:47594edaa5f3eebabb897401d0e90adac8146009
           location: 'uksouth'
