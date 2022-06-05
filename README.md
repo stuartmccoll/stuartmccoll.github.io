@@ -2,7 +2,7 @@
 
 This repository contains both the source and build files for my personal
 website, which is hosted via GitHub Pages and accessible at
-[https://stuartmccoll.github.io/](https://stuartmccol.github.io/).
+[https://stuartmccoll.github.io/](https://stuartmccoll.github.io/).
 
 ## How to run
 
