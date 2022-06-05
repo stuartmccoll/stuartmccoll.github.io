@@ -4,6 +4,14 @@ This repository contains both the source and build files for my personal
 website, which is hosted via GitHub Pages and accessible at
 [https://stuartmccoll.github.io/](https://stuartmccoll.github.io/).
 
+## Pull the necessary submodule(s)
+
+Within your terminal, run:
+
+```bash
+git submodule update --init --recursive
+```
+
 ## How to run
 
 To run the server, simply execute the following command in your terminal:

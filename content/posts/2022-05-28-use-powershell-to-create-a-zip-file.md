@@ -1,6 +1,7 @@
 ---
 categories:
   - Automation
+  - PowerShell
 date: 2022-05-28T11:30:00+01:00
 draft: false
 lastMod: 2022-05-28T11:30:00+01:00
