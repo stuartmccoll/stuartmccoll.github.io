@@ -19,6 +19,8 @@ jobs:
         uses: 'azure/aci-deploy@v1'
         with:
           dns-name-label: website-archiver
+          environment-variables: AZURE_BLOB_STORAGE_CONTAINER_NAME=archives DOMAIN=https://stuartmccoll.github.io/
+          secure-environment-variables: AZURE_BLOB_STORAGE_CONNECTION_STRING=${{ secrets.AZURE_BLOB_STORAGE_CONNECTION_STRING }}
           image: ${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }}/websitearchiver:47594edaa5f3eebabb897401d0e90adac8146009
           registry-login-server: ${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }}
           registry-username: ${{ secrets.AZURE_CONTAINER_REGISTRY_USERNAME }}
