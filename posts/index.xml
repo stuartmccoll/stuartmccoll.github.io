@@ -1,4 +1,119 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 02 Jun 2022 11:05:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use PowerShell to generate a GUID</title><link>https://stuartmccoll.github.io/posts/2022-06-02-use-powershell-to-generate-a-guid/</link><pubDate>Thu, 02 Jun 2022 11:05:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2022-06-02-use-powershell-to-generate-a-guid/</guid><description>Another quick automation using PowerShell, this time to solve the problem of quickly adding a new GUID to the clipboard.
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 11 Jun 2022 11:15:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Push a Docker image to Azure Container Registry using a GitHub Actions workflow</title><link>https://stuartmccoll.github.io/posts/2022-06-11-github-action-to-azure-container-registry/</link><pubDate>Sat, 11 Jun 2022 11:15:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2022-06-11-github-action-to-azure-container-registry/</guid><description>Building and pushing Docker images to Azure Container Registry is simple with a small GitHub Actions workflow.
+This blog post assumes you&amp;rsquo;ve got a docker-compose.yml file in your GitHub repository. If you&amp;rsquo;re just using a Dockerfile, you&amp;rsquo;ll need to make a tiny amendment to the Build Docker image step in the push-to-acr.yml file described below.
+Microsoft Azure setup/configuration If you&amp;rsquo;re starting fresh, in terms of our Azure setup we&amp;rsquo;ll need:</description><content type="html"><![CDATA[<p>Building and pushing Docker images to Azure Container Registry is simple with
+a small GitHub Actions workflow.</p>
+<p>This blog post assumes you&rsquo;ve got a <code>docker-compose.yml</code> file in your GitHub
+repository. If you&rsquo;re just using a <code>Dockerfile</code>, you&rsquo;ll need to make a tiny
+amendment to the <code>Build Docker image</code> step in the <code>push-to-acr.yml</code> file
+described below.</p>
+<h2 id="microsoft-azure-setupconfiguration">Microsoft Azure setup/configuration</h2>
+<p>If you&rsquo;re starting fresh, in terms of our Azure setup we&rsquo;ll need:</p>
+<ul>
+<li>a Resource Group;</li>
+<li>an Azure Container Registry (ACR);</li>
+<li>and an access key so that we can access our ACR programmatically from our
+GitHub Actions workflow.</li>
+</ul>
+<p>If you&rsquo;ve already got this configured, you can skip to the
+<a href="#github-actions-workflow">next section</a>.</p>
+<p>I&rsquo;ll use PowerShell to create this. First, our Resource Group.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">New-AzResourceGroup</span> <span class="n">-Name</span> <span class="s2">&#34;mydemoappghatoacr&#34;</span> <span class="n">-Location</span> <span class="s2">&#34;UK South&#34;</span>
+</code></pre></div><p>With that done, we&rsquo;ll create our ACR within this Resource Group.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">New-AzContainerRegistry</span> <span class="n">-ResourceGroupName</span> <span class="s2">&#34;mydemoappghatoacr&#34;</span> <span class="n">-Name</span> <span class="s2">&#34;mydemoappghatoacr&#34;</span> <span class="n">-Sku</span> <span class="s2">&#34;Basic&#34;</span> <span class="n">-EnableAdminUser</span>
+</code></pre></div><p>Finally, let&rsquo;s grab the access key values we&rsquo;ll need to connect to our ACR
+from our GitHub Actions workflow.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Get-AzContainerRegistryCredential</span> <span class="n">-ResourceGroupName</span> <span class="s2">&#34;mydemoappghatoacr&#34;</span> <span class="n">-Name</span> <span class="s2">&#34;mydemoappghatoacr&#34;</span>
+</code></pre></div><p>Make a note of the <code>Username</code> and <code>Password</code> values from this response.</p>
+<h2 id="github-actions-workflow">GitHub Actions workflow</h2>
+<p>Before we create our GitHub Actions workflow, we&rsquo;ll add a couple of Actions
+secrets to our GitHub repository. These are encrypted environment variables
+that can be used within our GitHub Actions workflow(s), which stops us from
+exposing values that we want to remain secure, such as our Microsoft Azure
+client ID and secret.</p>
+<p>Head to your GitHub repository, and navigate to the Settings screen. In here,
+you should be able to find a Secrets section under the Security subheading.
+Secrets currently allows you to configure secrets for Actions, Codespaces,
+and Dependabot. Select Actions, and then click &lsquo;New repository secret&rsquo;.</p>
+<p>We&rsquo;ll be adding three Actions secrets:</p>
+<ol>
+<li><code>ACR_REGISTRY_NAME</code>, containing the name of your ACR.</li>
+<li><code>AZ_SP_CLIENT_ID</code> containing the <code>Username</code> value you noted earlier.</li>
+<li><code>AZ_SP_CLIENT_SECRET</code> containing the <code>Password</code> value you noted earlier.</li>
+</ol>
+<p>In your repository, create a new directory named <code>.github</code>. Inside here, we&rsquo;ll
+create another new directory named <code>workflows</code>, inside which we&rsquo;ll add a new
+empty file named <code>push-to-acr.yml</code>, with the resulting file path being
+<code>.\.github\workflows\push-to-acr.yml</code>.</p>
+<p>First, we&rsquo;ll give our workflow a name, and some run configuration. In this
+case we&rsquo;re telling GitHub Actions to run this workflow when we push code
+to our <code>main</code> branch.</p>
+<p>Secondly, we&rsquo;re checking out the repository code.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Push to Azure Container Registry</span><span class="w">
+</span><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">main</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">push-to-azure-container-registry</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Checkout repository</span><span class="w">
+</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@main</span><span class="w">
+</span></code></pre></div><p>In order for our GitHub Actions workflow to push to ACR, it&rsquo;ll need to
+authenticate using the credentials we&rsquo;ve stored as GitHub Actions secrets.
+To do this, we&rsquo;ll use the <a href="https://github.com/marketplace/actions/azure-container-registry-login">Azure Container Registry Login</a>
+GitHub Action available on the <a href="https://github.com/marketplace">GitHub Marketplace</a>.
+This GitHub Action will handle the authentication for us, we just need to
+tell it what values to use.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Login to Azure Container Registry</span><span class="w">
+</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">azure/docker-login@v1</span><span class="w">
+</span><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">login-server</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.ACR_REGISTRY_NAME }}.azurecr.io</span><span class="w">
+</span><span class="w">          </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.AZ_SP_CLIENT_ID }}</span><span class="w">
+</span><span class="w">          </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.AZ_SP_CLIENT_SECRET }}</span><span class="w">
+</span></code></pre></div><p>Next, we&rsquo;ll add a simple step to our workflow that will build our Docker image.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build Docker image</span><span class="w">
+</span><span class="w"></span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">docker-compose build</span><span class="w">
+</span></code></pre></div><p>Our workflow is now capable of checking out our codebase and building our
+Docker image. The final step is to push this image to our pre-configured
+Azure Container Registry.</p>
+<p>Let&rsquo;s add this final step to our workflow. This last step will tag the image
+we&rsquo;ve just built with the Git commit SHA, and then push this tagged image
+to ACR.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml">- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Push Docker image to Azure Container Registry</span><span class="w">
+</span><span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span><span class="sd">    docker tag mydemoapp:latest ${{ secrets.ACR_REGISTRY_NAME }}.azurecr.io/mydemoapp:${{ github.sha }}
+</span><span class="sd">    docker push ${{ secrets.ACR_REGISTRY_NAME }}.azurecr.io/mydemoapp:${{ github.sha }}</span><span class="w">    
+</span></code></pre></div><p>Our full GitHub Actions workflow file looks like the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Push to Azure Container Registry</span><span class="w">
+</span><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">main</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">push-to-azure-container-registry</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Checkout repository</span><span class="w">
+</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@main</span><span class="w">
+</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Login to Azure Container Registry</span><span class="w">
+</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">azure/docker-login@v1</span><span class="w">
+</span><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="nt">login-server</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.ACR_REGISTRY_NAME }}.azurecr.io</span><span class="w">
+</span><span class="w">          </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.AZ_SP_CLIENT_ID }}</span><span class="w">
+</span><span class="w">          </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.AZ_SP_CLIENT_SECRET }}</span><span class="w">
+</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build Docker image</span><span class="w">
+</span><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">docker-compose build</span><span class="w">
+</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Push Docker image to Azure Container Registry</span><span class="w">
+</span><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p">|</span><span class="sd">
+</span><span class="sd">            docker tag mydemoapp:latest ${{ secrets.ACR_REGISTRY_NAME }}.azurecr.io/mydemoapp:${{ github.sha }}
+</span><span class="sd">            docker push ${{ secrets.ACR_REGISTRY_NAME }}.azurecr.io/mydemoapp:${{ github.sha }}</span><span class="w">            
+</span></code></pre></div>]]></content></item><item><title>Use PowerShell to generate a GUID</title><link>https://stuartmccoll.github.io/posts/2022-06-02-use-powershell-to-generate-a-guid/</link><pubDate>Thu, 02 Jun 2022 11:05:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2022-06-02-use-powershell-to-generate-a-guid/</guid><description>Another quick automation using PowerShell, this time to solve the problem of quickly adding a new GUID to the clipboard.
 The New-Guid cmdlet will quickly create a random globally unique identifier, with the below output.
 Guid ---- 8c312165-113b-4c30-91e9-e4e6edebcf0b This is great, but I&amp;rsquo;ve got a couple of extra needs; I don&amp;rsquo;t need the - characters, and I want the GUID to be added straight to my clipboard.
 Ignoring the header is simple:</description><content type="html"><![CDATA[<p>Another quick automation using PowerShell, this time to solve the problem of
