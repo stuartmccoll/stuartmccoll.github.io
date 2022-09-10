@@ -1,4 +1,112 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 11 Jun 2022 11:15:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Push a Docker image to Azure Container Registry using a GitHub Actions workflow</title><link>https://stuartmccoll.github.io/posts/2022-06-11-github-action-to-azure-container-registry/</link><pubDate>Sat, 11 Jun 2022 11:15:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2022-06-11-github-action-to-azure-container-registry/</guid><description>Building and pushing Docker images to Azure Container Registry is simple with a small GitHub Actions workflow.
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 10 Sep 2022 23:00:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Maintain an Azure Container Registry using a PowerShell Azure Function</title><link>https://stuartmccoll.github.io/posts/2022-09-10-maintain-acr-using-azure-function/</link><pubDate>Sat, 10 Sep 2022 23:00:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2022-09-10-maintain-acr-using-azure-function/</guid><description>This year I created a small C# CLI application that scrapes this website and stores the results in Azure Blob Storage. It&amp;rsquo;s essentially a not-very-good version of the the Internet Archive&amp;rsquo;s Wayback Machine, but specific only to this website.
+The process happens in two parts. If I merge any pull requests on the website-archiver into main, then a GitHub Actions workflow pushes the latest Docker image to an Azure Container Registry.</description><content type="html"><![CDATA[<p>This year I created a small C# CLI application that scrapes this website and
+stores the results in Azure Blob Storage. It&rsquo;s essentially a not-very-good
+version of the the <a href="https://archive.org/">Internet Archive</a>&rsquo;s
+<a href="https://web.archive.org/">Wayback Machine</a>, but specific only to this website.</p>
+<p>The process happens in two parts. If I merge any pull requests on the
+<a href="https://github.com/stuartmccoll/website-archiver">website-archiver</a> into
+<code>main</code>, then a GitHub Actions workflow pushes the latest Docker image to an
+Azure Container Registry. If I merge any pull requests on the repository that
+holds the codebase for this website, then another GitHub Actions workflow
+triggers the deployment of an Azure Container Instance using the <code>latest</code>
+tagged image in the aforementioned Azure Container Registry. The container
+runs, the website is scraped and stored in Azure Blob Storage, and then
+the container exits.</p>
+<p>So far, this is working well. When I update this website, within a minute or
+two I can see the most recently scraped version land in Azure Blob Storage.
+Whilst I plan to hang on to all of these &lsquo;scrapes&rsquo;, what I don&rsquo;t need to hang
+onto in the long term is outdated container images for the website archiver
+itself. I could manually drop into the Azure Container Registry every once
+in a while and remove any that aren&rsquo;t needed - it&rsquo;s not as if I&rsquo;m frequently
+uploading updated images - but this seems like something that should be easy
+enough to automate.</p>
+<h2 id="removing-images-from-azure-container-registry-using-powershell">Removing images from Azure Container Registry using PowerShell</h2>
+<p>Rather than head straight for an Azure Function, we&rsquo;ll test the theory in our
+local <a href="https://docs.microsoft.com/en-us/windows/terminal/">Windows Terminal</a>
+first. I want to:</p>
+<ul>
+<li>List the available images in an Azure Container Registry repository, ordered
+by when they were last updated.</li>
+<li>If there are more than five images available, then I want to remove all
+<em>except</em> the most recently updated five images.</li>
+</ul>
+<p>We&rsquo;ll use two cmdlets, one for each action above;
+<a href="https://docs.microsoft.com/en-us/powershell/module/az.containerregistry/get-azcontainerregistrytag"><code>Get-AzContainerRegistryTag</code></a> and
+<a href="https://docs.microsoft.com/en-us/powershell/module/az.containerregistry/remove-azcontainerregistrytag"><code>Remove-AzContainerRegistryTag</code></a>.</p>
+<p>First, we retrieve <em>all</em> available tagged images in an Azure Container Registry
+repository.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nv">$Tags</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-AzContainerRegistryTag</span> <span class="n">-RepositoryName</span> <span class="s2">&#34;RepoName&#34;</span> <span class="p">`</span>
+<span class="n">-RegistryName</span> <span class="s2">&#34;RegName&#34;</span><span class="p">).</span><span class="n">Tags</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">LastUpdateTime</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">Name</span>
+</code></pre></div><p>Now, if <code>$Tags</code> contains more than five tagged images, we want to remove all
+but the five most recent.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="k">if</span> <span class="p">(</span><span class="nv">$Tags</span><span class="p">.</span><span class="n">Length</span> <span class="o">-gt</span> <span class="n">5</span><span class="p">)</span>
+<span class="p">{</span>
+
+  <span class="k">Foreach</span> <span class="p">(</span><span class="nv">$Tag</span> <span class="k">in</span> <span class="nv">$Tags</span><span class="p">[</span><span class="n">0</span><span class="p">..(</span><span class="nv">$Tags</span><span class="p">.</span><span class="n">Length</span> <span class="p">-</span> <span class="n">5</span><span class="p">)])</span>
+  <span class="p">{</span>
+    <span class="nb">Remove-AzContainerRegistryTag</span> <span class="n">-RepositoryName</span> <span class="s2">&#34;RepoName&#34;</span> <span class="p">`</span>
+    <span class="n">-RegistryName</span> <span class="s2">&#34;RegName&#34;</span> <span class="n">-Name</span> <span class="nv">$Tag</span><span class="p">.</span><span class="n">Name</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div><p>That&rsquo;s the extent of the PowerShell we&rsquo;ll write here, other than a bit of
+logging output for our Azure Function.</p>
+<h2 id="running-an-azure-function-on-a-timer">Running an Azure Function on a timer</h2>
+<p>After creating an Azure Function App (using the PowerShell Core runtime stack),
+we&rsquo;ve got an extra step before we add our code or configure our timer. We&rsquo;ll
+need to make the <code>Az.ContainerRegistry</code> PowerShell module available to our
+Function. This can be done by heading to &lsquo;App files&rsquo;, and adding the following
+line to <code>requirements.psd1</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="s1">&#39;Az.ContainerRegistry&#39;</span> <span class="p">=</span> <span class="s1">&#39;3.0.0&#39;</span>
+</code></pre></div><p>Configuring the timer is done when creating the Azure Function itself; select
+&lsquo;Timer trigger&rsquo; from the available templates. Give it a name, and enter a
+cron expression to specify the schedule that the Azure Function will run on.
+I&rsquo;ve gone with <code>0 30 23 * * Sat</code>, which equates to 23:30 every Saturday. The
+cron format in Azure is <code>{second} {minute} {hour} {day} {month} {day of week}</code>.</p>
+<p>Azure will pre-populate our Azure Function with some boilerplate, which we&rsquo;ll
+leave for now, inserting our full code in the middle:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="c"># Input bindings are passed in via param block.</span>
+<span class="k">param</span><span class="p">(</span><span class="nv">$Timer</span><span class="p">)</span>
+
+<span class="c"># Get the current universal time in the default string format.</span>
+<span class="nv">$currentUTCtime</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-Date</span><span class="p">).</span><span class="n">ToUniversalTime</span><span class="p">()</span>
+
+<span class="c"># The &#39;IsPastDue&#39; property is &#39;true&#39; when the current function invocation is</span>
+<span class="c"># later than scheduled.</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$Timer</span><span class="p">.</span><span class="n">IsPastDue</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">Write-Host</span> <span class="s2">&#34;PowerShell timer is running late!&#34;</span>
+<span class="p">}</span>
+
+<span class="nb">Write-Host</span> <span class="s2">&#34;Retrieving Azure Container Registry Repository Tags in &#34;</span><span class="p">`</span>
+<span class="s2">&#34;descending order of LastUpdatedTime&#34;</span>
+
+<span class="nv">$Tags</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Get-AzContainerRegistryTag</span> <span class="n">-RepositoryName</span> <span class="s2">&#34;RepoName&#34;</span> <span class="p">`</span>
+<span class="n">-RegistryName</span> <span class="s2">&#34;RegName&#34;</span><span class="p">).</span><span class="n">Tags</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">LastUpdateTime</span> <span class="p">|</span> <span class="p">`</span>
+<span class="nb">Select-Object</span> <span class="n">Name</span>
+
+<span class="nb">Write-Host</span> <span class="s2">&#34;Finished retrieving </span><span class="p">$(</span><span class="nv">$Tags</span><span class="p">.</span><span class="n">Length</span><span class="p">)</span><span class="s2"> Azure Container Registry &#34;</span> <span class="p">`</span>
+<span class="s2">&#34;Repository Tags in descending order of LastUpdatedTime&#34;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$Tags</span><span class="p">.</span><span class="n">Length</span> <span class="o">-gt</span> <span class="n">5</span><span class="p">)</span>
+<span class="p">{</span>
+
+    <span class="nb">Write-Host</span> <span class="s2">&#34;More than 5 tags found for Azure Container Registry Repository&#34;</span>
+
+    <span class="k">Foreach</span> <span class="p">(</span><span class="nv">$Tag</span> <span class="k">in</span> <span class="nv">$Tags</span><span class="p">[</span><span class="n">0</span><span class="p">..(</span><span class="nv">$Tags</span><span class="p">.</span><span class="n">Length</span> <span class="p">-</span> <span class="n">5</span><span class="p">)])</span>
+    <span class="p">{</span>
+        <span class="nb">Write-Host</span> <span class="s2">&#34;Removing Tag </span><span class="p">$(</span><span class="nv">$Tag</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span><span class="s2">&#34;</span>
+        <span class="nb">Remove-AzContainerRegistryTag</span> <span class="n">-RepositoryName</span> <span class="s2">&#34;RepoName&#34;</span> <span class="p">`</span>
+        <span class="n">-RegistryName</span> <span class="s2">&#34;RegName&#34;</span> <span class="n">-Name</span> <span class="nv">$Tag</span><span class="p">.</span><span class="n">Name</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="c"># Write an information log with the current time.</span>
+<span class="nb">Write-Host</span> <span class="s2">&#34;PowerShell timer trigger function ran! TIME: $currentUTCtime&#34;</span>
+
+</code></pre></div><p>This is now happily running in my Azure account, limiting the amount of storage
+that I&rsquo;m using in this particular Azure Container Registry.</p>
+]]></content></item><item><title>Push a Docker image to Azure Container Registry using a GitHub Actions workflow</title><link>https://stuartmccoll.github.io/posts/2022-06-11-github-action-to-azure-container-registry/</link><pubDate>Sat, 11 Jun 2022 11:15:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2022-06-11-github-action-to-azure-container-registry/</guid><description>Building and pushing Docker images to Azure Container Registry is simple with a small GitHub Actions workflow.
 This blog post assumes you&amp;rsquo;ve got a docker-compose.yml file in your GitHub repository. If you&amp;rsquo;re just using a Dockerfile, you&amp;rsquo;ll need to make a tiny amendment to the Build Docker image step in the push-to-acr.yml file described below.
 Microsoft Azure setup/configuration If you&amp;rsquo;re starting fresh, in terms of our Azure setup we&amp;rsquo;ll need:</description><content type="html"><![CDATA[<p>Building and pushing Docker images to Azure Container Registry is simple with
 a small GitHub Actions workflow.</p>
