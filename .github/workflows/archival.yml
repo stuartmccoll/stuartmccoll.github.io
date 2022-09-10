@@ -20,7 +20,7 @@ jobs:
           cpu: 0.1
           dns-name-label: websitearchiver
           environment-variables: AZURE_BLOB_STORAGE_CONTAINER_NAME=archives DOMAIN=https://stuartmccoll.github.io/
-          image: ${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }}/websitearchiver:47594edaa5f3eebabb897401d0e90adac8146009
+          image: ${{ secrets.AZURE_CONTAINER_REGISTRY_LOGIN_SERVER }}/websitearchiver:latest
           location: 'uksouth'
           memory: 1
           name: websitearchiver
