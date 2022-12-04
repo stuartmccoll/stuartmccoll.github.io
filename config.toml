@@ -42,10 +42,10 @@ pygmentsCodeFencers = true
   issuesLink = "https://github.com/stuartmccoll/hugo-theme-refresh/issues/new"
 
   # Flag to toggle inclusion of Twitter link
-  includeTwitter = true
+  includeMastodon = true
 
   # Twitter username
-  twitterUsername = "itstuartmccoll"
+  mastodonUsername = "@stuartmccoll@hachyderm.io"
 
   # Flag to toggle inclusion of Hugo version details
   includeHugoVersion = true
