@@ -1,0 +1,147 @@
+<!doctype html><html lang=en-gb><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=author content="Stuart McColl "><meta name=description content="Something I&amp;rsquo;ve had to do on more than one occassion recently is copy the contents of one S3 bucket to another S3 bucket. There is no built-in way of doing this in the AWS Management Console, but it is possible using the AWS Command Line Interface (CLI).
+As an example, I&amp;rsquo;m going to create two new S3 buckets in my AWS account using Terraform, push some objects into my source bucket, and then copy the contents of this bucket into my target bucket."><meta name=keywords content="homepage,blog,development,programming"><meta name=robots content="noodp"><link rel=canonical href=https://stuartmccoll.github.io/posts/2023-01-14-sync-contents-between-s3-buckets/><title>Sync contents between two S3 Buckets :: Stuart McColl</title><link rel=stylesheet href=/main.min.204e05be3bf8f06e400f4478e75c46ae9e3015935b7dd6625b19338e6625499b.css><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#252627><link rel="shortcut icon" href=/favicon.ico><meta name=theme-color content="#252627"><meta itemprop=name content="Sync contents between two S3 Buckets"><meta itemprop=description content="Something I&rsquo;ve had to do on more than one occassion recently is copy the contents of one S3 bucket to another S3 bucket. There is no built-in way of doing this in the AWS Management Console, but it is possible using the AWS Command Line Interface (CLI).
+As an example, I&rsquo;m going to create two new S3 buckets in my AWS account using Terraform, push some objects into my source bucket, and then copy the contents of this bucket into my target bucket."><meta itemprop=datePublished content="2023-01-14T11:32:05+00:00"><meta itemprop=dateModified content="2023-01-14T11:32:05+00:00"><meta itemprop=wordCount content="638"><meta itemprop=image content="https://stuartmccoll.github.io"><meta itemprop=keywords content="Amazon Web Services,AWS,S3,Terraform,"><meta property="article:section" content="Amazon Web Services"><meta property="article:section" content="AWS"><meta property="article:section" content="S3"><meta property="article:section" content="Terraform"><meta property="article:published_time" content="2023-01-14 11:32:05 +0000 UTC"></head><body><div class=container><header><section><h1 class=site-heading>Stuart McColl</h1><nav><ul><li><a href=/>Blog</a></li><li><a href=/about>About</a></li></ul></nav></section></header><hr><div class=content><main class=post><article><header><h1 class=post-title>Sync contents between two S3 Buckets</h1><p class=post-date>January 14, 2023</p></header><hr class=post-rule><div class=post-content><p>Something I&rsquo;ve had to do on more than one occassion recently is copy the
+contents of one S3 bucket to another S3 bucket. There is no built-in way
+of doing this in the AWS Management Console, but it <em>is</em> possible using
+the AWS Command Line Interface (CLI).</p><p>As an example, I&rsquo;m going to create two new S3 buckets in my AWS account
+using Terraform, push some objects into my source bucket, and then copy
+the contents of this bucket into my target bucket. If you&rsquo;d like to
+skip the setup and jump straight to the instructions, head to the
+<a href=#syncing-contents>Syncing contents</a> section.</p><h2 id=provisioning-our-infrastructure>Provisioning our infrastructure</h2><p>I&rsquo;m going to use Terraform to create two S3 buckets with some basic
+configuration, one named <code>${account-id}-source</code>, and the other named
+<code>${account-id}-target</code>. If you&rsquo;re playing along, the following steps
+assume that you have Terraform installed and AWS credentials configured
+locally.</p><p>First, we&rsquo;ll create a new directory to store out Terraform files.</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>mkdir sync-s3-bucket-contents
+</code></pre></div><p>In this directory, we&rsquo;ll create a new <code>versions.tf</code> file.</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>touch versions.tf
+</code></pre></div><p>In this file we&rsquo;ll declare our required Terraform version and provider(s).</p><div class=highlight><pre class=chroma><code class=language-terraform data-lang=terraform><span class=nx>terraform</span> <span class=p>{</span>
+  <span class=na>required_version</span> = <span class=s2>&#34;&gt;= 1.3.6&#34;</span>
+
+  <span class=nx>required_providers</span> <span class=p>{</span>
+    <span class=na>aws</span> = <span class=p>{</span>
+      <span class=na>source</span>  = <span class=s2>&#34;hashicorp/aws&#34;</span>
+      <span class=na>version</span> = <span class=s2>&#34;&gt;= 4.50.0&#34;</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>Next, we&rsquo;ll create a new <code>main.tf</code> file.</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>touch main.tf
+</code></pre></div><p>In this file, we&rsquo;ll utilise our provider:</p><div class=highlight><pre class=chroma><code class=language-terraform data-lang=terraform><span class=kr>provider</span> <span class=s2>&#34;aws&#34;</span> <span class=p>{</span>
+  <span class=na>region</span> = <span class=nx>local</span><span class=p>.</span><span class=nx>region</span>
+<span class=p>}</span>
+</code></pre></div><p>We&rsquo;ll declare our local variables:</p><div class=highlight><pre class=chroma><code class=language-terraform data-lang=terraform><span class=nx>locals</span> <span class=p>{</span>
+  <span class=na>account_id</span> = <span class=nb>data</span><span class=p>.</span><span class=nx>aws_caller_identity</span><span class=p>.</span><span class=nx>current</span><span class=p>.</span><span class=nx>account_id</span>
+  <span class=na>region</span>     = <span class=s2>&#34;eu-west-2&#34;</span>
+<span class=p>}</span>
+</code></pre></div><p>And we&rsquo;ll grab the AWS account identifier being used, so that we can
+use that in our S3 bucket names to ensure that they&rsquo;re unique:</p><div class=highlight><pre class=chroma><code class=language-terraform data-lang=terraform><span class=kr>data</span> <span class=s2>&#34;aws_caller_identity&#34;</span> <span class=s2>&#34;current&#34;</span> <span class=p>{}</span>
+</code></pre></div><p>Finally, we&rsquo;ll declare our S3 buckets:</p><div class=highlight><pre class=chroma><code class=language-terraform data-lang=terraform><span class=kr>module</span> <span class=s2>&#34;s3_source_bucket&#34;</span> <span class=p>{</span>
+  <span class=na>source</span> = <span class=s2>&#34;terraform-aws-modules/s3-bucket/aws&#34;</span>
+
+  <span class=na>bucket</span> = <span class=s2>&#34;</span><span class=si>${</span><span class=nx>local</span><span class=p>.</span><span class=nx>account_id</span><span class=si>}</span><span class=s2>-source-bucket&#34;</span>
+
+  <span class=na>block_public_acls</span>       = <span class=kc>true</span>
+  <span class=na>block_public_policy</span>     = <span class=kc>true</span>
+  <span class=na>ignore_public_acls</span>      = <span class=kc>true</span>
+  <span class=na>restrict_public_buckets</span> = <span class=kc>true</span>
+
+  <span class=na>acl</span> = <span class=s2>&#34;private&#34;</span>
+
+  <span class=na>server_side_encryption_configuration</span> = <span class=p>{</span>
+    <span class=na>rule</span> = <span class=p>{</span>
+      <span class=na>apply_server_side_encryption_by_default</span> = <span class=p>{</span>
+        <span class=na>sse_algorithm</span> = <span class=s2>&#34;AES256&#34;</span>
+      <span class=p>}</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+<span class=kr>
+</span><span class=kr>module</span> <span class=s2>&#34;s3_target_bucket&#34;</span> <span class=p>{</span>
+  <span class=na>source</span> = <span class=s2>&#34;terraform-aws-modules/s3-bucket/aws&#34;</span>
+
+  <span class=na>bucket</span> = <span class=s2>&#34;</span><span class=si>${</span><span class=nx>local</span><span class=p>.</span><span class=nx>account_id</span><span class=si>}</span><span class=s2>-target-bucket&#34;</span>
+
+  <span class=na>block_public_acls</span>       = <span class=kc>true</span>
+  <span class=na>block_public_policy</span>     = <span class=kc>true</span>
+  <span class=na>ignore_public_acls</span>      = <span class=kc>true</span>
+  <span class=na>restrict_public_buckets</span> = <span class=kc>true</span>
+
+  <span class=na>acl</span> = <span class=s2>&#34;private&#34;</span>
+
+  <span class=na>server_side_encryption_configuration</span> = <span class=p>{</span>
+    <span class=na>rule</span> = <span class=p>{</span>
+      <span class=na>apply_server_side_encryption_by_default</span> = <span class=p>{</span>
+        <span class=na>sse_algorithm</span> = <span class=s2>&#34;AES256&#34;</span>
+      <span class=p>}</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>Altogether, our <code>main.tf</code> file should look like this:</p><div class=highlight><pre class=chroma><code class=language-terraform data-lang=terraform><span class=kr>provider</span> <span class=s2>&#34;aws&#34;</span> <span class=p>{</span>
+  <span class=na>region</span> = <span class=nx>local</span><span class=p>.</span><span class=nx>region</span>
+<span class=p>}</span>
+
+<span class=nx>locals</span> <span class=p>{</span>
+  <span class=na>account_id</span> = <span class=nb>data</span><span class=p>.</span><span class=nx>aws_caller_identity</span><span class=p>.</span><span class=nx>current</span><span class=p>.</span><span class=nx>account_id</span>
+  <span class=na>region</span>     = <span class=s2>&#34;eu-west-2&#34;</span>
+<span class=p>}</span>
+<span class=kr>
+</span><span class=kr>data</span> <span class=s2>&#34;aws_caller_identity&#34;</span> <span class=s2>&#34;current&#34;</span> <span class=p>{}</span>
+<span class=kr>
+</span><span class=kr>module</span> <span class=s2>&#34;s3_source_bucket&#34;</span> <span class=p>{</span>
+  <span class=na>source</span> = <span class=s2>&#34;terraform-aws-modules/s3-bucket/aws&#34;</span>
+
+  <span class=na>bucket</span> = <span class=s2>&#34;</span><span class=si>${</span><span class=nx>local</span><span class=p>.</span><span class=nx>account_id</span><span class=si>}</span><span class=s2>-source-bucket&#34;</span>
+
+  <span class=na>block_public_acls</span>       = <span class=kc>true</span>
+  <span class=na>block_public_policy</span>     = <span class=kc>true</span>
+  <span class=na>ignore_public_acls</span>      = <span class=kc>true</span>
+  <span class=na>restrict_public_buckets</span> = <span class=kc>true</span>
+
+  <span class=na>acl</span> = <span class=s2>&#34;private&#34;</span>
+
+  <span class=na>server_side_encryption_configuration</span> = <span class=p>{</span>
+    <span class=na>rule</span> = <span class=p>{</span>
+      <span class=na>apply_server_side_encryption_by_default</span> = <span class=p>{</span>
+        <span class=na>sse_algorithm</span> = <span class=s2>&#34;AES256&#34;</span>
+      <span class=p>}</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+<span class=kr>
+</span><span class=kr>module</span> <span class=s2>&#34;s3_target_bucket&#34;</span> <span class=p>{</span>
+  <span class=na>source</span> = <span class=s2>&#34;terraform-aws-modules/s3-bucket/aws&#34;</span>
+
+  <span class=na>bucket</span> = <span class=s2>&#34;</span><span class=si>${</span><span class=nx>local</span><span class=p>.</span><span class=nx>account_id</span><span class=si>}</span><span class=s2>-target-bucket&#34;</span>
+
+  <span class=na>block_public_acls</span>       = <span class=kc>true</span>
+  <span class=na>block_public_policy</span>     = <span class=kc>true</span>
+  <span class=na>ignore_public_acls</span>      = <span class=kc>true</span>
+  <span class=na>restrict_public_buckets</span> = <span class=kc>true</span>
+
+  <span class=na>acl</span> = <span class=s2>&#34;private&#34;</span>
+
+  <span class=na>server_side_encryption_configuration</span> = <span class=p>{</span>
+    <span class=na>rule</span> = <span class=p>{</span>
+      <span class=na>apply_server_side_encryption_by_default</span> = <span class=p>{</span>
+        <span class=na>sse_algorithm</span> = <span class=s2>&#34;AES256&#34;</span>
+      <span class=p>}</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p>With that in place, we&rsquo;ll run <code>terraform init</code> to initiliase everything,
+followed by <code>terraform validate</code> to ensure that everything we&rsquo;ve written is
+valid Terraform code. <code>terraform plan</code> will tell us exactly what Terraform will
+provision. Finally, running <code>terraform apply</code> will provision our infrastructure.</p><h2 id=adding-items-to-our-source-s3-bucket>Adding items to our source S3 bucket</h2><p>Again, if you&rsquo;re playing along, the following section assumes that you have
+the AWS CLI installed, and AWS credentials configured locally.</p><p>I&rsquo;ve created two <code>.txt</code> files locally, <code>test-1.txt</code> and <code>test-2.txt</code>. To move
+these from my local machine into our source S3 bucket, I can use the following
+AWS CLI command:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>aws s3 mv test-1.txt s3://<span class=si>${</span><span class=nv>my</span><span class=p>-account-id</span><span class=si>}</span>-source-bucket
+aws s3 mv test-2.txt s3://<span class=si>${</span><span class=nv>my</span><span class=p>-account-id</span><span class=si>}</span>-source-bucket
+</code></pre></div><p>To check that the files have successfully been moved, I can run the following
+AWS CLI command:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>aws s3 ls <span class=si>${</span><span class=nv>my</span><span class=p>-account-id</span><span class=si>}</span>-source-bucket
+</code></pre></div><h2 id=syncing-contents>Syncing contents</h2><p>Now, to sync the contents from the source bucket to the target bucket, I run
+the following AWS CLI command:</p><div class=highlight><pre class=chroma><code class=language-bash data-lang=bash>aws s3 sync s3://<span class=si>${</span><span class=nv>my</span><span class=p>-account-id</span><span class=si>}</span>-source-bucket s3://<span class=si>${</span><span class=nv>my</span><span class=p>-account-id</span><span class=si>}</span>-target-bucket
+</code></pre></div><h2 id=tearing-down-our-infrastructure>Tearing down our infrastructure</h2><p>Finally, to remove the infrastructure I provisioned for this example, I can
+run <code>terraform destroy</code>.</p></div></article></main></div><hr><footer><section><h3>More</h3><ul><li><a href=https://hachyderm.io/@stuartmccoll rel=me>Contact me on Mastodon</a></li><li>Spotted a bug in the site?
+<a href=https://github.com/stuartmccoll/hugo-theme-refresh/issues/new>Raise an issue on GitHub</a></li><li>Get notifications of new posts by
+<a href=https://stuartmccoll.github.io/index.xml>subscribing to my RSS feed</a></li><li>This static site was generated using
+<a href=https://github.com/gohugoio/hugo/releases/tag/v0.83.1>Hugo version 0.83.1</a></li></ul></section><hr><section><h3>Attribution</h3><p xmlns:dct=http://purl.org/dc/terms/ xmlns:cc=http://creativecommons.org/ns# class=license-text>This blog post <span rel=dct:title>(Sync contents between two S3 Buckets)</span> is licensed under
+<a href=https://creativecommons.org/licenses/by/4.0>CC BY 4.0</a>. Any code contained within
+this article may be subject to other licenses.</p></section></footer></div></body></html>
