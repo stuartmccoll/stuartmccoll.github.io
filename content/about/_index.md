@@ -11,7 +11,7 @@ title: About
 
 ## About me
 
-I'm currently a Senior Software Engineer at [Kainos](https://www.kainos.com)
+I'm currently a Lead Software Engineer at [Kainos](https://www.kainos.com)
 where I build new products in the [Workday](https://www.workday.com) ecosystem.
 
 Formerly of
