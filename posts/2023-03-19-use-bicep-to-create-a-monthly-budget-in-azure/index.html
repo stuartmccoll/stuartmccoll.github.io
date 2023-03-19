@@ -1,0 +1,57 @@
+<!doctype html><html lang=en-gb><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=author content="Stuart McColl "><meta name=description content="I&amp;rsquo;ve recently started experimenting with Bicep for deploying Azure resources declaratively.
+In this post, I&amp;rsquo;ll show you how to create a Bicep file which declares a simple Azure Budget with a monthly alert.
+Creating the .bicep file Create a new file, called main.bicep.
+The first thing we&amp;rsquo;ll declare in this file is the target scope of any resources that we create. In this case, the Budget we&amp;rsquo;re creating will be created at a Subscription level."><meta name=keywords content="homepage,blog,development,programming"><meta name=robots content="noodp"><link rel=canonical href=https://stuartmccoll.github.io/posts/2023-03-19-use-bicep-to-create-a-monthly-budget-in-azure/><title>Use Bicep to create a monthly budget in Azure :: Stuart McColl</title><link rel=stylesheet href=/main.min.204e05be3bf8f06e400f4478e75c46ae9e3015935b7dd6625b19338e6625499b.css><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#252627><link rel="shortcut icon" href=/favicon.ico><meta name=theme-color content="#252627"><meta itemprop=name content="Use Bicep to create a monthly budget in Azure"><meta itemprop=description content="I&rsquo;ve recently started experimenting with Bicep for deploying Azure resources declaratively.
+In this post, I&rsquo;ll show you how to create a Bicep file which declares a simple Azure Budget with a monthly alert.
+Creating the .bicep file Create a new file, called main.bicep.
+The first thing we&rsquo;ll declare in this file is the target scope of any resources that we create. In this case, the Budget we&rsquo;re creating will be created at a Subscription level."><meta itemprop=datePublished content="2023-03-19T21:00:00+01:00"><meta itemprop=dateModified content="2023-03-19T21:00:00+01:00"><meta itemprop=wordCount content="300"><meta itemprop=image content="https://stuartmccoll.github.io"><meta itemprop=keywords content="Automation,Microsoft Azure,Bicep,PowerShell,"><meta property="article:section" content="Automation"><meta property="article:section" content="Microsoft Azure"><meta property="article:section" content="Bicep"><meta property="article:section" content="PowerShell"><meta property="article:published_time" content="2023-03-19 21:00:00 +0100 +0100"></head><body><div class=container><header><section><h1 class=site-heading>Stuart McColl</h1><nav><ul><li><a href=/>Blog</a></li><li><a href=/about>About</a></li></ul></nav></section></header><hr><div class=content><main class=post><article><header><h1 class=post-title>Use Bicep to create a monthly budget in Azure</h1><p class=post-date>March 19, 2023</p></header><hr class=post-rule><div class=post-content><p>I&rsquo;ve recently started experimenting with <a href=https://github.com/Azure/bicep>Bicep</a>
+for deploying Azure resources declaratively.</p><p>In this post, I&rsquo;ll show you how to create a Bicep file which declares a simple
+Azure Budget with a monthly alert.</p><h2 id=creating-the-bicep-file>Creating the <code>.bicep</code> file</h2><p>Create a new file, called <code>main.bicep</code>.</p><p>The first thing we&rsquo;ll declare in this file is the target scope of any
+resources that we create. In this case, the Budget we&rsquo;re creating will be
+created at a Subscription level.</p><pre><code class=language-bicep data-lang=bicep>targetScope = 'subscription'
+</code></pre><p>Next, we&rsquo;ll declare some input parameters to be used when we deploy our
+resources.</p><pre><code class=language-bicep data-lang=bicep>param startDate string
+param endDate string
+param email array
+</code></pre><p>The <code>startDate</code> and <code>endDate</code> will be used to configure how long our Budget
+lasts, whilst the <code>email</code> array will be used to send email alerts.</p><p>Finally, we&rsquo;ll declare the Budget resource itself.</p><pre><code class=language-bicep data-lang=bicep>resource budget 'Microsoft.Consumption/budgets@2021-10-01' = {
+  name: 'BudgetMonthly'
+  properties: {
+    timePeriod: {
+      startDate: startDate
+      endDate: endDate
+    }
+    timeGrain: 'Monthly'
+    amount: 10
+    category: 'Cost'
+    notifications: {
+      NotificationForExceededBudget1: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 90
+        contactEmails: email
+      }
+      NotificationForExceededBudget2: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 110
+        contactEmails: email
+      }
+    }
+  }
+}
+</code></pre><p>The <code>thresholds</code> within the two notification objects can be thought of as our
+triggers; the first threshold of <code>90</code> means that we&rsquo;ll send a notification once
+we&rsquo;ve exceeded 90% of our <code>amount</code> (which in this case is $10, meaning $0.90);
+the second threshold of <code>110</code> means that we&rsquo;ll send a notification once we&rsquo;ve
+exceeded 110% of our <code>amount</code> ($1.10).</p><h2 id=deploying-the-resources-declared-in-the-bicep-file>Deploying the resources declared in the <code>.bicep</code> file</h2><p>If you don&rsquo;t already have the Azure CLI installed, you can find an installation
+guide at <a href=https://learn.microsoft.com/en-us/cli/azure/install-azure-cli>Microsoft Learn</a>.</p><p>With the Azure CLI installed and authenticated, deploying the resource is done
+using the following PowerShell commands:</p><div class=highlight><pre class=chroma><code class=language-powershell data-lang=powershell><span class=nv>$email</span> <span class=p>=</span> <span class=p>@(</span><span class=s2>&#34;user@contoso.com&#34;</span><span class=p>)</span>
+
+<span class=nb>New-AzSubscriptionDeployment</span> <span class=n>-Name</span> <span class=n>budgetMonthly</span> <span class=n>-Location</span> <span class=n>uksouth</span> <span class=n>-TemplateFile</span> <span class=p>./</span><span class=n>main</span><span class=p>.</span><span class=n>bicep</span> <span class=n>-startDate</span> <span class=s2>&#34;2023-03-01&#34;</span> <span class=n>-endDate</span> <span class=s2>&#34;2023-12-31&#34;</span> <span class=n>-email</span> <span class=nv>$email</span>
+</code></pre></div></div></article></main></div><hr><footer><section><h3>More</h3><ul><li><a href=https://hachyderm.io/@stuartmccoll rel=me>Contact me on Mastodon</a></li><li>Spotted a bug in the site?
+<a href=https://github.com/stuartmccoll/hugo-theme-refresh/issues/new>Raise an issue on GitHub</a></li><li>Get notifications of new posts by
+<a href=https://stuartmccoll.github.io/index.xml>subscribing to my RSS feed</a></li><li>This static site was generated using
+<a href=https://github.com/gohugoio/hugo/releases/tag/v0.83.1>Hugo version 0.83.1</a></li></ul></section><hr><section><h3>Attribution</h3><p xmlns:dct=http://purl.org/dc/terms/ xmlns:cc=http://creativecommons.org/ns# class=license-text>This blog post <span rel=dct:title>(Use Bicep to create a monthly budget in Azure)</span> is licensed under
+<a href=https://creativecommons.org/licenses/by/4.0>CC BY 4.0</a>. Any code contained within
+this article may be subject to other licenses.</p></section></footer></div></body></html>

@@ -1,4 +1,64 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 14 Jan 2023 11:32:05 +0000</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Sync contents between two S3 Buckets</title><link>https://stuartmccoll.github.io/posts/2023-01-14-sync-contents-between-s3-buckets/</link><pubDate>Sat, 14 Jan 2023 11:32:05 +0000</pubDate><guid>https://stuartmccoll.github.io/posts/2023-01-14-sync-contents-between-s3-buckets/</guid><description>Something I&amp;rsquo;ve had to do on more than one occassion recently is copy the contents of one S3 bucket to another S3 bucket. There is no built-in way of doing this in the AWS Management Console, but it is possible using the AWS Command Line Interface (CLI).
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 19 Mar 2023 21:00:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use Bicep to create a monthly budget in Azure</title><link>https://stuartmccoll.github.io/posts/2023-03-19-use-bicep-to-create-a-monthly-budget-in-azure/</link><pubDate>Sun, 19 Mar 2023 21:00:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-03-19-use-bicep-to-create-a-monthly-budget-in-azure/</guid><description>I&amp;rsquo;ve recently started experimenting with Bicep for deploying Azure resources declaratively.
+In this post, I&amp;rsquo;ll show you how to create a Bicep file which declares a simple Azure Budget with a monthly alert.
+Creating the .bicep file Create a new file, called main.bicep.
+The first thing we&amp;rsquo;ll declare in this file is the target scope of any resources that we create. In this case, the Budget we&amp;rsquo;re creating will be created at a Subscription level.</description><content type="html"><![CDATA[<p>I&rsquo;ve recently started experimenting with <a href="https://github.com/Azure/bicep">Bicep</a>
+for deploying Azure resources declaratively.</p>
+<p>In this post, I&rsquo;ll show you how to create a Bicep file which declares a simple
+Azure Budget with a monthly alert.</p>
+<h2 id="creating-the-bicep-file">Creating the <code>.bicep</code> file</h2>
+<p>Create a new file, called <code>main.bicep</code>.</p>
+<p>The first thing we&rsquo;ll declare in this file is the target scope of any
+resources that we create. In this case, the Budget we&rsquo;re creating will be
+created at a Subscription level.</p>
+<pre><code class="language-bicep" data-lang="bicep">targetScope = 'subscription'
+</code></pre><p>Next, we&rsquo;ll declare some input parameters to be used when we deploy our
+resources.</p>
+<pre><code class="language-bicep" data-lang="bicep">param startDate string
+param endDate string
+param email array
+</code></pre><p>The <code>startDate</code> and <code>endDate</code> will be used to configure how long our Budget
+lasts, whilst the <code>email</code> array will be used to send email alerts.</p>
+<p>Finally, we&rsquo;ll declare the Budget resource itself.</p>
+<pre><code class="language-bicep" data-lang="bicep">resource budget 'Microsoft.Consumption/budgets@2021-10-01' = {
+  name: 'BudgetMonthly'
+  properties: {
+    timePeriod: {
+      startDate: startDate
+      endDate: endDate
+    }
+    timeGrain: 'Monthly'
+    amount: 10
+    category: 'Cost'
+    notifications: {
+      NotificationForExceededBudget1: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 90
+        contactEmails: email
+      }
+      NotificationForExceededBudget2: {
+        enabled: true
+        operator: 'GreaterThan'
+        threshold: 110
+        contactEmails: email
+      }
+    }
+  }
+}
+</code></pre><p>The <code>thresholds</code> within the two notification objects can be thought of as our
+triggers; the first threshold of <code>90</code> means that we&rsquo;ll send a notification once
+we&rsquo;ve exceeded 90% of our <code>amount</code> (which in this case is $10, meaning $0.90);
+the second threshold of <code>110</code> means that we&rsquo;ll send a notification once we&rsquo;ve
+exceeded 110% of our <code>amount</code> ($1.10).</p>
+<h2 id="deploying-the-resources-declared-in-the-bicep-file">Deploying the resources declared in the <code>.bicep</code> file</h2>
+<p>If you don&rsquo;t already have the Azure CLI installed, you can find an installation
+guide at <a href="https://learn.microsoft.com/en-us/cli/azure/install-azure-cli">Microsoft Learn</a>.</p>
+<p>With the Azure CLI installed and authenticated, deploying the resource is done
+using the following PowerShell commands:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nv">$email</span> <span class="p">=</span> <span class="p">@(</span><span class="s2">&#34;user@contoso.com&#34;</span><span class="p">)</span>
+
+<span class="nb">New-AzSubscriptionDeployment</span> <span class="n">-Name</span> <span class="n">budgetMonthly</span> <span class="n">-Location</span> <span class="n">uksouth</span> <span class="n">-TemplateFile</span> <span class="p">./</span><span class="n">main</span><span class="p">.</span><span class="n">bicep</span> <span class="n">-startDate</span> <span class="s2">&#34;2023-03-01&#34;</span> <span class="n">-endDate</span> <span class="s2">&#34;2023-12-31&#34;</span> <span class="n">-email</span> <span class="nv">$email</span>
+</code></pre></div>]]></content></item><item><title>Sync contents between two S3 Buckets</title><link>https://stuartmccoll.github.io/posts/2023-01-14-sync-contents-between-s3-buckets/</link><pubDate>Sat, 14 Jan 2023 11:32:05 +0000</pubDate><guid>https://stuartmccoll.github.io/posts/2023-01-14-sync-contents-between-s3-buckets/</guid><description>Something I&amp;rsquo;ve had to do on more than one occassion recently is copy the contents of one S3 bucket to another S3 bucket. There is no built-in way of doing this in the AWS Management Console, but it is possible using the AWS Command Line Interface (CLI).
 As an example, I&amp;rsquo;m going to create two new S3 buckets in my AWS account using Terraform, push some objects into my source bucket, and then copy the contents of this bucket into my target bucket.</description><content type="html"><![CDATA[<p>Something I&rsquo;ve had to do on more than one occassion recently is copy the
 contents of one S3 bucket to another S3 bucket. There is no built-in way
 of doing this in the AWS Management Console, but it <em>is</em> possible using
