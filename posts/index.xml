@@ -1,4 +1,45 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 19 Mar 2023 21:00:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use Bicep to create a monthly budget in Azure</title><link>https://stuartmccoll.github.io/posts/2023-03-19-use-bicep-to-create-a-monthly-budget-in-azure/</link><pubDate>Sun, 19 Mar 2023 21:00:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-03-19-use-bicep-to-create-a-monthly-budget-in-azure/</guid><description>I&amp;rsquo;ve recently started experimenting with Bicep for deploying Azure resources declaratively.
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 24 Mar 2023 18:30:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use PowerShell to retrieve Azure location information</title><link>https://stuartmccoll.github.io/posts/2023-03-24-use-powershell-to-retrieve-azure-location-information/</link><pubDate>Fri, 24 Mar 2023 18:30:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-03-24-use-powershell-to-retrieve-azure-location-information/</guid><description>In this post, I&amp;rsquo;ll show you how to retrieve Azure location names using PowerShell; specifically, using the Azure Az PowerShell module.
+Install the Azure Az PowerShell module We&amp;rsquo;re going to follow this guide on Microsoft Learn to install the Azure Az PowerShell module.
+I&amp;rsquo;m going to assume that you have the latest version of PowerShell installed. If you don&amp;rsquo;t, you can follow this guide on Microsoft Learn.
+Run the following command in a PowerShell session:</description><content type="html"><![CDATA[<p>In this post, I&rsquo;ll show you how to retrieve Azure location names using
+PowerShell; specifically, using the Azure Az PowerShell module.</p>
+<h2 id="install-the-azure-az-powershell-module">Install the Azure Az PowerShell module</h2>
+<p>We&rsquo;re going to follow <a href="https://learn.microsoft.com/en-us/powershell/azure/install-az-ps">this guide on Microsoft Learn</a>
+to install the Azure Az PowerShell module.</p>
+<p>I&rsquo;m going to assume that you have the latest version of PowerShell installed.
+If you don&rsquo;t, you can follow <a href="https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell">this guide on Microsoft Learn</a>.</p>
+<p>Run the following command in a PowerShell session:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Install-Module</span> <span class="n">-Name</span> <span class="n">Az</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span> <span class="n">-Repository</span> <span class="n">PsGallery</span> <span class="n">-Force</span>
+</code></pre></div><p>You&rsquo;ll need to authenticate Azure PowerShell by signing in with your Azure
+credentials.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Connect-AzAccount</span>
+</code></pre></div><h2 id="using-the-get-azlocation-cmdlet">Using the <code>Get-AzLocation</code> cmdlet</h2>
+<p>You can run the <code>Get-AzLocation</code> cmdlet without any filtering to return
+information such as latitude, longitude, physical location, region type, etc.
+Here, we&rsquo;re going to filter to retrieve <em>only</em> the location names, e.g. the
+<code>Location</code> of each object returned.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Get-AzLocation</span> <span class="p">|</span> <span class="nb">Select </span><span class="n">Location</span>
+</code></pre></div><p>This will return a formatted table containing only the &lsquo;unfriendly&rsquo; version of
+each location, e.g. &lsquo;eastus&rsquo;, &lsquo;uksouth&rsquo;, etc. If you&rsquo;re looking to include
+Azure location information in a Bicep file, for example, chances are that this
+is the value that you&rsquo;re looking for.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">Location</span>
+<span class="p">--------</span>
+<span class="n">eastus</span>
+<span class="n">eastus2</span>
+</code></pre></div><p>If you wanted to expand your returned results to also include the &lsquo;friendly&rsquo;
+version of each location, you can.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Get-AzLocation</span> <span class="p">|</span> <span class="nb">Select </span><span class="n">DisplayName</span><span class="p">,</span><span class="n">Location</span>
+</code></pre></div><p>This will return a formatted table containing the &lsquo;friendly&rsquo; and &lsquo;unfriendly&rsquo;
+version of each location.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">DisplayName</span>          <span class="n">Location</span>
+<span class="p">-----------</span>          <span class="p">--------</span>
+<span class="n">East</span> <span class="n">US</span>              <span class="n">eastus</span>
+<span class="n">East</span> <span class="n">US</span> <span class="n">2</span>            <span class="n">eastus2</span>
+</code></pre></div><h2 id="further-reading">Further reading</h2>
+<p>Further information on the <code>Get-AzLocation</code> cmdlet can be found on
+<a href="https://learn.microsoft.com/en-us/powershell/module/az.resources/get-azlocation">Microsoft Learn</a>.</p>
+]]></content></item><item><title>Use Bicep to create a monthly budget in Azure</title><link>https://stuartmccoll.github.io/posts/2023-03-19-use-bicep-to-create-a-monthly-budget-in-azure/</link><pubDate>Sun, 19 Mar 2023 21:00:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-03-19-use-bicep-to-create-a-monthly-budget-in-azure/</guid><description>I&amp;rsquo;ve recently started experimenting with Bicep for deploying Azure resources declaratively.
 In this post, I&amp;rsquo;ll show you how to create a Bicep file which declares a simple Azure Budget with a monthly alert.
 Creating the .bicep file Create a new file, called main.bicep.
 The first thing we&amp;rsquo;ll declare in this file is the target scope of any resources that we create. In this case, the Budget we&amp;rsquo;re creating will be created at a Subscription level.</description><content type="html"><![CDATA[<p>I&rsquo;ve recently started experimenting with <a href="https://github.com/Azure/bicep">Bicep</a>
