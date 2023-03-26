@@ -1,4 +1,192 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 24 Mar 2023 18:30:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use PowerShell to retrieve Azure location information</title><link>https://stuartmccoll.github.io/posts/2023-03-24-use-powershell-to-retrieve-azure-location-information/</link><pubDate>Fri, 24 Mar 2023 18:30:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-03-24-use-powershell-to-retrieve-azure-location-information/</guid><description>In this post, I&amp;rsquo;ll show you how to retrieve Azure location names using PowerShell; specifically, using the Azure Az PowerShell module.
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 26 Mar 2023 15:00:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use Bicep to create an Azure Function App</title><link>https://stuartmccoll.github.io/posts/2023-03-26-use-bicep-to-create-an-azure-function-app/</link><pubDate>Sun, 26 Mar 2023 15:00:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-03-26-use-bicep-to-create-an-azure-function-app/</guid><description>In this post, I&amp;rsquo;ll show you how to create a Bicep file which declares the resources required for an Azure Function App.
+Prerequisites I&amp;rsquo;ll be using Visual Studio Code as my editor, where I&amp;rsquo;ll be writing the .bicep file for this walkthrough. I&amp;rsquo;ll also be using the official Bicep extension.
+I&amp;rsquo;ll be using the Azure Az PowerShell module to handle deploying the resources declared in the .bicep file I create. You can find instructions on installing the module at Microsoft Learn.</description><content type="html"><![CDATA[<p>In this post, I&rsquo;ll show you how to create a
+<a href="https://github.com/Azure/bicep">Bicep</a> file which declares the resources
+required for an Azure Function App.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>I&rsquo;ll be using <a href="https://code.visualstudio.com/">Visual Studio Code</a> as my
+editor, where I&rsquo;ll be writing the <code>.bicep</code> file for this walkthrough. I&rsquo;ll also
+be using the official <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep">Bicep extension</a>.</p>
+<p>I&rsquo;ll be using the
+<a href="https://learn.microsoft.com/en-us/powershell/azure/?view=azps-9.5.0">Azure Az PowerShell module</a>
+to handle deploying the resources declared in the <code>.bicep</code> file I create. You
+can find instructions on <a href="https://learn.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-9.5.0">installing the module</a>
+at Microsoft Learn.</p>
+<p>You&rsquo;ll need to install <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/">Azure Bicep</a>
+if you haven&rsquo;t already.</p>
+<p>The rest of this post assumes that you&rsquo;ve already authenticated the Azure Az
+PowerShell module with an Azure account.</p>
+<h2 id="creating-an-azure-resource-group">Creating an Azure resource group</h2>
+<p>Before we begin writing our Bicep code, we&rsquo;ll create an Azure resource group
+using the Azure Az PowerShell module. Run the following command in a PowerShell
+session:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">New-AzResourceGroup</span> <span class="n">-Name</span> <span class="nb">rg-BicepFunctionAppDemo</span> <span class="n">-Location</span> <span class="n">uksouth</span>
+</code></pre></div><p>You&rsquo;ll get a response back similar to the following (where <code>&lt;subscription_id&gt;</code>
+contains your own Azure subscription identifier):</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">ResourceGroupName</span> <span class="err">:</span> <span class="nb">rg-BicepFunctionAppDemo</span>
+<span class="n">Location</span>          <span class="err">:</span> <span class="n">uksouth</span>
+<span class="n">ProvisioningState</span> <span class="err">:</span> <span class="n">Succeeded</span>
+<span class="n">Tags</span>              <span class="err">:</span>
+<span class="n">ResourceId</span>        <span class="err">:</span> <span class="p">/</span><span class="n">subscriptions</span><span class="p">/&lt;</span><span class="n">subscription_id</span><span class="p">&gt;/</span><span class="n">resourceGroups</span><span class="p">/</span><span class="nb">rg-BicepFunctionAppDemo</span>
+</code></pre></div><h2 id="the-azure-function-code">The Azure Function code</h2>
+<p>The Bicep file that we create shortly won&rsquo;t <em>only</em> declare the resources for an
+Azure Function App, but it&rsquo;ll also contain declarations necessary to deploy an
+Azure Function inside of this resource. For the purposes of this walkthrough,
+I&rsquo;ve taken a copy of the default code populated when manually creating a new
+.NET Azure Function HTTP trigger. When triggered with no query parameters, this
+code simply responds with:</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">This HTTP triggered function executed successfully. Pass a name in the query
+string or in the request body for a personalized response.
+</code></pre></div><p>I&rsquo;ve compressed the contents of this default code into a .<code>zip</code> file and
+uploaded it to my GitHub account. If you&rsquo;re playing along, you can use the same
+default code found in <a href="https://github.com/stuartmccoll/bicep-examples/azure-function-app/">this GitHub repository</a>.
+A full copy of the <code>Create-AzureFunctionApp.bicep</code> file that we create below
+can also be found in the same GitHub repository.</p>
+<h2 id="creating-the-bicep-file">Creating the <code>.bicep</code> file</h2>
+<p>Create a new file called <code>Create-AzureFunctionApp.bicep</code>. In this file, we&rsquo;ll
+be declaring <em>five</em> different Azure resources:</p>
+<ul>
+<li>an Azure Function App</li>
+<li>an Azure Storage account (required by the Azure Function App)</li>
+<li>a serverless Consumption hosting plan (required by the Azure Function App)</li>
+<li>an Application Insights resource (allowing us to collect logs)</li>
+<li>a zip deployment (allowing us to deploy our pre-packaged <code>.zip</code> file
+containing the code mentioned above).</li>
+</ul>
+<p>I&rsquo;ve decomposed the entire <code>.bicep</code> file into individual sections below,
+but you can also <a href="https://github.com/stuartmccoll/bicep-examples/blob/main/azure-function-app/Create-AzureFunctionApp.bicep">view the file in its entirety</a>.</p>
+<p>We&rsquo;ll be passing <em>two</em> parameters when deploying the resources declared in
+this file. First, will be the Azure region that we want to deploy to, which
+we&rsquo;ll give a parameter name of <code>location</code>. If not passed, this will default
+to the location of the associated Azure resource group:</p>
+<pre><code class="language-bicep" data-lang="bicep">@description('Location for all resources')
+param location string = resourceGroup.location()
+</code></pre><p>Our second parameter will allow us to pass the URL of the <code>.zip</code> file
+containing our default Azure Function code:</p>
+<pre><code class="language-bicep" data-lang="bicep">@description('Location of Azure Function .zip archive')
+param packageUri string
+</code></pre><p>We&rsquo;ll create two variables for our Azure Function App name, and our
+Azure Storage account name:</p>
+<pre><code class="language-bicep" data-lang="bicep">var functionAppName = 'funcBicepFunctionAppDemo'
+var storageAccountName = 'stbicepfunctionappdemo'
+</code></pre><h3 id="declaring-the-azure-storage-account">Declaring the Azure Storage account</h3>
+<pre><code class="language-bicep" data-lang="bicep">resource storageAccount 'Microsoft.Storage/storageAccounts@2021-08-01' = {
+  name: storageAccountName
+  location: location
+  sku: {
+    name: 'Standard_LRS'
+  }
+  kind: 'Storage'
+}
+</code></pre><h3 id="declaring-the-azure-serverless-consumption-hosting-plan">Declaring the Azure serverless Consumption hosting plan</h3>
+<pre><code class="language-bicep" data-lang="bicep">resource hostingPlan 'Microsoft.Web/serverfarms@2021-03-01' = {
+  name: 'aseBicepFunctionAppDemo'
+  location: location
+  sku: {
+    name: 'Y1'
+    tier: 'Dynamic'
+  }
+  properties: {}
+}
+</code></pre><h3 id="declaring-the-azure-function-app">Declaring the Azure Function App</h3>
+<pre><code class="language-bicep" data-lang="bicep">resource functionApp 'Microsoft.Web/sites@2021-03-01' = {
+  name: functionAppName
+  location: location
+  kind: 'functionapp'
+  identity: {
+    type: 'SystemAssigned'
+  }
+  properties: {
+    serverFarmId: hostingPlan.id
+    siteConfig: {
+      appSettings: [
+        {
+          name: 'AzureWebJobsStorage'
+          value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountName};EndpointSuffix=${environment().suffixes.storage};AccountKey=${storageAccount.listKeys().keys[0].value}'
+        }
+        {
+          name: 'WEBSITE_CONTENTAZUREFILECONNECTIONSTRING'
+          value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountName};EndpointSuffix=${environment().suffixes.storage};AccountKey=${storageAccount.listKeys().keys[0].value}'
+        }
+        {
+          name: 'FUNCTIONS_EXTENSION_VERSION'
+          value: '~4'
+        }
+        {
+          name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
+          value: applicationInsights.properties.InstrumentationKey
+        }
+        {
+          name: 'FUNCTIONS_WORKER_RUNTIME'
+          value: 'dotnet'
+        }
+      ]
+    }
+    httpsOnly: true
+  }
+}
+</code></pre><h3 id="declaring-the-azure-application-insights-resource">Declaring the Azure Application Insights resource</h3>
+<p>This resource isn&rsquo;t <em>strictly</em> necessary, as it isn&rsquo;t something that is
+mandatory when deploying a new Azure Function App.</p>
+<pre><code class="language-bicep" data-lang="bicep">resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
+  name: 'appiBicepFunctionAppDemo'
+  location: location
+  kind: 'web'
+  properties: {
+    Application_Type: 'web'
+    Request_Source: 'rest'
+  }
+}
+</code></pre><h3 id="declaring-the-zip-deployment-resource">Declaring the <code>.zip</code> deployment resource</h3>
+<p>It&rsquo;s important that the <code>packageUri</code> property value matches the name that you
+give to the <code>.zip</code> file URL parameter mentioned earlier. For ease, I&rsquo;ve given
+both the same name.</p>
+<pre><code class="language-bicep" data-lang="bicep">resource zipDeploy 'Microsoft.Web/sites/extensions@2022-03-01' = {
+  parent: functionApp
+  name: 'MSDeploy'
+  properties: {
+    packageUri: packageUri
+  }
+}
+</code></pre><h2 id="deploying-the-resources-declared-in-the-bicep-file">Deploying the resources declared in the <code>.bicep</code> file</h2>
+<p>If you don&rsquo;t already have the Azure CLI installed, you can find an installation
+guide at <a href="https://learn.microsoft.com/en-us/cli/azure/install-azure-cli">Microsoft Learn</a>.</p>
+<p>To deploy the resources declared in our .<code>bicep</code> file, run the following
+command in a PowerShell session:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">New-AzResourceGroupDeployment</span> <span class="n">-ResourceGroupName</span> <span class="nb">rg-BicepFunctionAppDemo</span> <span class="n">-TemplateFile</span> <span class="p">./</span><span class="nb">Create-AzureFunctionApp</span><span class="p">.</span><span class="n">bicep</span> <span class="n">-packageUri</span> <span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">stuartmccoll</span><span class="p">/</span><span class="nb">bicep-examples</span><span class="p">/</span><span class="n">raw</span><span class="p">/</span><span class="n">main</span><span class="p">/</span><span class="nb">azure-function</span><span class="n">-app</span><span class="p">/</span><span class="n">BicepFunctionAppDemo</span><span class="p">.</span><span class="n">zip</span>
+</code></pre></div><p>You should receive a similar response to the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">DeploymentName</span>          <span class="err">:</span> <span class="nb">Create-AzureFunctionApp</span>
+<span class="n">ResourceGroupName</span>       <span class="err">:</span> <span class="nb">rg-BicepFunctionAppDemo</span>
+<span class="n">ProvisioningState</span>       <span class="err">:</span> <span class="n">Succeeded</span>
+<span class="n">Timestamp</span>               <span class="err">:</span> <span class="n">26</span><span class="p">/</span><span class="n">03</span><span class="p">/</span><span class="n">2023</span> <span class="n">13</span><span class="err">:</span><span class="n">31</span><span class="err">:</span><span class="n">22</span>
+<span class="n">Mode</span>                    <span class="err">:</span> <span class="n">Incremental</span>
+<span class="n">TemplateLink</span>            <span class="err">:</span>
+<span class="n">Parameters</span>              <span class="err">:</span>
+                          <span class="n">Name</span>             <span class="nb">Type </span>                      <span class="n">Value</span>
+                          <span class="p">===============</span>  <span class="p">=========================</span>  <span class="p">==========</span>
+                          <span class="n">location</span>         <span class="n">String</span>                     <span class="s2">&#34;uksouth&#34;</span>
+                          <span class="n">packageUri</span>       <span class="n">String</span>
+                          <span class="s2">&#34;https://github.com/stuartmccoll/bicep-examples/raw/main/azure-function-app/BicepFunctionAppDemo.zip&#34;</span>
+
+<span class="n">Outputs</span>                 <span class="err">:</span>
+<span class="n">DeploymentDebugLogLevel</span> <span class="err">:</span>
+</code></pre></div><p>You can validate that the deployment has been successful by running the
+following command in a PowerShell session:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Get-AzResource</span> <span class="n">-ResourceGroupName</span> <span class="nb">rg-BicepFunctionAppDemo</span>
+</code></pre></div><p>If you navigate to the Azure function resource in your account, you&rsquo;ll find a
+&lsquo;Get Function Url&rsquo; button on the Overview screen. If you navigate to the URL,
+you should receive our expected response:</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">This HTTP triggered function executed successfully. Pass a name in the query
+string or in the request body for a personalized response.
+</code></pre></div><h2 id="removing-resources">Removing resources</h2>
+<p>Finally, let&rsquo;s remove the resources created. Run the following command in a
+PowerShell session:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Remove-AzResourceGroup</span> <span class="n">-Name</span> <span class="nb">rg-BicepFunctionAppDemo</span>
+</code></pre></div><h2 id="further-reading">Further reading</h2>
+<p>If you&rsquo;re interested in exploring Bicep further, you may be interested in the
+<a href="https://learn.microsoft.com/en-gb/training/paths/fundamentals-bicep/">Fundamentals of Bicep</a>
+learning path at Microsoft Learn.</p>
+]]></content></item><item><title>Use PowerShell to retrieve Azure location information</title><link>https://stuartmccoll.github.io/posts/2023-03-24-use-powershell-to-retrieve-azure-location-information/</link><pubDate>Fri, 24 Mar 2023 18:30:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-03-24-use-powershell-to-retrieve-azure-location-information/</guid><description>In this post, I&amp;rsquo;ll show you how to retrieve Azure location names using PowerShell; specifically, using the Azure Az PowerShell module.
 Install the Azure Az PowerShell module We&amp;rsquo;re going to follow this guide on Microsoft Learn to install the Azure Az PowerShell module.
 I&amp;rsquo;m going to assume that you have the latest version of PowerShell installed. If you don&amp;rsquo;t, you can follow this guide on Microsoft Learn.
 Run the following command in a PowerShell session:</description><content type="html"><![CDATA[<p>In this post, I&rsquo;ll show you how to retrieve Azure location names using
