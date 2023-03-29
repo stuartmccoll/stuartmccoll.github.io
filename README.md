@@ -12,6 +12,16 @@ Within your terminal, run:
 git submodule update --init --recursive
 ```
 
+## How to update the theme submodule to the latest commit
+
+Within your terminal, run:
+
+```bash
+git submodule update --remote --merge
+```
+
+You will then need to `git add` the theme submodule directory, and `git commit` this staged change.
+
 ## How to run
 
 To run the server, simply execute the following command in your terminal:
