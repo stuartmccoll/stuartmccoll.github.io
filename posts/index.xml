@@ -1,4 +1,35 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 28 Mar 2023 11:00:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use PowerShell to find untagged Azure resources</title><link>https://stuartmccoll.github.io/posts/2023-03-28-use-powershell-to-find-untagged-azure-resources/</link><pubDate>Tue, 28 Mar 2023 11:00:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-03-28-use-powershell-to-find-untagged-azure-resources/</guid><description>In this post, I&amp;rsquo;ll show you how to retrieve Azure resources that do not have any associated tags.
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 29 Mar 2023 20:00:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use PowerShell to find empty Azure resource groups</title><link>https://stuartmccoll.github.io/posts/2023-03-29-use-powershell-to-find-empty-azure-resource-groups/</link><pubDate>Wed, 29 Mar 2023 20:00:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-03-29-use-powershell-to-find-empty-azure-resource-groups/</guid><description>In this post, I&amp;rsquo;ll show you how to find and remove empty Azure resource groups using the Azure Az PowerShell module.
+Install the Azure Az PowerShell module We&amp;rsquo;re going to follow this guide on Microsoft Learn to install the Azure Az PowerShell module.
+I&amp;rsquo;m going to assume that you have the latest version of PowerShell installed. If you don&amp;rsquo;t, you can follow this guide on Microsoft Learn.
+Run the following command in a PowerShell session:</description><content type="html"><![CDATA[<p>In this post, I&rsquo;ll show you how to find and remove empty Azure resource groups
+using the Azure Az PowerShell module.</p>
+<h2 id="install-the-azure-az-powershell-module">Install the Azure Az PowerShell module</h2>
+<p>We&rsquo;re going to follow <a href="https://learn.microsoft.com/en-us/powershell/azure/install-az-ps">this guide on Microsoft Learn</a>
+to install the Azure Az PowerShell module.</p>
+<p>I&rsquo;m going to assume that you have the latest version of PowerShell installed.
+If you don&rsquo;t, you can follow <a href="https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell">this guide on Microsoft Learn</a>.</p>
+<p>Run the following command in a PowerShell session:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Install-Module</span> <span class="n">-Name</span> <span class="n">Az</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span> <span class="n">-Repository</span> <span class="n">PsGallery</span> <span class="n">-Force</span>
+</code></pre></div><p>You&rsquo;ll need to authenticate Azure PowerShell by signing in with your Azure
+credentials.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Connect-AzAccount</span>
+</code></pre></div><h2 id="using-the-get-azresourcegroup-cmdlet">Using the <code>Get-AzResourceGroup</code> cmdlet</h2>
+<p>You can run the <code>Get-AzResourceGroup</code> cmdlet without any options to retrieve
+all Azure resource groups within your connected Azure account.</p>
+<p>We&rsquo;ll use this cmdlet in tandem with the <code>Get-AzResource</code> cmdlet to retrieve
+the names of all resource groups that do not have associated resources.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Get-AzResourceGroup</span> <span class="p">|</span> <span class="nb">ForEach-Object</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(!(</span><span class="nb">Get-AzResource</span> <span class="n">-ResourceGroupName</span> <span class="nv">$_</span><span class="p">.</span><span class="n">ResourceGroupName</span><span class="p">))</span> <span class="p">{</span> <span class="nb">Write-Host</span> <span class="nv">$_</span><span class="p">.</span><span class="n">ResourceGroupName</span> <span class="p">}</span> <span class="p">}</span>
+</code></pre></div><p>This can be taken a step further to remove any resource groups that are found
+to have no associated resources, by using the <code>Remove-AzResourceGroup</code> cmdlet.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Get-AzResourceGroup</span> <span class="p">|</span> <span class="nb">ForEach-Object</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(!(</span><span class="nb">Get-AzResource</span> <span class="n">-ResourceGroupName</span> <span class="nv">$_</span><span class="p">.</span><span class="n">ResourceGroupName</span><span class="p">))</span> <span class="p">{</span> <span class="nb">Remove-AzResourceGroup</span> <span class="nv">$_</span><span class="p">.</span><span class="n">ResourceGroupName</span> <span class="p">}</span> <span class="p">}</span>
+</code></pre></div><h2 id="further-reading">Further reading</h2>
+<p>Further information on the <code>Get-AzResourceGroup</code> cmdlet can be found on
+<a href="https://learn.microsoft.com/en-us/powershell/module/az.resources/get-azresourcegroup">Microsoft Learn</a>.</p>
+<p>Further information on the <code>Remove-AzResourceGroup</code> cmdlet can be found on
+<a href="https://learn.microsoft.com/en-us/powershell/module/az.resources/remove-azresourcegroup">Microsoft Learn</a>.</p>
+<p>Further information on the <code>Get-AzResource</code> cmdlet can be found on
+<a href="https://learn.microsoft.com/en-us/powershell/module/az.resources/get-azresource">Microsoft Learn</a>.</p>
+]]></content></item><item><title>Use PowerShell to find untagged Azure resources</title><link>https://stuartmccoll.github.io/posts/2023-03-28-use-powershell-to-find-untagged-azure-resources/</link><pubDate>Tue, 28 Mar 2023 11:00:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-03-28-use-powershell-to-find-untagged-azure-resources/</guid><description>In this post, I&amp;rsquo;ll show you how to retrieve Azure resources that do not have any associated tags.
 Install the Azure Az PowerShell module We&amp;rsquo;re going to follow this guide on Microsoft Learn to install the Azure Az PowerShell module.
 I&amp;rsquo;m going to assume that you have the latest version of PowerShell installed. If you don&amp;rsquo;t, you can follow this guide on Microsoft Learn.
 Run the following command in a PowerShell session:</description><content type="html"><![CDATA[<p>In this post, I&rsquo;ll show you how to retrieve Azure resources that do not have
