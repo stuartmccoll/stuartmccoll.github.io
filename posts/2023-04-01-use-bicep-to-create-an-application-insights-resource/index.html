@@ -1,0 +1,94 @@
+<!doctype html><html lang=en-gb><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=author content="Stuart McColl "><meta name=description content="In this post, I&amp;rsquo;ll show you how to create a Bicep file which declares the resources required for an Application Insights instance, specifically one used to monitor a website.
+Prerequisites I&amp;rsquo;ll be using Visual Studio Code as my editor, where I&amp;rsquo;ll be writing the .bicep file for this walkthrough. I&amp;rsquo;ll also be using the official Bicep extension.
+I&amp;rsquo;ll be using the Azure Az PowerShell module to handle deploying the resources declared in the ."><meta name=keywords content="homepage,blog,development,programming"><meta name=robots content="noodp"><link rel=canonical href=https://stuartmccoll.github.io/posts/2023-04-01-use-bicep-to-create-an-application-insights-resource/><title>Use Bicep to create an Application Insights resource :: Stuart McColl</title><link rel=stylesheet href=/main.min.15c204e66791e2f70ca06e7872b0ed743b4d2392b3c6dc31ba8dbd9f3d4618d2.css><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#252627><link rel="shortcut icon" href=/favicon.ico><meta name=theme-color content="#252627"><meta itemprop=name content="Use Bicep to create an Application Insights resource"><meta itemprop=description content="In this post, I&rsquo;ll show you how to create a Bicep file which declares the resources required for an Application Insights instance, specifically one used to monitor a website.
+Prerequisites I&rsquo;ll be using Visual Studio Code as my editor, where I&rsquo;ll be writing the .bicep file for this walkthrough. I&rsquo;ll also be using the official Bicep extension.
+I&rsquo;ll be using the Azure Az PowerShell module to handle deploying the resources declared in the ."><meta itemprop=datePublished content="2023-04-01T21:00:00+01:00"><meta itemprop=dateModified content="2023-04-01T21:00:00+01:00"><meta itemprop=wordCount content="757"><meta itemprop=image content="https://stuartmccoll.github.io"><meta itemprop=keywords content="Automation,Application Insights,Bicep,Microsoft Azure,PowerShell,"><meta property="article:section" content="Automation"><meta property="article:section" content="Application Insights"><meta property="article:section" content="Bicep"><meta property="article:section" content="Microsoft Azure"><meta property="article:section" content="PowerShell"><meta property="article:published_time" content="2023-04-01 21:00:00 +0100 +0100"><script type=text/javascript>!function(b,d,a){var e=b.location,o="script",n="instrumentationKey",g="ingestionendpoint",k="disableExceptionTracking",i="ai.device.",j="toLowerCase",h="crossOrigin",l="POST",m="appInsightsSDK",f=a.name||"appInsights",c;(a.name||b[m])&&(b[m]=f),c=b[f]||function(f){var z=!1,q=!1,c={initialize:!0,queue:[],sv:"5",version:2,config:f},r,s,m,x,y,B,p,A;function w(b,f){var a={},d="Browser";return a[i+"id"]=d[j](),a[i+"type"]=d,a["ai.operation.name"]=e&&e.pathname||"_unknown_",a["ai.internal.sdkVersion"]="javascript:snippet_"+(c.sv||c.version),{time:function(){var a=new Date;function b(b){var a=""+b;return 1===a.length&&(a="0"+a),a}return a.getUTCFullYear()+"-"+b(1+a.getUTCMonth())+"-"+b(a.getUTCDate())+"T"+b(a.getUTCHours())+":"+b(a.getUTCMinutes())+":"+b(a.getUTCSeconds())+"."+((a.getUTCMilliseconds()/1e3).toFixed(3)+"").slice(2,5)+"Z"}(),iKey:b,name:"Microsoft.ApplicationInsights."+b.replace(/-/g,"")+"."+f,sampleRate:100,tags:a,data:{baseData:{ver:2}}}}if(r=f.url||a.src,r){function u(x){var h,i,t,u,v,s,o,p,k,d,m;z=!0,c.queue=[],q||(q=!0,h=r,o=function(){var a={},d=f.connectionString,e,b,c,h,i;if(d)for(e=d.split(";"),b=0;b<e.length;b++)c=e[b].split("="),2===c.length&&(a[c[0][j]()]=c[1]);return a[g]||(h=a.endpointsuffix,i=h?a.location:null,a[g]="https://"+(i?i+".":"")+"dc."+(h||"services.visualstudio.com")),a}(),p=o[n]||f[n]||"",k=o[g],d=k?k+"/v2/track":f.endpointUrl,(m=[]).push((i="SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)",t=h,u=d,(s=(v=w(p,"Exception")).data).baseType="ExceptionData",s.baseData.exceptions=[{typeName:"SDKLoadFailed",message:i.replace(/\./g,"-"),hasFullStack:!1,stack:i+"\nSnippet failed to load ["+t+"] -- Telemetry is disabled\nHelp Link: https://go.microsoft.com/fwlink/?linkid=2128109\nHost: "+(e&&e.pathname||"_unknown_")+"\nEndpoint: "+u,parsedStack:[]}],v)),m.push(function(g,f,d,e){var b=w(p,"Message"),c=b.data,a;return c.baseType="MessageData",a=c.baseData,a.message='AI (Internal): 99 message:"'+("SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details) ("+d+")").replace(/\"/g,"")+'"',a.properties={endpoint:e},b}(0,0,h,d)),function(e,f){var d,c;JSON&&(d=b.fetch,d&&!a.useXhr?d(f,{method:l,body:JSON.stringify(e),mode:"cors"}):XMLHttpRequest&&(c=new XMLHttpRequest,c.open(l,f),c.setRequestHeader("Content-type","application/json"),c.send(JSON.stringify(e))))}(m,d))}function t(b,a){q||setTimeout(function(){!a&&c.core||u()},500)}s=function(){var b=d.createElement(o),c;return b.src=r,c=a[h],!c&&""!==c||"undefined"==b[h]||(b[h]=c),b.onload=t,b.onerror=u,b.onreadystatechange=function(c,a){"loaded"!==b.readyState&&"complete"!==b.readyState||t(0,a)},b}(),a.ld<0?d.getElementsByTagName("head")[0].appendChild(s):setTimeout(function(){d.getElementsByTagName(o)[0].parentNode.appendChild(s)},a.ld||0)}try{c.cookie=d.cookie}catch(a){}function v(a){for(;a.length;)!function(a){c[a]=function(){var b=arguments;z||c.queue.push(function(){c[a].apply(c,b)})}}(a.pop())}return m="track",x="TrackPage",y="TrackEvent",v([m+"Event",m+"PageView",m+"Exception",m+"Trace",m+"DependencyData",m+"Metric",m+"PageViewPerformance","start"+x,"stop"+x,"start"+y,"stop"+y,"addTelemetryInitializer","setAuthenticatedUserContext","clearAuthenticatedUserContext","flush"]),c.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4},B=(f.extensionConfig||{}).ApplicationInsightsAnalytics||{},!0!==f[k]&&!0!==B[k]&&(p="onerror",v(["_"+p]),A=b[p],b[p]=function(a,b,d,e,f){var g=A&&A(a,b,d,e,f);return!0!==g&&c["_"+p]({message:a,url:b,lineNumber:d,columnNumber:e,error:f}),g},f.autoExceptionInstrumented=!0),c}(a.cfg);function p(){a.onInit&&a.onInit(c)}(b[f]=c).queue&&0===c.queue.length?(c.queue.push(p),c.trackPageView({})):p()}(window,document,{src:"https://js.monitor.azure.com/scripts/b/ai.2.min.js",crossOrigin:"anonymous",cfg:{connectionString:"InstrumentationKey=74cc5c48-d066-4928-932e-459f438b579d;IngestionEndpoint=https://uksouth-1.in.applicationinsights.azure.com/;LiveEndpoint=https://uksouth.livediagnostics.monitor.azure.com/"}})</script></head><body><div class=container><header><section><h1 class=site-heading>Stuart McColl</h1><nav><ul><li><a href=/>Blog</a></li><li><a href=/about>About</a></li></ul></nav></section></header><hr><div class=content><main class=post><article><header><h1 class=post-title>Use Bicep to create an Application Insights resource</h1><p class=post-date>April 1, 2023</p></header><hr class=post-rule><div class=post-content><p>In this post, I&rsquo;ll show you how to create a
+<a href=https://github.com/Azure/bicep>Bicep</a> file which declares the resources
+required for an Application Insights instance, specifically one used to
+monitor a website.</p><h2 id=prerequisites>Prerequisites</h2><p>I&rsquo;ll be using <a href=https://code.visualstudio.com/>Visual Studio Code</a> as my
+editor, where I&rsquo;ll be writing the <code>.bicep</code> file for this walkthrough. I&rsquo;ll also
+be using the official <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep">Bicep extension</a>.</p><p>I&rsquo;ll be using the
+<a href="https://learn.microsoft.com/en-us/powershell/azure/?view=azps-9.5.0">Azure Az PowerShell module</a>
+to handle deploying the resources declared in the <code>.bicep</code> file I create. You
+can find instructions on <a href="https://learn.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-9.5.0">installing the module</a>
+at Microsoft Learn.</p><p>You&rsquo;ll need to install <a href=https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/>Azure Bicep</a>
+if you haven&rsquo;t already.</p><p>The rest of this post assumes that you&rsquo;ve already authenticated the Azure Az
+PowerShell module with an Azure account.</p><h2 id=creating-an-azure-resource-group>Creating an Azure resource group</h2><p>Before we begin writing our Bicep code, we&rsquo;ll create an Azure resource group
+using the Azure Az PowerShell module. Run the following command in a PowerShell
+session:</p><div class=highlight><pre class=chroma><code class=language-powershell data-lang=powershell><span class=nb>New-AzResourceGroup</span> <span class=n>-Name</span> <span class=n>rgApplicationInsightsDemo</span> <span class=n>-Location</span> <span class=n>uksouth</span>
+</code></pre></div><p>You&rsquo;ll get a response back similar to the following (where <code>&lt;subscription_id></code>
+contains your own Azure subscription identifier):</p><div class=highlight><pre class=chroma><code class=language-powershell data-lang=powershell><span class=n>ResourceGroupName</span> <span class=err>:</span> <span class=n>rgApplicationInsightsDemo</span>
+<span class=n>Location</span>          <span class=err>:</span> <span class=n>uksouth</span>
+<span class=n>ProvisioningState</span> <span class=err>:</span> <span class=n>Succeeded</span>
+<span class=n>Tags</span>              <span class=err>:</span>
+<span class=n>ResourceId</span>        <span class=err>:</span> <span class=p>/</span><span class=n>subscriptions</span><span class=p>/&lt;</span><span class=n>subscription_id</span><span class=p>&gt;/</span><span class=n>resourceGroups</span><span class=p>/</span><span class=n>rgApplicationInsightsDemo</span>
+</code></pre></div><h2 id=creating-the-bicep-file>Creating the <code>.bicep</code> file</h2><p>Create a new file called <code>Create-ApplicationInsights.bicep</code>. In this file, we&rsquo;ll
+be declaring two different Azure resources:</p><ul><li>an Application Insights resource</li><li>a Log Analytics workspace - this isn&rsquo;t <em>strictly</em> necessary; without it, you
+can create an Application Insights with the &lsquo;Classic&rsquo; Resource Mode. However, this mode has been deprecated in favour of using a Log Analytics workspace.</li></ul><p>We&rsquo;ll be passing a single parameter when deploying the resources declared in
+this file - the Azure region that we want to deploy to, which
+we&rsquo;ll give a parameter name of <code>location</code>. If not passed, this will default
+to the location of the associated Azure resource group:</p><pre><code class=language-bicep data-lang=bicep>@description('Location for all resources')
+param location string = resourceGroup.location()
+</code></pre><h3 id=declaring-the-log-analytics-workspace>Declaring the Log Analytics workspace</h3><p>You can find information on all of the available properties within the
+<a href="https://learn.microsoft.com/en-us/azure/templates/microsoft.operationalinsights/workspaces?pivots=deployment-language-bicep">Microsoft Learn documentation for the Microsoft.OperationInsights/workspaces resource type</a>.</p><p>When declaring this resource, the properties we&rsquo;re setting are as follows:</p><ul><li><code>name</code> - the name of the resource.</li><li><code>location</code> - the Azure region where the resource will be deployed.</li><li><code>sku</code> - the name of the SKU; <code>PerGB2018</code> is effectively &lsquo;pay per use&rsquo;.</li><li><code>retentionInDays</code> - the number of days to retain workspace data.</li></ul><pre><code class=language-bicep data-lang=bicep>resource workspace 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
+  name: 'logWebsiteApplicationInsightsWorkspace'
+  location: location
+  properties: {
+    sku: {
+      name: 'PerGB2018'
+    }
+    retentionInDays: 30
+  }
+}
+</code></pre><h3 id=declaring-the-azure-application-insights-resource>Declaring the Azure Application Insights resource</h3><p>You can find information on all of the available properties within the
+<a href="https://learn.microsoft.com/en-us/azure/templates/microsoft.insights/components?pivots=deployment-language-bicep">Microsoft Learn documentation for the Microsoft.Insights/components resource type</a>.</p><p>When declaring this resource, the properties we&rsquo;re setting are as follows:</p><ul><li><code>name</code> - the name of the resource.</li><li><code>location</code> - the Azure region where the resource will be deployed.</li><li><code>kind</code> - the kind of application that the resource refers to. In this example
+we&rsquo;re monitoring a website, so we&rsquo;re using <code>web</code>.</li><li><code>Application_Type</code> - the type of application being monitored. Again, we&rsquo;re
+using <code>web</code>.</li><li><code>Flow_Type</code> - the documentation specifies that this is to be set as
+<code>Bluefield</code> when creating resources via the REST API.</li><li><code>Ingestion_Mode</code> - the flow of the ingestion; we&rsquo;re delivering to a Log
+Analytics workspace, so our value is <code>LogAnalytics</code>.</li><li><code>publicNetworkAccessForIngestion</code> - the network access type for accessing
+Application Insights ingestion.</li><li><code>publicNetworkAccessForQuery</code> - the network access type for accessing
+Application Insights query.</li><li><code>Request_Source</code> - the documentation specifies that this is to be set as
+<code>rest</code> when creating resources via the REST API.</li><li><code>RetentionInDays</code> - the retention period in days.</li><li><code>WorkspaceResourceId</code> - the resource identifier of the Log Analytics
+workspace that data will be ingested to.</li></ul><pre><code class=language-bicep data-lang=bicep>resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
+  name: 'appiWebsite'
+  kind: 'web'
+  location: location
+  properties: {
+    Application_Type: 'web'
+    Flow_Type: 'Bluefield'
+    IngestionMode: 'LogAnalytics'
+    publicNetworkAccessForIngestion: 'Enabled'
+    publicNetworkAccessForQuery: 'Enabled'
+    Request_Source: 'rest'
+    RetentionInDays: 90
+    WorkspaceResourceId: workspace.id
+  }
+}
+</code></pre><h2 id=deploying-the-resources-declared-in-the-bicep-file>Deploying the resources declared in the <code>.bicep</code> file</h2><p>To deploy the resources declared in our .<code>bicep</code> file, run the following
+command in a PowerShell session:</p><div class=highlight><pre class=chroma><code class=language-powershell data-lang=powershell><span class=nb>New-AzResourceGroupDeployment</span> <span class=n>-ResourceGroupName</span> <span class=n>rgApplicationInsightsDemo</span> <span class=n>-TemplateFile</span> <span class=p>./</span><span class=nb>Create-ApplicationInsights</span><span class=p>.</span><span class=n>bicep</span>
+</code></pre></div><p>You should receive a similar response to the following:</p><div class=highlight><pre class=chroma><code class=language-powershell data-lang=powershell><span class=n>DeploymentName</span>          <span class=err>:</span> <span class=nb>Create-ApplicationInsights</span>
+<span class=n>ResourceGroupName</span>       <span class=err>:</span> <span class=n>rgApplicationInsightsDemo</span>
+<span class=n>ProvisioningState</span>       <span class=err>:</span> <span class=n>Succeeded</span>
+<span class=n>Timestamp</span>               <span class=err>:</span> <span class=n>01</span><span class=p>/</span><span class=n>04</span><span class=p>/</span><span class=n>2023</span> <span class=n>11</span><span class=err>:</span><span class=n>08</span><span class=err>:</span><span class=n>36</span>
+<span class=n>Mode</span>                    <span class=err>:</span> <span class=n>Incremental</span>
+<span class=n>TemplateLink</span>            <span class=err>:</span>
+<span class=n>Parameters</span>              <span class=err>:</span>
+                          <span class=n>Name</span>             <span class=nb>Type </span>                      <span class=n>Value</span>
+                          <span class=p>===============</span>  <span class=p>=========================</span>  <span class=p>==========</span>
+                          <span class=n>location</span>         <span class=n>String</span>                     <span class=s2>&#34;uksouth&#34;</span>
+
+<span class=n>Outputs</span>                 <span class=err>:</span>
+
+<span class=n>DeploymentDebugLogLevel</span> <span class=err>:</span>
+</code></pre></div><p>You can validate that the deployment has been successful by running the
+following command in a PowerShell session:</p><div class=highlight><pre class=chroma><code class=language-powershell data-lang=powershell><span class=nb>Get-AzResource</span> <span class=n>-ResourceGroupName</span> <span class=n>rgApplicationInsightsDemo</span>
+</code></pre></div><h2 id=removing-resources>Removing resources</h2><p>Finally, let&rsquo;s remove the resources created. Run the following command in a
+PowerShell session:</p><div class=highlight><pre class=chroma><code class=language-powershell data-lang=powershell><span class=nb>Remove-AzResourceGroup</span> <span class=n>-Name</span> <span class=n>rgApplicationInsightsDemo</span>
+</code></pre></div><h2 id=further-reading>Further reading</h2><p>If you&rsquo;re interested in exploring Bicep further, you may be interested in the
+<a href=https://learn.microsoft.com/en-gb/training/paths/fundamentals-bicep/>Fundamentals of Bicep</a>
+learning path at Microsoft Learn.</p></div></article></main></div><hr><footer><section><h3>More</h3><ul><li><a href=https://hachyderm.io/@stuartmccoll rel=me>Contact me on Mastodon</a></li><li>Spotted a bug in the site?
+<a href=https://github.com/stuartmccoll/hugo-theme-refresh/issues/new>Raise an issue on GitHub</a></li><li>Get notifications of new posts by
+<a href=https://stuartmccoll.github.io/index.xml>subscribing to my RSS feed</a></li><li>This static site was generated using
+<a href=https://github.com/gohugoio/hugo/releases/tag/v0.83.1>Hugo version 0.83.1</a></li></ul></section><hr><section><h3>Attribution</h3><p xmlns:dct=http://purl.org/dc/terms/ xmlns:cc=http://creativecommons.org/ns# class=license-text>This blog post <span rel=dct:title>(Use Bicep to create an Application Insights resource)</span> is licensed under
+<a href=https://creativecommons.org/licenses/by/4.0>CC BY 4.0</a>. Any code contained within
+this article may be subject to other licenses.</p></section></footer></div></body></html>

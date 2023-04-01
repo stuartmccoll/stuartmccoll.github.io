@@ -1,4 +1,139 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 29 Mar 2023 20:00:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use PowerShell to find empty Azure resource groups</title><link>https://stuartmccoll.github.io/posts/2023-03-29-use-powershell-to-find-empty-azure-resource-groups/</link><pubDate>Wed, 29 Mar 2023 20:00:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-03-29-use-powershell-to-find-empty-azure-resource-groups/</guid><description>In this post, I&amp;rsquo;ll show you how to find and remove empty Azure resource groups using the Azure Az PowerShell module.
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 01 Apr 2023 21:00:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use Bicep to create an Application Insights resource</title><link>https://stuartmccoll.github.io/posts/2023-04-01-use-bicep-to-create-an-application-insights-resource/</link><pubDate>Sat, 01 Apr 2023 21:00:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-04-01-use-bicep-to-create-an-application-insights-resource/</guid><description>In this post, I&amp;rsquo;ll show you how to create a Bicep file which declares the resources required for an Application Insights instance, specifically one used to monitor a website.
+Prerequisites I&amp;rsquo;ll be using Visual Studio Code as my editor, where I&amp;rsquo;ll be writing the .bicep file for this walkthrough. I&amp;rsquo;ll also be using the official Bicep extension.
+I&amp;rsquo;ll be using the Azure Az PowerShell module to handle deploying the resources declared in the .</description><content type="html"><![CDATA[<p>In this post, I&rsquo;ll show you how to create a
+<a href="https://github.com/Azure/bicep">Bicep</a> file which declares the resources
+required for an Application Insights instance, specifically one used to
+monitor a website.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>I&rsquo;ll be using <a href="https://code.visualstudio.com/">Visual Studio Code</a> as my
+editor, where I&rsquo;ll be writing the <code>.bicep</code> file for this walkthrough. I&rsquo;ll also
+be using the official <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep">Bicep extension</a>.</p>
+<p>I&rsquo;ll be using the
+<a href="https://learn.microsoft.com/en-us/powershell/azure/?view=azps-9.5.0">Azure Az PowerShell module</a>
+to handle deploying the resources declared in the <code>.bicep</code> file I create. You
+can find instructions on <a href="https://learn.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-9.5.0">installing the module</a>
+at Microsoft Learn.</p>
+<p>You&rsquo;ll need to install <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/">Azure Bicep</a>
+if you haven&rsquo;t already.</p>
+<p>The rest of this post assumes that you&rsquo;ve already authenticated the Azure Az
+PowerShell module with an Azure account.</p>
+<h2 id="creating-an-azure-resource-group">Creating an Azure resource group</h2>
+<p>Before we begin writing our Bicep code, we&rsquo;ll create an Azure resource group
+using the Azure Az PowerShell module. Run the following command in a PowerShell
+session:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">New-AzResourceGroup</span> <span class="n">-Name</span> <span class="n">rgApplicationInsightsDemo</span> <span class="n">-Location</span> <span class="n">uksouth</span>
+</code></pre></div><p>You&rsquo;ll get a response back similar to the following (where <code>&lt;subscription_id&gt;</code>
+contains your own Azure subscription identifier):</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">ResourceGroupName</span> <span class="err">:</span> <span class="n">rgApplicationInsightsDemo</span>
+<span class="n">Location</span>          <span class="err">:</span> <span class="n">uksouth</span>
+<span class="n">ProvisioningState</span> <span class="err">:</span> <span class="n">Succeeded</span>
+<span class="n">Tags</span>              <span class="err">:</span>
+<span class="n">ResourceId</span>        <span class="err">:</span> <span class="p">/</span><span class="n">subscriptions</span><span class="p">/&lt;</span><span class="n">subscription_id</span><span class="p">&gt;/</span><span class="n">resourceGroups</span><span class="p">/</span><span class="n">rgApplicationInsightsDemo</span>
+</code></pre></div><h2 id="creating-the-bicep-file">Creating the <code>.bicep</code> file</h2>
+<p>Create a new file called <code>Create-ApplicationInsights.bicep</code>. In this file, we&rsquo;ll
+be declaring two different Azure resources:</p>
+<ul>
+<li>an Application Insights resource</li>
+<li>a Log Analytics workspace - this isn&rsquo;t <em>strictly</em> necessary; without it, you
+can create an Application Insights with the &lsquo;Classic&rsquo; Resource Mode. However, this mode has been deprecated in favour of using a Log Analytics workspace.</li>
+</ul>
+<p>We&rsquo;ll be passing a single parameter when deploying the resources declared in
+this file - the Azure region that we want to deploy to, which
+we&rsquo;ll give a parameter name of <code>location</code>. If not passed, this will default
+to the location of the associated Azure resource group:</p>
+<pre><code class="language-bicep" data-lang="bicep">@description('Location for all resources')
+param location string = resourceGroup.location()
+</code></pre><h3 id="declaring-the-log-analytics-workspace">Declaring the Log Analytics workspace</h3>
+<p>You can find information on all of the available properties within the
+<a href="https://learn.microsoft.com/en-us/azure/templates/microsoft.operationalinsights/workspaces?pivots=deployment-language-bicep">Microsoft Learn documentation for the Microsoft.OperationInsights/workspaces resource type</a>.</p>
+<p>When declaring this resource, the properties we&rsquo;re setting are as follows:</p>
+<ul>
+<li><code>name</code> - the name of the resource.</li>
+<li><code>location</code> - the Azure region where the resource will be deployed.</li>
+<li><code>sku</code> - the name of the SKU; <code>PerGB2018</code> is effectively &lsquo;pay per use&rsquo;.</li>
+<li><code>retentionInDays</code> - the number of days to retain workspace data.</li>
+</ul>
+<pre><code class="language-bicep" data-lang="bicep">resource workspace 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
+  name: 'logWebsiteApplicationInsightsWorkspace'
+  location: location
+  properties: {
+    sku: {
+      name: 'PerGB2018'
+    }
+    retentionInDays: 30
+  }
+}
+</code></pre><h3 id="declaring-the-azure-application-insights-resource">Declaring the Azure Application Insights resource</h3>
+<p>You can find information on all of the available properties within the
+<a href="https://learn.microsoft.com/en-us/azure/templates/microsoft.insights/components?pivots=deployment-language-bicep">Microsoft Learn documentation for the Microsoft.Insights/components resource type</a>.</p>
+<p>When declaring this resource, the properties we&rsquo;re setting are as follows:</p>
+<ul>
+<li><code>name</code> - the name of the resource.</li>
+<li><code>location</code> - the Azure region where the resource will be deployed.</li>
+<li><code>kind</code> - the kind of application that the resource refers to. In this example
+we&rsquo;re monitoring a website, so we&rsquo;re using <code>web</code>.</li>
+<li><code>Application_Type</code> - the type of application being monitored. Again, we&rsquo;re
+using <code>web</code>.</li>
+<li><code>Flow_Type</code> - the documentation specifies that this is to be set as
+<code>Bluefield</code> when creating resources via the REST API.</li>
+<li><code>Ingestion_Mode</code> - the flow of the ingestion; we&rsquo;re delivering to a Log
+Analytics workspace, so our value is <code>LogAnalytics</code>.</li>
+<li><code>publicNetworkAccessForIngestion</code> - the network access type for accessing
+Application Insights ingestion.</li>
+<li><code>publicNetworkAccessForQuery</code> - the network access type for accessing
+Application Insights query.</li>
+<li><code>Request_Source</code> - the documentation specifies that this is to be set as
+<code>rest</code> when creating resources via the REST API.</li>
+<li><code>RetentionInDays</code> - the retention period in days.</li>
+<li><code>WorkspaceResourceId</code> - the resource identifier of the Log Analytics
+workspace that data will be ingested to.</li>
+</ul>
+<pre><code class="language-bicep" data-lang="bicep">resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
+  name: 'appiWebsite'
+  kind: 'web'
+  location: location
+  properties: {
+    Application_Type: 'web'
+    Flow_Type: 'Bluefield'
+    IngestionMode: 'LogAnalytics'
+    publicNetworkAccessForIngestion: 'Enabled'
+    publicNetworkAccessForQuery: 'Enabled'
+    Request_Source: 'rest'
+    RetentionInDays: 90
+    WorkspaceResourceId: workspace.id
+  }
+}
+</code></pre><h2 id="deploying-the-resources-declared-in-the-bicep-file">Deploying the resources declared in the <code>.bicep</code> file</h2>
+<p>To deploy the resources declared in our .<code>bicep</code> file, run the following
+command in a PowerShell session:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">New-AzResourceGroupDeployment</span> <span class="n">-ResourceGroupName</span> <span class="n">rgApplicationInsightsDemo</span> <span class="n">-TemplateFile</span> <span class="p">./</span><span class="nb">Create-ApplicationInsights</span><span class="p">.</span><span class="n">bicep</span>
+</code></pre></div><p>You should receive a similar response to the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">DeploymentName</span>          <span class="err">:</span> <span class="nb">Create-ApplicationInsights</span>
+<span class="n">ResourceGroupName</span>       <span class="err">:</span> <span class="n">rgApplicationInsightsDemo</span>
+<span class="n">ProvisioningState</span>       <span class="err">:</span> <span class="n">Succeeded</span>
+<span class="n">Timestamp</span>               <span class="err">:</span> <span class="n">01</span><span class="p">/</span><span class="n">04</span><span class="p">/</span><span class="n">2023</span> <span class="n">11</span><span class="err">:</span><span class="n">08</span><span class="err">:</span><span class="n">36</span>
+<span class="n">Mode</span>                    <span class="err">:</span> <span class="n">Incremental</span>
+<span class="n">TemplateLink</span>            <span class="err">:</span>
+<span class="n">Parameters</span>              <span class="err">:</span>
+                          <span class="n">Name</span>             <span class="nb">Type </span>                      <span class="n">Value</span>
+                          <span class="p">===============</span>  <span class="p">=========================</span>  <span class="p">==========</span>
+                          <span class="n">location</span>         <span class="n">String</span>                     <span class="s2">&#34;uksouth&#34;</span>
+
+<span class="n">Outputs</span>                 <span class="err">:</span>
+
+<span class="n">DeploymentDebugLogLevel</span> <span class="err">:</span>
+</code></pre></div><p>You can validate that the deployment has been successful by running the
+following command in a PowerShell session:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Get-AzResource</span> <span class="n">-ResourceGroupName</span> <span class="n">rgApplicationInsightsDemo</span>
+</code></pre></div><h2 id="removing-resources">Removing resources</h2>
+<p>Finally, let&rsquo;s remove the resources created. Run the following command in a
+PowerShell session:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Remove-AzResourceGroup</span> <span class="n">-Name</span> <span class="n">rgApplicationInsightsDemo</span>
+</code></pre></div><h2 id="further-reading">Further reading</h2>
+<p>If you&rsquo;re interested in exploring Bicep further, you may be interested in the
+<a href="https://learn.microsoft.com/en-gb/training/paths/fundamentals-bicep/">Fundamentals of Bicep</a>
+learning path at Microsoft Learn.</p>
+]]></content></item><item><title>Use PowerShell to find empty Azure resource groups</title><link>https://stuartmccoll.github.io/posts/2023-03-29-use-powershell-to-find-empty-azure-resource-groups/</link><pubDate>Wed, 29 Mar 2023 20:00:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-03-29-use-powershell-to-find-empty-azure-resource-groups/</guid><description>In this post, I&amp;rsquo;ll show you how to find and remove empty Azure resource groups using the Azure Az PowerShell module.
 Install the Azure Az PowerShell module We&amp;rsquo;re going to follow this guide on Microsoft Learn to install the Azure Az PowerShell module.
 I&amp;rsquo;m going to assume that you have the latest version of PowerShell installed. If you don&amp;rsquo;t, you can follow this guide on Microsoft Learn.
 Run the following command in a PowerShell session:</description><content type="html"><![CDATA[<p>In this post, I&rsquo;ll show you how to find and remove empty Azure resource groups
