@@ -7,4 +7,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: az bicep build .azure/bicep/*.bicep
+      - run: az bicep build --file .azure/bicep/*.bicep
