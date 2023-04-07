@@ -1,4 +1,42 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 01 Apr 2023 21:00:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use Bicep to create an Application Insights resource</title><link>https://stuartmccoll.github.io/posts/2023-04-01-use-bicep-to-create-an-application-insights-resource/</link><pubDate>Sat, 01 Apr 2023 21:00:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-04-01-use-bicep-to-create-an-application-insights-resource/</guid><description>In this post, I&amp;rsquo;ll show you how to create a Bicep file which declares the resources required for an Application Insights instance, specifically one used to monitor a website.
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 07 Apr 2023 12:00:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use PowerShell to find large files</title><link>https://stuartmccoll.github.io/posts/2023-04-07-use-powershell-to-find-large-files/</link><pubDate>Fri, 07 Apr 2023 12:00:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-04-07-use-powershell-to-find-large-files/</guid><description>In this post, I&amp;rsquo;ll show you how to find large files using PowerShell.
+Using the Get-ChildItem cmdlet Searching for files based on different properties can all be done using PowerShell&amp;rsquo;s built-in Get-ChildItem cmdlet.
+Find the largest files within the current working directory The following command will retrieve the ten largest files within the current working directory (e.g., it won&amp;rsquo;t recursively search within inner directories). It&amp;rsquo;ll sort these ten results in descending size order, returning the file names and the file size.</description><content type="html"><![CDATA[<p>In this post, I&rsquo;ll show you how to find large files using PowerShell.</p>
+<h2 id="using-the-get-childitem-cmdlet">Using the <code>Get-ChildItem</code> cmdlet</h2>
+<p>Searching for files based on different properties can all be done using
+PowerShell&rsquo;s built-in <code>Get-ChildItem</code> cmdlet.</p>
+<h3 id="find-the-largest-files-within-the-current-working-directory">Find the largest files within the current working directory</h3>
+<p>The following command will retrieve the ten largest files within the current
+working directory (e.g., it won&rsquo;t recursively search within inner directories).
+It&rsquo;ll sort these ten results in descending size order, returning the file names
+and the file size.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Get-ChildItem</span> <span class="o">-File</span> <span class="p">|</span> <span class="nb">Sort </span><span class="n">-Descending</span> <span class="n">-Property</span> <span class="n">Length</span> <span class="p">|</span> <span class="nb">Select </span><span class="n">-First</span> <span class="n">10</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Length</span>
+</code></pre></div><p>When running the above command, you&rsquo;ll receive a response that looks like the
+output below.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">Name</span>          <span class="n">Length</span>
+<span class="p">----</span>          <span class="p">------</span>
+<span class="n">FirstFile</span>       <span class="n">2790</span>
+<span class="n">SecondFile</span>      <span class="n">213</span>
+<span class="n">ThirdFile</span>       <span class="n">182</span>
+<span class="p">...</span>
+</code></pre></div><h3 id="find-the-largest-files-beneath-the-current-working-directory">Find the largest files beneath the current working directory</h3>
+<p>We can expand our search to recursively search within <em>all</em> directories within
+the current working directory by adding a single flag to the command -
+<code>-Recurse</code>.</p>
+<p>The following command will retrieve the ten largest files beneath the current
+working directory (e.g., it won&rsquo;t just find files inside the current working
+directory, but will continue to search within inner directories). It&rsquo;ll sort
+these ten results in descending size order, returning the file names and the
+file size.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Get-ChildItem</span> <span class="n">-Recurse</span> <span class="o">-File</span> <span class="p">|</span> <span class="nb">Sort </span><span class="n">-Descending</span> <span class="n">-Property</span> <span class="n">Length</span> <span class="p">|</span> <span class="nb">Select </span><span class="n">-First</span> <span class="n">10</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Length</span>
+</code></pre></div><h3 id="find-the-largest-file-within-a-user-profile">Find the largest file within a user profile</h3>
+<p>Perhaps you&rsquo;re only interested in finding the largest file within a given user
+profile. This is easily done by passing the <code>$env:USERPROFILE</code> value to
+<code>Get-ChildItem</code>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Get-ChildItem</span> <span class="nv">$env:USERPROFILE</span> <span class="n">-Recurse</span> <span class="o">-File</span> <span class="p">|</span> <span class="nb">Sort </span><span class="n">-Descending</span> <span class="n">-Property</span> <span class="n">Length</span> <span class="p">|</span> <span class="nb">Select </span><span class="n">-First</span> <span class="n">1</span>
+</code></pre></div><h2 id="further-reading">Further reading</h2>
+<p>Further information on the <code>Get-ChildItem</code> cmdlet can be found on
+<a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-childitem">Microsoft Learn</a>.</p>
+]]></content></item><item><title>Use Bicep to create an Application Insights resource</title><link>https://stuartmccoll.github.io/posts/2023-04-01-use-bicep-to-create-an-application-insights-resource/</link><pubDate>Sat, 01 Apr 2023 21:00:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-04-01-use-bicep-to-create-an-application-insights-resource/</guid><description>In this post, I&amp;rsquo;ll show you how to create a Bicep file which declares the resources required for an Application Insights instance, specifically one used to monitor a website.
 Prerequisites I&amp;rsquo;ll be using Visual Studio Code as my editor, where I&amp;rsquo;ll be writing the .bicep file for this walkthrough. I&amp;rsquo;ll also be using the official Bicep extension.
 I&amp;rsquo;ll be using the Azure Az PowerShell module to handle deploying the resources declared in the .</description><content type="html"><![CDATA[<p>In this post, I&rsquo;ll show you how to create a
 <a href="https://github.com/Azure/bicep">Bicep</a> file which declares the resources
