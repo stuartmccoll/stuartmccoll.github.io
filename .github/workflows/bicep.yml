@@ -1,0 +1,11 @@
+name: Lint Bicep files
+
+on: pull_request
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - script: |
+        az bicep build .azure/bicep/*.bicep
