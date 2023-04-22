@@ -1,4 +1,77 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 15 Apr 2023 09:30:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use PowerShell to find empty files</title><link>https://stuartmccoll.github.io/posts/2023-04-15-use-powershell-to-find-empty-files/</link><pubDate>Sat, 15 Apr 2023 09:30:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-04-15-use-powershell-to-find-empty-files/</guid><description>In this post, I&amp;rsquo;ll show you how to find empty files using PowerShell.
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 22 Apr 2023 11:30:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use GitHub Actions to validate Bicep files</title><link>https://stuartmccoll.github.io/posts/2023-04-22-use-github-actions-to-validate-bicep-files/</link><pubDate>Sat, 22 Apr 2023 11:30:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-04-22-use-github-actions-to-validate-bicep-files/</guid><description>In this post, I&amp;rsquo;ll show you how to validate Bicep files using GitHub Actions.
+What is GitHub Actions? GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform built into GitHub. It allows for the automation of build, test, and deployment pipelines.
+It can also be used for running workflows based on other repository events, like automatically responding to created issues.
+The structure of a GitHub Actions workflow GitHub Actions workflows are made up of three things.</description><content type="html"><![CDATA[<p>In this post, I&rsquo;ll show you how to validate Bicep files using GitHub Actions.</p>
+<h2 id="what-is-github-actions">What is GitHub Actions?</h2>
+<p>GitHub Actions is a continuous integration and continuous delivery (CI/CD)
+platform built into GitHub. It allows for the automation of build, test, and
+deployment pipelines.</p>
+<p>It can also be used for running workflows based on other repository events,
+like automatically responding to created issues.</p>
+<h2 id="the-structure-of-a-github-actions-workflow">The structure of a GitHub Actions workflow</h2>
+<p>GitHub Actions workflows are made up of three things.</p>
+<h3 id="an-event-trigger">An event trigger</h3>
+<p>A GitHub Actions workflow can be configured to trigger based on an event
+occuring in a GitHub repository, such as a pull request being opened, or
+a branch being deleted.</p>
+<h3 id="a-job">A job</h3>
+<p>A GitHub Actions workflow can contain one or more jobs. These can be run
+sequentially, or in parallel.</p>
+<p>Each job will run inside its own virtual machine runner, or inside a
+container.</p>
+<h3 id="steps-within-a-job">Steps within a job</h3>
+<p>Each job has one or more steps. A step might be a script that you define,
+or an action; a reusable extension.</p>
+<p>Steps are executed in order, and on the same runner, meaning that you can
+share data from one step to another.</p>
+<h2 id="a-github-actions-workflow-for-validating-bicep-files">A GitHub Actions workflow for validating Bicep files</h2>
+<p>This example GitHub Actions workflow assumes that you want to validate
+Bicep files when a pull request is raised against your repository. It also
+assumes that the Bicep files that you wish to validate are contained within
+the <code>.azure/bicep/</code> directory.</p>
+<p>You should create a <code>.github</code> directory in the root of your repository. In
+this directory, you should create another directory, this time named
+<code>workflows</code>. Within here, create a new file named <code>bicep.yml</code>.</p>
+<p>First, we have to define a name for the GitHub Actions workflow.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Validate Bicep files</span><span class="w">
+</span></code></pre></div><p>Next, we have to define the repository event that will trigger the GitHub
+Actions workflow.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="l">pull_request</span><span class="w">
+</span></code></pre></div><p>Finally, we have to define the job itself, and the steps that make up the job.</p>
+<div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">validate</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v3</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">az bicep build --file .azure/bicep/*.bicep</span><span class="w">
+</span></code></pre></div><ul>
+<li>We&rsquo;re definining a single job, named <code>validate</code>.</li>
+<li>We&rsquo;re declaring that this job will run on the latest version of Ubuntu
+(<code>runs-on: ubuntu-latest</code>).</li>
+<li>We&rsquo;re declaring two steps. In the first step, we&rsquo;re reusing the <code>checkout</code>
+action available on GitHub Marketplace. This allows our GitHub Actions
+workflow to checkout our repository. In the second step, we&rsquo;re running an
+Azure CLI command to build any files with a <code>.bicep</code> file extension within
+the <code>.azure/bicep</code> directory. If any of these files fail to build, our
+GitHub Actions workflow will report a failure, otherwise it will succeed.</li>
+</ul>
+<p>Altogether, our <code>.github/workflows/bicep.yml</code> file looks like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Validate Bicep files</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">on</span><span class="p">:</span><span class="w"> </span><span class="l">pull_request</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">validate</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v3</span><span class="w">
+</span><span class="w">      </span>- <span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">az bicep build --file .azure/bicep/*.bicep</span><span class="w">
+</span></code></pre></div><p>Once merged into the repository, any future pull requests raised will trigger
+this GitHub Actions workflow to be run.</p>
+<h2 id="further-reading">Further reading</h2>
+<p>Further information on GitHub Actions can be found at
+<a href="https://docs.github.com/en/actions/learn-github-actions/">GitHub Docs</a>.</p>
+]]></content></item><item><title>Use PowerShell to find empty files</title><link>https://stuartmccoll.github.io/posts/2023-04-15-use-powershell-to-find-empty-files/</link><pubDate>Sat, 15 Apr 2023 09:30:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-04-15-use-powershell-to-find-empty-files/</guid><description>In this post, I&amp;rsquo;ll show you how to find empty files using PowerShell.
 Find empty files in the current working directory The following command will retrieve empty files within the current working directory (e.g., it won&amp;rsquo;t recursively search within inner directories). It&amp;rsquo;ll return the full file path to any empty files that it finds.
 Get-ChildItem -File | Where-Object { $_.PSIsContainer -eq $false -and $_.Length -eq 0 } | Select -ExpandProperty FullName We&amp;rsquo;re using the Get-ChildItem cmdlet here to retrieve a list of all files within the current working directory.</description><content type="html"><![CDATA[<p>In this post, I&rsquo;ll show you how to find empty files using PowerShell.</p>
 <h2 id="find-empty-files-in-the-current-working-directory">Find empty files in the current working directory</h2>
