@@ -1,4 +1,144 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 22 Apr 2023 11:30:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use GitHub Actions to validate Bicep files</title><link>https://stuartmccoll.github.io/posts/2023-04-22-use-github-actions-to-validate-bicep-files/</link><pubDate>Sat, 22 Apr 2023 11:30:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-04-22-use-github-actions-to-validate-bicep-files/</guid><description>In this post, I&amp;rsquo;ll show you how to validate Bicep files using GitHub Actions.
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 23 Apr 2023 22:00:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use Bicep to create an Azure key vault</title><link>https://stuartmccoll.github.io/posts/2023-04-23-use-bicep-to-create-a-key-vault/</link><pubDate>Sun, 23 Apr 2023 22:00:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-04-23-use-bicep-to-create-a-key-vault/</guid><description>In this post, I&amp;rsquo;ll show you how to create a Bicep file which declares an Azure key vault resource containing a single secret.
+Prerequisites I&amp;rsquo;ll be using Visual Studio Code as my editor, where I&amp;rsquo;ll be writing the .bicep file for this walkthrough. I&amp;rsquo;ll also be using the official Bicep extension.
+I&amp;rsquo;ll be using the Azure Az PowerShell module to handle deploying the resources declared in the .bicep file I create.</description><content type="html"><![CDATA[<p>In this post, I&rsquo;ll show you how to create a
+<a href="https://github.com/Azure/bicep">Bicep</a> file which declares an Azure key vault
+resource containing a single secret.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>I&rsquo;ll be using <a href="https://code.visualstudio.com/">Visual Studio Code</a> as my
+editor, where I&rsquo;ll be writing the <code>.bicep</code> file for this walkthrough. I&rsquo;ll also
+be using the official <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep">Bicep extension</a>.</p>
+<p>I&rsquo;ll be using the
+<a href="https://learn.microsoft.com/en-us/powershell/azure/?view=azps-9.5.0">Azure Az PowerShell module</a>
+to handle deploying the resources declared in the <code>.bicep</code> file I create. You
+can find instructions on <a href="https://learn.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-9.5.0">installing the module</a>
+at Microsoft Learn.</p>
+<p>You&rsquo;ll need to install <a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/">Azure Bicep</a>
+if you haven&rsquo;t already.</p>
+<p>The rest of this post assumes that you&rsquo;ve already authenticated the Azure Az
+PowerShell module with an Azure account.</p>
+<h2 id="creating-an-azure-resource-group">Creating an Azure resource group</h2>
+<p>Before we begin writing our Bicep code, we&rsquo;ll create an Azure resource group
+using the Azure Az PowerShell module. Run the following command in a PowerShell
+session:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">New-AzResourceGroup</span> <span class="n">-Name</span> <span class="n">rgKeyVaultDemo</span> <span class="n">-Location</span> <span class="n">uksouth</span>
+</code></pre></div><p>You&rsquo;ll get a response back similar to the following (where <code>&lt;subscription_id&gt;</code>
+contains your own Azure subscription identifier):</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">ResourceGroupName</span> <span class="err">:</span> <span class="n">rgKeyVaultDemo</span>
+<span class="n">Location</span>          <span class="err">:</span> <span class="n">uksouth</span>
+<span class="n">ProvisioningState</span> <span class="err">:</span> <span class="n">Succeeded</span>
+<span class="n">Tags</span>              <span class="err">:</span>
+<span class="n">ResourceId</span>        <span class="err">:</span> <span class="p">/</span><span class="n">subscriptions</span><span class="p">/&lt;</span><span class="n">subscription_id</span><span class="p">&gt;/</span><span class="n">resourceGroups</span><span class="p">/</span><span class="n">rgKeyVaultDemo</span>
+</code></pre></div><h2 id="creating-the-bicep-file">Creating the <code>.bicep</code> file</h2>
+<p>Create a new file called <code>Create-KeyVault.bicep</code>. In this file, we&rsquo;ll
+be declaring two different Azure resources:</p>
+<ul>
+<li>the key vault itself.</li>
+<li>a single secret to be stored within the key vault.</li>
+</ul>
+<p>We&rsquo;ll be passing two mandatory parameters when deploying the resources declared
+in this file; the name of the key vault to be created; and the name of the
+secret to be created.</p>
+<pre><code class="language-bicep" data-lang="bicep">@description('The name of the key vault to be created')
+param keyVaultName string
+
+@description('The name of the key vault secret to be created')
+param secretName string
+</code></pre><p>We&rsquo;ll also be passing another parameter when deploying the resources declared
+in this file - the Azure region that we want to deploy to, which we&rsquo;ll give
+a parameter name of <code>location</code>. If not passed, this will default to the
+location of the associated Azure resource group.</p>
+<pre><code class="language-bicep" data-lang="bicep">@description('Location for all resources')
+param location string = resourceGroup.location()
+</code></pre><h3 id="declaring-the-key-vault">Declaring the key vault</h3>
+<p>You can find information on all of the available properties within the
+<a href="https://learn.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults?pivots=deployment-language-bicep">Microsoft Learn documentation for the Microsoft.KeyVault/vaults resource type</a>.</p>
+<p>When declaring this resource, the properties we&rsquo;re setting are as follows:</p>
+<ul>
+<li><code>name</code> - the name of the resource.</li>
+<li><code>location</code> - the Azure region where the resource will be deployed.</li>
+<li><code>accessPolicies</code> - an array of identities that have access to the key vault.</li>
+<li><code>enableRbacAuthorization</code> - controls how data actions are authorised.</li>
+<li><code>enableSoftDelete</code> - specifies whether &lsquo;soft delete&rsquo; functionality is
+enabled.</li>
+<li><code>enabledForDeployment</code> - specifies whether Azure Virtual Machines are
+permitted to retrieve certificates stored as secrets from the key vault.</li>
+<li><code>enabledForDiskEncryption</code> - specifies whether Azure Disk Encryption
+is permitted to retrieve secrets from the vault and unwrap keys.</li>
+<li><code>enabledForTemplateDeployment</code> - specifies whether Azure Resource
+Manager is permitted to retrieve secrets from the key vault.</li>
+<li><code>sku</code> - the name of the SKU; <code>standard</code> is effectively &lsquo;pay per use&rsquo;.</li>
+<li><code>softDeleteRetentionInDays</code> the number of days to retain data after
+soft deletion.</li>
+<li><code>tenantId</code> - the Azure Active Directory tenant identifier that should
+be used for authenticating requests to the key vault.</li>
+</ul>
+<pre><code class="language-bicep" data-lang="bicep">resource vault 'Microsoft.KeyVault/vaults@2023-02-01' = {
+  name: keyVaultName
+  location: location
+  properties: {
+    accessPolicies: []
+    enableRbacAuthorization: false
+    enableSoftDelete: true
+    enabledForDeployment: false
+    enabledForDiskEncryption: false
+    enabledForTemplateDeployment: false
+    softDeleteRetentionInDays: 7
+    sku: {
+      family: 'A'
+      name: 'standard'
+    }
+    tenantId: subscription().tenantId
+  }
+}
+</code></pre><h3 id="declaring-the-secret">Declaring the secret</h3>
+<p>You can find information on all of the available properties within the
+<a href="https://learn.microsoft.com/en-us/azure/templates/microsoft.keyvault/vaults/secrets?pivots=deployment-language-bicep">Microsoft Learn documentation for the Microsoft.KeyVault/vaults/secrets resource type</a>.</p>
+<p>When declaring this resource, the properties we&rsquo;re setting are as follows:</p>
+<ul>
+<li><code>name</code> - the name of the resource</li>
+<li><code>parent</code> - the key vault that this secret will belong to.</li>
+<li><code>value</code> - the value of the secret.</li>
+</ul>
+<pre><code class="language-bicep" data-lang="bicep">resource secret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
+  name: secretName
+  parent: vault
+  properties: {
+    value: 'TestValue'
+  }
+}
+</code></pre><h2 id="deploying-the-resources-declared-in-the-bicep-file">Deploying the resources declared in the <code>.bicep</code> file</h2>
+<p>To deploy the resources declared in our .<code>bicep</code> file, run the following
+command in a PowerShell session:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">New-AzResourceGroupDeployment</span> <span class="n">-ResourceGroupName</span> <span class="n">rgKeyVaultDemo</span> <span class="n">-TemplateFile</span> <span class="p">./</span><span class="nb">Create-KeyVault</span><span class="p">.</span><span class="n">bicep</span> <span class="n">-keyVaultName</span> <span class="p">&lt;</span><span class="n">UNIQUE_VALUE</span><span class="p">&gt;</span> <span class="n">-secretName</span> <span class="n">TestSecret</span>
+</code></pre></div><p>You should receive a similar response to the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">DeploymentName</span>          <span class="err">:</span> <span class="nb">Create-KeyVault</span>
+<span class="n">ResourceGroupName</span>       <span class="err">:</span> <span class="n">rgTestKeyVault</span>
+<span class="n">ProvisioningState</span>       <span class="err">:</span> <span class="n">Succeeded</span>
+<span class="n">Timestamp</span>               <span class="err">:</span> <span class="n">23</span><span class="p">/</span><span class="n">04</span><span class="p">/</span><span class="n">2023</span> <span class="n">20</span><span class="err">:</span><span class="n">57</span><span class="err">:</span><span class="n">48</span>
+<span class="n">Mode</span>                    <span class="err">:</span> <span class="n">Incremental</span>
+<span class="n">TemplateLink</span>            <span class="err">:</span>
+<span class="n">Parameters</span>              <span class="err">:</span>
+                          <span class="n">Name</span>             <span class="nb">Type </span>                      <span class="n">Value</span>
+                          <span class="p">===============</span>  <span class="p">=========================</span>  <span class="p">==========</span>
+                          <span class="n">keyVaultName</span>     <span class="n">String</span>                     <span class="s2">&#34;TestKeyVault&#34;</span>
+                          <span class="n">secretName</span>       <span class="n">String</span>                     <span class="s2">&#34;TestSecret&#34;</span>
+                          <span class="n">location</span>         <span class="n">String</span>                     <span class="s2">&#34;uksouth&#34;</span>
+                          <span class="n">sku</span>              <span class="n">String</span>                     <span class="s2">&#34;standard&#34;</span>
+
+<span class="n">Outputs</span>                 <span class="err">:</span>
+<span class="n">DeploymentDebugLogLevel</span> <span class="err">:</span>
+</code></pre></div><p>You can validate that the deployment has been successful by running the
+following command in a PowerShell session:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Get-AzResource</span> <span class="n">-ResourceGroupName</span> <span class="n">rgKeyVaultDemo</span>
+</code></pre></div><h2 id="removing-resources">Removing resources</h2>
+<p>Finally, let&rsquo;s remove the resources created. Run the following command in a
+PowerShell session:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Remove-AzResourceGroup</span> <span class="n">-Name</span> <span class="n">rgKeyVaultDemo</span>
+</code></pre></div><h2 id="further-reading">Further reading</h2>
+<p>If you&rsquo;re interested in exploring Bicep further, you may be interested in the
+<a href="https://learn.microsoft.com/en-gb/training/paths/fundamentals-bicep/">Fundamentals of Bicep</a>
+learning path at Microsoft Learn.</p>
+]]></content></item><item><title>Use GitHub Actions to validate Bicep files</title><link>https://stuartmccoll.github.io/posts/2023-04-22-use-github-actions-to-validate-bicep-files/</link><pubDate>Sat, 22 Apr 2023 11:30:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-04-22-use-github-actions-to-validate-bicep-files/</guid><description>In this post, I&amp;rsquo;ll show you how to validate Bicep files using GitHub Actions.
 What is GitHub Actions? GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform built into GitHub. It allows for the automation of build, test, and deployment pipelines.
 It can also be used for running workflows based on other repository events, like automatically responding to created issues.
 The structure of a GitHub Actions workflow GitHub Actions workflows are made up of three things.</description><content type="html"><![CDATA[<p>In this post, I&rsquo;ll show you how to validate Bicep files using GitHub Actions.</p>
