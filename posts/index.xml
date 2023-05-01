@@ -1,4 +1,51 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 23 Apr 2023 22:00:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use Bicep to create an Azure key vault</title><link>https://stuartmccoll.github.io/posts/2023-04-23-use-bicep-to-create-a-key-vault/</link><pubDate>Sun, 23 Apr 2023 22:00:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-04-23-use-bicep-to-create-a-key-vault/</guid><description>In this post, I&amp;rsquo;ll show you how to create a Bicep file which declares an Azure key vault resource containing a single secret.
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 01 May 2023 11:15:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use PowerShell to monitor system performance</title><link>https://stuartmccoll.github.io/posts/2023-05-01-use-powershell-to-monitor-system-performance/</link><pubDate>Mon, 01 May 2023 11:15:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-05-01-use-powershell-to-monitor-system-performance/</guid><description>In this post, I&amp;rsquo;ll show you how to monitor system performance using PowerShell. I&amp;rsquo;ll introduce you to a few different cmdlets and some examples of how you might use them to monitor the performance of a system.
+Get-Process This cmdlet provides information about all of the running processes on a system, including their process ID, their CPU usages, and their memory usage.
+You might use this cmdlet to:
+Get the five processes using the most CPU: Get-Process | Sort-Object -Property CPU | Select-Object Name,CPU -Last 5.</description><content type="html"><![CDATA[<p>In this post, I&rsquo;ll show you how to monitor system performance using PowerShell.
+I&rsquo;ll introduce you to a few different cmdlets and some examples of how you
+might use them to monitor the performance of a system.</p>
+<h2 id="get-process"><code>Get-Process</code></h2>
+<p>This cmdlet provides information about all of the running processes on a
+system, including their process ID, their CPU usages, and their memory usage.</p>
+<p>You might use this cmdlet to:</p>
+<ul>
+<li>Get the five processes using the most CPU:
+<code>Get-Process | Sort-Object -Property CPU | Select-Object Name,CPU -Last 5</code>.</li>
+<li>Get the five processes using the most memory:
+<code>Get-Process | Sort-Object -Property WorkingSet | Select-Object Name,WorkingSet -Last 5</code></li>
+<li>Get the total CPU time of a specific process:
+<code>(Get-Process -Name msedge).TotalProcessorTime</code></li>
+</ul>
+<h2 id="get-counter"><code>Get-Counter</code></h2>
+<p>This cmdlet provides information about system performance counters, such as
+CPU, memory, and disk usage.</p>
+<p>You might use this cmdlet to:</p>
+<ul>
+<li>Check free space on a drive:
+<code>(Get-Counter '\LogicalDisk(C:)\% Free Megabytes').CounterSamples.CookedValue/1024</code></li>
+<li>Check the amount of available memory: <code>Get-Counter '\Memory\Available MBytes'</code></li>
+<li>Check network traffic: <code>Get-Counter '\Network Interface(*)\Bytes Total/sec'</code></li>
+</ul>
+<h2 id="get-wmiobject"><code>Get-WmiObject</code></h2>
+<p>This cmdlet provides access to the Windows Management Instrumentation (WMI)
+database, which contains information about system resources.</p>
+<p>You might use this cmdlet to:</p>
+<ul>
+<li>Check system uptime:
+<code>Get-WmiObject -Class Win32_OperatingSystem | Select-Object -Property LastBootUpTime | ForEach-Object {[System.Management.ManagementDateTimeConverter]::ToDateTime($_.LastBootUpTime)} | Select-Object -ExpandProperty DateTime</code></li>
+<li>Check system battery status:
+<code>Get-WmiObject -Class Win32_Battery | Select-Object -Property BatteryStatus,EstimatedChargeRemaining</code></li>
+<li>Check system fan speeds:
+<code>Get-WmiObject -Namespace &quot;root\cimv2&quot; -Class &quot;Win32_Fan&quot; | Select-Object -Property DeviceID, CurrentSpeed</code></li>
+</ul>
+<h2 id="further-reading">Further reading</h2>
+<p>Further information on the <code>Get-Process</code> cmdlet can be found on
+<a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-process">Microsoft Learn</a>.</p>
+<p>Further information on the <code>Get-Counter</code> cmdlet can be found on
+<a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-counter">Microsoft Learn</a>.</p>
+<p>Further information on the <code>Get-WmiObject</code> cmdlet can be found on
+<a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-wmiobject">Microsoft Learn</a>.</p>
+]]></content></item><item><title>Use Bicep to create an Azure key vault</title><link>https://stuartmccoll.github.io/posts/2023-04-23-use-bicep-to-create-a-key-vault/</link><pubDate>Sun, 23 Apr 2023 22:00:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-04-23-use-bicep-to-create-a-key-vault/</guid><description>In this post, I&amp;rsquo;ll show you how to create a Bicep file which declares an Azure key vault resource containing a single secret.
 Prerequisites I&amp;rsquo;ll be using Visual Studio Code as my editor, where I&amp;rsquo;ll be writing the .bicep file for this walkthrough. I&amp;rsquo;ll also be using the official Bicep extension.
 I&amp;rsquo;ll be using the Azure Az PowerShell module to handle deploying the resources declared in the .bicep file I create.</description><content type="html"><![CDATA[<p>In this post, I&rsquo;ll show you how to create a
 <a href="https://github.com/Azure/bicep">Bicep</a> file which declares an Azure key vault
