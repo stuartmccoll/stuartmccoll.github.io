@@ -1,4 +1,64 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 01 May 2023 11:15:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use PowerShell to monitor system performance</title><link>https://stuartmccoll.github.io/posts/2023-05-01-use-powershell-to-monitor-system-performance/</link><pubDate>Mon, 01 May 2023 11:15:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-05-01-use-powershell-to-monitor-system-performance/</guid><description>In this post, I&amp;rsquo;ll show you how to monitor system performance using PowerShell. I&amp;rsquo;ll introduce you to a few different cmdlets and some examples of how you might use them to monitor the performance of a system.
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 06 Jun 2023 22:15:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>My Microsoft Build 2023 takeaways</title><link>https://stuartmccoll.github.io/posts/2023-06-06-microsoft-build-2023-takeaways/</link><pubDate>Tue, 06 Jun 2023 22:15:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-06-06-microsoft-build-2023-takeaways/</guid><description>I&amp;rsquo;m slowly working my way through my backlog of Microsoft Build 2023 session recordings, but wanted to take some time out to summarise my key takeaways from this year&amp;rsquo;s event.
+The common thread that ran throughout the event this year was artifical intelligence (AI), woven into sessions focused on what developers are building and how they&amp;rsquo;re building it, as well as sessions looking at the future of work and how this will be impacted by AI.</description><content type="html"><![CDATA[<p>I&rsquo;m slowly working my way through my backlog of <a href="https://build.microsoft.com/en-US">Microsoft Build 2023</a>
+session recordings, but wanted to take some time out to summarise my key
+takeaways from this year&rsquo;s event.</p>
+<p>The common thread that ran throughout the event this year was artifical
+intelligence (AI), woven into sessions focused on what developers are building
+and how they&rsquo;re building it, as well as sessions looking at the future of work
+and how this will be impacted by AI.</p>
+<h2 id="copilot-everywhere">Copilot everywhere</h2>
+<p>One of the biggest announcements from this year&rsquo;s event is that Copilot is
+coming to Windows 11 (available in preview in June). Windows Copilot will
+enable all Windows users to become &lsquo;power&rsquo; users, putting a personal
+assistant capable of taking actions, configuring settings, summarising content,
+connecting accross applications, and more, right at the heart of the Windows
+experience.</p>
+<p>Elsewhere, developers can now integrate applications and services with
+Microsoft 365 Copilot with plugins.</p>
+<p>I&rsquo;m excited to see how Windows Copilot can improve my daily workflows.</p>
+<h2 id="windows-terminal-is-getting-smarter">Windows Terminal is getting smarter</h2>
+<p>Another application, another copilot. This time, GitHub Copilot X is coming
+to Windows Terminal. Users <em>&ldquo;will be able to take advantage of natural
+language AI both inline and in an experimental chat experience to recommend
+commands, explain errors and take actions&rdquo;</em>.</p>
+<p>I can see this being a huge time-saver. Error returned by a build script? Don&rsquo;t
+switch context to Edge in order to search for the error, simply ask Copilot
+what it means and get back an explanation, as well as a resolution, all right
+there in the terminal.</p>
+<h2 id="a-new-dashboard-for-windows-developers">A new dashboard for Windows developers</h2>
+<p>Dev Home is an open-source, centralised place to configure a development
+environment (not only a local machine, but also remote environments like
+Dev Box or GitHub Codespaces), monitor system performance, and manage projects.</p>
+<p>System performance can be monitored using a customisable dashboard, which is
+extensible using widgets built using the Windows widget platform. Dev Home can
+be customised using extensions, one of which will be installed by default; the
+Dev Home GitHub Extension. Extensions can provide widgets for use on the
+Dev Home dashboard.</p>
+<p>Reducing the time from new machine to local development environment can only be
+a good thing. It&rsquo;ll be interesting to see whether Dev Home does gain any
+traction as being the central hub for all things development on Windows
+devices.</p>
+<h2 id="dev-drive-delivers-performance-improvements">Dev Drive delivers performance improvements</h2>
+<p>The introduction of Dev Drive promises to deliver <em>&ldquo;performance, security and
+control&rdquo;</em>, bringing a new type of storage volume to Windows optimised
+specifically for typical developer workloads.</p>
+<p>With an up to 30% improvement on overall build times, and performance
+improvements to other operations, such as cloning repositories, Dev Drive will
+bring important performance gains with minimal configuration required.</p>
+<h2 id="more-ai-training-and-development-comes-to-microsoft-learn">More AI training and development comes to Microsoft Learn</h2>
+<p>Additional training and documentation is being launched on Microsoft Learn,
+to help people leverage the power of AI, through instructor-led training,
+self-paced learning paths, cloud games, and more.</p>
+<p>These newly-launched offerings cover a breadth of products, including Azure
+OpenAI Service, Power Apps, Power Virtual Agents, and GitHub Copilot.</p>
+<h2 id="further-reading">Further reading</h2>
+<p>Check out the <a href="https://news.microsoft.com/build-2023-book-of-news/">Microsoft Build 2023 Book of News</a>
+for a summary of news from the event.</p>
+<p>Read more about Dev Home at <a href="https://blogs.windows.com/windowsdeveloper/2023/05/30/introducing-dev-home/">Windows Blogs</a>.</p>
+<p>Further information on setting up Dev Home can be found on <a href="https://learn.microsoft.com/en-us/windows/dev-home/">Microsoft Learn</a>.</p>
+<p>Read more about Dev Drive at <a href="https://blogs.windows.com/windowsdeveloper/2023/06/01/dev-drive-performance-security-and-control-for-developers/">Windows Blogs</a>.</p>
+<p>Further information on setting up Dev Drive can be found on <a href="https://learn.microsoft.com/en-us/windows/dev-drive/">Microsoft Learn</a>.</p>
+]]></content></item><item><title>Use PowerShell to monitor system performance</title><link>https://stuartmccoll.github.io/posts/2023-05-01-use-powershell-to-monitor-system-performance/</link><pubDate>Mon, 01 May 2023 11:15:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-05-01-use-powershell-to-monitor-system-performance/</guid><description>In this post, I&amp;rsquo;ll show you how to monitor system performance using PowerShell. I&amp;rsquo;ll introduce you to a few different cmdlets and some examples of how you might use them to monitor the performance of a system.
 Get-Process This cmdlet provides information about all of the running processes on a system, including their process ID, their CPU usages, and their memory usage.
 You might use this cmdlet to:
 Get the five processes using the most CPU: Get-Process | Sort-Object -Property CPU | Select-Object Name,CPU -Last 5.</description><content type="html"><![CDATA[<p>In this post, I&rsquo;ll show you how to monitor system performance using PowerShell.
