@@ -1,4 +1,44 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 06 Jun 2023 22:15:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>My Microsoft Build 2023 takeaways</title><link>https://stuartmccoll.github.io/posts/2023-06-06-microsoft-build-2023-takeaways/</link><pubDate>Tue, 06 Jun 2023 22:15:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-06-06-microsoft-build-2023-takeaways/</guid><description>I&amp;rsquo;m slowly working my way through my backlog of Microsoft Build 2023 session recordings, but wanted to take some time out to summarise my key takeaways from this year&amp;rsquo;s event.
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 24 Jun 2023 11:30:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use PowerShell to find deallocated Azure VMs</title><link>https://stuartmccoll.github.io/posts/2023-06-24-use-powershell-to-fund-deallocated-azure-vms/</link><pubDate>Sat, 24 Jun 2023 11:30:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-06-24-use-powershell-to-fund-deallocated-azure-vms/</guid><description>In this post, I&amp;rsquo;ll show you how to find deallocated Azure Virtual Machines using the Azure Resource Graph PowerShell module.
+Install the Azure Az PowerShell module We&amp;rsquo;re going to follow this guide on Microsoft Learn to install the Azure Az PowerShell module.
+I&amp;rsquo;m going to assume that you have the latest version of PowerShell installed. If you don&amp;rsquo;t, you can follow this guide on Microsoft Learn.
+Run the following command in a PowerShell session:</description><content type="html"><![CDATA[<p>In this post, I&rsquo;ll show you how to find deallocated Azure Virtual Machines
+using the Azure Resource Graph PowerShell module.</p>
+<h2 id="install-the-azure-az-powershell-module">Install the Azure Az PowerShell module</h2>
+<p>We&rsquo;re going to follow <a href="https://learn.microsoft.com/en-us/powershell/azure/install-az-ps">this guide on Microsoft Learn</a>
+to install the Azure Az PowerShell module.</p>
+<p>I&rsquo;m going to assume that you have the latest version of PowerShell installed.
+If you don&rsquo;t, you can follow <a href="https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell">this guide on Microsoft Learn</a>.</p>
+<p>Run the following command in a PowerShell session:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Install-Module</span> <span class="n">-Name</span> <span class="n">Az</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span> <span class="n">-Repository</span> <span class="n">PsGallery</span> <span class="n">-Force</span>
+</code></pre></div><p>You&rsquo;ll need to authenticate Azure PowerShell by signing in with your Azure
+credentials.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Connect-AzAccount</span>
+</code></pre></div><h2 id="install-the-azure-resource-graph-powershell-module">Install the Azure Resource Graph PowerShell module</h2>
+<p>We&rsquo;re going to follow <a href="https://learn.microsoft.com/en-us/azure/governance/resource-graph/first-query-powershell#add-the-resource-graph-module">this guide on Microsoft Learn</a>
+to install the Azure Resource Graph PowerShell module.</p>
+<p>Run the following command in a PowerShell session:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Install-Module</span> <span class="n">-Name</span> <span class="n">Az</span><span class="p">.</span><span class="n">ResourceGraph</span>
+</code></pre></div><h2 id="using-the-search-azgraph-cmdlet">Using the <code>Search-AzGraph</code> cmdlet</h2>
+<p>Azure Virtual Machines that have been stopped will have a PowerState property
+of &lsquo;deallocated&rsquo;. We can use this in an Azure Resource Graph query to find
+any Azure Virtual Machines that have been stopped.</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="nb">Search-AzGraph</span> <span class="n">-Query</span> <span class="s2">&#34;where type=~ &#39;Microsoft.Compute/VirtualMachines&#39; and properties.extended.instanceView.powerState.code == &#39;PowerState/deallocated&#39; | project name, location&#34;</span>
+</code></pre></div><p>With this query, we&rsquo;re asking to retrieve any Azure resources that have a type
+of <code>Microsoft.Compute/VirtualMachines</code> and where the
+<code>properties.extended.instanceView.powerState.code</code> property is equal to
+<code>PowerState/deallocated</code>. We&rsquo;re then asking only for the <code>name</code> and <code>location</code>
+properties to be returned.</p>
+<p>You should get a response like:</p>
+<div class="highlight"><pre class="chroma"><code class="language-powershell" data-lang="powershell"><span class="n">name</span>        <span class="n">location</span>
+<span class="p">----</span>        <span class="p">--------</span>
+<span class="n">TestVM1</span>     <span class="n">eastus</span>
+</code></pre></div><p>If you want more information to be returned about the resource, you can leave
+out the <code>| project name, location</code> part of the query to return the default
+dataset.</p>
+<h2 id="further-reading">Further reading</h2>
+<p>Further information on the <code>Search-AzGraph</code> cmdlet can be found on
+<a href="https://learn.microsoft.com/en-us/powershell/module/az.resourcegraph/search-azgraph">Microsoft Learn</a>.</p>
+]]></content></item><item><title>My Microsoft Build 2023 takeaways</title><link>https://stuartmccoll.github.io/posts/2023-06-06-microsoft-build-2023-takeaways/</link><pubDate>Tue, 06 Jun 2023 22:15:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-06-06-microsoft-build-2023-takeaways/</guid><description>I&amp;rsquo;m slowly working my way through my backlog of Microsoft Build 2023 session recordings, but wanted to take some time out to summarise my key takeaways from this year&amp;rsquo;s event.
 The common thread that ran throughout the event this year was artifical intelligence (AI), woven into sessions focused on what developers are building and how they&amp;rsquo;re building it, as well as sessions looking at the future of work and how this will be impacted by AI.</description><content type="html"><![CDATA[<p>I&rsquo;m slowly working my way through my backlog of <a href="https://build.microsoft.com/en-US">Microsoft Build 2023</a>
 session recordings, but wanted to take some time out to summarise my key
 takeaways from this year&rsquo;s event.</p>
