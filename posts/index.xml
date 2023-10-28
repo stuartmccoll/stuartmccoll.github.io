@@ -1,4 +1,57 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 24 Jun 2023 11:30:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Use PowerShell to find deallocated Azure VMs</title><link>https://stuartmccoll.github.io/posts/2023-06-24-use-powershell-to-fund-deallocated-azure-vms/</link><pubDate>Sat, 24 Jun 2023 11:30:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-06-24-use-powershell-to-fund-deallocated-azure-vms/</guid><description>In this post, I&amp;rsquo;ll show you how to find deallocated Azure Virtual Machines using the Azure Resource Graph PowerShell module.
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Stuart McColl</title><link>https://stuartmccoll.github.io/posts/</link><description>Recent content in Posts on Stuart McColl</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 28 Oct 2023 11:45:00 +0100</lastBuildDate><atom:link href="https://stuartmccoll.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>10 sessions to see at GitHub Universe 2023</title><link>https://stuartmccoll.github.io/posts/2023-10-27-10-talks-to-see-at-github-universe-2023/</link><pubDate>Sat, 28 Oct 2023 11:45:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-10-27-10-talks-to-see-at-github-universe-2023/</guid><description>GitHub Universe takes place on November 8th and 9th this year, live and virtual. I&amp;rsquo;ve put together a list of ten sessions that I&amp;rsquo;m particularly looking forward to.
+Opening Keynote This year&amp;rsquo;s keynote will see GitHub CEO Thomas Dohmke and others look at what it means to be a software development platform in the age of AI.
+GitHub Copilot: the AI pair programmer for today and tomorrow Folks from both GitHub and Microsoft will be talking about the shift in software development caused by GitHub Copilot, and other developments in the world of AI-assisted programming.</description><content type="html"><![CDATA[<p><a href="https://githubuniverse.com/">GitHub Universe</a> takes place on November 8th and
+9th this year, live and virtual. I&rsquo;ve put together a list of ten sessions that
+I&rsquo;m particularly looking forward to.</p>
+<h2 id="opening-keynote">Opening Keynote</h2>
+<p>This year&rsquo;s keynote will see GitHub CEO Thomas Dohmke and others look at what
+it means to be a software development platform in the age of AI.</p>
+<h2 id="github-copilot-the-ai-pair-programmer-for-today-and-tomorrow">GitHub Copilot: the AI pair programmer for today and tomorrow</h2>
+<p>Folks from both GitHub and Microsoft will be talking about the shift in
+software development caused by GitHub Copilot, and other developments in the
+world of AI-assisted programming.</p>
+<h2 id="the-future-state-of-apis">The future state of APIS</h2>
+<p>Ankit Sobti, Chief Technology Officer at <a href="https://www.postman.com/">Postman</a>
+will be delivering this session, discussing advancements in API automation
+and more. I&rsquo;ve created some cool things whilst tinkering with the automation
+features in Postman, so I&rsquo;m always interested in news coming out of the
+company.</p>
+<h2 id="maximise-developer-productivity-and-cost-savings-with-github-actions">Maximise developer productivity and cost-savings with GitHub Actions</h2>
+<p>I&rsquo;m a big fan of GitHub Actions (this website is built and deployed using
+a GitHub Actions workflow) and enjoy the productivity gains that it provides.
+I&rsquo;m interested in the potential for cost-savings via optimisation and
+automation mentioned in the description of this session. Unfortunately it&rsquo;s
+tagged as in-person only.</p>
+<h2 id="hassle-free-pull-requests-with-github-copilot">Hassle-free pull requests with GitHub Copilot</h2>
+<p>Another one that&rsquo;s in-person only, but 🤞 for a recording. In every project I&rsquo;ve
+ever worked on, there&rsquo;s always been <em>someone</em> that&rsquo;ll open a pull request with
+50+ files changed and zero information or context provided. It&rsquo;ll be great to
+see how GitHub Copilot can improve the pull request process, not only for those
+opening pull requests, but also in working with pull requests opened by others.</p>
+<h2 id="from-chaos-to-order-using-repository-rules-to-deliver-code-compliance-at-scale">From chaos to order: using repository rules to deliver code compliance at scale</h2>
+<p>There&rsquo;s something of a theme here, in that all of the sessions that look the
+most interesting are tagged as in-person only. I&rsquo;m always interested in
+improvements to code compliance and governance, so am particularly keen to see
+how that can be delivered at both a branch and repository level across an
+organisation.</p>
+<h2 id="how-to-innovate-faster-by-standardising-delivery-and-automating-governance">How to innovate faster by standardising delivery and automating governance</h2>
+<p>Similar to the session above, this is directly in my wheelhouse. This session
+promises a look into improvements in change review processes and the reduction
+of subjectivity in decision-making.</p>
+<h2 id="github-productivity-via-vs-code-for-rapid-context-switchers-like-me">GitHub productivity via VS Code for rapid-context-switchers like me</h2>
+<p>Visual Studio Code is my daily driver, and this session promises a deep dive
+into GitHub and VS Code features and extensions that can enhance focus and
+productivity.</p>
+<h2 id="generative-ai-and-the-future-of-development">Generative AI and the future of development</h2>
+<p>It&rsquo;s hard not to put a session with such a title on this list. Folks from
+GitHub will be showing off GitHub Copilot and offering guidance on what it
+can and can&rsquo;t do, and where it&rsquo;s best utilised.</p>
+<h2 id="from-fiction-to-function-how-ai-agents-will-reshape-developer-workflows">From fiction to function: How AI agents will reshape developer workflows</h2>
+<p>Experts from GitHub Next will be talking about their research in augmenting
+development work through the leverage of AI agents. I&rsquo;m hoping that this is
+not only a look at GitHub Copilot, but potentially whatever comes <em>after</em>
+it.</p>
+]]></content></item><item><title>Use PowerShell to find deallocated Azure VMs</title><link>https://stuartmccoll.github.io/posts/2023-06-24-use-powershell-to-fund-deallocated-azure-vms/</link><pubDate>Sat, 24 Jun 2023 11:30:00 +0100</pubDate><guid>https://stuartmccoll.github.io/posts/2023-06-24-use-powershell-to-fund-deallocated-azure-vms/</guid><description>In this post, I&amp;rsquo;ll show you how to find deallocated Azure Virtual Machines using the Azure Resource Graph PowerShell module.
 Install the Azure Az PowerShell module We&amp;rsquo;re going to follow this guide on Microsoft Learn to install the Azure Az PowerShell module.
 I&amp;rsquo;m going to assume that you have the latest version of PowerShell installed. If you don&amp;rsquo;t, you can follow this guide on Microsoft Learn.
 Run the following command in a PowerShell session:</description><content type="html"><![CDATA[<p>In this post, I&rsquo;ll show you how to find deallocated Azure Virtual Machines
