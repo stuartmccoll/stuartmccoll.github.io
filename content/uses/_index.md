@@ -6,7 +6,7 @@ categories:
   - Uses
 date: 2022-05-22T09:45:00+01:00
 draft: false
-lastMod: 2022-05-22T09:45:00+01:00
+lastMod: 2024-09-24T23:30:00+01:00
 tags:
   - about
   - uses
@@ -19,24 +19,17 @@ Inspired by [/uses](https://uses.tech/), this is my current development setup.
 
 ### 🖥️ Desktop (Personal)
 
-* [NVIDIA GeForce RTX 2080 Ti](https://www.nvidia.com/en-me/geforce/graphics-cards/rtx-2080-ti/)
-* [Intel Core i9-10900X 3.70GHz](https://www.intel.com/content/www/us/en/products/sku/198019/intel-core-i910900x-xseries-processor-19-25m-cache-3-70-ghz/specifications.html)
-* [Asus Prime X299-A II](https://www.asus.com/uk/Motherboards-Components/Motherboards/PRIME/Prime-X299-A-II/techspec/)
-* [32GB Corsair Vengeance DDR4 2400MHz (2 x 16GB)](https://www.corsair.com/uk/en/Categories/Products/Memory/VENGEANCE-LPX/p/CMK32GX4M2A2400C14)
-* [WD Blue SN550 NVMe SSD 1TB](https://www.westerndigital.com/en-gb/products/internal-drives/wd-blue-sn550-nvme-ssd)
-* [Seagate Barracuda HDD 2TB](https://www.seagate.com/gb/en/products/hard-drives/barracuda-hard-drive/)
-* [Corsair Hydro Series H80i High Performance Liquid CPU Cooler](https://www.corsair.com/uk/en/Categories/Products/Liquid-Cooling/Hydro-Series%E2%84%A2-H80i-High-Performance-Liquid-CPU-Cooler/p/CW-9060008-WW)
-* [Corsair Obsidian Series 500D RGB SE](https://www.corsair.com/uk/en/Categories/Products/Cases/Software-Control-and-Monitoring-Cases/Obsidian-Series-500D-RGB-SE-Premium-Mid-Tower-Case/p/CC-9011139-WW)
-
-### 💻 Laptop (Work)
-
-* [Dell Latitude 5411](https://www.dell.com/uk/dfb/p/latitude-14-5411-laptop/pd)
+* [NVIDIA GeForce RTX 4080 Super](https://www.nvidia.com/en-gb/geforce/graphics-cards/40-series/rtx-4080-family/)
+* [Intel Core i9-12900K 5.20GHz](https://www.intel.com/content/www/us/en/products/sku/134599/intel-core-i912900k-processor-30m-cache-up-to-5-20-ghz/specifications.html)
+* [Asus ROG Strix Z790-A Gaming WIFI II](https://rog.asus.com/motherboards/rog-strix/rog-strix-z790-a-gaming-wifi-ii/)
+* [32GB Corsair Vengeance RGB DDR5 5200MHz (2 x 16GB)](https://www.corsair.com/uk/en/p/memory/cmh32gx5m2b6200c36w/vengeance-rgb-32gb-2x16gb-ddr5-dram-6200mhz-c36-memory-kit-white-cmh32gx5m2b6200c36w)
+* [Corsair Core XT MP600 2TB SSD](https://www.corsair.com/uk/en/p/data-storage/cssd-f1000gbmp600cxt/mp600-core-xt-1tb-pcie-4-0-gen4-x-4-nvme-m-2-ssd-cssd-f1000gbmp600cxt)
+* [Corsair iCUE Link H100i RGB AIO Liquid CPU Cooler](https://www.corsair.com/uk/en/p/cpu-coolers/cw-9061001-ww/icue-link-h100i-rgb-aio-liquid-cpu-cooler-cw-9061001-ww)
+* [Fractal Pop Silent](https://www.fractal-design.com/products/cases/pop/pop-silent/white-tg-clear/)
 
 ### ⌨️ Devices / Other
 
 * [Samsung Odyssey G95T 49" Monitor](https://www.samsung.com/uk/monitors/gaming/odyssey-g9-49-inch-240hz-1ms-curved-lc49g95tssrxxu/)
-* [Corsair K70 RGB MK.2 Mechanical Gaming Keyboard - Cherry MX Blue](https://www.corsair.com/uk/en/Categories/Products/Gaming-Keyboards/RGB-Mechanical-Gaming-Keyboards/K70-RGB-MK-2/p/CH-9109011-UK)
-* [Logitech G305 Lightspeed Wireless Gaming Mouse](https://www.logitechg.com/en-gb/products/gaming-mice/g305-lightspeed-wireless-gaming-mouse.html)
 * [Blue Yeti Microphone](https://www.bluemic.com/en-gb/products/yeti/)
 * [IKEA BEKANT Standing Desk](https://www.ikea.com/gb/en/p/bekant-desk-sit-stand-white-s99061198/)
 
