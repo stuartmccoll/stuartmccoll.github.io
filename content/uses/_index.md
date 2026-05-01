@@ -13,8 +13,6 @@ tags:
 title: Uses
 ---
 
-## Uses
-
 Inspired by [/uses](https://uses.tech/), this is my current development setup.
 
 ### 🖥️ Desktop (Personal)

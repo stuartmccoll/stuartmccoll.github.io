@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Azure Function App on Stuart McColl</title>
+    <link>https://stuartmccoll.github.io/tags/azure-function-app/</link>
+    <description>Recent content in Azure Function App on Stuart McColl</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 26 Mar 2023 15:00:00 +0100</lastBuildDate>
+    <atom:link href="https://stuartmccoll.github.io/tags/azure-function-app/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Use Bicep to create an Azure Function App</title>
+      <link>https://stuartmccoll.github.io/posts/2023-03-26-use-bicep-to-create-an-azure-function-app/</link>
+      <pubDate>Sun, 26 Mar 2023 15:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-03-26-use-bicep-to-create-an-azure-function-app/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll show you how to create a&#xA;&lt;a href=&#34;https://github.com/Azure/bicep&#34;&gt;Bicep&lt;/a&gt; file which declares the resources&#xA;required for an Azure Function App.&lt;/p&gt;&#xA;&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using &lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;Visual Studio Code&lt;/a&gt; as my&#xA;editor, where I&amp;rsquo;ll be writing the &lt;code&gt;.bicep&lt;/code&gt; file for this walkthrough. I&amp;rsquo;ll also&#xA;be using the official &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep&#34;&gt;Bicep extension&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using the&#xA;&lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/?view=azps-9.5.0&#34;&gt;Azure Az PowerShell module&lt;/a&gt;&#xA;to handle deploying the resources declared in the &lt;code&gt;.bicep&lt;/code&gt; file I create. You&#xA;can find instructions on &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-9.5.0&#34;&gt;installing the module&lt;/a&gt;&#xA;at Microsoft Learn.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

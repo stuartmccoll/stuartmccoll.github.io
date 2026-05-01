@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AWS on Stuart McColl</title>
+    <link>https://stuartmccoll.github.io/tags/aws/</link>
+    <description>Recent content in AWS on Stuart McColl</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 14 Jan 2023 11:32:05 +0000</lastBuildDate>
+    <atom:link href="https://stuartmccoll.github.io/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sync contents between two S3 Buckets</title>
+      <link>https://stuartmccoll.github.io/posts/2023-01-14-sync-contents-between-s3-buckets/</link>
+      <pubDate>Sat, 14 Jan 2023 11:32:05 +0000</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-01-14-sync-contents-between-s3-buckets/</guid>
+      <description>&lt;p&gt;Something I&amp;rsquo;ve had to do on more than one occassion recently is copy the&#xA;contents of one S3 bucket to another S3 bucket. There is no built-in way&#xA;of doing this in the AWS Management Console, but it &lt;em&gt;is&lt;/em&gt; possible using&#xA;the AWS Command Line Interface (CLI).&lt;/p&gt;&#xA;&lt;p&gt;As an example, I&amp;rsquo;m going to create two new S3 buckets in my AWS account&#xA;using Terraform, push some objects into my source bucket, and then copy&#xA;the contents of this bucket into my target bucket. If you&amp;rsquo;d like to&#xA;skip the setup and jump straight to the instructions, head to the&#xA;&lt;a href=&#34;#syncing-contents&#34;&gt;Syncing contents&lt;/a&gt; section.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>HTTP/S Redirects for AWS Route 53 Using S3</title>
+      <link>https://stuartmccoll.github.io/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</link>
+      <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</guid>
+      <description>&lt;p&gt;I moved hosting of my domains recently from &lt;a href=&#34;https://www.tsohost.com&#34;&gt;tsoHost&lt;/a&gt; to &lt;a href=&#34;https://aws.amazon.com&#34;&gt;Amazon Web Services&lt;/a&gt;, as uptime on tsoHost seems to have been slowly getting worse. Rather than using disparate providers for different services, I chose AWS to sit everything under one provider.&lt;/p&gt;&#xA;&lt;p&gt;Shifting to AWS itself was relatively easy - I&amp;rsquo;m now using &lt;a href=&#34;https://aws.amazon.com/workmail/&#34;&gt;Amazon WorkMail&lt;/a&gt; for my email service and &lt;a href=&#34;https://aws.amazon.com/route53/&#34;&gt;Amazon Route 53&lt;/a&gt; for DNS. The documentation for switching to both from another provider was straight forward and I was up and running within a few days.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

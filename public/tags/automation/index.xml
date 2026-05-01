@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Automation on Stuart McColl</title>
+    <link>https://stuartmccoll.github.io/tags/automation/</link>
+    <description>Recent content in Automation on Stuart McColl</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 23 Apr 2023 22:00:00 +0100</lastBuildDate>
+    <atom:link href="https://stuartmccoll.github.io/tags/automation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Use Bicep to create an Azure key vault</title>
+      <link>https://stuartmccoll.github.io/posts/2023-04-23-use-bicep-to-create-a-key-vault/</link>
+      <pubDate>Sun, 23 Apr 2023 22:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-04-23-use-bicep-to-create-a-key-vault/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll show you how to create a&#xA;&lt;a href=&#34;https://github.com/Azure/bicep&#34;&gt;Bicep&lt;/a&gt; file which declares an Azure key vault&#xA;resource containing a single secret.&lt;/p&gt;&#xA;&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using &lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;Visual Studio Code&lt;/a&gt; as my&#xA;editor, where I&amp;rsquo;ll be writing the &lt;code&gt;.bicep&lt;/code&gt; file for this walkthrough. I&amp;rsquo;ll also&#xA;be using the official &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep&#34;&gt;Bicep extension&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using the&#xA;&lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/?view=azps-9.5.0&#34;&gt;Azure Az PowerShell module&lt;/a&gt;&#xA;to handle deploying the resources declared in the &lt;code&gt;.bicep&lt;/code&gt; file I create. You&#xA;can find instructions on &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-9.5.0&#34;&gt;installing the module&lt;/a&gt;&#xA;at Microsoft Learn.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use Bicep to create an Application Insights resource</title>
+      <link>https://stuartmccoll.github.io/posts/2023-04-01-use-bicep-to-create-an-application-insights-resource/</link>
+      <pubDate>Sat, 01 Apr 2023 21:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-04-01-use-bicep-to-create-an-application-insights-resource/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll show you how to create a&#xA;&lt;a href=&#34;https://github.com/Azure/bicep&#34;&gt;Bicep&lt;/a&gt; file which declares the resources&#xA;required for an Application Insights instance, specifically one used to&#xA;monitor a website.&lt;/p&gt;&#xA;&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using &lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;Visual Studio Code&lt;/a&gt; as my&#xA;editor, where I&amp;rsquo;ll be writing the &lt;code&gt;.bicep&lt;/code&gt; file for this walkthrough. I&amp;rsquo;ll also&#xA;be using the official &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep&#34;&gt;Bicep extension&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using the&#xA;&lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/?view=azps-9.5.0&#34;&gt;Azure Az PowerShell module&lt;/a&gt;&#xA;to handle deploying the resources declared in the &lt;code&gt;.bicep&lt;/code&gt; file I create. You&#xA;can find instructions on &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-9.5.0&#34;&gt;installing the module&lt;/a&gt;&#xA;at Microsoft Learn.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use Bicep to create an Azure Function App</title>
+      <link>https://stuartmccoll.github.io/posts/2023-03-26-use-bicep-to-create-an-azure-function-app/</link>
+      <pubDate>Sun, 26 Mar 2023 15:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-03-26-use-bicep-to-create-an-azure-function-app/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll show you how to create a&#xA;&lt;a href=&#34;https://github.com/Azure/bicep&#34;&gt;Bicep&lt;/a&gt; file which declares the resources&#xA;required for an Azure Function App.&lt;/p&gt;&#xA;&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using &lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;Visual Studio Code&lt;/a&gt; as my&#xA;editor, where I&amp;rsquo;ll be writing the &lt;code&gt;.bicep&lt;/code&gt; file for this walkthrough. I&amp;rsquo;ll also&#xA;be using the official &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep&#34;&gt;Bicep extension&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using the&#xA;&lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/?view=azps-9.5.0&#34;&gt;Azure Az PowerShell module&lt;/a&gt;&#xA;to handle deploying the resources declared in the &lt;code&gt;.bicep&lt;/code&gt; file I create. You&#xA;can find instructions on &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-9.5.0&#34;&gt;installing the module&lt;/a&gt;&#xA;at Microsoft Learn.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use Bicep to create a monthly budget in Azure</title>
+      <link>https://stuartmccoll.github.io/posts/2023-03-19-use-bicep-to-create-a-monthly-budget-in-azure/</link>
+      <pubDate>Sun, 19 Mar 2023 21:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-03-19-use-bicep-to-create-a-monthly-budget-in-azure/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve recently started experimenting with &lt;a href=&#34;https://github.com/Azure/bicep&#34;&gt;Bicep&lt;/a&gt;&#xA;for deploying Azure resources declaratively.&lt;/p&gt;&#xA;&lt;p&gt;In this post, I&amp;rsquo;ll show you how to create a Bicep file which declares a simple&#xA;Azure Budget with a monthly alert.&lt;/p&gt;&#xA;&lt;h2 id=&#34;creating-the-bicep-file&#34;&gt;Creating the &lt;code&gt;.bicep&lt;/code&gt; file&lt;/h2&gt;&#xA;&lt;p&gt;Create a new file, called &lt;code&gt;main.bicep&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;The first thing we&amp;rsquo;ll declare in this file is the target scope of any&#xA;resources that we create. In this case, the Budget we&amp;rsquo;re creating will be&#xA;created at a Subscription level.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Maintain an Azure Container Registry using a PowerShell Azure Function</title>
+      <link>https://stuartmccoll.github.io/posts/2022-09-10-maintain-acr-using-azure-function/</link>
+      <pubDate>Sat, 10 Sep 2022 23:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2022-09-10-maintain-acr-using-azure-function/</guid>
+      <description>&lt;p&gt;This year I created a small C# CLI application that scrapes this website and&#xA;stores the results in Azure Blob Storage. It&amp;rsquo;s essentially a not-very-good&#xA;version of the the &lt;a href=&#34;https://archive.org/&#34;&gt;Internet Archive&lt;/a&gt;&amp;rsquo;s&#xA;&lt;a href=&#34;https://web.archive.org/&#34;&gt;Wayback Machine&lt;/a&gt;, but specific only to this website.&lt;/p&gt;&#xA;&lt;p&gt;The process happens in two parts. If I merge any pull requests on the&#xA;&lt;a href=&#34;https://github.com/stuartmccoll/website-archiver&#34;&gt;website-archiver&lt;/a&gt; into&#xA;&lt;code&gt;main&lt;/code&gt;, then a GitHub Actions workflow pushes the latest Docker image to an&#xA;Azure Container Registry. If I merge any pull requests on the repository that&#xA;holds the codebase for this website, then another GitHub Actions workflow&#xA;triggers the deployment of an Azure Container Instance using the &lt;code&gt;latest&lt;/code&gt;&#xA;tagged image in the aforementioned Azure Container Registry. The container&#xA;runs, the website is scraped and stored in Azure Blob Storage, and then&#xA;the container exits.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Push a Docker image to Azure Container Registry using a GitHub Actions workflow</title>
+      <link>https://stuartmccoll.github.io/posts/2022-06-11-github-action-to-azure-container-registry/</link>
+      <pubDate>Sat, 11 Jun 2022 11:15:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2022-06-11-github-action-to-azure-container-registry/</guid>
+      <description>&lt;p&gt;Building and pushing Docker images to Azure Container Registry is simple with&#xA;a small GitHub Actions workflow.&lt;/p&gt;&#xA;&lt;p&gt;This blog post assumes you&amp;rsquo;ve got a &lt;code&gt;docker-compose.yml&lt;/code&gt; file in your GitHub&#xA;repository. If you&amp;rsquo;re just using a &lt;code&gt;Dockerfile&lt;/code&gt;, you&amp;rsquo;ll need to make a tiny&#xA;amendment to the &lt;code&gt;Build Docker image&lt;/code&gt; step in the &lt;code&gt;push-to-acr.yml&lt;/code&gt; file&#xA;described below.&lt;/p&gt;&#xA;&lt;h2 id=&#34;microsoft-azure-setupconfiguration&#34;&gt;Microsoft Azure setup/configuration&lt;/h2&gt;&#xA;&lt;p&gt;If you&amp;rsquo;re starting fresh, in terms of our Azure setup we&amp;rsquo;ll need:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Set WSL as the default integrated terminal in Visual Studio Code</title>
+      <link>https://stuartmccoll.github.io/posts/2021-06-08-set-wsl-as-default-vscode-terminal/</link>
+      <pubDate>Tue, 08 Jun 2021 10:00:13 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2021-06-08-set-wsl-as-default-vscode-terminal/</guid>
+      <description>&lt;p&gt;If you&amp;rsquo;re using &lt;a href=&#34;https://docs.microsoft.com/en-us/windows/wsl/about&#34;&gt;Windows Subsystem for Linux&lt;/a&gt;&#xA;(WSL) in tandem with Visual Studio Code, you might be wondering how to change&#xA;your default integrated terminal from PowerShell to WSL.&lt;/p&gt;&#xA;&lt;p&gt;Previously, you could set this in a single line in your &lt;code&gt;settings.json&lt;/code&gt; file&#xA;using &lt;code&gt;terminal.integrated.shell.windows&lt;/code&gt;, but this has since been deprecated&#xA;in a later version of Visual Studio Code.&lt;/p&gt;&#xA;&lt;p&gt;Add the following snippet of JSON to your &lt;code&gt;settings.json&lt;/code&gt; file in Visual Studio&#xA;Code (you can access this file by clicking the gear icon in the bottom left&#xA;hand corner of the screen, selecting the &amp;lsquo;Settings&amp;rsquo; menu option, and then&#xA;clicking on the &amp;lsquo;Open settings (JSON)&amp;rsquo; icon in the top right hand corner&#xA;of the subsequent screen - alternatively you can open the Command Palette&#xA;with CTRL + Shift + P and then type in &amp;lsquo;Open settings (JSON)&amp;rsquo;):&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Automate the shutdown of a Windows 10 PC</title>
+      <link>https://stuartmccoll.github.io/posts/2020-10-14-automate-windows-10-shutdown/</link>
+      <pubDate>Wed, 14 Oct 2020 10:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2020-10-14-automate-windows-10-shutdown/</guid>
+      <description>&lt;h2 id=&#34;using-the-shutdown-command&#34;&gt;Using the &lt;code&gt;shutdown&lt;/code&gt; command&lt;/h2&gt;&#xA;&lt;p&gt;Setting a single, non-repeatable shutdown timer can be done using the &lt;code&gt;shutdown&lt;/code&gt; command, which can be run in the Command Prompt or PowerShell. Let&amp;rsquo;s use PowerShell as an example.&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Search for &amp;lsquo;&lt;em&gt;PowerShell&lt;/em&gt;&amp;rsquo; in the start menu and open the app that is returned.&lt;/li&gt;&#xA;&lt;li&gt;Run the command &lt;code&gt;shutdown -s -t TimeInSeconds&lt;/code&gt; where &lt;code&gt;TimeInSeconds&lt;/code&gt; is replaced with the number of seconds after which you want the Windows 10 PC to shutdown. For example, if you want it to shutdown after 30 minutes, then replace &lt;code&gt;TimeInSeconds&lt;/code&gt; with &lt;code&gt;1800&lt;/code&gt;. The &lt;code&gt;-s&lt;/code&gt; flag is simply telling the command to shutdown, as opposed to logging out, or restarting, etc.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;That&amp;rsquo;s it - you&amp;rsquo;ve scheduled a one-time shutdown of your Windows 10 PC.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

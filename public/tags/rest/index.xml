@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rest on Stuart McColl</title>
+    <link>https://stuartmccoll.github.io/tags/rest/</link>
+    <description>Recent content in Rest on Stuart McColl</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 22 Jun 2020 16:00:48 +0100</lastBuildDate>
+    <atom:link href="https://stuartmccoll.github.io/tags/rest/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Attaching to list items with the Microsoft SharePoint REST API</title>
+      <link>https://stuartmccoll.github.io/posts/2020-06-22-attaching-to-list-items-with-sharepoint-rest-api/</link>
+      <pubDate>Mon, 22 Jun 2020 16:00:48 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2020-06-22-attaching-to-list-items-with-sharepoint-rest-api/</guid>
+      <description>&lt;p&gt;In my &lt;a href=&#34;../2020-06-18-creating-list-items-with-sharepoint-rest-api&#34;&gt;last blog post&lt;/a&gt; I explained how to create list items with Microsoft&amp;rsquo;s legacy SharePoint REST API using Postman. This post builds on that work to attach a file to an existing list item.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;Assuming you&amp;rsquo;ve been following along, we have a SharePoint list with at least one item in it that we&amp;rsquo;ve created through a request sent from Postman to the Microsoft SharePoint REST API. The item we created will have been assigned an &lt;code&gt;id&lt;/code&gt; within SharePoint. If you don&amp;rsquo;t still have the response from our creation request to hand (which will have contained the ID in the response body), you can obtain it from SharePoint. Access the list item and then click the &amp;lsquo;Copy Link&amp;rsquo; shortcut. A URL will be copied to your clipboard which looks like the following:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creating list items with the Microsoft SharePoint REST API</title>
+      <link>https://stuartmccoll.github.io/posts/2020-06-18-creating-list-items-with-sharepoint-rest-api/</link>
+      <pubDate>Thu, 18 Jun 2020 19:30:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2020-06-18-creating-list-items-with-sharepoint-rest-api/</guid>
+      <description>&lt;p&gt;In my &lt;a href=&#34;../2020-06-16-sharepoint-api-authentication-with-postman&#34;&gt;last blog post&lt;/a&gt; I explained how to authenticate requests to Microsoft&amp;rsquo;s legacy SharePoint REST API using Postman. This post builds on that work to store our access token as a Postman environment variable and to then send &lt;code&gt;POST&lt;/code&gt; requests to the SharePoint REST API to create new items within an existing SharePoint list.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;If you were following along previously, the last thing we did was to request an access token to use in future requests. We&amp;rsquo;re going to write a couple of lines of JavaScript code within Postman which will parse the API response containing the access token and add it to our previously-created Postman environment.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

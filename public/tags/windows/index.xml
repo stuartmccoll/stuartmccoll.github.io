@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows on Stuart McColl</title>
+    <link>https://stuartmccoll.github.io/tags/windows/</link>
+    <description>Recent content in Windows on Stuart McColl</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 06 Jun 2023 22:15:00 +0100</lastBuildDate>
+    <atom:link href="https://stuartmccoll.github.io/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My Microsoft Build 2023 takeaways</title>
+      <link>https://stuartmccoll.github.io/posts/2023-06-06-microsoft-build-2023-takeaways/</link>
+      <pubDate>Tue, 06 Jun 2023 22:15:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-06-06-microsoft-build-2023-takeaways/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m slowly working my way through my backlog of &lt;a href=&#34;https://build.microsoft.com/en-US&#34;&gt;Microsoft Build 2023&lt;/a&gt;&#xA;session recordings, but wanted to take some time out to summarise my key&#xA;takeaways from this year&amp;rsquo;s event.&lt;/p&gt;&#xA;&lt;p&gt;The common thread that ran throughout the event this year was artifical&#xA;intelligence (AI), woven into sessions focused on what developers are building&#xA;and how they&amp;rsquo;re building it, as well as sessions looking at the future of work&#xA;and how this will be impacted by AI.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Set WSL as the default integrated terminal in Visual Studio Code</title>
+      <link>https://stuartmccoll.github.io/posts/2021-06-08-set-wsl-as-default-vscode-terminal/</link>
+      <pubDate>Tue, 08 Jun 2021 10:00:13 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2021-06-08-set-wsl-as-default-vscode-terminal/</guid>
+      <description>&lt;p&gt;If you&amp;rsquo;re using &lt;a href=&#34;https://docs.microsoft.com/en-us/windows/wsl/about&#34;&gt;Windows Subsystem for Linux&lt;/a&gt;&#xA;(WSL) in tandem with Visual Studio Code, you might be wondering how to change&#xA;your default integrated terminal from PowerShell to WSL.&lt;/p&gt;&#xA;&lt;p&gt;Previously, you could set this in a single line in your &lt;code&gt;settings.json&lt;/code&gt; file&#xA;using &lt;code&gt;terminal.integrated.shell.windows&lt;/code&gt;, but this has since been deprecated&#xA;in a later version of Visual Studio Code.&lt;/p&gt;&#xA;&lt;p&gt;Add the following snippet of JSON to your &lt;code&gt;settings.json&lt;/code&gt; file in Visual Studio&#xA;Code (you can access this file by clicking the gear icon in the bottom left&#xA;hand corner of the screen, selecting the &amp;lsquo;Settings&amp;rsquo; menu option, and then&#xA;clicking on the &amp;lsquo;Open settings (JSON)&amp;rsquo; icon in the top right hand corner&#xA;of the subsequent screen - alternatively you can open the Command Palette&#xA;with CTRL + Shift + P and then type in &amp;lsquo;Open settings (JSON)&amp;rsquo;):&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Automate the shutdown of a Windows 10 PC</title>
+      <link>https://stuartmccoll.github.io/posts/2020-10-14-automate-windows-10-shutdown/</link>
+      <pubDate>Wed, 14 Oct 2020 10:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2020-10-14-automate-windows-10-shutdown/</guid>
+      <description>&lt;h2 id=&#34;using-the-shutdown-command&#34;&gt;Using the &lt;code&gt;shutdown&lt;/code&gt; command&lt;/h2&gt;&#xA;&lt;p&gt;Setting a single, non-repeatable shutdown timer can be done using the &lt;code&gt;shutdown&lt;/code&gt; command, which can be run in the Command Prompt or PowerShell. Let&amp;rsquo;s use PowerShell as an example.&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Search for &amp;lsquo;&lt;em&gt;PowerShell&lt;/em&gt;&amp;rsquo; in the start menu and open the app that is returned.&lt;/li&gt;&#xA;&lt;li&gt;Run the command &lt;code&gt;shutdown -s -t TimeInSeconds&lt;/code&gt; where &lt;code&gt;TimeInSeconds&lt;/code&gt; is replaced with the number of seconds after which you want the Windows 10 PC to shutdown. For example, if you want it to shutdown after 30 minutes, then replace &lt;code&gt;TimeInSeconds&lt;/code&gt; with &lt;code&gt;1800&lt;/code&gt;. The &lt;code&gt;-s&lt;/code&gt; flag is simply telling the command to shutdown, as opposed to logging out, or restarting, etc.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;That&amp;rsquo;s it - you&amp;rsquo;ve scheduled a one-time shutdown of your Windows 10 PC.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

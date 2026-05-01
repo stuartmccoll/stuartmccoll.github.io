@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+    <head>
+        <script>
+            (function() {
+                var theme = localStorage.getItem('theme');
+                if (theme) {
+                    document.documentElement.setAttribute('data-theme', theme);
+                }
+            })();
+        </script>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+<meta name="author"
+    content="">
+<meta name="description"
+    content="" />
+<meta name="keywords" content="homepage, blog, development, programming" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://stuartmccoll.github.io/posts/" />
+<title>
+    Posts :: Stuart McColl 
+</title>
+<link rel="stylesheet" href="/main.min.1c694e117dadbc3e40e7f861b153f122b96bde5d01907520f3c4b1cf56ba68f0.css"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="theme-color" content="#252627">
+  <meta itemprop="name" content="Posts">
+  <meta itemprop="description" content="Stuart McColl software design and development blog">
+  <meta itemprop="datePublished" content="2023-12-01T10:00:00+00:00">
+  <meta itemprop="dateModified" content="2023-12-01T10:00:00+00:00">
+  <meta itemprop="image" content="https://stuartmccoll.github.io/"><link rel="alternate" type="application/rss+xml" href="https://stuartmccoll.github.io/posts/index.xml" title="Stuart McColl" />
+
+<script type="text/javascript">
+    !function(T,l,y){var S=T.location,k="script",D="instrumentationKey",C="ingestionendpoint",I="disableExceptionTracking",E="ai.device.",b="toLowerCase",w="crossOrigin",N="POST",e="appInsightsSDK",t=y.name||"appInsights";(y.name||T[e])&&(T[e]=t);var n=T[t]||function(d){var g=!1,f=!1,m={initialize:!0,queue:[],sv:"5",version:2,config:d};function v(e,t){var n={},a="Browser";return n[E+"id"]=a[b](),n[E+"type"]=a,n["ai.operation.name"]=S&&S.pathname||"_unknown_",n["ai.internal.sdkVersion"]="javascript:snippet_"+(m.sv||m.version),{time:function(){var e=new Date;function t(e){var t=""+e;return 1===t.length&&(t="0"+t),t}return e.getUTCFullYear()+"-"+t(1+e.getUTCMonth())+"-"+t(e.getUTCDate())+"T"+t(e.getUTCHours())+":"+t(e.getUTCMinutes())+":"+t(e.getUTCSeconds())+"."+((e.getUTCMilliseconds()/1e3).toFixed(3)+"").slice(2,5)+"Z"}(),iKey:e,name:"Microsoft.ApplicationInsights."+e.replace(/-/g,"")+"."+t,sampleRate:100,tags:n,data:{baseData:{ver:2}}}}var h=d.url||y.src;if(h){function a(e){var t,n,a,i,r,o,s,c,u,p,l;g=!0,m.queue=[],f||(f=!0,t=h,s=function(){var e={},t=d.connectionString;if(t)for(var n=t.split(";"),a=0;a<n.length;a++){var i=n[a].split("=");2===i.length&&(e[i[0][b]()]=i[1])}if(!e[C]){var r=e.endpointsuffix,o=r?e.location:null;e[C]="https://"+(o?o+".":"")+"dc."+(r||"services.visualstudio.com")}return e}(),c=s[D]||d[D]||"",u=s[C],p=u?u+"/v2/track":d.endpointUrl,(l=[]).push((n="SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)",a=t,i=p,(o=(r=v(c,"Exception")).data).baseType="ExceptionData",o.baseData.exceptions=[{typeName:"SDKLoadFailed",message:n.replace(/\./g,"-"),hasFullStack:!1,stack:n+"\nSnippet failed to load ["+a+"] -- Telemetry is disabled\nHelp Link: https://go.microsoft.com/fwlink/?linkid=2128109\nHost: "+(S&&S.pathname||"_unknown_")+"\nEndpoint: "+i,parsedStack:[]}],r)),l.push(function(e,t,n,a){var i=v(c,"Message"),r=i.data;r.baseType="MessageData";var o=r.baseData;return o.message='AI (Internal): 99 message:"'+("SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details) ("+n+")").replace(/\"/g,"")+'"',o.properties={endpoint:a},i}(0,0,t,p)),function(e,t){if(JSON){var n=T.fetch;if(n&&!y.useXhr)n(t,{method:N,body:JSON.stringify(e),mode:"cors"});else if(XMLHttpRequest){var a=new XMLHttpRequest;a.open(N,t),a.setRequestHeader("Content-type","application/json"),a.send(JSON.stringify(e))}}}(l,p))}function i(e,t){f||setTimeout(function(){!t&&m.core||a()},500)}var e=function(){var n=l.createElement(k);n.src=h;var e=y[w];return!e&&""!==e||"undefined"==n[w]||(n[w]=e),n.onload=i,n.onerror=a,n.onreadystatechange=function(e,t){"loaded"!==n.readyState&&"complete"!==n.readyState||i(0,t)},n}();y.ld<0?l.getElementsByTagName("head")[0].appendChild(e):setTimeout(function(){l.getElementsByTagName(k)[0].parentNode.appendChild(e)},y.ld||0)}try{m.cookie=l.cookie}catch(p){}function t(e){for(;e.length;)!function(t){m[t]=function(){var e=arguments;g||m.queue.push(function(){m[t].apply(m,e)})}}(e.pop())}var n="track",r="TrackPage",o="TrackEvent";t([n+"Event",n+"PageView",n+"Exception",n+"Trace",n+"DependencyData",n+"Metric",n+"PageViewPerformance","start"+r,"stop"+r,"start"+o,"stop"+o,"addTelemetryInitializer","setAuthenticatedUserContext","clearAuthenticatedUserContext","flush"]),m.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4};var s=(d.extensionConfig||{}).ApplicationInsightsAnalytics||{};if(!0!==d[I]&&!0!==s[I]){var c="onerror";t(["_"+c]);var u=T[c];T[c]=function(e,t,n,a,i){var r=u&&u(e,t,n,a,i);return!0!==r&&m["_"+c]({message:e,url:t,lineNumber:n,columnNumber:a,error:i}),r},d.autoExceptionInstrumented=!0}return m}(y.cfg);function a(){y.onInit&&y.onInit(n)}(T[t]=n).queue&&0===n.queue.length?(n.queue.push(a),n.trackPageView({})):a()}(window,document,{
+    src: "https://js.monitor.azure.com/scripts/b/ai.2.min.js", 
+    
+    
+    
+    crossOrigin: "anonymous", 
+    
+    cfg: { 
+        connectionString: "InstrumentationKey=74cc5c48-d066-4928-932e-459f438b579d;IngestionEndpoint=https:\/\/uksouth-1.in.applicationinsights.azure.com\/;LiveEndpoint=https:\/\/uksouth.livediagnostics.monitor.azure.com\/"
+    }});
+</script>
+    </head>
+
+    <body>
+        <div class="accent-bar"></div>
+        <header class="site-header">
+    <div class="header-inner">
+        <div class="site-branding">
+            <a href="/" class="site-title">Stuart McColl</a>
+            <p class="site-tagline">Thoughts on Windows, Azure, PowerShell, and more.</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a class="nav-link" href="/">Blog</a></li>
+                <li><a class="nav-link" href="/about">About</a></li>
+                <li>
+                    <div class="theme-picker">
+                        <button class="theme-picker-toggle" aria-label="Change theme" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a7 7 0 0 0 0 20 10 10 0 0 0 0-20z" fill="currentColor" opacity="0.3"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                        <div class="theme-picker-dropdown">
+                            <button data-set-theme="azure-light"><span class="theme-swatch" style="background: linear-gradient(135deg, #0068c9, #2b88d8)"></span> Azure (Light)</button>
+                            <button data-set-theme="azure-dark"><span class="theme-swatch" style="background: linear-gradient(135deg, #4dacff, #7cc3ff)"></span> Azure (Dark)</button>
+                            <button data-set-theme="masterchief-light"><span class="theme-swatch" style="background: linear-gradient(135deg, #4b7a2e, #7aa93e)"></span> Master Chief (Light)</button>
+                            <button data-set-theme="masterchief-dark"><span class="theme-swatch" style="background: linear-gradient(135deg, #7aa93e, #9ecc5a)"></span> Master Chief (Dark)</button>
+                            <button data-set-theme="cortana-light"><span class="theme-swatch" style="background: linear-gradient(135deg, #7b4bb5, #a06cdd)"></span> Cortana (Light)</button>
+                            <button data-set-theme="cortana-dark"><span class="theme-swatch" style="background: linear-gradient(135deg, #a06cdd, #c49bf5)"></span> Cortana (Dark)</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    
+</header>
+
+        <div class="container">
+            <div class="content">
+                
+
+<main class="posts">
+
+    <div class="posts-grid">
+        <a class="posts-item pattern-2" href="https://stuartmccoll.github.io/posts/2023-10-27-10-talks-to-see-at-github-universe-2023/">
+            <span class="posts-title">10 sessions to see at GitHub Universe 2023</span>
+            <span class="posts-date">October 28, 2023</span>
+        </a>
+        <a class="posts-item pattern-5" href="https://stuartmccoll.github.io/posts/2023-06-24-use-powershell-to-fund-deallocated-azure-vms/">
+            <span class="posts-title">Use PowerShell to find deallocated Azure VMs</span>
+            <span class="posts-date">June 24, 2023</span>
+        </a>
+        <a class="posts-item pattern-3" href="https://stuartmccoll.github.io/posts/2023-06-06-microsoft-build-2023-takeaways/">
+            <span class="posts-title">My Microsoft Build 2023 takeaways</span>
+            <span class="posts-date">June 6, 2023</span>
+        </a>
+        <a class="posts-item pattern-7" href="https://stuartmccoll.github.io/posts/2023-05-01-use-powershell-to-monitor-system-performance/">
+            <span class="posts-title">Use PowerShell to monitor system performance</span>
+            <span class="posts-date">May 1, 2023</span>
+        </a>
+        <a class="posts-item pattern-2" href="https://stuartmccoll.github.io/posts/2023-04-23-use-bicep-to-create-a-key-vault/">
+            <span class="posts-title">Use Bicep to create an Azure key vault</span>
+            <span class="posts-date">April 23, 2023</span>
+        </a>
+        <a class="posts-item pattern-7" href="https://stuartmccoll.github.io/posts/2023-04-22-use-github-actions-to-validate-bicep-files/">
+            <span class="posts-title">Use GitHub Actions to validate Bicep files</span>
+            <span class="posts-date">April 22, 2023</span>
+        </a>
+        <a class="posts-item pattern-0" href="https://stuartmccoll.github.io/posts/2023-04-15-use-powershell-to-find-empty-files/">
+            <span class="posts-title">Use PowerShell to find empty files</span>
+            <span class="posts-date">April 15, 2023</span>
+        </a>
+        <a class="posts-item pattern-1" href="https://stuartmccoll.github.io/posts/2023-04-07-use-powershell-to-find-large-files/">
+            <span class="posts-title">Use PowerShell to find large files</span>
+            <span class="posts-date">April 7, 2023</span>
+        </a>
+        <a class="posts-item pattern-4" href="https://stuartmccoll.github.io/posts/2023-04-01-use-bicep-to-create-an-application-insights-resource/">
+            <span class="posts-title">Use Bicep to create an Application Insights resource</span>
+            <span class="posts-date">April 1, 2023</span>
+        </a>
+        <a class="posts-item pattern-3" href="https://stuartmccoll.github.io/posts/2023-03-29-use-powershell-to-find-empty-azure-resource-groups/">
+            <span class="posts-title">Use PowerShell to find empty Azure resource groups</span>
+            <span class="posts-date">March 29, 2023</span>
+        </a>
+        <a class="posts-item pattern-1" href="https://stuartmccoll.github.io/posts/2023-03-28-use-powershell-to-find-untagged-azure-resources/">
+            <span class="posts-title">Use PowerShell to find untagged Azure resources</span>
+            <span class="posts-date">March 28, 2023</span>
+        </a>
+        <a class="posts-item pattern-4" href="https://stuartmccoll.github.io/posts/2023-03-26-use-bicep-to-create-an-azure-function-app/">
+            <span class="posts-title">Use Bicep to create an Azure Function App</span>
+            <span class="posts-date">March 26, 2023</span>
+        </a>
+        <a class="posts-item pattern-1" href="https://stuartmccoll.github.io/posts/2023-03-24-use-powershell-to-retrieve-azure-location-information/">
+            <span class="posts-title">Use PowerShell to retrieve Azure location information</span>
+            <span class="posts-date">March 24, 2023</span>
+        </a>
+        <a class="posts-item pattern-2" href="https://stuartmccoll.github.io/posts/2023-03-19-use-bicep-to-create-a-monthly-budget-in-azure/">
+            <span class="posts-title">Use Bicep to create a monthly budget in Azure</span>
+            <span class="posts-date">March 19, 2023</span>
+        </a>
+        <a class="posts-item pattern-2" href="https://stuartmccoll.github.io/posts/2023-01-14-sync-contents-between-s3-buckets/">
+            <span class="posts-title">Sync contents between two S3 Buckets</span>
+            <span class="posts-date">January 14, 2023</span>
+        </a>
+        <a class="posts-item pattern-5" href="https://stuartmccoll.github.io/posts/2022-09-10-maintain-acr-using-azure-function/">
+            <span class="posts-title">Maintain an Azure Container Registry using a PowerShell Azure Function</span>
+            <span class="posts-date">September 10, 2022</span>
+        </a>
+        <a class="posts-item pattern-7" href="https://stuartmccoll.github.io/posts/2022-06-11-github-action-to-azure-container-registry/">
+            <span class="posts-title">Push a Docker image to Azure Container Registry using a GitHub Actions workflow</span>
+            <span class="posts-date">June 11, 2022</span>
+        </a>
+        <a class="posts-item pattern-2" href="https://stuartmccoll.github.io/posts/2022-06-02-use-powershell-to-generate-a-guid/">
+            <span class="posts-title">Use PowerShell to generate a GUID</span>
+            <span class="posts-date">June 2, 2022</span>
+        </a>
+        <a class="posts-item pattern-6" href="https://stuartmccoll.github.io/posts/2022-05-28-use-powershell-to-create-a-zip-file/">
+            <span class="posts-title">Use PowerShell to create a .zip file</span>
+            <span class="posts-date">May 28, 2022</span>
+        </a>
+        <a class="posts-item pattern-2" href="https://stuartmccoll.github.io/posts/2021-10-02-how-to-install-local-powershell-modules/">
+            <span class="posts-title">How to lnstall local Powershell Modules</span>
+            <span class="posts-date">October 2, 2021</span>
+        </a>
+        <a class="posts-item pattern-1" href="https://stuartmccoll.github.io/posts/2021-07-11-how-to-install-winget/">
+            <span class="posts-title">How to install Windows Package Manager (WinGet) on Windows 10</span>
+            <span class="posts-date">July 11, 2021</span>
+        </a>
+        <a class="posts-item pattern-5" href="https://stuartmccoll.github.io/posts/2021-06-08-set-wsl-as-default-vscode-terminal/">
+            <span class="posts-title">Set WSL as the default integrated terminal in Visual Studio Code</span>
+            <span class="posts-date">June 8, 2021</span>
+        </a>
+        <a class="posts-item pattern-6" href="https://stuartmccoll.github.io/posts/2020-10-14-automate-windows-10-shutdown/">
+            <span class="posts-title">Automate the shutdown of a Windows 10 PC</span>
+            <span class="posts-date">October 14, 2020</span>
+        </a>
+        <a class="posts-item pattern-0" href="https://stuartmccoll.github.io/posts/2020-10-10-push-declined-due-to-email-privacy-restrictions/">
+            <span class="posts-title">The Push Declined Due to Email Privacy Restrictions error</span>
+            <span class="posts-date">October 10, 2020</span>
+        </a>
+        <a class="posts-item pattern-2" href="https://stuartmccoll.github.io/posts/2020-09-21-azure-storage-api/">
+            <span class="posts-title">Retrieving files from Microsoft Azure blob storage</span>
+            <span class="posts-date">September 21, 2020</span>
+        </a>
+        <a class="posts-item pattern-5" href="https://stuartmccoll.github.io/posts/2020-07-16-github-secret-repository-readme/">
+            <span class="posts-title">Enabling the GitHub Secret Profile README.md</span>
+            <span class="posts-date">July 16, 2020</span>
+        </a>
+        <a class="posts-item pattern-0" href="https://stuartmccoll.github.io/posts/2020-06-22-attaching-to-list-items-with-sharepoint-rest-api/">
+            <span class="posts-title">Attaching to list items with the Microsoft SharePoint REST API</span>
+            <span class="posts-date">June 22, 2020</span>
+        </a>
+        <a class="posts-item pattern-5" href="https://stuartmccoll.github.io/posts/2020-06-18-creating-list-items-with-sharepoint-rest-api/">
+            <span class="posts-title">Creating list items with the Microsoft SharePoint REST API</span>
+            <span class="posts-date">June 18, 2020</span>
+        </a>
+        <a class="posts-item pattern-0" href="https://stuartmccoll.github.io/posts/2020-06-16-sharepoint-api-authentication-with-postman/">
+            <span class="posts-title">Microsoft SharePoint API Access with Postman</span>
+            <span class="posts-date">June 16, 2020</span>
+        </a>
+        <a class="posts-item pattern-4" href="https://stuartmccoll.github.io/posts/2020-05-15-azure-account-active-directory-error/">
+            <span class="posts-title">Fixing Azure Account Active Directory Association Error</span>
+            <span class="posts-date">May 15, 2020</span>
+        </a>
+        <a class="posts-item pattern-2" href="https://stuartmccoll.github.io/posts/2020-05-02-applescript-bluetooth-devices/">
+            <span class="posts-title">AppleScript for Connecting Bluetooth Devices</span>
+            <span class="posts-date">May 2, 2020</span>
+        </a>
+        <a class="posts-item pattern-4" href="https://stuartmccoll.github.io/posts/2020-04-27-applescript-external-displays/">
+            <span class="posts-title">AppleScript for Configuring External Displays</span>
+            <span class="posts-date">April 27, 2020</span>
+        </a>
+        <a class="posts-item pattern-2" href="https://stuartmccoll.github.io/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/">
+            <span class="posts-title">HTTP/S Redirects for AWS Route 53 Using S3</span>
+            <span class="posts-date">February 7, 2020</span>
+        </a>
+        <a class="posts-item pattern-1" href="https://stuartmccoll.github.io/posts/microservice-design-patterns-aggregator/">
+            <span class="posts-title">Microservice Design Patterns: Aggregator</span>
+            <span class="posts-date">June 17, 2019</span>
+        </a>
+        <a class="posts-item pattern-7" href="https://stuartmccoll.github.io/posts/deploy-a-serverless-flask-application-with-aws-lambda/">
+            <span class="posts-title">Deploy a Serverless Flask Application with AWS Lambda</span>
+            <span class="posts-date">October 17, 2018</span>
+        </a>
+        <a class="posts-item pattern-4" href="https://stuartmccoll.github.io/posts/designing-resilient-apis-with-idempotency/">
+            <span class="posts-title">Designing Resilient APIs with Idempotency</span>
+            <span class="posts-date">September 2, 2018</span>
+        </a>
+        <a class="posts-item pattern-3" href="https://stuartmccoll.github.io/posts/python-3.7-data-classes/">
+            <span class="posts-title">Python 3.7 Data Classes</span>
+            <span class="posts-date">July 8, 2018</span>
+        </a>
+        <a class="posts-item pattern-7" href="https://stuartmccoll.github.io/posts/gitlab-changelog-generator/">
+            <span class="posts-title">GitLab Changelog Generator</span>
+            <span class="posts-date">June 23, 2018</span>
+        </a>
+        <a class="posts-item pattern-3" href="https://stuartmccoll.github.io/posts/add-a-flask-application-to-a-docker-container/">
+            <span class="posts-title">Add a Flask Application to a Docker Container</span>
+            <span class="posts-date">May 14, 2017</span>
+        </a>
+        <a class="posts-item pattern-1" href="https://stuartmccoll.github.io/posts/quick-and-dirty-kombu/rabbitmq-application/">
+            <span class="posts-title">Quick and Dirty Kombu/RabbitMQ Application</span>
+            <span class="posts-date">May 14, 2017</span>
+        </a>
+    </div>
+</main>
+
+            </div>
+
+            
+
+            <footer class="footer-pattern-1">
+    <div class="footer-inner">
+        <div class="footer-links">
+            
+            <a href="https://hachyderm.io/@stuartmccoll" rel="me">Mastodon</a>
+            
+            
+            <a href="https://github.com/stuartmccoll/hugo-theme-refresh/issues/new">GitHub</a>
+            
+            <a href="https://stuartmccoll.github.io//index.xml">RSS</a>
+        </div>
+        <div class="footer-meta">
+            
+            <span>Built with <a href="https://github.com/gohugoio/hugo/releases/tag/v0.145.0">Hugo 0.145.0</a></span>
+            
+            
+            <span>
+                
+                Licensed under <a href="https://creativecommons.org/licenses/by/4.0">CC BY 4.0</a>
+                
+            </span>
+            
+        </div>
+    </div>
+</footer>
+
+
+            
+        </div>
+
+        <script>
+            (function() {
+                
+                var toggle = document.querySelector('.theme-picker-toggle');
+                var dropdown = document.querySelector('.theme-picker-dropdown');
+                if (!toggle || !dropdown) return;
+
+                toggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    var isOpen = dropdown.classList.contains('is-open');
+                    dropdown.classList.toggle('is-open');
+                    toggle.setAttribute('aria-expanded', !isOpen);
+                });
+
+                dropdown.addEventListener('click', function(e) {
+                    var btn = e.target.closest('[data-set-theme]');
+                    if (!btn) return;
+                    var theme = btn.getAttribute('data-set-theme');
+                    document.documentElement.setAttribute('data-theme', theme);
+                    localStorage.setItem('theme', theme);
+                    dropdown.classList.remove('is-open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (!e.target.closest('.theme-picker')) {
+                        dropdown.classList.remove('is-open');
+                        toggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                
+                var progress = document.querySelector('.reading-progress');
+                if (progress) {
+                    window.addEventListener('scroll', function() {
+                        var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                        if (docHeight <= 0) return;
+                        var scrolled = (window.scrollY / docHeight) * 100;
+                        progress.style.width = scrolled + '%';
+                    });
+                }
+
+                
+                var moreBtn = document.querySelector('.posts-more-btn');
+                if (moreBtn) {
+                    moreBtn.addEventListener('click', function() {
+                        var hidden = document.querySelectorAll('.posts-item.is-hidden');
+                        for (var i = 0; i < 12 && i < hidden.length; i++) {
+                            hidden[i].classList.remove('is-hidden');
+                        }
+                        if (document.querySelectorAll('.posts-item.is-hidden').length === 0) {
+                            moreBtn.parentElement.style.display = 'none';
+                        }
+                    });
+                }
+            })();
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Application Insights on Stuart McColl</title>
+    <link>https://stuartmccoll.github.io/tags/application-insights/</link>
+    <description>Recent content in Application Insights on Stuart McColl</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 01 Apr 2023 21:00:00 +0100</lastBuildDate>
+    <atom:link href="https://stuartmccoll.github.io/tags/application-insights/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Use Bicep to create an Application Insights resource</title>
+      <link>https://stuartmccoll.github.io/posts/2023-04-01-use-bicep-to-create-an-application-insights-resource/</link>
+      <pubDate>Sat, 01 Apr 2023 21:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-04-01-use-bicep-to-create-an-application-insights-resource/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll show you how to create a&#xA;&lt;a href=&#34;https://github.com/Azure/bicep&#34;&gt;Bicep&lt;/a&gt; file which declares the resources&#xA;required for an Application Insights instance, specifically one used to&#xA;monitor a website.&lt;/p&gt;&#xA;&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using &lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;Visual Studio Code&lt;/a&gt; as my&#xA;editor, where I&amp;rsquo;ll be writing the &lt;code&gt;.bicep&lt;/code&gt; file for this walkthrough. I&amp;rsquo;ll also&#xA;be using the official &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep&#34;&gt;Bicep extension&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using the&#xA;&lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/?view=azps-9.5.0&#34;&gt;Azure Az PowerShell module&lt;/a&gt;&#xA;to handle deploying the resources declared in the &lt;code&gt;.bicep&lt;/code&gt; file I create. You&#xA;can find instructions on &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-9.5.0&#34;&gt;installing the module&lt;/a&gt;&#xA;at Microsoft Learn.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

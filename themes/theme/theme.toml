@@ -1,0 +1,12 @@
+name = "refresh"
+license = "MIT"
+licenselink = "https://github.com/stuartmccoll/hugo-theme-refresh/blob/master/LICENSE.md"
+description = "A simple, light Hugo theme."
+tags = ["blog", "clean", "light", "minimal", "personal", "responsive", "simple", "technical"]
+features = ["blog", "shortcode", "syntax highlighting"]
+min_version = 0.1
+
+[author]
+  name = "Stuart McColl"
+  homepage = "https://stuartmccoll.co.uk"
+  mastodon = "https://hachyderm.io/@stuartmccoll"

@@ -1,0 +1,32 @@
+title = "Site Title"
+
+[params]
+    # Flag to toggle inclusion of license information
+    includeLicense = true
+
+    # Type of attribution license to use
+    licenseType = "CC BY 4.0"
+
+    # Link to attribution license
+    licenseLink = "https://creativecommons.org/licenses/by/4.0"
+
+    # Flag to toggle inclusion of GitHub issues link
+    includeIssues = true
+
+    # Link to create a new GitHub issue
+    issuesLink = "https://github.com/stuartmccoll/hugo-theme-refresh/issues/new"
+
+    # Flag to toggle inclusion of Mastodon link
+    includeMastodon = true
+
+    # Mastodon username
+    mastodonUsername = "@stuartmccoll@hachyderm.io"
+
+    # Flag to toggle inclusion of Hugo version details
+    includeHugoVersion = true
+
+    # Flag to toggle inclusion of Azure Application Insights
+    includeApplicationInsights = false
+
+    # Azure Application Insights connection string
+    applicationInsightsConnectionString = "placeholder"

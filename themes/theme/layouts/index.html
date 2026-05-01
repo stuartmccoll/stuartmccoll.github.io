@@ -1,0 +1,27 @@
+{{ define "main" }}
+<main class="posts">
+    {{- if .Content }}
+    <div class="content">{{ .Content }}</div>
+    {{- end }}
+
+    <div class="posts-grid">
+        {{- $index := 0 }}
+        {{- range .Site.RegularPages }}
+        {{ if ne .Page.Title "About" }}
+        <a class="posts-item pattern-{{ mod (add (len .Title) $index) 8 }}{{ if ge $index 12 }} is-hidden{{ end }}" href="{{.Permalink}}">
+            <span class="posts-title">{{.Title}}</span>
+            <span class="posts-date">{{ .Date.Format "January 2, 2006"}}</span>
+        </a>
+        {{- $index = add $index 1 }}
+        {{ end }}
+        {{- end }}
+    </div>
+
+    {{ $count := 0 }}{{ range .Site.RegularPages }}{{ if ne .Page.Title "About" }}{{ $count = add $count 1 }}{{ end }}{{ end }}
+    {{ if gt $count 12 }}
+    <div class="posts-more">
+        <button class="posts-more-btn">More</button>
+    </div>
+    {{ end }}
+</main>
+{{ end }}

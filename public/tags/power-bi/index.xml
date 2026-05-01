@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Power Bi on Stuart McColl</title>
+    <link>https://stuartmccoll.github.io/tags/power-bi/</link>
+    <description>Recent content in Power Bi on Stuart McColl</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 15 May 2020 20:01:32 +0100</lastBuildDate>
+    <atom:link href="https://stuartmccoll.github.io/tags/power-bi/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fixing Azure Account Active Directory Association Error</title>
+      <link>https://stuartmccoll.github.io/posts/2020-05-15-azure-account-active-directory-error/</link>
+      <pubDate>Fri, 15 May 2020 20:01:32 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2020-05-15-azure-account-active-directory-error/</guid>
+      <description>&lt;p&gt;If you&amp;rsquo;ve tried to create a Microsoft Azure subscription using an existing Microsoft 365 (formerly Office 365) or Microsoft Power BI account, depending on how the account is setup you might have been redirected to &lt;a href=&#34;https://account.azure.com/Error/NoValidTenant/100&#34;&gt;this static page&lt;/a&gt; which displays the following error message:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Your account belongs to a directory that cannot be associated with an Azure subscription. Please sign in with a different account.&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;It&amp;rsquo;s not immediately clear what this means. After a bit of research, I was able to establish that the directory referred to is an Azure Active Directory. When signing up for a Microsoft 365 or Power BI account, an unmanaged Azure Active Directory is created in the background which your account is then assigned to. The problem here is that we can&amp;rsquo;t create an Azure subscription unless this account has the &lt;strong&gt;Global Administrator&lt;/strong&gt; role within the Azure Active Directory.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

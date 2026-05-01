@@ -1,0 +1,21 @@
+{{ define "main" }}
+
+<main class="post">
+
+    <article>
+
+        <header>
+            <h1 class="post-title">{{ .Title | markdownify }}</h1>
+            <p class="post-date">{{ .Date.Format "January 2, 2020" }}</p>
+        </header>
+
+        <hr class="post-rule" />
+
+        <div class="post-content">
+            {{ .Content }}
+        </div>
+
+    </article>
+
+</main>
+{{ end }}

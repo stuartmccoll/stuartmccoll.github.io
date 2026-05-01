@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Stuart McColl</title>
+    <link>https://stuartmccoll.github.io/</link>
+    <description>Recent content on Stuart McColl</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 28 Oct 2023 11:45:00 +0100</lastBuildDate>
+    <atom:link href="https://stuartmccoll.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>10 sessions to see at GitHub Universe 2023</title>
+      <link>https://stuartmccoll.github.io/posts/2023-10-27-10-talks-to-see-at-github-universe-2023/</link>
+      <pubDate>Sat, 28 Oct 2023 11:45:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-10-27-10-talks-to-see-at-github-universe-2023/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://githubuniverse.com/&#34;&gt;GitHub Universe&lt;/a&gt; takes place on November 8th and&#xA;9th this year, live and virtual. I&amp;rsquo;ve put together a list of ten sessions that&#xA;I&amp;rsquo;m particularly looking forward to.&lt;/p&gt;&#xA;&lt;h2 id=&#34;opening-keynote&#34;&gt;Opening Keynote&lt;/h2&gt;&#xA;&lt;p&gt;This year&amp;rsquo;s keynote will see GitHub CEO Thomas Dohmke and others look at what&#xA;it means to be a software development platform in the age of AI.&lt;/p&gt;&#xA;&lt;h2 id=&#34;github-copilot-the-ai-pair-programmer-for-today-and-tomorrow&#34;&gt;GitHub Copilot: the AI pair programmer for today and tomorrow&lt;/h2&gt;&#xA;&lt;p&gt;Folks from both GitHub and Microsoft will be talking about the shift in&#xA;software development caused by GitHub Copilot, and other developments in the&#xA;world of AI-assisted programming.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use PowerShell to find deallocated Azure VMs</title>
+      <link>https://stuartmccoll.github.io/posts/2023-06-24-use-powershell-to-fund-deallocated-azure-vms/</link>
+      <pubDate>Sat, 24 Jun 2023 11:30:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-06-24-use-powershell-to-fund-deallocated-azure-vms/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll show you how to find deallocated Azure Virtual Machines&#xA;using the Azure Resource Graph PowerShell module.&lt;/p&gt;&#xA;&lt;h2 id=&#34;install-the-azure-az-powershell-module&#34;&gt;Install the Azure Az PowerShell module&lt;/h2&gt;&#xA;&lt;p&gt;We&amp;rsquo;re going to follow &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/install-az-ps&#34;&gt;this guide on Microsoft Learn&lt;/a&gt;&#xA;to install the Azure Az PowerShell module.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;m going to assume that you have the latest version of PowerShell installed.&#xA;If you don&amp;rsquo;t, you can follow &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell&#34;&gt;this guide on Microsoft Learn&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Run the following command in a PowerShell session:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>My Microsoft Build 2023 takeaways</title>
+      <link>https://stuartmccoll.github.io/posts/2023-06-06-microsoft-build-2023-takeaways/</link>
+      <pubDate>Tue, 06 Jun 2023 22:15:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-06-06-microsoft-build-2023-takeaways/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m slowly working my way through my backlog of &lt;a href=&#34;https://build.microsoft.com/en-US&#34;&gt;Microsoft Build 2023&lt;/a&gt;&#xA;session recordings, but wanted to take some time out to summarise my key&#xA;takeaways from this year&amp;rsquo;s event.&lt;/p&gt;&#xA;&lt;p&gt;The common thread that ran throughout the event this year was artifical&#xA;intelligence (AI), woven into sessions focused on what developers are building&#xA;and how they&amp;rsquo;re building it, as well as sessions looking at the future of work&#xA;and how this will be impacted by AI.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use PowerShell to monitor system performance</title>
+      <link>https://stuartmccoll.github.io/posts/2023-05-01-use-powershell-to-monitor-system-performance/</link>
+      <pubDate>Mon, 01 May 2023 11:15:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-05-01-use-powershell-to-monitor-system-performance/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll show you how to monitor system performance using PowerShell.&#xA;I&amp;rsquo;ll introduce you to a few different cmdlets and some examples of how you&#xA;might use them to monitor the performance of a system.&lt;/p&gt;&#xA;&lt;h2 id=&#34;get-process&#34;&gt;&lt;code&gt;Get-Process&lt;/code&gt;&lt;/h2&gt;&#xA;&lt;p&gt;This cmdlet provides information about all of the running processes on a&#xA;system, including their process ID, their CPU usages, and their memory usage.&lt;/p&gt;&#xA;&lt;p&gt;You might use this cmdlet to:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Get the five processes using the most CPU:&#xA;&lt;code&gt;Get-Process | Sort-Object -Property CPU | Select-Object Name,CPU -Last 5&lt;/code&gt;.&lt;/li&gt;&#xA;&lt;li&gt;Get the five processes using the most memory:&#xA;&lt;code&gt;Get-Process | Sort-Object -Property WorkingSet | Select-Object Name,WorkingSet -Last 5&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Get the total CPU time of a specific process:&#xA;&lt;code&gt;(Get-Process -Name msedge).TotalProcessorTime&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;get-counter&#34;&gt;&lt;code&gt;Get-Counter&lt;/code&gt;&lt;/h2&gt;&#xA;&lt;p&gt;This cmdlet provides information about system performance counters, such as&#xA;CPU, memory, and disk usage.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use Bicep to create an Azure key vault</title>
+      <link>https://stuartmccoll.github.io/posts/2023-04-23-use-bicep-to-create-a-key-vault/</link>
+      <pubDate>Sun, 23 Apr 2023 22:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-04-23-use-bicep-to-create-a-key-vault/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll show you how to create a&#xA;&lt;a href=&#34;https://github.com/Azure/bicep&#34;&gt;Bicep&lt;/a&gt; file which declares an Azure key vault&#xA;resource containing a single secret.&lt;/p&gt;&#xA;&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using &lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;Visual Studio Code&lt;/a&gt; as my&#xA;editor, where I&amp;rsquo;ll be writing the &lt;code&gt;.bicep&lt;/code&gt; file for this walkthrough. I&amp;rsquo;ll also&#xA;be using the official &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep&#34;&gt;Bicep extension&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using the&#xA;&lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/?view=azps-9.5.0&#34;&gt;Azure Az PowerShell module&lt;/a&gt;&#xA;to handle deploying the resources declared in the &lt;code&gt;.bicep&lt;/code&gt; file I create. You&#xA;can find instructions on &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-9.5.0&#34;&gt;installing the module&lt;/a&gt;&#xA;at Microsoft Learn.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use GitHub Actions to validate Bicep files</title>
+      <link>https://stuartmccoll.github.io/posts/2023-04-22-use-github-actions-to-validate-bicep-files/</link>
+      <pubDate>Sat, 22 Apr 2023 11:30:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-04-22-use-github-actions-to-validate-bicep-files/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll show you how to validate Bicep files using GitHub Actions.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-github-actions&#34;&gt;What is GitHub Actions?&lt;/h2&gt;&#xA;&lt;p&gt;GitHub Actions is a continuous integration and continuous delivery (CI/CD)&#xA;platform built into GitHub. It allows for the automation of build, test, and&#xA;deployment pipelines.&lt;/p&gt;&#xA;&lt;p&gt;It can also be used for running workflows based on other repository events,&#xA;like automatically responding to created issues.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-structure-of-a-github-actions-workflow&#34;&gt;The structure of a GitHub Actions workflow&lt;/h2&gt;&#xA;&lt;p&gt;GitHub Actions workflows are made up of three things.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use PowerShell to find empty files</title>
+      <link>https://stuartmccoll.github.io/posts/2023-04-15-use-powershell-to-find-empty-files/</link>
+      <pubDate>Sat, 15 Apr 2023 09:30:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-04-15-use-powershell-to-find-empty-files/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll show you how to find empty files using PowerShell.&lt;/p&gt;&#xA;&lt;h2 id=&#34;find-empty-files-in-the-current-working-directory&#34;&gt;Find empty files in the current working directory&lt;/h2&gt;&#xA;&lt;p&gt;The following command will retrieve empty files within the current working&#xA;directory (e.g., it won&amp;rsquo;t recursively search within inner directories).&#xA;It&amp;rsquo;ll return the full file path to any empty files that it finds.&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;Get-ChildItem&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-File&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Where-Object&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;PSIsContainer&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;vm&#34;&gt;$false&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-and&lt;/span&gt; &lt;span class=&#34;nv&#34;&gt;$_&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;Length&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;Select &lt;/span&gt;&lt;span class=&#34;n&#34;&gt;-ExpandProperty&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;FullName&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We&amp;rsquo;re using the &lt;code&gt;Get-ChildItem&lt;/code&gt; cmdlet here to retrieve a list of all files&#xA;within the current working directory. We&amp;rsquo;re then utilising the &lt;code&gt;Where-Object&lt;/code&gt;&#xA;cmdlet to filter this list to return &lt;em&gt;only&lt;/em&gt; files&#xA;(&lt;code&gt;$_.PSIsContainer -eq $false&lt;/code&gt;) and &lt;em&gt;only&lt;/em&gt; files with no length&#xA;(&lt;code&gt;-and $_.Length -eq 0&lt;/code&gt;).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use PowerShell to find large files</title>
+      <link>https://stuartmccoll.github.io/posts/2023-04-07-use-powershell-to-find-large-files/</link>
+      <pubDate>Fri, 07 Apr 2023 12:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-04-07-use-powershell-to-find-large-files/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll show you how to find large files using PowerShell.&lt;/p&gt;&#xA;&lt;h2 id=&#34;using-the-get-childitem-cmdlet&#34;&gt;Using the &lt;code&gt;Get-ChildItem&lt;/code&gt; cmdlet&lt;/h2&gt;&#xA;&lt;p&gt;Searching for files based on different properties can all be done using&#xA;PowerShell&amp;rsquo;s built-in &lt;code&gt;Get-ChildItem&lt;/code&gt; cmdlet.&lt;/p&gt;&#xA;&lt;h3 id=&#34;find-the-largest-files-within-the-current-working-directory&#34;&gt;Find the largest files within the current working directory&lt;/h3&gt;&#xA;&lt;p&gt;The following command will retrieve the ten largest files within the current&#xA;working directory (e.g., it won&amp;rsquo;t recursively search within inner directories).&#xA;It&amp;rsquo;ll sort these ten results in descending size order, returning the file names&#xA;and the file size.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use Bicep to create an Application Insights resource</title>
+      <link>https://stuartmccoll.github.io/posts/2023-04-01-use-bicep-to-create-an-application-insights-resource/</link>
+      <pubDate>Sat, 01 Apr 2023 21:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-04-01-use-bicep-to-create-an-application-insights-resource/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll show you how to create a&#xA;&lt;a href=&#34;https://github.com/Azure/bicep&#34;&gt;Bicep&lt;/a&gt; file which declares the resources&#xA;required for an Application Insights instance, specifically one used to&#xA;monitor a website.&lt;/p&gt;&#xA;&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using &lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;Visual Studio Code&lt;/a&gt; as my&#xA;editor, where I&amp;rsquo;ll be writing the &lt;code&gt;.bicep&lt;/code&gt; file for this walkthrough. I&amp;rsquo;ll also&#xA;be using the official &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep&#34;&gt;Bicep extension&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using the&#xA;&lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/?view=azps-9.5.0&#34;&gt;Azure Az PowerShell module&lt;/a&gt;&#xA;to handle deploying the resources declared in the &lt;code&gt;.bicep&lt;/code&gt; file I create. You&#xA;can find instructions on &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-9.5.0&#34;&gt;installing the module&lt;/a&gt;&#xA;at Microsoft Learn.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use PowerShell to find empty Azure resource groups</title>
+      <link>https://stuartmccoll.github.io/posts/2023-03-29-use-powershell-to-find-empty-azure-resource-groups/</link>
+      <pubDate>Wed, 29 Mar 2023 20:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-03-29-use-powershell-to-find-empty-azure-resource-groups/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll show you how to find and remove empty Azure resource groups&#xA;using the Azure Az PowerShell module.&lt;/p&gt;&#xA;&lt;h2 id=&#34;install-the-azure-az-powershell-module&#34;&gt;Install the Azure Az PowerShell module&lt;/h2&gt;&#xA;&lt;p&gt;We&amp;rsquo;re going to follow &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/install-az-ps&#34;&gt;this guide on Microsoft Learn&lt;/a&gt;&#xA;to install the Azure Az PowerShell module.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;m going to assume that you have the latest version of PowerShell installed.&#xA;If you don&amp;rsquo;t, you can follow &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell&#34;&gt;this guide on Microsoft Learn&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Run the following command in a PowerShell session:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use PowerShell to find untagged Azure resources</title>
+      <link>https://stuartmccoll.github.io/posts/2023-03-28-use-powershell-to-find-untagged-azure-resources/</link>
+      <pubDate>Tue, 28 Mar 2023 11:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-03-28-use-powershell-to-find-untagged-azure-resources/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll show you how to retrieve Azure resources that do not have&#xA;any associated tags.&lt;/p&gt;&#xA;&lt;h2 id=&#34;install-the-azure-az-powershell-module&#34;&gt;Install the Azure Az PowerShell module&lt;/h2&gt;&#xA;&lt;p&gt;We&amp;rsquo;re going to follow &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/install-az-ps&#34;&gt;this guide on Microsoft Learn&lt;/a&gt;&#xA;to install the Azure Az PowerShell module.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;m going to assume that you have the latest version of PowerShell installed.&#xA;If you don&amp;rsquo;t, you can follow &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell&#34;&gt;this guide on Microsoft Learn&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Run the following command in a PowerShell session:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use Bicep to create an Azure Function App</title>
+      <link>https://stuartmccoll.github.io/posts/2023-03-26-use-bicep-to-create-an-azure-function-app/</link>
+      <pubDate>Sun, 26 Mar 2023 15:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-03-26-use-bicep-to-create-an-azure-function-app/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll show you how to create a&#xA;&lt;a href=&#34;https://github.com/Azure/bicep&#34;&gt;Bicep&lt;/a&gt; file which declares the resources&#xA;required for an Azure Function App.&lt;/p&gt;&#xA;&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using &lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;Visual Studio Code&lt;/a&gt; as my&#xA;editor, where I&amp;rsquo;ll be writing the &lt;code&gt;.bicep&lt;/code&gt; file for this walkthrough. I&amp;rsquo;ll also&#xA;be using the official &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep&#34;&gt;Bicep extension&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using the&#xA;&lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/?view=azps-9.5.0&#34;&gt;Azure Az PowerShell module&lt;/a&gt;&#xA;to handle deploying the resources declared in the &lt;code&gt;.bicep&lt;/code&gt; file I create. You&#xA;can find instructions on &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-9.5.0&#34;&gt;installing the module&lt;/a&gt;&#xA;at Microsoft Learn.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use PowerShell to retrieve Azure location information</title>
+      <link>https://stuartmccoll.github.io/posts/2023-03-24-use-powershell-to-retrieve-azure-location-information/</link>
+      <pubDate>Fri, 24 Mar 2023 18:30:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-03-24-use-powershell-to-retrieve-azure-location-information/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll show you how to retrieve Azure location names using&#xA;PowerShell; specifically, using the Azure Az PowerShell module.&lt;/p&gt;&#xA;&lt;h2 id=&#34;install-the-azure-az-powershell-module&#34;&gt;Install the Azure Az PowerShell module&lt;/h2&gt;&#xA;&lt;p&gt;We&amp;rsquo;re going to follow &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/install-az-ps&#34;&gt;this guide on Microsoft Learn&lt;/a&gt;&#xA;to install the Azure Az PowerShell module.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;m going to assume that you have the latest version of PowerShell installed.&#xA;If you don&amp;rsquo;t, you can follow &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell&#34;&gt;this guide on Microsoft Learn&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;Run the following command in a PowerShell session:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use Bicep to create a monthly budget in Azure</title>
+      <link>https://stuartmccoll.github.io/posts/2023-03-19-use-bicep-to-create-a-monthly-budget-in-azure/</link>
+      <pubDate>Sun, 19 Mar 2023 21:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-03-19-use-bicep-to-create-a-monthly-budget-in-azure/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve recently started experimenting with &lt;a href=&#34;https://github.com/Azure/bicep&#34;&gt;Bicep&lt;/a&gt;&#xA;for deploying Azure resources declaratively.&lt;/p&gt;&#xA;&lt;p&gt;In this post, I&amp;rsquo;ll show you how to create a Bicep file which declares a simple&#xA;Azure Budget with a monthly alert.&lt;/p&gt;&#xA;&lt;h2 id=&#34;creating-the-bicep-file&#34;&gt;Creating the &lt;code&gt;.bicep&lt;/code&gt; file&lt;/h2&gt;&#xA;&lt;p&gt;Create a new file, called &lt;code&gt;main.bicep&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;The first thing we&amp;rsquo;ll declare in this file is the target scope of any&#xA;resources that we create. In this case, the Budget we&amp;rsquo;re creating will be&#xA;created at a Subscription level.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Sync contents between two S3 Buckets</title>
+      <link>https://stuartmccoll.github.io/posts/2023-01-14-sync-contents-between-s3-buckets/</link>
+      <pubDate>Sat, 14 Jan 2023 11:32:05 +0000</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-01-14-sync-contents-between-s3-buckets/</guid>
+      <description>&lt;p&gt;Something I&amp;rsquo;ve had to do on more than one occassion recently is copy the&#xA;contents of one S3 bucket to another S3 bucket. There is no built-in way&#xA;of doing this in the AWS Management Console, but it &lt;em&gt;is&lt;/em&gt; possible using&#xA;the AWS Command Line Interface (CLI).&lt;/p&gt;&#xA;&lt;p&gt;As an example, I&amp;rsquo;m going to create two new S3 buckets in my AWS account&#xA;using Terraform, push some objects into my source bucket, and then copy&#xA;the contents of this bucket into my target bucket. If you&amp;rsquo;d like to&#xA;skip the setup and jump straight to the instructions, head to the&#xA;&lt;a href=&#34;#syncing-contents&#34;&gt;Syncing contents&lt;/a&gt; section.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Maintain an Azure Container Registry using a PowerShell Azure Function</title>
+      <link>https://stuartmccoll.github.io/posts/2022-09-10-maintain-acr-using-azure-function/</link>
+      <pubDate>Sat, 10 Sep 2022 23:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2022-09-10-maintain-acr-using-azure-function/</guid>
+      <description>&lt;p&gt;This year I created a small C# CLI application that scrapes this website and&#xA;stores the results in Azure Blob Storage. It&amp;rsquo;s essentially a not-very-good&#xA;version of the the &lt;a href=&#34;https://archive.org/&#34;&gt;Internet Archive&lt;/a&gt;&amp;rsquo;s&#xA;&lt;a href=&#34;https://web.archive.org/&#34;&gt;Wayback Machine&lt;/a&gt;, but specific only to this website.&lt;/p&gt;&#xA;&lt;p&gt;The process happens in two parts. If I merge any pull requests on the&#xA;&lt;a href=&#34;https://github.com/stuartmccoll/website-archiver&#34;&gt;website-archiver&lt;/a&gt; into&#xA;&lt;code&gt;main&lt;/code&gt;, then a GitHub Actions workflow pushes the latest Docker image to an&#xA;Azure Container Registry. If I merge any pull requests on the repository that&#xA;holds the codebase for this website, then another GitHub Actions workflow&#xA;triggers the deployment of an Azure Container Instance using the &lt;code&gt;latest&lt;/code&gt;&#xA;tagged image in the aforementioned Azure Container Registry. The container&#xA;runs, the website is scraped and stored in Azure Blob Storage, and then&#xA;the container exits.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Push a Docker image to Azure Container Registry using a GitHub Actions workflow</title>
+      <link>https://stuartmccoll.github.io/posts/2022-06-11-github-action-to-azure-container-registry/</link>
+      <pubDate>Sat, 11 Jun 2022 11:15:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2022-06-11-github-action-to-azure-container-registry/</guid>
+      <description>&lt;p&gt;Building and pushing Docker images to Azure Container Registry is simple with&#xA;a small GitHub Actions workflow.&lt;/p&gt;&#xA;&lt;p&gt;This blog post assumes you&amp;rsquo;ve got a &lt;code&gt;docker-compose.yml&lt;/code&gt; file in your GitHub&#xA;repository. If you&amp;rsquo;re just using a &lt;code&gt;Dockerfile&lt;/code&gt;, you&amp;rsquo;ll need to make a tiny&#xA;amendment to the &lt;code&gt;Build Docker image&lt;/code&gt; step in the &lt;code&gt;push-to-acr.yml&lt;/code&gt; file&#xA;described below.&lt;/p&gt;&#xA;&lt;h2 id=&#34;microsoft-azure-setupconfiguration&#34;&gt;Microsoft Azure setup/configuration&lt;/h2&gt;&#xA;&lt;p&gt;If you&amp;rsquo;re starting fresh, in terms of our Azure setup we&amp;rsquo;ll need:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use PowerShell to generate a GUID</title>
+      <link>https://stuartmccoll.github.io/posts/2022-06-02-use-powershell-to-generate-a-guid/</link>
+      <pubDate>Thu, 02 Jun 2022 11:05:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2022-06-02-use-powershell-to-generate-a-guid/</guid>
+      <description>&lt;p&gt;Another quick automation using PowerShell, this time to solve the problem of&#xA;quickly adding a new GUID to the clipboard.&lt;/p&gt;&#xA;&lt;p&gt;The &lt;code&gt;New-Guid&lt;/code&gt; cmdlet will quickly create a random globally unique identifier,&#xA;with the below output.&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Guid&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;----&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;8c312165&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;113b&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;4c30&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;91e9&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;-e4e6edebcf0b&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This is great, but I&amp;rsquo;ve got a couple of extra needs; I don&amp;rsquo;t need the &lt;code&gt;-&lt;/code&gt;&#xA;characters, and I want the GUID to be added straight to my clipboard.&lt;/p&gt;&#xA;&lt;p&gt;Ignoring the header is simple:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use PowerShell to create a .zip file</title>
+      <link>https://stuartmccoll.github.io/posts/2022-05-28-use-powershell-to-create-a-zip-file/</link>
+      <pubDate>Sat, 28 May 2022 11:30:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2022-05-28-use-powershell-to-create-a-zip-file/</guid>
+      <description>&lt;p&gt;A simple automation need that I stumbled across recently was the ability to&#xA;quickly create a &lt;code&gt;.zip&lt;/code&gt; file from a static set of files and directories. Rather&#xA;than run a long command in PowerShell each time, I bundled everything up into a&#xA;quick function that I can run using &lt;code&gt;New-StaticZipFile&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;The &lt;code&gt;Compress-Archive&lt;/code&gt; cmdlet lets us create a compressed, or zipped, archive&#xA;file. There are limitations (e.g. maximum file size is 2GB) to this cmdlet, as&#xA;well as more advanced options, such as the level of compression needed, but&#xA;we&amp;rsquo;ll be keeping it &lt;em&gt;really&lt;/em&gt; simple here.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>How to lnstall local Powershell Modules</title>
+      <link>https://stuartmccoll.github.io/posts/2021-10-02-how-to-install-local-powershell-modules/</link>
+      <pubDate>Sat, 02 Oct 2021 14:16:33 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2021-10-02-how-to-install-local-powershell-modules/</guid>
+      <description>&lt;p&gt;I keep some custom PowerShell modules stored locally on different machines,&#xA;depending on the type of machine. For example, my work laptop has modules&#xA;for setup and teardown of my development environment, which are modules that&#xA;I don&amp;rsquo;t keep around on my personal desktop machine.&lt;/p&gt;&#xA;&lt;p&gt;Rather than have all of this live in a PowerShell profile which I &lt;em&gt;do&lt;/em&gt; share&#xA;between different machines, I keep a tiny bit of code in my shared profile&#xA;which will import any custom modules found locally.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>How to install Windows Package Manager (WinGet) on Windows 10</title>
+      <link>https://stuartmccoll.github.io/posts/2021-07-11-how-to-install-winget/</link>
+      <pubDate>Sun, 11 Jul 2021 11:55:02 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2021-07-11-how-to-install-winget/</guid>
+      <description>&lt;p&gt;The Windows Package Manager client (also known as WinGet)&#xA;celebrated it&amp;rsquo;s v1.0 release in May of 2021, after announcing at&#xA;&lt;a href=&#34;https://channel9.msdn.com/Events/Build/2020&#34;&gt;Microsoft Build 2020&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;At the time of writing, although the client is distributed within the&#xA;App Installer package, it isn&amp;rsquo;t generally available unless you&amp;rsquo;re running&#xA;a Windows 10 Insider build, or have signed up to the Preview flight ring.&lt;/p&gt;&#xA;&lt;p&gt;However, it&amp;rsquo;s simple to download and install the package from the&#xA;&lt;a href=&#34;https://github.com/microsoft/winget-cli&#34;&gt;official GitHub repository&lt;/a&gt;.&#xA;The only downside to this is that it won&amp;rsquo;t enable automatic updates from&#xA;the Microsoft Store.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Set WSL as the default integrated terminal in Visual Studio Code</title>
+      <link>https://stuartmccoll.github.io/posts/2021-06-08-set-wsl-as-default-vscode-terminal/</link>
+      <pubDate>Tue, 08 Jun 2021 10:00:13 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2021-06-08-set-wsl-as-default-vscode-terminal/</guid>
+      <description>&lt;p&gt;If you&amp;rsquo;re using &lt;a href=&#34;https://docs.microsoft.com/en-us/windows/wsl/about&#34;&gt;Windows Subsystem for Linux&lt;/a&gt;&#xA;(WSL) in tandem with Visual Studio Code, you might be wondering how to change&#xA;your default integrated terminal from PowerShell to WSL.&lt;/p&gt;&#xA;&lt;p&gt;Previously, you could set this in a single line in your &lt;code&gt;settings.json&lt;/code&gt; file&#xA;using &lt;code&gt;terminal.integrated.shell.windows&lt;/code&gt;, but this has since been deprecated&#xA;in a later version of Visual Studio Code.&lt;/p&gt;&#xA;&lt;p&gt;Add the following snippet of JSON to your &lt;code&gt;settings.json&lt;/code&gt; file in Visual Studio&#xA;Code (you can access this file by clicking the gear icon in the bottom left&#xA;hand corner of the screen, selecting the &amp;lsquo;Settings&amp;rsquo; menu option, and then&#xA;clicking on the &amp;lsquo;Open settings (JSON)&amp;rsquo; icon in the top right hand corner&#xA;of the subsequent screen - alternatively you can open the Command Palette&#xA;with CTRL + Shift + P and then type in &amp;lsquo;Open settings (JSON)&amp;rsquo;):&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Automate the shutdown of a Windows 10 PC</title>
+      <link>https://stuartmccoll.github.io/posts/2020-10-14-automate-windows-10-shutdown/</link>
+      <pubDate>Wed, 14 Oct 2020 10:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2020-10-14-automate-windows-10-shutdown/</guid>
+      <description>&lt;h2 id=&#34;using-the-shutdown-command&#34;&gt;Using the &lt;code&gt;shutdown&lt;/code&gt; command&lt;/h2&gt;&#xA;&lt;p&gt;Setting a single, non-repeatable shutdown timer can be done using the &lt;code&gt;shutdown&lt;/code&gt; command, which can be run in the Command Prompt or PowerShell. Let&amp;rsquo;s use PowerShell as an example.&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Search for &amp;lsquo;&lt;em&gt;PowerShell&lt;/em&gt;&amp;rsquo; in the start menu and open the app that is returned.&lt;/li&gt;&#xA;&lt;li&gt;Run the command &lt;code&gt;shutdown -s -t TimeInSeconds&lt;/code&gt; where &lt;code&gt;TimeInSeconds&lt;/code&gt; is replaced with the number of seconds after which you want the Windows 10 PC to shutdown. For example, if you want it to shutdown after 30 minutes, then replace &lt;code&gt;TimeInSeconds&lt;/code&gt; with &lt;code&gt;1800&lt;/code&gt;. The &lt;code&gt;-s&lt;/code&gt; flag is simply telling the command to shutdown, as opposed to logging out, or restarting, etc.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;That&amp;rsquo;s it - you&amp;rsquo;ve scheduled a one-time shutdown of your Windows 10 PC.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The Push Declined Due to Email Privacy Restrictions error</title>
+      <link>https://stuartmccoll.github.io/posts/2020-10-10-push-declined-due-to-email-privacy-restrictions/</link>
+      <pubDate>Sat, 10 Oct 2020 11:41:22 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2020-10-10-push-declined-due-to-email-privacy-restrictions/</guid>
+      <description>&lt;p&gt;This is a quick blog post detailing what to do if you receive the &lt;code&gt;push declined due to email privacy restrictions&lt;/code&gt; error when attempting to push to a GitHub repository.&lt;/p&gt;&#xA;&lt;p&gt;The error message tells us that your GitHub account has been configured to disallow the pushing of commits which might reveal a personal email address.&lt;/p&gt;&#xA;&lt;p&gt;This means that in order to push commits to this remote repository, you&amp;rsquo;ll need to do one of two things:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Retrieving files from Microsoft Azure blob storage</title>
+      <link>https://stuartmccoll.github.io/posts/2020-09-21-azure-storage-api/</link>
+      <pubDate>Mon, 21 Sep 2020 18:08:50 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2020-09-21-azure-storage-api/</guid>
+      <description>&lt;p&gt;Recently on the Digital Service Design Team at &lt;a href=&#34;https://www.heritagefund.org.uk/&#34;&gt;The National Lottery Heritage Fund&lt;/a&gt; we&amp;rsquo;ve been investigating &lt;a href=&#34;https://azure.microsoft.com/en-gb/services/storage/blobs/&#34;&gt;Microsoft Azure blob storage&lt;/a&gt; as an option for storing files as part of a service we&amp;rsquo;re building.&lt;/p&gt;&#xA;&lt;p&gt;Before writing any code, we tested some of our assumptions about things like access and structure by calling the &lt;a href=&#34;https://docs.microsoft.com/en-us/rest/api/storageservices/&#34;&gt;Microsoft Azure Storage REST API&lt;/a&gt; from &lt;a href=&#34;https://www.postman.com&#34;&gt;Postman&lt;/a&gt;. This post documents a few of those tests using a basic Azure blob storage setup, using a Shared Key authorisation scheme to list files in a container; list files using a prefix; and to retrieve a specific file.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Enabling the GitHub Secret Profile README.md</title>
+      <link>https://stuartmccoll.github.io/posts/2020-07-16-github-secret-repository-readme/</link>
+      <pubDate>Thu, 16 Jul 2020 18:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2020-07-16-github-secret-repository-readme/</guid>
+      <description>&lt;p&gt;People on Twitter have recently discovered a GitHub &lt;em&gt;secret&lt;/em&gt;. If you create a new GitHub repository with the same name as your profile name, you can add a &lt;code&gt;README.md&lt;/code&gt; to your GitHub profile &lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;how-to-create-a-github-profile-readmemd&#34;&gt;How to create a GitHub profile &lt;code&gt;README.md&lt;/code&gt;&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.github.com/new&#34;&gt;Create a new GitHub repository&lt;/a&gt;. You&amp;rsquo;ll see two mandatory options when creating your repository - the &amp;lsquo;&lt;strong&gt;Owner&lt;/strong&gt;&amp;rsquo; dropdown field and the &amp;lsquo;&lt;strong&gt;Repository name&lt;/strong&gt;&amp;rsquo; input field. Ensure that the &amp;lsquo;&lt;strong&gt;Repository name&lt;/strong&gt;&amp;rsquo; value is the same as the value in the &amp;lsquo;&lt;strong&gt;Owner&lt;/strong&gt;&amp;rsquo; dropdown field. At the time of writing this feature hasn&amp;rsquo;t rolled out to all users - if it&amp;rsquo;s been enabled for you, you&amp;rsquo;ll see a message displayed beginning &amp;lsquo;You found a secret&amp;rsquo;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Attaching to list items with the Microsoft SharePoint REST API</title>
+      <link>https://stuartmccoll.github.io/posts/2020-06-22-attaching-to-list-items-with-sharepoint-rest-api/</link>
+      <pubDate>Mon, 22 Jun 2020 16:00:48 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2020-06-22-attaching-to-list-items-with-sharepoint-rest-api/</guid>
+      <description>&lt;p&gt;In my &lt;a href=&#34;../2020-06-18-creating-list-items-with-sharepoint-rest-api&#34;&gt;last blog post&lt;/a&gt; I explained how to create list items with Microsoft&amp;rsquo;s legacy SharePoint REST API using Postman. This post builds on that work to attach a file to an existing list item.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;Assuming you&amp;rsquo;ve been following along, we have a SharePoint list with at least one item in it that we&amp;rsquo;ve created through a request sent from Postman to the Microsoft SharePoint REST API. The item we created will have been assigned an &lt;code&gt;id&lt;/code&gt; within SharePoint. If you don&amp;rsquo;t still have the response from our creation request to hand (which will have contained the ID in the response body), you can obtain it from SharePoint. Access the list item and then click the &amp;lsquo;Copy Link&amp;rsquo; shortcut. A URL will be copied to your clipboard which looks like the following:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Creating list items with the Microsoft SharePoint REST API</title>
+      <link>https://stuartmccoll.github.io/posts/2020-06-18-creating-list-items-with-sharepoint-rest-api/</link>
+      <pubDate>Thu, 18 Jun 2020 19:30:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2020-06-18-creating-list-items-with-sharepoint-rest-api/</guid>
+      <description>&lt;p&gt;In my &lt;a href=&#34;../2020-06-16-sharepoint-api-authentication-with-postman&#34;&gt;last blog post&lt;/a&gt; I explained how to authenticate requests to Microsoft&amp;rsquo;s legacy SharePoint REST API using Postman. This post builds on that work to store our access token as a Postman environment variable and to then send &lt;code&gt;POST&lt;/code&gt; requests to the SharePoint REST API to create new items within an existing SharePoint list.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;If you were following along previously, the last thing we did was to request an access token to use in future requests. We&amp;rsquo;re going to write a couple of lines of JavaScript code within Postman which will parse the API response containing the access token and add it to our previously-created Postman environment.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Microsoft SharePoint API Access with Postman</title>
+      <link>https://stuartmccoll.github.io/posts/2020-06-16-sharepoint-api-authentication-with-postman/</link>
+      <pubDate>Tue, 16 Jun 2020 21:30:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2020-06-16-sharepoint-api-authentication-with-postman/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://developer.microsoft.com/en-us/graph/&#34;&gt;Microsoft Graph API&lt;/a&gt; has largely superceded &lt;a href=&#34;https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/get-to-know-the-sharepoint-rest-service?tabs=csom&#34;&gt;v1 of the SharePoint REST API&lt;/a&gt; for API-driven interaction with SharePoint online, but there are still a few things that you can&amp;rsquo;t do with it. For example, at the time of writing, it&amp;rsquo;s not possible to use Microsoft Graph API to add attachments to a list item, or retrieve attachments from an existing list item. The legacy SharePoint REST API &lt;em&gt;does&lt;/em&gt; allow for this functionality. Authentication with the Graph API and the legacy SharePoint REST API also differs - the following acts as a tutorial for configuring interaction with the legacy SharePoint REST API using &lt;a href=&#34;https://www.postman.com&#34;&gt;Postman&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Fixing Azure Account Active Directory Association Error</title>
+      <link>https://stuartmccoll.github.io/posts/2020-05-15-azure-account-active-directory-error/</link>
+      <pubDate>Fri, 15 May 2020 20:01:32 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2020-05-15-azure-account-active-directory-error/</guid>
+      <description>&lt;p&gt;If you&amp;rsquo;ve tried to create a Microsoft Azure subscription using an existing Microsoft 365 (formerly Office 365) or Microsoft Power BI account, depending on how the account is setup you might have been redirected to &lt;a href=&#34;https://account.azure.com/Error/NoValidTenant/100&#34;&gt;this static page&lt;/a&gt; which displays the following error message:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Your account belongs to a directory that cannot be associated with an Azure subscription. Please sign in with a different account.&lt;/p&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;It&amp;rsquo;s not immediately clear what this means. After a bit of research, I was able to establish that the directory referred to is an Azure Active Directory. When signing up for a Microsoft 365 or Power BI account, an unmanaged Azure Active Directory is created in the background which your account is then assigned to. The problem here is that we can&amp;rsquo;t create an Azure subscription unless this account has the &lt;strong&gt;Global Administrator&lt;/strong&gt; role within the Azure Active Directory.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AppleScript for Connecting Bluetooth Devices</title>
+      <link>https://stuartmccoll.github.io/posts/2020-05-02-applescript-bluetooth-devices/</link>
+      <pubDate>Sat, 02 May 2020 10:50:44 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2020-05-02-applescript-bluetooth-devices/</guid>
+      <description>&lt;p&gt;Last week I wrote another AppleScript for automating a manual task I have to carry out each time I switch between my personal MacBook Pro and my work device. This time, I needed&#xA;to write a script which would connect to my Bluetooth devices - a Magic Mouse, Magic Keyboard and my AirPods.&lt;/p&gt;&#xA;&lt;p&gt;Rather than accessing the System Preferences application, which I demonstrated in &lt;a href=&#34;https://stuartmccoll.github.io/posts/2020-04-27-applescript-external-displays&#34;&gt;my last AppleScript&lt;/a&gt;, this script needed to directly access the Bluetooth icon in the&#xA;menu bar. If you&amp;rsquo;re repurposing anything within this script, you&amp;rsquo;ll need to make sure that you have the Bluetooth icon within your own menu bar.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>AppleScript for Configuring External Displays</title>
+      <link>https://stuartmccoll.github.io/posts/2020-04-27-applescript-external-displays/</link>
+      <pubDate>Mon, 27 Apr 2020 20:00:00 +0000</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2020-04-27-applescript-external-displays/</guid>
+      <description>&lt;p&gt;AppleScript is a scripting language bundled within all versions of macOS, which allows for scripting of elements of the operating system and compatible applications.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;d never touched it before, but decided to try to use it to automate setting the resolutions of my external displays when switching between my personal and work MacBook Pros.&#xA;Sometimes the resolutions stick when switching between the two, sometimes they don&amp;rsquo;t. Rather than have to go into &lt;code&gt;System Preferences &amp;gt; Displays&lt;/code&gt; and set them whenever the&#xA;settings don&amp;rsquo;t stick, I quite liked the idea of just running a script and having something else take care of it for me. That&amp;rsquo;s where AppleScript comes in.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>HTTP/S Redirects for AWS Route 53 Using S3</title>
+      <link>https://stuartmccoll.github.io/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</link>
+      <pubDate>Fri, 07 Feb 2020 20:45:35 +0000</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/</guid>
+      <description>&lt;p&gt;I moved hosting of my domains recently from &lt;a href=&#34;https://www.tsohost.com&#34;&gt;tsoHost&lt;/a&gt; to &lt;a href=&#34;https://aws.amazon.com&#34;&gt;Amazon Web Services&lt;/a&gt;, as uptime on tsoHost seems to have been slowly getting worse. Rather than using disparate providers for different services, I chose AWS to sit everything under one provider.&lt;/p&gt;&#xA;&lt;p&gt;Shifting to AWS itself was relatively easy - I&amp;rsquo;m now using &lt;a href=&#34;https://aws.amazon.com/workmail/&#34;&gt;Amazon WorkMail&lt;/a&gt; for my email service and &lt;a href=&#34;https://aws.amazon.com/route53/&#34;&gt;Amazon Route 53&lt;/a&gt; for DNS. The documentation for switching to both from another provider was straight forward and I was up and running within a few days.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Microservice Design Patterns: Aggregator</title>
+      <link>https://stuartmccoll.github.io/posts/microservice-design-patterns-aggregator/</link>
+      <pubDate>Mon, 17 Jun 2019 10:00:00 +0000</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/microservice-design-patterns-aggregator/</guid>
+      <description>&lt;p&gt;The aggregator design pattern is a simple way of providing a single, unified service capable of surfacing data from multiple microservices, and a commonly used pattern when implementing a microservice-based architecture.&lt;/p&gt;&#xA;&lt;p&gt;Let&amp;rsquo;s imagine that we&amp;rsquo;ve been tasked with developing an internal API for our organisation - a general practice clinic. The API needs to consume data from three existing microservices, each of which is used by other services within the practice&amp;rsquo;s architecture - some services call these individually, some call all three.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Deploy a Serverless Flask Application with AWS Lambda</title>
+      <link>https://stuartmccoll.github.io/posts/deploy-a-serverless-flask-application-with-aws-lambda/</link>
+      <pubDate>Wed, 17 Oct 2018 22:00:00 +0000</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/deploy-a-serverless-flask-application-with-aws-lambda/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://aws.amazon.com/lambda/&#34;&gt;AWS Lambda&lt;/a&gt; lets us run code without provisioning or managing servers, paying only for the compute time of the running code. There&amp;rsquo;s no permanent infrastructure, and the server only has a life cycle of 40 &lt;em&gt;milliseconds&lt;/em&gt;. AWS provides automatic horizontal scaling for Lambda applications, spinning up and down as many instances as are necessary.&lt;/p&gt;&#xA;&lt;p&gt;An open source Python library, &lt;a href=&#34;https://github.com/Miserlou/Zappa&#34;&gt;Zappa&lt;/a&gt; gives us the ability to build and deploy serverless, event-driven Python applications on &lt;a href=&#34;https://aws.amazon.com/lambda/&#34;&gt;AWS Lambda&lt;/a&gt;. Zappa works out of the box with WSGI web applications, such as Flask and Django.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Designing Resilient APIs with Idempotency</title>
+      <link>https://stuartmccoll.github.io/posts/designing-resilient-apis-with-idempotency/</link>
+      <pubDate>Sun, 02 Sep 2018 18:50:00 +0000</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/designing-resilient-apis-with-idempotency/</guid>
+      <description>&lt;p&gt;How can we design APIs to be resilient when our networks necessarily aren&amp;rsquo;t? An API should be robust enough to handle failure scenarios including connectivity drops, timeouts between resultant calls, and more. If a client makes a request to our API and loses connection during the request, how can we ensure that a successive identical request doesn&amp;rsquo;t alter the state of the system in a way that we weren&amp;rsquo;t expecting? This is where &lt;a href=&#34;https://en.wikipedia.org/wiki/Idempotence&#34;&gt;idempotence&lt;/a&gt; comes into play. An idempotent request is one which can be made any number of times with the guarantee that any resulting logic, or side effects, only happen once.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Python 3.7 Data Classes</title>
+      <link>https://stuartmccoll.github.io/posts/python-3.7-data-classes/</link>
+      <pubDate>Sun, 08 Jul 2018 19:50:00 +0000</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/python-3.7-data-classes/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.python.org/dev/peps/pep-0557/&#34;&gt;PEP 557&lt;/a&gt; in the recently-released &lt;a href=&#34;https://www.python.org/downloads/release/python-370/&#34;&gt;Python 3.7&lt;/a&gt; added data classes to the standard Python library. Data classes can be thought of as mutable data holders and are somewhat similar to &lt;a href=&#34;https://docs.python.org/2/library/collections.html#collections.namedtuple&#34;&gt;named tuples&lt;/a&gt;, although named tuples are immutable.&lt;/p&gt;&#xA;&lt;p&gt;Data classes provide a lot of boilerplate code, saving time and effort on the part of the Python programmer, although it could be argued that this layer of abstraction makes debugging more difficult.&lt;/p&gt;&#xA;&lt;h2 id=&#34;comparing-regular-classes-and-data-classes&#34;&gt;Comparing regular classes and data classes&lt;/h2&gt;&#xA;&lt;p&gt;Consider the following class:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>GitLab Changelog Generator</title>
+      <link>https://stuartmccoll.github.io/posts/gitlab-changelog-generator/</link>
+      <pubDate>Sat, 23 Jun 2018 22:50:00 +0000</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/gitlab-changelog-generator/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve recently written a small command line utility using Python 3.6 which will produce a &lt;code&gt;CHANGELOG.md&lt;/code&gt; file from the commit differences between two different GitLab project branches. I&amp;rsquo;ve released this as an open source Python package and it&amp;rsquo;s available from PyPi &lt;a href=&#34;https://pypi.org/project/pip/&#34;&gt;here&lt;/a&gt;. Not intended to be a direct replacement for writing a manual changelog, the utility should be used as a draft upon which to build.&lt;/p&gt;&#xA;&lt;p&gt;This was a small project to trial a few things; Python&amp;rsquo;s type hinting, which was added in &lt;a href=&#34;https://www.python.org/dev/peps/pep-0484/&#34;&gt;PEP484&lt;/a&gt;; &lt;a href=&#34;https://opensource.fb.com/&#34;&gt;Facebook Open Source&amp;rsquo;s&lt;/a&gt; type checker &lt;a href=&#34;https://pyre-check.org/&#34;&gt;Pyre&lt;/a&gt;; and &lt;a href=&#34;https://github.com/ambv/black&#34;&gt;Black&lt;/a&gt; &amp;rsquo;the uncompromising Python code formatter&#39;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Add a Flask Application to a Docker Container</title>
+      <link>https://stuartmccoll.github.io/posts/add-a-flask-application-to-a-docker-container/</link>
+      <pubDate>Sun, 14 May 2017 10:10:32 +0000</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/add-a-flask-application-to-a-docker-container/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://flask.pocoo.org/&#34;&gt;Flask&lt;/a&gt; is a microframework for Python, based on &lt;a href=&#34;http://werkzeug.pocoo.org/&#34;&gt;Werkzeug&lt;/a&gt; and &lt;a href=&#34;http://jinja.pocoo.org/docs/2.9/&#34;&gt;Jinja2&lt;/a&gt;. The core Flask framework is extremely lightweight, albeit infinitely extensible, and it&amp;rsquo;s simple for an experienced developer to pick up. I had been using Laravel a lot at the beginning of the year and Flask has been a breeze to work with in comparison. With it&amp;rsquo;s extensibility I haven&amp;rsquo;t been locked into working with pre-defined components either; I&amp;rsquo;ve used different database abstraction layers across multiple projects, such as &lt;a href=&#34;https://redis.io/&#34;&gt;Redis&lt;/a&gt; and &lt;a href=&#34;https://www.postgresql.org/&#34;&gt;PostgreSQL&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Quick and Dirty Kombu/RabbitMQ Application</title>
+      <link>https://stuartmccoll.github.io/posts/quick-and-dirty-kombu/rabbitmq-application/</link>
+      <pubDate>Sun, 14 May 2017 10:10:32 +0000</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/quick-and-dirty-kombu/rabbitmq-application/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/celery/kombu&#34;&gt;Kombu&lt;/a&gt; is an open-source messaging library available for Python which aims to make messaging as simple as possible. Kombu provides a high-level interface for the &lt;a href=&#34;http://amqp.org/&#34;&gt;Advanced Message Queuing Protocol&lt;/a&gt; (AMQP), an open standard protocol for message orientation, queuing, routing, reliability, and security. The most popular implementation of AMQP is the &lt;a href=&#34;http://www.rabbitmq.com/&#34;&gt;RabbitMQ&lt;/a&gt; open-source messaging server.&lt;/p&gt;&#xA;&lt;p&gt;In the example application we&amp;rsquo;re going to create here, we&amp;rsquo;re going to use Kombu and RabbitMQ in combination to do the following:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

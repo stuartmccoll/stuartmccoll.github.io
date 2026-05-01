@@ -1,0 +1,20 @@
+{{ define "main" }}
+
+<main class="posts">
+
+    {{- if .Content }}
+    <div class="content">{{ .Content }}</div>
+    {{- end }}
+
+    <div class="posts-grid">
+        {{- $index := 0 }}
+        {{- range .Data.Pages }}
+        <a class="posts-item pattern-{{ mod (add (len .Title) $index) 8 }}" href="{{.Permalink}}">
+            <span class="posts-title">{{.Title}}</span>
+            <span class="posts-date">{{ .Date.Format "January 2, 2006"}}</span>
+        </a>
+        {{- $index = add $index 1 }}
+        {{- end }}
+    </div>
+</main>
+{{ end }}

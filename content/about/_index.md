@@ -9,8 +9,6 @@ tags:
 title: About
 ---
 
-## About me
-
 I'm currently a Lead Software Engineer at [Kainos](https://www.kainos.com)
 where I build new products in the [Workday](https://www.workday.com) ecosystem.
 
@@ -45,7 +43,6 @@ my work on my [GitHub profile](https://www.github.com/stuartmccoll).
 If you're interested in my current developement setup, both hardware and
 software, you can find out more [here](/uses).
 
----
-
-You can reach me via email at **stu** *[dot]* **mccoll** *[at]* **outlook**
-*[dot]* **com**.
+{{< cta >}}
+You can reach me via email at **stu** *[dot]* **mccoll** *[at]* **outlook** *[dot]* **com**.
+{{< /cta >}}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows Terminal on Stuart McColl</title>
+    <link>https://stuartmccoll.github.io/tags/windows-terminal/</link>
+    <description>Recent content in Windows Terminal on Stuart McColl</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 06 Jun 2023 22:15:00 +0100</lastBuildDate>
+    <atom:link href="https://stuartmccoll.github.io/tags/windows-terminal/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My Microsoft Build 2023 takeaways</title>
+      <link>https://stuartmccoll.github.io/posts/2023-06-06-microsoft-build-2023-takeaways/</link>
+      <pubDate>Tue, 06 Jun 2023 22:15:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-06-06-microsoft-build-2023-takeaways/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m slowly working my way through my backlog of &lt;a href=&#34;https://build.microsoft.com/en-US&#34;&gt;Microsoft Build 2023&lt;/a&gt;&#xA;session recordings, but wanted to take some time out to summarise my key&#xA;takeaways from this year&amp;rsquo;s event.&lt;/p&gt;&#xA;&lt;p&gt;The common thread that ran throughout the event this year was artifical&#xA;intelligence (AI), woven into sessions focused on what developers are building&#xA;and how they&amp;rsquo;re building it, as well as sessions looking at the future of work&#xA;and how this will be impacted by AI.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Azure Functions on Stuart McColl</title>
+    <link>https://stuartmccoll.github.io/tags/azure-functions/</link>
+    <description>Recent content in Azure Functions on Stuart McColl</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 11 Jun 2022 23:00:00 +0100</lastBuildDate>
+    <atom:link href="https://stuartmccoll.github.io/tags/azure-functions/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Maintain an Azure Container Registry using a PowerShell Azure Function</title>
+      <link>https://stuartmccoll.github.io/posts/2022-09-10-maintain-acr-using-azure-function/</link>
+      <pubDate>Sat, 10 Sep 2022 23:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2022-09-10-maintain-acr-using-azure-function/</guid>
+      <description>&lt;p&gt;This year I created a small C# CLI application that scrapes this website and&#xA;stores the results in Azure Blob Storage. It&amp;rsquo;s essentially a not-very-good&#xA;version of the the &lt;a href=&#34;https://archive.org/&#34;&gt;Internet Archive&lt;/a&gt;&amp;rsquo;s&#xA;&lt;a href=&#34;https://web.archive.org/&#34;&gt;Wayback Machine&lt;/a&gt;, but specific only to this website.&lt;/p&gt;&#xA;&lt;p&gt;The process happens in two parts. If I merge any pull requests on the&#xA;&lt;a href=&#34;https://github.com/stuartmccoll/website-archiver&#34;&gt;website-archiver&lt;/a&gt; into&#xA;&lt;code&gt;main&lt;/code&gt;, then a GitHub Actions workflow pushes the latest Docker image to an&#xA;Azure Container Registry. If I merge any pull requests on the repository that&#xA;holds the codebase for this website, then another GitHub Actions workflow&#xA;triggers the deployment of an Azure Container Instance using the &lt;code&gt;latest&lt;/code&gt;&#xA;tagged image in the aforementioned Azure Container Registry. The container&#xA;runs, the website is scraped and stored in Azure Blob Storage, and then&#xA;the container exits.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

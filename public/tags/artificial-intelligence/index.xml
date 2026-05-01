@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Artificial Intelligence on Stuart McColl</title>
+    <link>https://stuartmccoll.github.io/tags/artificial-intelligence/</link>
+    <description>Recent content in Artificial Intelligence on Stuart McColl</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 28 Oct 2023 11:45:00 +0100</lastBuildDate>
+    <atom:link href="https://stuartmccoll.github.io/tags/artificial-intelligence/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>10 sessions to see at GitHub Universe 2023</title>
+      <link>https://stuartmccoll.github.io/posts/2023-10-27-10-talks-to-see-at-github-universe-2023/</link>
+      <pubDate>Sat, 28 Oct 2023 11:45:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-10-27-10-talks-to-see-at-github-universe-2023/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://githubuniverse.com/&#34;&gt;GitHub Universe&lt;/a&gt; takes place on November 8th and&#xA;9th this year, live and virtual. I&amp;rsquo;ve put together a list of ten sessions that&#xA;I&amp;rsquo;m particularly looking forward to.&lt;/p&gt;&#xA;&lt;h2 id=&#34;opening-keynote&#34;&gt;Opening Keynote&lt;/h2&gt;&#xA;&lt;p&gt;This year&amp;rsquo;s keynote will see GitHub CEO Thomas Dohmke and others look at what&#xA;it means to be a software development platform in the age of AI.&lt;/p&gt;&#xA;&lt;h2 id=&#34;github-copilot-the-ai-pair-programmer-for-today-and-tomorrow&#34;&gt;GitHub Copilot: the AI pair programmer for today and tomorrow&lt;/h2&gt;&#xA;&lt;p&gt;Folks from both GitHub and Microsoft will be talking about the shift in&#xA;software development caused by GitHub Copilot, and other developments in the&#xA;world of AI-assisted programming.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

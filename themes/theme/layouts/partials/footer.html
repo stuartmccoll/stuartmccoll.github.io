@@ -1,0 +1,27 @@
+<footer class="footer-pattern-{{ mod (len .Page.Title) 4 }}">
+    <div class="footer-inner">
+        <div class="footer-links">
+            {{ if .Site.Params.includeMastodon }}
+            <a href="https://hachyderm.io/@stuartmccoll" rel="me">Mastodon</a>
+            {{ end }}
+            {{ if .Site.Params.includeIssues }}
+            <a href="{{ .Site.Params.issuesLink }}">GitHub</a>
+            {{ end }}
+            <a href="{{ .Site.BaseURL }}/index.xml">RSS</a>
+        </div>
+        <div class="footer-meta">
+            {{ if .Site.Params.includeHugoVersion }}
+            <span>Built with <a href="https://github.com/gohugoio/hugo/releases/tag/v{{ hugo.Version }}">Hugo {{ hugo.Version }}</a></span>
+            {{ end }}
+            {{ if .Site.Params.includeLicense }}
+            <span>
+                {{ if not .Page.IsHome }}
+                Licensed under <a href="{{ .Site.Params.licenseLink }}">{{ .Site.Params.licenseType }}</a>
+                {{ else }}
+                Licensed under <a href="{{ .Site.Params.licenseLink }}">{{ .Site.Params.licenseType }}</a>
+                {{ end }}
+            </span>
+            {{ end }}
+        </div>
+    </div>
+</footer>

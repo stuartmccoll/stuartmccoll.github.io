@@ -1,7 +1,7 @@
 baseurl = "https://stuartmccoll.github.io"
 title = "Stuart McColl"
 languageCode = "en"
-theme = "hugo-theme-refresh"
+theme = "theme"
 
 pygmentsStyle = "github"
 pygmentsUseClasses = true

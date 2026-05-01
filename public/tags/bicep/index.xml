@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bicep on Stuart McColl</title>
+    <link>https://stuartmccoll.github.io/tags/bicep/</link>
+    <description>Recent content in Bicep on Stuart McColl</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 23 Apr 2023 22:00:00 +0100</lastBuildDate>
+    <atom:link href="https://stuartmccoll.github.io/tags/bicep/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Use Bicep to create an Azure key vault</title>
+      <link>https://stuartmccoll.github.io/posts/2023-04-23-use-bicep-to-create-a-key-vault/</link>
+      <pubDate>Sun, 23 Apr 2023 22:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-04-23-use-bicep-to-create-a-key-vault/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll show you how to create a&#xA;&lt;a href=&#34;https://github.com/Azure/bicep&#34;&gt;Bicep&lt;/a&gt; file which declares an Azure key vault&#xA;resource containing a single secret.&lt;/p&gt;&#xA;&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using &lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;Visual Studio Code&lt;/a&gt; as my&#xA;editor, where I&amp;rsquo;ll be writing the &lt;code&gt;.bicep&lt;/code&gt; file for this walkthrough. I&amp;rsquo;ll also&#xA;be using the official &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep&#34;&gt;Bicep extension&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using the&#xA;&lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/?view=azps-9.5.0&#34;&gt;Azure Az PowerShell module&lt;/a&gt;&#xA;to handle deploying the resources declared in the &lt;code&gt;.bicep&lt;/code&gt; file I create. You&#xA;can find instructions on &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-9.5.0&#34;&gt;installing the module&lt;/a&gt;&#xA;at Microsoft Learn.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use GitHub Actions to validate Bicep files</title>
+      <link>https://stuartmccoll.github.io/posts/2023-04-22-use-github-actions-to-validate-bicep-files/</link>
+      <pubDate>Sat, 22 Apr 2023 11:30:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-04-22-use-github-actions-to-validate-bicep-files/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll show you how to validate Bicep files using GitHub Actions.&lt;/p&gt;&#xA;&lt;h2 id=&#34;what-is-github-actions&#34;&gt;What is GitHub Actions?&lt;/h2&gt;&#xA;&lt;p&gt;GitHub Actions is a continuous integration and continuous delivery (CI/CD)&#xA;platform built into GitHub. It allows for the automation of build, test, and&#xA;deployment pipelines.&lt;/p&gt;&#xA;&lt;p&gt;It can also be used for running workflows based on other repository events,&#xA;like automatically responding to created issues.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-structure-of-a-github-actions-workflow&#34;&gt;The structure of a GitHub Actions workflow&lt;/h2&gt;&#xA;&lt;p&gt;GitHub Actions workflows are made up of three things.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use Bicep to create an Application Insights resource</title>
+      <link>https://stuartmccoll.github.io/posts/2023-04-01-use-bicep-to-create-an-application-insights-resource/</link>
+      <pubDate>Sat, 01 Apr 2023 21:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-04-01-use-bicep-to-create-an-application-insights-resource/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll show you how to create a&#xA;&lt;a href=&#34;https://github.com/Azure/bicep&#34;&gt;Bicep&lt;/a&gt; file which declares the resources&#xA;required for an Application Insights instance, specifically one used to&#xA;monitor a website.&lt;/p&gt;&#xA;&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using &lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;Visual Studio Code&lt;/a&gt; as my&#xA;editor, where I&amp;rsquo;ll be writing the &lt;code&gt;.bicep&lt;/code&gt; file for this walkthrough. I&amp;rsquo;ll also&#xA;be using the official &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep&#34;&gt;Bicep extension&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using the&#xA;&lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/?view=azps-9.5.0&#34;&gt;Azure Az PowerShell module&lt;/a&gt;&#xA;to handle deploying the resources declared in the &lt;code&gt;.bicep&lt;/code&gt; file I create. You&#xA;can find instructions on &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-9.5.0&#34;&gt;installing the module&lt;/a&gt;&#xA;at Microsoft Learn.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use Bicep to create an Azure Function App</title>
+      <link>https://stuartmccoll.github.io/posts/2023-03-26-use-bicep-to-create-an-azure-function-app/</link>
+      <pubDate>Sun, 26 Mar 2023 15:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-03-26-use-bicep-to-create-an-azure-function-app/</guid>
+      <description>&lt;p&gt;In this post, I&amp;rsquo;ll show you how to create a&#xA;&lt;a href=&#34;https://github.com/Azure/bicep&#34;&gt;Bicep&lt;/a&gt; file which declares the resources&#xA;required for an Azure Function App.&lt;/p&gt;&#xA;&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using &lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;Visual Studio Code&lt;/a&gt; as my&#xA;editor, where I&amp;rsquo;ll be writing the &lt;code&gt;.bicep&lt;/code&gt; file for this walkthrough. I&amp;rsquo;ll also&#xA;be using the official &lt;a href=&#34;https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-bicep&#34;&gt;Bicep extension&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;ll be using the&#xA;&lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/?view=azps-9.5.0&#34;&gt;Azure Az PowerShell module&lt;/a&gt;&#xA;to handle deploying the resources declared in the &lt;code&gt;.bicep&lt;/code&gt; file I create. You&#xA;can find instructions on &lt;a href=&#34;https://learn.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-9.5.0&#34;&gt;installing the module&lt;/a&gt;&#xA;at Microsoft Learn.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Use Bicep to create a monthly budget in Azure</title>
+      <link>https://stuartmccoll.github.io/posts/2023-03-19-use-bicep-to-create-a-monthly-budget-in-azure/</link>
+      <pubDate>Sun, 19 Mar 2023 21:00:00 +0100</pubDate>
+      <guid>https://stuartmccoll.github.io/posts/2023-03-19-use-bicep-to-create-a-monthly-budget-in-azure/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve recently started experimenting with &lt;a href=&#34;https://github.com/Azure/bicep&#34;&gt;Bicep&lt;/a&gt;&#xA;for deploying Azure resources declaratively.&lt;/p&gt;&#xA;&lt;p&gt;In this post, I&amp;rsquo;ll show you how to create a Bicep file which declares a simple&#xA;Azure Budget with a monthly alert.&lt;/p&gt;&#xA;&lt;h2 id=&#34;creating-the-bicep-file&#34;&gt;Creating the &lt;code&gt;.bicep&lt;/code&gt; file&lt;/h2&gt;&#xA;&lt;p&gt;Create a new file, called &lt;code&gt;main.bicep&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;p&gt;The first thing we&amp;rsquo;ll declare in this file is the target scope of any&#xA;resources that we create. In this case, the Budget we&amp;rsquo;re creating will be&#xA;created at a Subscription level.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

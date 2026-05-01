@@ -1,0 +1,15 @@
+{{ define "main" }}
+<main class="post post--wide">
+
+    <article>
+        <header class="post-header header-pattern-{{ mod (len .Title) 4 }}">
+            <h1 class="post-title">{{ .Title | markdownify }}</h1>
+        </header>
+
+        <div class="post-content">
+            {{ .Content }}
+        </div>
+    </article>
+
+</main>
+{{ end }}
