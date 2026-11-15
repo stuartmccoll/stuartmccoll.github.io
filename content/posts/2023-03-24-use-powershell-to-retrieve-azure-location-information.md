@@ -5,6 +5,7 @@ categories:
 date: 2023-03-24T18:30:00+01:00
 draft: false
 lastMod: 2023-03-24T18:30:00+01:00
+resourceType: Microsoft.Resources/locations
 tags:
   - Microsoft Azure
   - PowerShell

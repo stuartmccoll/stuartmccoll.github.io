@@ -1,7 +1,7 @@
 ---
 title: "AppleScript for Configuring External Displays"
 date: 2020-04-27T20:00:00Z
-tags: ["applescript", "display", "external", "resolution", "macos"]
+tags: ["AppleScript", "Display", "External", "Resolution", "macOS"]
 draft: false
 ---
 

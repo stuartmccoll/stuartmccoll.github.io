@@ -5,7 +5,7 @@ linktitle = ""
 title = "Designing Resilient APIs with Idempotency"
 slug = "Designing Resilient APIs with Idempotency"
 type = "posts"
-tags = ["software", "api", "idempotency"]
+tags = ["Software", "API", "Idempotency"]
 wordcount = "5"
 readingtime = "5"
 +++

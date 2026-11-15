@@ -1,7 +1,8 @@
 baseurl = "https://stuartmccoll.github.io"
 title = "Stuart McColl"
-languageCode = "en"
-theme = "hugo-theme-refresh"
+locale = "en"
+theme = "azure"
+capitalizeListTitles = false
 
 pygmentsStyle = "github"
 pygmentsUseClasses = true
@@ -14,15 +15,10 @@ pygmentsCodeFencers = true
   tag = "tags"
 
 [params]
-  dateform        = "Jan 2, 2006"
-  dateformShort   = "Jan 2"
-  dateformNum     = "2006-01-02"
-  dateformNumTime = "2006-01-02 15:04 -0700"
   enableEmoji = true
   description = "Stuart McColl software design and development blog"
   keywords = "homepage, blog, development, programming"
   images = [""]
-  contentTypeName = "posts"
 
   title = "Stuart McColl"
   
@@ -35,20 +31,8 @@ pygmentsCodeFencers = true
   # Link to attribution license
   licenseLink = "https://creativecommons.org/licenses/by/4.0"
 
-  # Flag to toggle inclusion of GitHub issues link
-  includeIssues = true
-
-  # Link to create a new GitHub issue
-  issuesLink = "https://github.com/stuartmccoll/hugo-theme-refresh/issues/new"
-
-  # Flag to toggle inclusion of Twitter link
+  # Flag to toggle inclusion of Mastodon link
   includeMastodon = true
-
-  # Twitter username
-  mastodonUsername = "@stuartmccoll@hachyderm.io"
-
-  # Flag to toggle inclusion of Hugo version details
-  includeHugoVersion = true
 
   # Flag to toggle inclusion of Azure Application Insights
   includeApplicationInsights = true
@@ -56,7 +40,24 @@ pygmentsCodeFencers = true
   # Azure Application Insights connection string
   applicationInsightsConnectionString = "InstrumentationKey=74cc5c48-d066-4928-932e-459f438b579d;IngestionEndpoint=https://uksouth-1.in.applicationinsights.azure.com/;LiveEndpoint=https://uksouth.livediagnostics.monitor.azure.com/"
 
+  # ---- Azure theme ----
+  initials = "SM"
+  role = "Technologist"
+  focus = ["Azure", "PowerShell", "Bicep", "GitHub Actions", "Software design"]
+  heroEyebrow = "Software engineering · Azure · PowerShell"
+  heroTitle = "Thoughts on software engineering, AI, and technology"
+  heroLede = "I write about how software gets designed, built and run, with a soft spot for Microsoft Azure, PowerShell and infrastructure as code."
+  aboutSummary = "Solution Architect at Kainos. Formerly HM Land Registry and The National Lottery Heritage Fund. BSc (Hons) Computing and IT, Open University."
+  footerSummary = "Thoughts on software engineering from a technologist who spends most days in Microsoft Azure and PowerShell."
+  github = "https://github.com/stuartmccoll"
+  linkedin = "https://www.linkedin.com/in/stuart-mccoll"
+  mastodonLink = "https://hachyderm.io/@stuartmccoll"
+
 [markup]
+  [markup.tableOfContents]
+  startLevel = 2
+  endLevel = 3
+  ordered = false
   [markup.highlight]
   codeFences = true
   guessSyntax = false
@@ -64,6 +65,6 @@ pygmentsCodeFencers = true
   lineNoStart = 1
   lineNos = false
   lineNumbersInTable = true
-  noClasses = true
+  noClasses = false
   style = "github"
   tabWidth = 4

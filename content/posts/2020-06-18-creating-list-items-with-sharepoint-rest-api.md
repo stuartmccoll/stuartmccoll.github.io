@@ -1,7 +1,7 @@
 ---
 title: "Creating list items with the Microsoft SharePoint REST API"
 date: 2020-06-18T19:30:00+01:00
-tags: ["microsoft", "sharepoint", "rest", "api", "postman"]
+tags: ["Microsoft", "SharePoint", "REST", "API", "Postman"]
 draft: false
 ---
 

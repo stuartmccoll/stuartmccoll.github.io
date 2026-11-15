@@ -1,7 +1,7 @@
 ---
 title: "Microsoft SharePoint API Access with Postman"
 date: 2020-06-16T21:30:00+01:00
-tags: ["microsoft", "sharepoint", "api", "postman"]
+tags: ["Microsoft", "SharePoint", "API", "Postman"]
 draft: false
 ---
 

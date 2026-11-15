@@ -1,0 +1,56 @@
+{{- $posts := where .Site.RegularPages "Section" "posts" -}}
+{{- $p := .Site.Params -}}
+<footer class="site-footer">
+    <div class="wrap">
+        <div class="foot-top">
+            <div class="foot-brand">
+                <a class="brand" href="{{ "/" | relURL }}"><span class="mark" aria-hidden="true">{{ $p.initials | default "SM" }}</span>{{ .Site.Title }}</a>
+                <p>{{ $p.footerSummary | default $p.description }}</p>
+                <a class="btn btn-primary" href="{{ "/index.xml" | relURL }}">Subscribe via RSS</a>
+            </div>
+            <nav class="foot-cols" aria-label="Footer">
+                <div>
+                    <h2>Topics</h2>
+                    <ul>
+                        {{- range first 4 .Site.Taxonomies.tags.ByCount }}
+                        <li><a href="{{ printf "/tags/%s/" (urlize .Name) | relURL }}">{{ .Page.Title }}</a></li>
+                        {{- end }}
+                    </ul>
+                </div>
+                <div>
+                    <h2>Site</h2>
+                    <ul>
+                        <li><a href="{{ "/posts/" | relURL }}">All posts</a></li>
+                        <li><a href="{{ "/tags/" | relURL }}">Topics</a></li>
+                        <li><a href="{{ "/about/" | relURL }}">About</a></li>
+                        <li><a href="{{ "/uses/" | relURL }}">Uses</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h2>Elsewhere</h2>
+                    <ul>
+                        {{- with $p.github }}<li><a href="{{ . }}">GitHub</a></li>{{ end }}
+                        {{- with $p.linkedin }}<li><a href="{{ . }}">LinkedIn</a></li>{{ end }}
+                        {{- if $p.includeMastodon }}<li><a href="{{ $p.mastodonLink | default "https://hachyderm.io/@stuartmccoll" }}" rel="me">Mastodon</a></li>{{ end }}
+                        <li><a href="{{ "/index.xml" | relURL }}">RSS feed</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="foot-panel" role="group" aria-label="Site build details">
+                <div class="panel-head"><b>Deployment output</b><span class="status">Succeeded</span></div>
+<pre>{
+  <span class="t-key">"name"</span>: <span class="t-str">"{{ (urls.Parse .Site.BaseURL).Host }}"</span>,
+  <span class="t-key">"provisioningState"</span>: <span class="t-str">"Succeeded"</span>,
+  <span class="t-key">"generator"</span>: <span class="t-str">"Hugo {{ hugo.Version }}"</span>,
+  <span class="t-key">"host"</span>: <span class="t-str">"GitHub Pages"</span>,
+  <span class="t-key">"posts"</span>: <span class="t-num">{{ len $posts }}</span>,
+  <span class="t-key">"lastDeployed"</span>: <span class="t-str">"{{ now.UTC.Format "2006-01-02T15:04:05Z" }}"</span>
+}</pre>
+            </div>
+        </div>
+        <div class="foot-bottom">
+            <span>© {{ now.Year }} {{ $p.author.name | default .Site.Title }}{{ if $p.includeLicense }} · Content licensed under <a href="{{ $p.licenseLink }}">{{ $p.licenseType }}</a>{{ end }}</span>
+            <button type="button" class="to-top" id="to-top">Back to top ↑</button>
+        </div>
+    </div>
+</footer>

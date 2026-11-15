@@ -8,6 +8,7 @@ categories:
 date: 2023-04-01T21:00:00+01:00
 draft: false
 lastMod: 2023-04-01T21:00:00+01:00
+resourceType: Microsoft.Insights/components
 tags:
   - Automation
   - Application Insights

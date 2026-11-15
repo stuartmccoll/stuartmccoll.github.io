@@ -1,0 +1,13 @@
+{{- $section := .Section -}}
+<header class="topbar">
+    <div class="wrap">
+        <a class="brand" href="{{ "/" | relURL }}"><span class="mark" aria-hidden="true">{{ .Site.Params.initials | default "SM" }}</span>{{ .Site.Title }}</a>
+        <nav class="nav" aria-label="Primary">
+            <a href="{{ "/posts/" | relURL }}"{{ if or .IsHome (eq $section "posts") }} aria-current="page"{{ end }}>Posts</a>
+            <a href="{{ "/tags/" | relURL }}"{{ if eq $section "tags" }} aria-current="page"{{ end }}>Topics</a>
+            <a href="{{ "/about/" | relURL }}"{{ if eq $section "about" }} aria-current="page"{{ end }}>About</a>
+            <a href="{{ "/uses/" | relURL }}"{{ if eq $section "uses" }} aria-current="page"{{ end }}>Uses</a>
+        </nav>
+        {{ partial "scheme-picker.html" . }}
+    </div>
+</header>

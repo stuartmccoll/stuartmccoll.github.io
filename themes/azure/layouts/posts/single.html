@@ -1,0 +1,39 @@
+{{ define "main" }}
+{{- $crumbs := slice (dict "title" "Posts" "url" ("/posts/" | relURL)) (dict "title" .Title) -}}
+{{- with .Params.tags }}{{ $t := index . 0 }}{{ $crumbs = slice (dict "title" $t "url" (printf "/tags/%s/" (urlize $t) | relURL)) (dict "title" $.Title) }}{{ end -}}
+{{ partial "crumbs.html" $crumbs }}
+
+{{- $toc := .TableOfContents -}}
+{{- $hasToc := and (in $toc "<a") (ge (countwords .Content) 300) -}}
+<div class="article{{ if not $hasToc }} no-toc{{ end }}">
+    <div class="wrap">
+        <article style="min-width: 0">
+            <header>
+                {{- with .Params.tags }}<p class="eyebrow">{{ delimit (first 3 .) " · " }}</p>{{ end }}
+                <h1>{{ .Title | markdownify }}</h1>
+                <div class="meta">
+                    {{- with .Params.resourceType }}<span class="rtype">{{ . }}</span>{{ end }}
+                    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>
+                    <span>· {{ .ReadingTime }} min read</span>
+                    {{- if gt (.Lastmod.Sub .Date).Hours 24.0 }}<span>· Updated {{ .Lastmod.Format "2 Jan 2006" }}</span>{{ end }}
+                </div>
+            </header>
+            <div class="prose">
+                {{ .Content }}
+            </div>
+            {{- if or .PrevInSection .NextInSection }}
+            <nav class="post-footer" aria-label="More posts">
+                {{- with .PrevInSection }}<a class="prev" href="{{ .RelPermalink }}"><span>← Older</span>{{ .Title }}</a>{{ end }}
+                {{- with .NextInSection }}<a class="next" href="{{ .RelPermalink }}"><span>Newer →</span>{{ .Title }}</a>{{ end }}
+            </nav>
+            {{- end }}
+        </article>
+        {{- if $hasToc }}
+        <div class="toc">
+            <h2 class="rail-title">On this page</h2>
+            {{ $toc }}
+        </div>
+        {{- end }}
+    </div>
+</div>
+{{ end }}

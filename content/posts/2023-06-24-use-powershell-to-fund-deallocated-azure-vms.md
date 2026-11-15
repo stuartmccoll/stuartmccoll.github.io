@@ -5,6 +5,7 @@ categories:
 date: 2023-06-24T11:30:00+01:00
 draft: false
 lastMod: 2023-06-24T11:30:00+01:00
+resourceType: Microsoft.Compute/virtualMachines
 tags:
   - Microsoft Azure
   - PowerShell

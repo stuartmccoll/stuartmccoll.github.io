@@ -1,7 +1,7 @@
 ---
 title: "Attaching to list items with the Microsoft SharePoint REST API"
 date: 2020-06-22T16:00:48+01:00
-tags: ["microsoft", "sharepoint", "rest", "api", "postman"]
+tags: ["Microsoft", "SharePoint", "REST", "API", "Postman"]
 draft: false
 ---
 

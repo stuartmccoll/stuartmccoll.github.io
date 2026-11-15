@@ -6,31 +6,26 @@ This repository contains both the source and build files for my personal
 website, which is hosted via GitHub Pages and accessible at
 [https://stuartmccoll.github.io/](https://stuartmccoll.github.io/).
 
-## Pull the necessary submodule(s)
+## Theme
 
-Within your terminal, run:
+The site uses a custom theme, `azure`, which lives in this repository under
+[`themes/azure`](themes/azure). It is styled after Microsoft Azure, with
+switchable colour schemes, and is not a submodule, so there is nothing extra
+to pull.
 
-```bash
-git submodule update --init --recursive
-```
-
-## How to update the theme submodule to the latest commit
-
-Within your terminal, run:
-
-```bash
-git submodule update --remote --merge
-```
-
-You will then need to `git add` the theme submodule directory, and `git commit` this staged change.
+Most of the site's wording (the home page hero, the footer summary, social
+links and so on) is set under `[params]` in [`config.toml`](config.toml),
+rather than in the theme itself.
 
 ## How to run
 
-To run the server, simply execute the following command in your terminal:
+To run a local server, execute the following command in your terminal:
 
 ```bash
 hugo server
 ```
+
+Add `-D` to include draft posts.
 
 ## How to build
 
@@ -43,6 +38,20 @@ hugo
 
 If successful, this will re-populate the `public` directory if it already
 exists, or create and populate it if not.
+
+## Writing a post
+
+Create a new post with:
+
+```bash
+hugo new posts/YYYY-MM-DD-post-title.md
+```
+
+New posts start as drafts. Set `draft: false` when the post is ready to
+publish.
+
+Write tags with the casing you want shown on the site (for example `AWS`,
+`macOS`, `PowerShell`), because tag names are displayed exactly as written.
 
 ## Deployment
 
@@ -59,6 +68,9 @@ This branch is then served via GitHub Pages.
 Previous versions of the website are archived by triggering an instance of
 the [website-archiver](https://github.com/stuartmccoll/website-archiver)
 running in Azure.
+
+> **Paused:** this workflow no longer runs on merge to `main` while it is
+> being reworked. It can still be run manually from the Actions tab.
 
 For this workflow to run successfully, the following repository secrets
 must be configured:
@@ -87,6 +99,6 @@ Codespace.
 
 To open the repository in a GitHub Codespace, follow these instructions:
 
-1. Select the 'Code' dropdown on the repositorys main screen.
+1. Select the 'Code' dropdown on the repository's main screen.
 2. Select the 'Open with Codespaces' option.
 3. Select the 'New codespace' option.

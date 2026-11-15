@@ -3,8 +3,8 @@ title: "Set WSL as the default integrated terminal in Visual Studio Code"
 date: 2021-06-08T10:00:13+01:00
 draft: false
 tags: [
-  "microsoft", "windows", "windows 10", "automation", "PowerShell", "linux",
-  "wsl"
+  "Microsoft", "Windows", "Windows 10", "Automation", "PowerShell", "Linux",
+  "WSL"
 ]
 ---
 

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <script>
+        (function () {
+            try {
+                var scheme = localStorage.getItem('theme');
+                if (scheme && scheme !== 'system') document.documentElement.setAttribute('data-theme', scheme);
+            } catch (e) {}
+        })();
+    </script>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AppleScript for Configuring External Displays · Stuart McColl</title>
+<meta name="author" content="Stuart McColl">
+<meta name="description" content="AppleScript is a scripting language bundled within all versions of macOS, which allows for scripting of elements of the operating system and compatible …">
+<meta name="keywords" content="homepage, blog, development, programming">
+<link rel="canonical" href="https://stuartmccoll.github.io/posts/2020-04-27-applescript-external-displays/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/css/style.min.a6574c009869cfa967cf65ffdcab5ef8156e69a212ff767c60f96312788ee4b8.css"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="theme-color" content="#252627"><meta property="og:url" content="https://stuartmccoll.github.io/posts/2020-04-27-applescript-external-displays/">
+	<meta property="og:site_name" content="Stuart McColl">
+	<meta property="og:title" content="AppleScript for Configuring External Displays">
+	<meta property="og:description" content="AppleScript is a scripting language bundled within all versions of macOS, which allows for scripting of elements of the operating system and compatible applications.
+I’d never touched it before, but decided to try to use it to automate setting the resolutions of my external displays when switching between my personal and work MacBook Pros. Sometimes the resolutions stick when switching between the two, sometimes they don’t. Rather than have to go into System Preferences &gt; Displays and set them whenever the settings don’t stick, I quite liked the idea of just running a script and having something else take care of it for me. That’s where AppleScript comes in.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2020-04-27T20:00:00+00:00">
+		<meta property="article:modified_time" content="2020-04-27T20:00:00+00:00">
+		<meta property="article:tag" content="AppleScript">
+		<meta property="article:tag" content="Display">
+		<meta property="article:tag" content="External">
+		<meta property="article:tag" content="Resolution">
+		<meta property="article:tag" content="macOS">
+		<meta property="og:image" content="https://stuartmccoll.github.io/">
+
+	<meta itemprop="name" content="AppleScript for Configuring External Displays">
+	<meta itemprop="description" content="AppleScript is a scripting language bundled within all versions of macOS, which allows for scripting of elements of the operating system and compatible applications.
+I’d never touched it before, but decided to try to use it to automate setting the resolutions of my external displays when switching between my personal and work MacBook Pros. Sometimes the resolutions stick when switching between the two, sometimes they don’t. Rather than have to go into System Preferences &gt; Displays and set them whenever the settings don’t stick, I quite liked the idea of just running a script and having something else take care of it for me. That’s where AppleScript comes in.">
+	<meta itemprop="datePublished" content="2020-04-27T20:00:00+00:00">
+	<meta itemprop="dateModified" content="2020-04-27T20:00:00+00:00">
+	<meta itemprop="wordCount" content="682">
+	<meta itemprop="image" content="https://stuartmccoll.github.io/">
+	<meta itemprop="keywords" content="AppleScript,Display,External,Resolution,macOS">
+<script type="text/javascript">
+    !function(T,l,y){var S=T.location,k="script",D="instrumentationKey",C="ingestionendpoint",I="disableExceptionTracking",E="ai.device.",b="toLowerCase",w="crossOrigin",N="POST",e="appInsightsSDK",t=y.name||"appInsights";(y.name||T[e])&&(T[e]=t);var n=T[t]||function(d){var g=!1,f=!1,m={initialize:!0,queue:[],sv:"5",version:2,config:d};function v(e,t){var n={},a="Browser";return n[E+"id"]=a[b](),n[E+"type"]=a,n["ai.operation.name"]=S&&S.pathname||"_unknown_",n["ai.internal.sdkVersion"]="javascript:snippet_"+(m.sv||m.version),{time:function(){var e=new Date;function t(e){var t=""+e;return 1===t.length&&(t="0"+t),t}return e.getUTCFullYear()+"-"+t(1+e.getUTCMonth())+"-"+t(e.getUTCDate())+"T"+t(e.getUTCHours())+":"+t(e.getUTCMinutes())+":"+t(e.getUTCSeconds())+"."+((e.getUTCMilliseconds()/1e3).toFixed(3)+"").slice(2,5)+"Z"}(),iKey:e,name:"Microsoft.ApplicationInsights."+e.replace(/-/g,"")+"."+t,sampleRate:100,tags:n,data:{baseData:{ver:2}}}}var h=d.url||y.src;if(h){function a(e){var t,n,a,i,r,o,s,c,u,p,l;g=!0,m.queue=[],f||(f=!0,t=h,s=function(){var e={},t=d.connectionString;if(t)for(var n=t.split(";"),a=0;a<n.length;a++){var i=n[a].split("=");2===i.length&&(e[i[0][b]()]=i[1])}if(!e[C]){var r=e.endpointsuffix,o=r?e.location:null;e[C]="https://"+(o?o+".":"")+"dc."+(r||"services.visualstudio.com")}return e}(),c=s[D]||d[D]||"",u=s[C],p=u?u+"/v2/track":d.endpointUrl,(l=[]).push((n="SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details)",a=t,i=p,(o=(r=v(c,"Exception")).data).baseType="ExceptionData",o.baseData.exceptions=[{typeName:"SDKLoadFailed",message:n.replace(/\./g,"-"),hasFullStack:!1,stack:n+"\nSnippet failed to load ["+a+"] -- Telemetry is disabled\nHelp Link: https://go.microsoft.com/fwlink/?linkid=2128109\nHost: "+(S&&S.pathname||"_unknown_")+"\nEndpoint: "+i,parsedStack:[]}],r)),l.push(function(e,t,n,a){var i=v(c,"Message"),r=i.data;r.baseType="MessageData";var o=r.baseData;return o.message='AI (Internal): 99 message:"'+("SDK LOAD Failure: Failed to load Application Insights SDK script (See stack for details) ("+n+")").replace(/\"/g,"")+'"',o.properties={endpoint:a},i}(0,0,t,p)),function(e,t){if(JSON){var n=T.fetch;if(n&&!y.useXhr)n(t,{method:N,body:JSON.stringify(e),mode:"cors"});else if(XMLHttpRequest){var a=new XMLHttpRequest;a.open(N,t),a.setRequestHeader("Content-type","application/json"),a.send(JSON.stringify(e))}}}(l,p))}function i(e,t){f||setTimeout(function(){!t&&m.core||a()},500)}var e=function(){var n=l.createElement(k);n.src=h;var e=y[w];return!e&&""!==e||"undefined"==n[w]||(n[w]=e),n.onload=i,n.onerror=a,n.onreadystatechange=function(e,t){"loaded"!==n.readyState&&"complete"!==n.readyState||i(0,t)},n}();y.ld<0?l.getElementsByTagName("head")[0].appendChild(e):setTimeout(function(){l.getElementsByTagName(k)[0].parentNode.appendChild(e)},y.ld||0)}try{m.cookie=l.cookie}catch(p){}function t(e){for(;e.length;)!function(t){m[t]=function(){var e=arguments;g||m.queue.push(function(){m[t].apply(m,e)})}}(e.pop())}var n="track",r="TrackPage",o="TrackEvent";t([n+"Event",n+"PageView",n+"Exception",n+"Trace",n+"DependencyData",n+"Metric",n+"PageViewPerformance","start"+r,"stop"+r,"start"+o,"stop"+o,"addTelemetryInitializer","setAuthenticatedUserContext","clearAuthenticatedUserContext","flush"]),m.SeverityLevel={Verbose:0,Information:1,Warning:2,Error:3,Critical:4};var s=(d.extensionConfig||{}).ApplicationInsightsAnalytics||{};if(!0!==d[I]&&!0!==s[I]){var c="onerror";t(["_"+c]);var u=T[c];T[c]=function(e,t,n,a,i){var r=u&&u(e,t,n,a,i);return!0!==r&&m["_"+c]({message:e,url:t,lineNumber:n,columnNumber:a,error:i}),r},d.autoExceptionInstrumented=!0}return m}(y.cfg);function a(){y.onInit&&y.onInit(n)}(T[t]=n).queue&&0===n.queue.length?(n.queue.push(a),n.trackPageView({})):a()}(window,document,{
+    src: "https://js.monitor.azure.com/scripts/b/ai.2.min.js", 
+    
+    
+    
+    crossOrigin: "anonymous", 
+    
+    cfg: { 
+        connectionString: "InstrumentationKey=74cc5c48-d066-4928-932e-459f438b579d;IngestionEndpoint=https:\/\/uksouth-1.in.applicationinsights.azure.com\/;LiveEndpoint=https:\/\/uksouth.livediagnostics.monitor.azure.com\/"
+    }});
+</script>
+
+
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="topbar">
+    <div class="wrap">
+        <a class="brand" href="/"><span class="mark" aria-hidden="true">SM</span>Stuart McColl</a>
+        <nav class="nav" aria-label="Primary">
+            <a href="/posts/" aria-current="page">Posts</a>
+            <a href="/tags/">Topics</a>
+            <a href="/about/">About</a>
+            <a href="/uses/">Uses</a>
+        </nav>
+        <div class="scheme">
+    <button type="button" class="scheme-toggle" id="scheme-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="scheme-menu">
+        <span class="swatch swatch-system" id="scheme-current" aria-hidden="true"></span>
+        <span class="scheme-label">Colours</span>
+        <span class="visually-hidden">: choose a colour scheme</span>
+    </button>
+    <div class="scheme-menu" id="scheme-menu" role="menu" aria-label="Colour scheme" hidden>
+        <div class="scheme-group" role="group" aria-label="Default">
+            <div class="scheme-group-title" aria-hidden="true">Default</div>
+            <button type="button" class="scheme-option" role="menuitemradio" aria-checked="false" data-scheme="system"><span class="swatch swatch-system" aria-hidden="true"></span>Match system</button>
+        </div>
+        <div class="scheme-group" role="group" aria-label="Azure">
+            <div class="scheme-group-title" aria-hidden="true">Azure</div>
+            <button type="button" class="scheme-option" role="menuitemradio" aria-checked="false" data-scheme="azure-light"><span class="swatch swatch-azure-light" aria-hidden="true"></span>Azure light</button>
+            <button type="button" class="scheme-option" role="menuitemradio" aria-checked="false" data-scheme="azure-dark"><span class="swatch swatch-azure-dark" aria-hidden="true"></span>Azure dark</button>
+        </div>
+        <div class="scheme-group" role="group" aria-label="Halo">
+            <div class="scheme-group-title" aria-hidden="true">Halo</div>
+            <button type="button" class="scheme-option" role="menuitemradio" aria-checked="false" data-scheme="masterchief-light"><span class="swatch swatch-masterchief-light" aria-hidden="true"></span>Master Chief light</button>
+            <button type="button" class="scheme-option" role="menuitemradio" aria-checked="false" data-scheme="masterchief-dark"><span class="swatch swatch-masterchief-dark" aria-hidden="true"></span>Master Chief dark</button>
+            <button type="button" class="scheme-option" role="menuitemradio" aria-checked="false" data-scheme="cortana-light"><span class="swatch swatch-cortana-light" aria-hidden="true"></span>Cortana light</button>
+            <button type="button" class="scheme-option" role="menuitemradio" aria-checked="false" data-scheme="cortana-dark"><span class="swatch swatch-cortana-dark" aria-hidden="true"></span>Cortana dark</button>
+        </div>
+    </div>
+</div>
+
+    </div>
+</header>
+
+    <main id="main" class="site-main">
+        
+<nav class="crumbs" aria-label="Breadcrumb">
+    <ol class="wrap">
+        <li><a href="/">Home</a></li>
+        <li><a href="/tags/applescript/">AppleScript</a></li>
+        <li><span aria-current="page">AppleScript for Configuring External Displays</span></li>
+    </ol>
+</nav>
+<div class="article no-toc">
+    <div class="wrap">
+        <article style="min-width: 0">
+            <header><p class="eyebrow">AppleScript · Display · External</p>
+                <h1>AppleScript for Configuring External Displays</h1>
+                <div class="meta">
+                    <time datetime="2020-04-27">27 Apr 2020</time>
+                    <span>· 4 min read</span>
+                </div>
+            </header>
+            <div class="prose">
+                <p>AppleScript is a scripting language bundled within all versions of macOS, which allows for scripting of elements of the operating system and compatible applications.</p>
+<p>I&rsquo;d never touched it before, but decided to try to use it to automate setting the resolutions of my external displays when switching between my personal and work MacBook Pros.
+Sometimes the resolutions stick when switching between the two, sometimes they don&rsquo;t. Rather than have to go into <code>System Preferences &gt; Displays</code> and set them whenever the
+settings don&rsquo;t stick, I quite liked the idea of just running a script and having something else take care of it for me. That&rsquo;s where AppleScript comes in.</p>
+<p>There are different ways of running AppleScripts - I&rsquo;m not going to cover that here. Options include running from the command line, running as a bundled application, running
+from <a href="https://www.alfredapp.com">Alfred</a>, etc.</p>
+<p>I managed to cobble together a sloppy script to automate setting the resolution of my displays, which I&rsquo;ll detail below. Prior warning - I haven&rsquo;t done any cleanup; there&rsquo;s
+plenty that could be refactored - for example, it could be one function which you pass parameters to and call for each display you want to set. Go with it for now.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-applescript" data-lang="applescript"><span class="line"><span class="cl"><span class="k">tell</span> <span class="nb">application</span> <span class="s2">&#34;System Preferences&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">reveal</span> <span class="nv">anchor</span> <span class="s2">&#34;displaysDisplayTab&#34;</span> <span class="k">of</span> <span class="nv">pane</span> <span class="na">id</span> <span class="s2">&#34;com.apple.preference.displays&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">tell</span>
+</span></span></code></pre></div><p>This opens <code>System Preferences &gt; Displays</code> and then ensures that the <code>Display</code> tab is open.</p>
+<p><img src="/img/20200427-display.png" alt="System Preferences &gt; Displays"></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-applescript" data-lang="applescript"><span class="line"><span class="cl"><span class="k">tell</span> <span class="nb">application</span> <span class="s2">&#34;System Events&#34;</span> <span class="k">to</span> <span class="k">tell</span> <span class="nv">process</span> <span class="s2">&#34;System Preferences&#34;</span> <span class="k">to</span> <span class="k">tell</span> <span class="na">window</span> <span class="s2">&#34;Built-in Retina Display&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">set</span> <span class="nv">is_scaled</span> <span class="k">to</span> <span class="nv">value</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="s2">&#34;Scaled&#34;</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nv">is_scaled</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="s2">&#34;Scaled&#34;</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="mi">5</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="k">set</span> <span class="nv">scale_value</span> <span class="k">to</span> <span class="nv">value</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nv">scale_value</span> <span class="ow">is not</span> <span class="ow">equal to</span> <span class="mi">5</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">      <span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="mi">5</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span> <span class="k">if</span>
+</span></span><span class="line"><span class="cl">  <span class="k">end</span> <span class="k">if</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">tell</span>
+</span></span></code></pre></div><p>This is the bulk of the script, which I essentially duplicate this for both external displays. Let&rsquo;s break down what&rsquo;s happening here.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-applescript" data-lang="applescript"><span class="line"><span class="cl"><span class="k">tell</span> <span class="nb">application</span> <span class="s2">&#34;System Events&#34;</span> <span class="k">to</span> <span class="k">tell</span> <span class="nv">process</span> <span class="s2">&#34;System Preferences&#34;</span> <span class="k">to</span> <span class="k">tell</span> <span class="na">window</span> <span class="s2">&#34;Built-in Retina Display&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="k">end</span> <span class="k">tell</span>
+</span></span></code></pre></div><p>This <code>tell</code> block ensures that I&rsquo;m targeting the &ldquo;Built-in Retina Display&rdquo; window. I also have two separate <code>tell</code> blocks for my external displays, where instead of using
+<code>tell window &quot;Built-in Retina Display&quot;</code>, I use <code>tell window &quot;U28E590 (1)&quot;</code> and <code>tell window &quot;U28E590 (2)&quot;</code>. This is what I meant about my lack of refactoring; you could easily
+make this a function and pass the display name as an argument.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-applescript" data-lang="applescript"><span class="line"><span class="cl"><span class="k">set</span> <span class="nv">is_scaled</span> <span class="k">to</span> <span class="nv">value</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="s2">&#34;Scaled&#34;</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+</span></span></code></pre></div><p>This sets the value of the &ldquo;Scaled&rdquo; radio button to a variable, which we can then check.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-applescript" data-lang="applescript"><span class="line"><span class="cl"><span class="k">if</span> <span class="nv">is_scaled</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="s2">&#34;Scaled&#34;</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="mi">5</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl">  <span class="k">end</span> <span class="k">if</span>
+</span></span></code></pre></div><p>If the &ldquo;Scaled&rdquo; radio button has a value of <code>0</code>, then that means that it hasn&rsquo;t been clicked. We click the &ldquo;Scaled&rdquo; radio button and then select the appropriate resolution
+size from within the &ldquo;Scaled&rdquo; submenu. In this code example, <code>radio button 5</code> is the &ldquo;More Space&rdquo; setting.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-applescript" data-lang="applescript"><span class="line"><span class="cl"><span class="k">if</span> <span class="nv">is_scaled</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="k">set</span> <span class="nv">scale_value</span> <span class="k">to</span> <span class="nv">value</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nv">scale_value</span> <span class="ow">is not</span> <span class="ow">equal to</span> <span class="mi">5</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">      <span class="nv">click</span> <span class="nv">radio</span> <span class="nb">button</span> <span class="mi">5</span> <span class="k">of</span> <span class="nv">radio</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="nv">group</span> <span class="mi">1</span> <span class="k">of</span> <span class="no">tab</span> <span class="nv">group</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">end</span> <span class="k">if</span>
+</span></span><span class="line"><span class="cl">  <span class="k">end</span> <span class="k">if</span>
+</span></span></code></pre></div><p>In the <code>else</code> block, &ldquo;Scaled&rdquo; was already selected. In this case, we want to make sure that the appropriate resolution size from within the &ldquo;Scaled&rdquo; submenu is selected. Here,
+we set the currently selected resolution size to the <code>scale_value</code> variable. We then check whether it&rsquo;s equal to the value we want (in this case <code>5</code>). If it isn&rsquo;t, then we set it. If it&rsquo;s already set to <code>5</code>, then we don&rsquo;t need to click it again.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-applescript" data-lang="applescript"><span class="line"><span class="cl"><span class="nb">quit</span> <span class="nb">application</span> <span class="s2">&#34;System Preferences&#34;</span>
+</span></span></code></pre></div><p>This line is self-explanatory.</p>
+<p>And that&rsquo;s it.</p>
+
+            </div>
+            <nav class="post-footer" aria-label="More posts"><a class="prev" href="/posts/2020-02-07-http-redirects-for-aws-route-53-using-s3/"><span>← Older</span>HTTP/S Redirects for AWS Route 53 Using S3</a><a class="next" href="/posts/2020-05-02-applescript-bluetooth-devices/"><span>Newer →</span>AppleScript for Connecting Bluetooth Devices</a>
+            </nav>
+        </article>
+    </div>
+</div>
+
+    </main>
+    <footer class="site-footer">
+    <div class="wrap">
+        <div class="foot-top">
+            <div class="foot-brand">
+                <a class="brand" href="/"><span class="mark" aria-hidden="true">SM</span>Stuart McColl</a>
+                <p>Thoughts on software engineering from a technologist who spends most days in Microsoft Azure and PowerShell.</p>
+                <a class="btn btn-primary" href="/index.xml">Subscribe via RSS</a>
+            </div>
+            <nav class="foot-cols" aria-label="Footer">
+                <div>
+                    <h2>Topics</h2>
+                    <ul>
+                        <li><a href="/tags/powershell/">PowerShell</a></li>
+                        <li><a href="/tags/microsoft-azure/">Microsoft Azure</a></li>
+                        <li><a href="/tags/automation/">Automation</a></li>
+                        <li><a href="/tags/microsoft/">Microsoft</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h2>Site</h2>
+                    <ul>
+                        <li><a href="/posts/">All posts</a></li>
+                        <li><a href="/tags/">Topics</a></li>
+                        <li><a href="/about/">About</a></li>
+                        <li><a href="/uses/">Uses</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h2>Elsewhere</h2>
+                    <ul><li><a href="https://github.com/stuartmccoll">GitHub</a></li><li><a href="https://www.linkedin.com/in/stuart-mccoll">LinkedIn</a></li><li><a href="https://hachyderm.io/@stuartmccoll" rel="me">Mastodon</a></li>
+                        <li><a href="/index.xml">RSS feed</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="foot-panel" role="group" aria-label="Site build details">
+                <div class="panel-head"><b>Deployment output</b><span class="status">Succeeded</span></div>
+<pre>{
+  <span class="t-key">"name"</span>: <span class="t-str">"stuartmccoll.github.io"</span>,
+  <span class="t-key">"provisioningState"</span>: <span class="t-str">"Succeeded"</span>,
+  <span class="t-key">"generator"</span>: <span class="t-str">"Hugo 0.169.0"</span>,
+  <span class="t-key">"host"</span>: <span class="t-str">"GitHub Pages"</span>,
+  <span class="t-key">"posts"</span>: <span class="t-num">40</span>,
+  <span class="t-key">"lastDeployed"</span>: <span class="t-str">"2026-11-15T22:20:37Z"</span>
+}</pre>
+            </div>
+        </div>
+        <div class="foot-bottom">
+            <span>© 2026 Stuart McColl · Content licensed under <a href="https://creativecommons.org/licenses/by/4.0">CC BY 4.0</a></span>
+            <button type="button" class="to-top" id="to-top">Back to top ↑</button>
+        </div>
+    </div>
+</footer>
+
+    
+    <script src="/js/main.min.380dc544f986e9536538676fee1978cdde455a1d04c5be5324de644858af5cc5.js"></script>
+</body>
+</html>

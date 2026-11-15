@@ -1,16 +1,20 @@
 name: Run WebsiteArchiver
 
+# Disabled until the archiver is reworked: azure/aci-deploy is unmaintained
+# (last release 2021, Node 12). Run manually from the Actions tab if needed.
+# To re-enable on merge, restore:
+#   push:
+#     branches:
+#       - main
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   archival:
     runs-on: ubuntu-latest
     steps:
       - name: 'Login via Azure CLI'
-        uses: azure/login@v1
+        uses: azure/login@v3
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
     
