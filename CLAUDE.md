@@ -44,8 +44,8 @@ at https://stuartmccoll.github.io/.
 - In Hugo, `.NextInSection` is the *newer* post and `.PrevInSection` the
   *older* one. The post footer relies on this.
 - Writing style: British English; the site describes Stuart as a
-  "technologist". "Lead Software Engineer at Kainos" is his actual job title
-  and is used only in the About content.
+  "technologist". His actual job title ("Solution Architect at Kainos") is
+  used only in the About content (sidebar `aboutSummary` and the About page).
 
 ## Deployment
 
