@@ -1,0 +1,78 @@
+{{ define "main" }}
+{{- $p := .Site.Params -}}
+{{- $posts := where .Site.RegularPages "Section" "posts" -}}
+{{- $featuredList := first 1 (where $posts "Params.featured" true) -}}
+{{- if not $featuredList }}{{ $featuredList = first 1 $posts }}{{ end -}}
+{{- $recent := first 10 (complement $featuredList $posts) -}}
+
+{{ partial "crumbs.html" (slice (dict "title" "Posts")) }}
+
+<section class="hero">
+    <div class="wrap">
+        <div>
+            <p class="eyebrow">{{ $p.heroEyebrow }}</p>
+            <h1>{{ $p.heroTitle }}</h1>
+            <p class="lede">{{ $p.heroLede }}</p>
+            <div class="actions">
+                {{- with index $posts 0 }}<a class="btn btn-primary" href="{{ .RelPermalink }}">Read the latest post</a>{{ end }}
+                <a class="btn btn-secondary" href="{{ "/tags/" | relURL }}">Browse topics</a>
+            </div>
+        </div>
+        <div class="wt" role="group" aria-label="Profile summary">
+            <div class="wt-bar" aria-hidden="true">
+                <div class="wt-tab">
+                    <svg class="wt-icon" viewBox="0 0 16 16"><rect width="16" height="16" rx="3" fill="#2671be"/><path d="M4 4.5l4 3.5-4 3.5" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.5 11.5h3.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
+                    <span>PowerShell</span>
+                    <span class="wt-x">&#x2715;</span>
+                </div>
+                <span class="wt-btn">+</span>
+                <span class="wt-btn wt-chev">&#x2304;</span>
+                <span class="wt-controls"><span>&#x2500;</span><span>&#x2610;</span><span>&#x2715;</span></span>
+            </div>
+<pre><span class="t-dim">PowerShell 7.4.6</span>
+<span class="t-prompt">PS C:\Users\stuart&gt;</span> <span class="t-cmd">Get-Author</span> <span class="t-op">|</span> <span class="t-cmd">Format-List</span>
+
+<span class="t-key">Name</span>  : {{ $p.author.name | default .Site.Title }}
+<span class="t-key">Role</span>  : {{ $p.role }}
+<span class="t-key">Focus</span> : {{ "{" }}{{ range $i, $f := $p.focus }}{{ if $i }},{{ if eq (mod $i 3) 0 }}
+          {{ else }} {{ end }}{{ end }}{{ $f }}{{ end }}{{ "}" }}
+<span class="t-key">Posts</span> : {{ len $posts }}
+
+<span class="t-prompt">PS C:\Users\stuart&gt;</span> <span class="t-com"># {{ $p.heroComment | default "New posts most months" }}</span>
+<span class="t-prompt">PS C:\Users\stuart&gt;</span> <span class="wt-cursor"></span></pre>
+        </div>
+    </div>
+</section>
+
+<div class="home">
+    <div class="wrap">
+        <div style="min-width: 0">
+            {{- range $featuredList }}
+            <div class="section-head"><h2>Featured</h2></div>
+            <article class="featured">
+                <div class="meta">
+                    {{- with .Params.resourceType }}<span class="rtype">{{ . }}</span>{{ end }}
+                    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>
+                    <span>· {{ .ReadingTime }} min read</span>
+                </div>
+                <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                <p>{{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 180 }}{{ end }}</p>
+            </article>
+            {{- end }}
+
+            <div class="section-head"><h2>Recent posts</h2><a href="{{ "/posts/" | relURL }}">All posts →</a></div>
+            <div class="pills" role="group" aria-label="Filter recent posts">
+                <button type="button" class="pill" aria-pressed="true" data-filter="all">All</button>
+                {{- range first 5 .Site.Taxonomies.tags.ByCount }}
+                <button type="button" class="pill" aria-pressed="false" data-filter="{{ urlize .Name }}">{{ .Page.Title }}</button>
+                {{- end }}
+            </div>
+            <ul class="posts" id="posts">
+                {{- range $recent }}{{ partial "post-item.html" . }}{{ end }}
+            </ul>
+            <p class="posts-empty" id="posts-empty" hidden>No recent posts in this topic. <a href="{{ "/tags/" | relURL }}">Browse all topics</a>.</p>
+        </div>
+        {{ partial "rail.html" . }}
+    </div>
+</div>
+{{ end }}

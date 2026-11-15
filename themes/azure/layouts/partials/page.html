@@ -1,0 +1,15 @@
+{{ partial "crumbs.html" (slice (dict "title" .Title)) }}
+<div class="article no-toc">
+    <div class="wrap">
+        <article style="min-width: 0">
+            <header>
+                <p class="eyebrow">{{ .Site.Title }}</p>
+                <h1>{{ .Title | markdownify }}</h1>
+                {{- if not .Lastmod.IsZero }}<div class="meta"><span>Updated {{ .Lastmod.Format "2 Jan 2006" }}</span></div>{{ end }}
+            </header>
+            <div class="prose">
+                {{ .Content }}
+            </div>
+        </article>
+    </div>
+</div>

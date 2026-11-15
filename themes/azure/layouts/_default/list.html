@@ -1,0 +1,28 @@
+{{ define "main" }}
+{{- $crumbs := slice (dict "title" .Title) -}}
+{{- if eq .Kind "term" }}{{ $crumbs = slice (dict "title" "Topics" "url" ("/tags/" | relURL)) (dict "title" .Title) }}{{ end -}}
+{{ partial "crumbs.html" $crumbs }}
+
+<section class="page-head">
+    <div class="wrap">
+        <p class="eyebrow">{{ if eq .Kind "term" }}Topic{{ else }}Archive{{ end }}</p>
+        <h1>{{ if eq .Kind "term" }}{{ .Title }}{{ else }}All posts{{ end }}</h1>
+        <p>{{ len .Pages }} {{ if eq (len .Pages) 1 }}post{{ else }}posts{{ end }}</p>
+    </div>
+</section>
+
+<div class="listing">
+    <div class="wrap">
+        <div style="min-width: 0">
+            {{- with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+            {{- range .Pages.GroupByDate "2006" }}
+            <h2 class="year">{{ .Key }}</h2>
+            <ul class="posts">
+                {{- range .Pages }}{{ partial "post-item.html" . }}{{ end }}
+            </ul>
+            {{- end }}
+        </div>
+        {{ partial "rail.html" . }}
+    </div>
+</div>
+{{ end }}

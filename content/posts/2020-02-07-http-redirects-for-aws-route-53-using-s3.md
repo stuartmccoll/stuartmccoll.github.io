@@ -1,7 +1,7 @@
 ---
 title: "HTTP/S Redirects for AWS Route 53 Using S3"
 date: 2020-02-07T20:45:35Z
-tags: ["software development", "devops", "aws", "route53", "s3"]
+tags: ["Software Development", "DevOps", "AWS", "Route53", "S3"]
 draft: false
 ---
 

@@ -3,21 +3,19 @@ categories:
   - About
 date: 2019-05-06T17:58:41+01:00
 draft: false
-lastMod: 2022-05-22T09:45:00+01:00
+lastMod: 2026-11-15T22:05:00+01:00
 tags:
-  - about
+  - About
 title: About
 ---
 
-## About me
-
-I'm currently a Lead Software Engineer at [Kainos](https://www.kainos.com)
+I'm currently a Solution Architect at [Kainos](https://www.kainos.com)
 where I build new products in the [Workday](https://www.workday.com) ecosystem.
 
 Formerly of
 [The National Lottery Heritage Fund](https://www.heritagefund.org.uk),
 [HM Land Registry](https://www.gov.uk/government/organisations/land-registry)
-and Microtest (now [Eva Health Technologies](https://evahealth.co.uk/)).
+and Microtest.
 
 I graduated from the [Open University](http://open.ac.uk) in 2020 with a BSc.
 (Hons) in Computing and IT (Software), which I studied for alongside my
@@ -25,7 +23,7 @@ day job.
 
 ---
 
-With almost ten years of industry experience, I have broad knowledge across a
+With over ten years of industry experience, I have broad knowledge across a
 number of programming languages and frameworks which I have used to build
 customer-facing web applications; RESTful APIs; automated testing suites;
 CI/CD pipelines; and complex integrations between existing systems. I've done
@@ -45,7 +43,6 @@ my work on my [GitHub profile](https://www.github.com/stuartmccoll).
 If you're interested in my current developement setup, both hardware and
 software, you can find out more [here](/uses).
 
----
-
-You can reach me via email at **stu** *[dot]* **mccoll** *[at]* **outlook**
-*[dot]* **com**.
+{{< cta >}}
+You can reach me via email at **stu** *[dot]* **mccoll** *[at]* **outlook** *[dot]* **com**.
+{{< /cta >}}

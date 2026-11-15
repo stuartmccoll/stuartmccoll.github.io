@@ -5,7 +5,7 @@ linktitle = ""
 title = "Microservice Design Patterns: Aggregator"
 slug = "Microservice Design Patterns: Aggregator"
 type = "posts"
-tags = ["microservices", "design patterns", "software"]
+tags = ["Microservices", "Design Patterns", "Software"]
 +++
 
 The aggregator design pattern is a simple way of providing a single, unified service capable of surfacing data from multiple microservices, and a commonly used pattern when implementing a microservice-based architecture.

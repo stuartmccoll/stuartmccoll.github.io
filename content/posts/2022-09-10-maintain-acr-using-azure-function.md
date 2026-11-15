@@ -7,6 +7,7 @@ categories:
 date: 2022-09-10T23:00:00+01:00
 draft: false
 lastMod: 2022-06-11T23:00:00+01:00
+resourceType: Microsoft.ContainerRegistry/registries
 tags:
   - Automation
   - Microsoft Azure

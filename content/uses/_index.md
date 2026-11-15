@@ -8,12 +8,10 @@ date: 2022-05-22T09:45:00+01:00
 draft: false
 lastMod: 2024-09-24T23:30:00+01:00
 tags:
-  - about
-  - uses
+  - About
+  - Uses
 title: Uses
 ---
-
-## Uses
 
 Inspired by [/uses](https://uses.tech/), this is my current development setup.
 

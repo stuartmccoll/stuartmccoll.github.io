@@ -1,0 +1,22 @@
+{{- $groups := slice
+    (dict "title" "Default" "options" (slice (dict "id" "system" "label" "Match system")))
+    (dict "title" "Azure" "options" (slice (dict "id" "azure-light" "label" "Azure light") (dict "id" "azure-dark" "label" "Azure dark")))
+    (dict "title" "Halo" "options" (slice (dict "id" "masterchief-light" "label" "Master Chief light") (dict "id" "masterchief-dark" "label" "Master Chief dark") (dict "id" "cortana-light" "label" "Cortana light") (dict "id" "cortana-dark" "label" "Cortana dark")))
+-}}
+<div class="scheme">
+    <button type="button" class="scheme-toggle" id="scheme-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="scheme-menu">
+        <span class="swatch swatch-system" id="scheme-current" aria-hidden="true"></span>
+        <span class="scheme-label">Colours</span>
+        <span class="visually-hidden">: choose a colour scheme</span>
+    </button>
+    <div class="scheme-menu" id="scheme-menu" role="menu" aria-label="Colour scheme" hidden>
+        {{- range $groups }}
+        <div class="scheme-group" role="group" aria-label="{{ .title }}">
+            <div class="scheme-group-title" aria-hidden="true">{{ .title }}</div>
+            {{- range .options }}
+            <button type="button" class="scheme-option" role="menuitemradio" aria-checked="false" data-scheme="{{ .id }}"><span class="swatch swatch-{{ .id }}" aria-hidden="true"></span>{{ .label }}</button>
+            {{- end }}
+        </div>
+        {{- end }}
+    </div>
+</div>

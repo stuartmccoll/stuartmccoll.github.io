@@ -1,0 +1,10 @@
+name = "azure"
+license = "MIT"
+description = "A clean, professional Hugo theme inspired by Microsoft Azure, with switchable colour schemes."
+tags = ["blog", "clean", "dark", "light", "responsive", "technical"]
+features = ["blog", "colour schemes", "syntax highlighting", "table of contents"]
+min_version = "0.83.0"
+
+[author]
+  name = "Stuart McColl"
+  homepage = "https://stuartmccoll.github.io"

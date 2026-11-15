@@ -1,0 +1,10 @@
+{{/* Expects a slice of dicts: (dict "title" "..." "url" "...") ; last item is the current page */}}
+<nav class="crumbs" aria-label="Breadcrumb">
+    <ol class="wrap">
+        <li><a href="{{ "/" | relURL }}">Home</a></li>
+        {{- $n := len . }}
+        {{- range $i, $c := . }}
+        <li>{{ if and $c.url (lt (add $i 1) $n) }}<a href="{{ $c.url }}">{{ $c.title }}</a>{{ else }}<span aria-current="page">{{ $c.title }}</span>{{ end }}</li>
+        {{- end }}
+    </ol>
+</nav>

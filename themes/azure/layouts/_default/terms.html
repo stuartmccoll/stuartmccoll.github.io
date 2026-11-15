@@ -1,0 +1,22 @@
+{{ define "main" }}
+{{ partial "crumbs.html" (slice (dict "title" "Topics")) }}
+
+<section class="page-head">
+    <div class="wrap">
+        <p class="eyebrow">Browse</p>
+        <h1>Topics</h1>
+        <p>{{ len .Data.Terms }} topics across {{ len (where .Site.RegularPages "Section" "posts") }} posts</p>
+    </div>
+</section>
+
+<div class="listing">
+    <div class="wrap">
+        <ul class="topics term-grid">
+            {{- range .Data.Terms.ByCount }}
+            <li><a href="{{ printf "/tags/%s/" (urlize .Name) | relURL }}">{{ .Page.Title }} <span class="n">{{ .Count }}</span></a></li>
+            {{- end }}
+        </ul>
+        {{ partial "rail.html" . }}
+    </div>
+</div>
+{{ end }}

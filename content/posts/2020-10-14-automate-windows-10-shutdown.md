@@ -4,7 +4,7 @@ date: 2020-10-14T10:00:00+01:00
 draft: false
 images:
 - img/microsoft-windows-logo.png
-tags: ["microsoft", "windows", "windows 10", "automation", "PowerShell"]
+tags: ["Microsoft", "Windows", "Windows 10", "Automation", "PowerShell"]
 ---
 
 ## Using the `shutdown` command

@@ -1,0 +1,37 @@
+{{- $p := .Site.Params -}}
+<aside class="rail">
+    <div class="about-card">
+        {{- $photo := resources.Get ($p.avatar | default "img/headshot.png") }}
+        {{- if $photo }}
+        {{- /* Take a square-ish region from the top of a portrait photo so the face sits centrally, then cut circles from it */}}
+        {{- $h := int (mul $photo.Width 1.14) }}
+        {{- if gt $h $photo.Height }}{{ $h = $photo.Height }}{{ end }}
+        {{- $portrait := $photo.Crop (printf "%dx%d Top" $photo.Width $h) }}
+        {{- $x1 := $portrait.Fill "72x72 Center q85 jpg" }}
+        {{- $x2 := $portrait.Fill "144x144 Center q85 jpg" }}
+        {{- $x3 := $portrait.Fill "216x216 Center q85 jpg" }}
+        <img class="avatar avatar-photo" src="{{ $x2.RelPermalink }}" srcset="{{ $x1.RelPermalink }} 1x, {{ $x2.RelPermalink }} 2x, {{ $x3.RelPermalink }} 3x" width="72" height="72" alt="Photo of {{ $p.author.name | default $.Site.Title }}">
+        {{- else }}
+        <div class="avatar" aria-hidden="true">{{ $p.initials | default "SM" }}</div>
+        {{- end }}
+        <h2 class="rail-title">About</h2>
+        <p>{{ $p.aboutSummary }}</p>
+        <div class="links">
+            {{- with $p.github }}<a class="btn btn-secondary" href="{{ . }}">GitHub</a>{{ end }}
+            {{- with $p.linkedin }}<a class="btn btn-secondary" href="{{ . }}">LinkedIn</a>{{ end }}
+        </div>
+    </div>
+    <div>
+        <h2 class="rail-title">Topics</h2>
+        <ul class="topics">
+            {{- range first 8 .Site.Taxonomies.tags.ByCount }}
+            <li><a href="{{ printf "/tags/%s/" (urlize .Name) | relURL }}">{{ .Page.Title }} <span class="n">{{ .Count }}</span></a></li>
+            {{- end }}
+        </ul>
+        <p><a href="{{ "/tags/" | relURL }}">All topics →</a></p>
+    </div>
+    <div>
+        <h2 class="rail-title">Subscribe</h2>
+        <a href="{{ "/index.xml" | relURL }}">RSS feed</a>
+    </div>
+</aside>

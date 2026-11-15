@@ -6,6 +6,7 @@ categories:
 date: 2022-06-11T11:15:00+01:00
 draft: false
 lastMod: 2022-06-11T11:15:00+01:00
+resourceType: Microsoft.ContainerRegistry/registries
 tags:
   - Automation
   - GitHub Actions

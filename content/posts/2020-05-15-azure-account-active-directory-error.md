@@ -1,7 +1,7 @@
 ---
 title: "Fixing Azure Account Active Directory Association Error"
 date: 2020-05-15T20:01:32+01:00
-tags: ["microsoft", "azure", "power bi", "microsoft 365", "azure active directory"]
+tags: ["Microsoft", "Azure", "Power BI", "Microsoft 365", "Azure Active Directory"]
 draft: false
 ---
 
